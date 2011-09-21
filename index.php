@@ -189,7 +189,7 @@ else
             </tr>
             <tr>
                 <td style="text-align:center;border-left:1px solid #116811;border-right:1px solid #116811;" colspan="6">
-                   <p> | ©2011 | Dave | Kim | Ray | Rob | Vince |</p>
+                   <p> | ©2011 | Dave | Kim | Ray | Rob | Vince | RIP KEVIN</p>
                 </td>
             </tr>
         </table>
