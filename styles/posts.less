@@ -1,0 +1,59 @@
+@light: #c7c7c7;
+@green: #5CBD00;
+@dark: #000;
+
+.clickable {
+	cursor:pointer;
+}
+
+.rounded {
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+div.post {
+	clear: both;
+	margin: 10px 10px 10px 10px;
+	overflow: hidden;
+	border: 1px solid @light;
+	.rounded;
+}
+
+div.post-author {
+	float: left;
+	text-align: center;
+	margin-right: 15px;
+	padding: 15px;
+	font-weight: bold;
+	.clickable;
+}
+
+div.post-body {
+	float: left;
+	text-align: left;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 5px;
+	width: 300px;
+}
+
+.post-body p {
+	padding: 10px 0px 10px 0px;
+}
+
+div.feeds-container {
+	overflow: hidden;
+	height: auto;
+	border: 3px solid @dark;
+	margin: 5px 10px 10px 10px;
+	.rounded;
+}
+
+ul.feeds {
+	background: @green;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	overflow: hidden;
+	padding: 10px 3px;
+	
+}
