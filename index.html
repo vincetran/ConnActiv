@@ -2,20 +2,27 @@
 <html>
 <head>
 <title>ConnActiv</title>
+<!-- COMMENT -->
+<link type="text/css" rel="stylesheet/less" href="styles/style.less"/>
+<link type="text/css" rel="stylesheet/less" href="styles/posts.less"/>
 
-<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/less.min.js"/></script>
+<script type="text/javascript" src="js/jquery.min.js"/></script>
 
 <script type="text/javascript">
+
 $(function() {
+	
 	$('ul#nav li').hover(function() {
-		$(this).hide();
-		$(this).addClass('hover');
-	});
+			$(this).hide();
+			$(this).addClass('hover');
+		});
 	
 	$('header').load('views/header.html');
 	$('#side').load('views/sidebar.html');
 	$('#content').load('views/home.html');
 	$('a#home').addClass('active');	
+
 });
 </script>
 
