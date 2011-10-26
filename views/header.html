@@ -1,12 +1,26 @@
 <script type="text/javascript">
 
 $('.top_links').click(function(e) {
-	$(this).nav(e);
+	$(this).nav(e); // function routes to index.html script (for now, index holds more global functions)
+});
+
+$('#user_login').click(function(e) {
+	e.preventDefault();
+	$('#user_menu').slideDown();
+	});
+
+$('#signout').click(function(e) {
+	e.preventDefault();
+	t = confirm('Are you sure you want to sign out?');
+	if (t) {
+		alert('Signed out.'); 
+	}
+	$('#user_menu').hide();
 });
 	
 </script>
 
-<a id="login">Captain Awesome</a>
+<a id="user_login" href="#">Captain Awesome</a>
 
 <span id="top-nav">
 	<ul id="nav">
@@ -16,3 +30,7 @@ $('.top_links').click(function(e) {
 		<li class="headerlink" id="link_settings"><a class="top_links" id="settings" href="">Settings</a></li>
 	</ul>
 </span>
+
+<div id="user_menu" style="display:none; border:1px solid #000; height:2em; width:80px; padding: 2px 2px; text-align: center; background: #fff; color: #333;">
+	<a href="#" autofocus id="signout">Sign out</a>
+</div>
