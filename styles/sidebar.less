@@ -1,26 +1,32 @@
-@dark: #000; 
+@dark: #555; 
 @white: #fff;
 @green: #5CBD00;
+@grey: #ddd;
 
 #side {
+	overflow: hidden;
 	float: left;
-	width: 200px;
-	margin-right: 15px;
-	padding: 20px 5px 50px 5px;
-	background: @white;
-	left: 10px;
+	width: 150px;
+	margin: 10px 15px 0px 0px;
+	padding: 20px 25px 0px 20px;
+	left: 0px;
 	min-height: 750px;
 	height: 100%;
 	position: relative;
-	border: 1px solid @dark;
-	border-bottom: 0px solid;
+	border-right: thin solid @grey;
 }
 
 #side .thumbs {
+	border: thin solid @white;
 	padding: 3px 3px;
 }
 
 #side .thumbs:hover{
-	background: @green;
+	border: thin solid @green;
 	padding: 3px 3px;
+}
+
+#favorites {
+	padding-top: 10px;
+	border-top: thin solid @grey;
 }
