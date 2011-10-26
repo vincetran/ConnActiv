@@ -1,42 +1,18 @@
 <script type="text/javascript">
 
-	$('#link_home').click(function() {
-		//$('#content').load('views/home.html');
-		$('.top_links').removeClass('active');
-		$('#home').addClass('active');
-		alert("STUB: Going to user's home.");
-	});
+$('.top_links').click(function(e) {
+	$(this).nav(e);
+});
 	
-	$('#link_profile').click(function() {
-		alert("STUB: Going to the user's profile.");
-		$('.top_links').removeClass('active');
-		$('#profile').addClass('active');
-		$('#content').load('views/profile.html');
-	});
-	
-	$('#link_requests').click(function() {
-		//$('#content').load('views/home.html');
-		$('.top_links').removeClass('active');
-		$('#requests').addClass('active');
-		alert("STUB: Going to the requests page.");
-	});
-	
-	$('#link_settings').click(function() {
-		//$('#content').load('views/home.html');
-		$('.top_links').removeClass('active');
-		$('#settings').addClass('active');
-		alert("STUB: Going to the user's setttings.");
-	});
-
 </script>
 
+<a id="login">Captain Awesome</a>
 
-<a id="login">Captain Awesome </a>
-		<span id="top-nav">
-			<ul id="nav">
-				<li id="link_home"><a  class="top_links" id="home" href="">Home</a></li>
-				<li id="link_profile"><a  class="top_links" id="profile" href="">Profile</a></li>
-				<li id="link_requests"><a  class="top_links" id="requests" href="">Requests</a></li>
-				<li id="link_settings"><a  class="top_links" id="settings" href="">Settings</a></li>
-			</ul>
-		</span>
+<span id="top-nav">
+	<ul id="nav">
+		<li class="headerlink" id="link_home"><a class="top_links" id="home" href="">Home</a></li>
+		<li class="headerlink" id="link_profile"><a class="top_links" id="profile" href="">Profile</a></li>
+		<li class="headerlink" id="link_requests"><a class="top_links" id="requests" href="">Requests</a></li>
+		<li class="headerlink" id="link_settings"><a class="top_links" id="settings" href="">Settings</a></li>
+	</ul>
+</span>

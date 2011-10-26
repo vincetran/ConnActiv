@@ -1,11 +1,12 @@
-<!doctype html>
+<!DOCTYPE HTML>
 <html>
 <head>
-<title>ConnActiv</title>
+<title>ConnActiv | The place for activ people.</title>
 
 <link type="text/css" rel="stylesheet" href="styles/defaults.css"/>
 <link type="text/css" rel="stylesheet/less" href="styles/style.less"/>
 <link type="text/css" rel="stylesheet/less" href="styles/posts.less"/>
+<link type="text/css" rel="stylesheet/less" href="styles/sidebar.less"/>
 
 <script type="text/javascript" src="js/less.min.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -17,15 +18,22 @@ $(function() {
 //Load the content from the appropriate views.
 	$('header').load('views/header.html');
 	$('#side').load('views/sidebar.html');
-	$('#content').load('views/home.html');
+	$('#content').load('views/home.html'); // NOTE: To test the login/signup function,
+																						// change this between views/welcome.html & views/home.html.
+																						// Don't worry-- I'ma fix the formatting so neither the nav bar
+																						// nor the sidebar show when someone isn't signed in. --Kim
 	$('a#home').addClass('active');	
-	
-	$('ul#nav li').hover(function() {
-			$(this).hide();
-			$(this).addClass('hover');
-		});
-
 });
+
+$.fn.nav = function(e) {
+		e.preventDefault();
+		page = $(this).attr('id');
+		$('.top_links').removeClass('active');
+		$('#'+page).addClass('active');
+		$('#content').load('views/'+page+'.html');
+		alert("Going to view " +page);
+	};
+
 
 </script>
 
