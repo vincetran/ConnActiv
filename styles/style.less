@@ -14,6 +14,12 @@
 	-moz-border-radius: 5px;
 }
 
+.shadow {
+	-moz-box-shadow: 10px 10px 5px #888;
+	-webkit-box-shadow: 10px 10px 5px #888;
+	box-shadow: 10px 10px 5px #888;
+}
+
 ul {
 	margin: 0 0 0 0;
 	list-style: none;
@@ -26,20 +32,22 @@ body {
 	color: @dark;
 	padding: 0;
 	margin: 0px auto;
+	margin-bottom: 10px;
 	height: 768px;
 	max-width: 800px;
-	background-image:url('../public/images/bg2.png');
+	background: @white;
 	align: center;
 }
 
 #container {
-	width:800px;
+	width:780px;
 	height: 100%;
 	margin:0px auto;
 	text-align:left;
 	padding:0px;
-	border: thin dashed @dark;
 	overflow:hidden;
+	position: absolute;
+	top: 55px;
 }
 
 a {
