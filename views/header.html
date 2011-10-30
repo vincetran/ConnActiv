@@ -9,11 +9,12 @@ $('#user_login').click(function(e) {
 	$('#user_menu').slideDown();
 	});
 
-$('#signout').click(function(e) {
+$('#logout').click(function(e) {
 	e.preventDefault();
 	t = confirm('Are you sure you want to sign out?');
 	if (t) {
-		alert('Signed out.'); 
+		window.location.replace('views/logout.php');
+		//alert('Signed out.'); 
 	}
 	$('#user_menu').hide();
 });
@@ -32,5 +33,5 @@ $('#signout').click(function(e) {
 </span>
 
 <div id="user_menu" style="display:none; border:1px solid #000; height:2em; width:80px; padding: 2px 2px; text-align: center; background: #fff; color: #333;">
-	<a href="#" autofocus id="signout">Sign out</a>
+	<a href="" autofocus id="logout">Sign out</a>
 </div>
