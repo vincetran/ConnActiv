@@ -27,7 +27,7 @@
 	
 	//if the login form is submitted i.e. the user supplies login credentials
 	// if form has been submitted
-	if (isset($_POST['submit'])) { 
+	if (isset($_POST['login'])) { 
 		// makes sure they filled it in
 		if(!$_POST['username'] | !$_POST['pass']) {
 			die('You did not fill in a required field.');
@@ -98,23 +98,68 @@
 				<td><input id="password" type="password" name="pass" maxlength="100"/></td>
 			</tr>
 			<tr>
-				<input type="submit" name="submit" value="Login"/>
+				<input type="submit" name="login" value="Login"/>
 			</tr>
 		</table>
 		</form>
 	</div>
 	
 	<div id="new_user" style="display:none">
+		<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
 		<table>
 			<tr>
-				<td>Enter your email (will be used as your username):</td> 
-				<td><input type="text"/><br/><br/></td>
+				<td>Email:</td>
+				<td><input id="username"  type="text" name="username" maxlength="25"/><br/><br/></td>
 			</tr>
 			<tr>
-				<td>Select your password. Should be between x and y characters:</td> 
-				<td><input type="password"/></td>
+				<td>First Name:</td>
+				<td><input id="firstName"  type="text" name="firstName" maxlength="20"/><br/><br/></td>
+			</tr>
+			<tr>
+				<td>Last Name:</td>
+				<td><input id="lastName" type="text" name="lastName" maxlength="20"/></td>
+			</tr>
+			<tr>
+				<td>Street:</td>
+				<td><input id="street"  type="text" name="street" maxlength="25"/><br/><br/></td>
+			</tr>
+			<tr>
+				<td>City:</td>
+				<td><input id="city" type="text" name="city" maxlength="25"/></td>
+			</tr>
+			<tr>
+				<td>State:</td>
+				<td><input id="state"  type="text" name="state" maxlength="2"/><br/><br/></td>
+			</tr>
+			<tr>
+				<td>Zip:</td>
+				<td><input id="zip" type="text" name="zip" maxlength="5"/></td>
+			</tr>
+			<tr>
+				<td>Phone:</td>
+				<td><input id="phone"  type="text" name="phone" maxlength="25"/><br/><br/></td>
+			</tr>
+			<tr>
+				<td>Interests:</td>
+				<td><input id="interests" type="text" name="interests" maxlength="4000"/></td>
+			</tr>
+			<tr>
+				<td>Activities:</td>
+				<td><input id="activities"  type="checkbox" name="activities"/><br/><br/></td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td><input id="password" type="password" name="pass" maxlength="100"/></td>
+			</tr>
+			<tr>
+				<td>Confirm Password:</td>
+				<td><input id="password" type="password" name="pass" maxlength="100"/></td>
+			</tr>
+			<tr>
+				<input type="submit" name="register" value="Get ConnActed!"/>
 			</tr>
 		</table>
+		</form>
 	</div>
 	
 </center>
