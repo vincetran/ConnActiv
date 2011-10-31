@@ -1,9 +1,9 @@
-@light: #c7c7c7;
-@dark: #000;
-@blue: #27408B;
+@grey: #555;
+@dark: #555;
 @white: #fff;
 @green: #5CBD00;
-@darkgreen: #5CBD00;
+@darkgreen: #004a1e;
+@bg: #F8F8F8;
 
 .clickable {
 	cursor:pointer;
@@ -14,30 +14,40 @@
 	-moz-border-radius: 5px;
 }
 
+.shadow {
+	-moz-box-shadow: 10px 10px 5px #888;
+	-webkit-box-shadow: 10px 10px 5px #888;
+	box-shadow: 10px 10px 5px #888;
+}
+
 ul {
 	margin: 0 0 0 0;
 	list-style: none;
 }
 
 body {
-	font-family:arial;
-	font-size: 10pt;
+	font-family:"Helvetica Neue", "Helvetica Neue", Hevetica, Arial, sans-serif;
+	font-size: 0.8em;
 	line-height: 1.4;
 	color: @dark;
 	padding: 0;
-	margin: 0;
+	margin: 0px auto;
+	margin-bottom: 10px;
 	height: 768px;
-	min-width: 799px;
-	max-width: 958px;
-	background: #fff;
+	max-width: 800px;
+	background: @white;
 	align: center;
 }
 
 #container {
-	width:800px;
+	width:780px;
+	height: 100%;
 	margin:0px auto;
 	text-align:left;
-	padding:15px;
+	padding:0px;
+	overflow:hidden;
+	position: absolute;
+	top: 55px;
 }
 
 a {
@@ -47,6 +57,7 @@ a {
 }
 
 a:hover {
+	color: @green;
 	text-decoration: underline;
 }
 
@@ -80,7 +91,7 @@ header {
 	padding: 10px 10px 0px 10px;
 	width: 100%;
 	position: fixed;
-	background: @dark;
+	background: #000;
 	color: @white;
 	z-index:99;
 	height: 30px;
@@ -89,7 +100,6 @@ header {
 #content {
 	align: center;
 	height: 100%;
-	width: 300px;
 	width: 100%;
 	margin: 20px 40px 0px 0px;
 	padding: 30px 0px 10px 0px;
@@ -107,50 +117,15 @@ p {
 
 div.main {
 	float: left;
-	background: @white;
 	height: 100%;
-	z-index: 5;
-	margin: 20px 0px 10px 0px;
-	.rounded;
-}
-
-ul.tags {
-	display:inline;
-	padding-left: 4px;
-	margin-top: 10px;
 }
 
 .main li, .tags li {
 	display:inline;
 	border: 1px solid @green;
 	color: @green;
-	background: @white;
 	padding: 3px 10px 5px 10px;
 	.rounded;
-}
-
-#side {
-	float: left;
-	width: 200px;
-	margin-right: 15px;
-	padding: 20px 5px 50px 5px;
-	background: @white;
-	left: 10px;
-	min-height: 750px;
-	height: 100%;
-	position: relative;
-	border: 3px solid @dark;
-	border-bottom: 0px solid;
-}
-
-#side .thumbs {
-	border: 1px solid #333;
-	padding: 3px 3px;
-}
-
-#side .thumbs:hover{
-	border: 1px solid @green;
-	padding: 3px 3px;
 }
 
 #banner {
@@ -159,4 +134,8 @@ ul.tags {
 	padding-left: -10px;
 	left: 0;
 	positive: absolute;
+}
+
+div.page {
+	margin-left: 180px;
 }

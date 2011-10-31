@@ -1,21 +1,48 @@
 
-<script>
+<script type="text/javascript">
+	
+	$('#login').click(function(e) {
+		e.preventDefault();
+		$('#credentials').slideDown();
+	});
+	
+	$('#signup').click(function(e) {
+		e.preventDefault();
+		$('#new_user').slideDown();
+	});
 	
 </script>
 
 <center>
-	<h1 class="welcome">Welcome to Connactiv.</h1>
+	<h1 class="welcome">Welcome to ConnActiv!</h1>
 	
-	<p>
-		ConnActiv homepage
-	</p>
+	<a class="welcome" id="login" href="#login">Log in</a>
+	<a class="welcome" id="signup" href="#signup">Sign up</a>
 	
-	<a class="welcome" id="signin" href="#login">Log in</a>
-	<a class="welcome"  href="#signup">Sign up</a>
+	<div id="credentials" style="display:none">
+		<table>
+			<tr>
+				<td>Email:</td>
+				<td><input type="text"/><br/><br/></td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td><input type="password"/></td>
+			</tr>
+		</table>
+	</div>
 	
-	<div id="credentials">
-		Username: <input type="text"/><br/>
-		Password: <input type="password/>
+	<div id="new_user" style="display:none">
+		<table>
+			<tr>
+				<td>Enter your email (will be used as your username):</td> 
+				<td><input type="text"/><br/><br/></td>
+			</tr>
+			<tr>
+				<td>Select your password. Should be between x and y characters:</td> 
+				<td><input type="password"/></td>
+			</tr>
+		</table>
 	</div>
 	
 </center>
