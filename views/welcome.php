@@ -1,4 +1,4 @@
-<?php echo "whats up";
+<?php
 	// Connects to Database
 	//mysql_connect("localhost", "xgamings_connact", "connactive123") or die(mysql_error()); //This is our database credentials
 	mysql_connect("localhost", "root", "") or die(mysql_error()); 	//This is wamp database credentials
@@ -35,7 +35,7 @@
 		// checks it against the database
 		//if (!get_magic_quotes_gpc()) {
 		//	$_POST['email'] = addslashes($_POST['email']);		//I do not know where this came from. Did you add it dave?
-		/}
+		//}
 		$check = mysql_query("SELECT * FROM Users WHERE email = '".$_POST['username']."'")or die(mysql_error());
 		//Gives error if user dosen't exist
 		$check2 = mysql_num_rows($check);
@@ -212,18 +212,18 @@
 			<tr>
 				<td>Activities:</td>
 				<?php $activities = mysql_query("select * from ACTIVITIES");
-					while($activities1 = mysql_fetch_array($activities){
+					while($activities1 = mysql_fetch_array($activities)){
 						echo "<td><input id='activities'  type='checkbox' name='activities' value=.".
 						$activities1['ACTIVITY_NAME']."' /><br/></td>";
 					}?>
 			</tr>
 			<tr>
 				<td>Password(required):</td>
-				<td><input id="password" type="password" name="pass" maxlength="100"/></td>
+				<td><input id="password" type="password" name="password" maxlength="100"/></td>
 			</tr>
 			<tr>
 				<td>Confirm Password(required):</td>
-				<td><input id="confirm" type="password" name="pass" maxlength="100"/></td>
+				<td><input id="confirm" type="password" name="confirm" maxlength="100"/></td>
 			</tr>
 			<tr>
 				<input type="submit" name="register" value="Get ConnActed!"/>
