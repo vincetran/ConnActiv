@@ -26,6 +26,8 @@ SET time_zone = "+00:00";
 -- Table structure for table `networks`
 --
 
+DROP TABLE `networks`;
+
 CREATE TABLE IF NOT EXISTS `networks` (
   `NETWORK_ID` int(11) NOT NULL,
   `AREA` varchar(25) NOT NULL,
