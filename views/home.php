@@ -35,6 +35,15 @@
 				
 			<div class="page">
 				
+			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
+			<table>
+				<tr>
+					<td>Post a ConnAction: <input id="connaction"  type="text" name="connaction" maxlength="25"/><br/><br/></td>
+				</tr>
+			</table>
+			</form>
+				
+				
 				<h3>
 				<a class="stream" id="public" href="#public-stream">Public Stream</a> | 
 				<a class="stream" id="buddy" href="#buddy-stream">Buddy Stream</a>
@@ -44,11 +53,14 @@
 				<div class="main feeds-container">
 					<ul class="feeds">
 						<li id="link_feeds_all"><a href="#">All</a></li>
-						<li id="link_feeds_run"><a href="#">Running</a></li>
-						<li id="link_feeds_pgh"><a href="#">Pittsburgh</a></li>
-						<li id="link_feeds_bike"><a href="#">Biking</a></li>
-						<li id="link_feeds_swim"><a href="#">Swimming</a></li>
-						<li id="link_feeds_climb"><a href="#">Climbing</a></li>
+						<?php 
+						$networkNames = getNetworkNames();
+						for($i = 0; $i < count($networkNames); $i++){
+							?>
+							<li id="link_feeds_<?php $networkNames[$i]; ?>"><a href="#"><?php echo $networkNames[$i]; ?></a></li>
+							<?php
+						}
+						?>
 					</ul>
 					
 						<div class="post"> <!-- begin post -->

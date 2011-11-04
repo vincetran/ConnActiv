@@ -17,12 +17,41 @@
 			<h3>
 			Settings
 			</h3>
-			
+			Networks: <br/>
+			<table>
+				<tr>
+					<td>Area</td>
+					<td>Activity</td>
+					<td>Action</td>
+				</tr>
+			<?php 
+				$networks = getNetworkNames();
+				for($i = 0; $i < count($networks); $i++){
+					?>
+					<tr>
+						<td><?php echo $networks[$i]; ?></td>
+					</tr>
+					<?php
+					$activities = getNetworkActivites($networks[$i]);
+					for($k = 0; $k < count($activities); $k++){
+						?>
+						<tr>
+							<td></td>
+							<td><?php echo $activities[$k]; ?></td>
+							<td><input type="submit" name="remove" value="Remove"/></td>
+						</tr>
+						<?php 
+					
+					}
+					
+				}
 				
+			?>
+			</table>	
 			</div>
 			<?php
 		}
- 	
+ 	//
 	}
 	else {	 
 		//if they are not logged in";

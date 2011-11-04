@@ -11,7 +11,7 @@
 		}
 		else{
 			//Cookie matches, show what they want
-			header("Location: home.html");
+			header("Location: home.php");
  		}
 	}
 	if (isset($_POST['login'])) { 

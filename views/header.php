@@ -1,3 +1,5 @@
+<?php include("config.php");?>
+
 <script type="text/javascript">
 
 $('.top_links').click(function(e) {
@@ -22,7 +24,7 @@ $('#logout').click(function(e) {
 </script>
 
 <a id="user_login" href="#">
-<?php include("config.php"); getName(); ?>
+<?php echo getName(); ?>
 </a>
 
 <span id="top-nav">

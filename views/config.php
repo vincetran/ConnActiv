@@ -15,8 +15,8 @@
 		//Check to make sure the user ID cookie matches the password cookie
 		$username = $_COOKIE['ID_my_site']; 
 		$pass = $_COOKIE['Key_my_site'];
-		$info = getDatabaseInfo($username);
-		//while($info = getDatabaseInfo($username)) 	{ 		//Since we have unique cookies I do not think we need to have this
+		$info = getDatabaseInfo("users", "email", $username);
+		//while($info = getDatabaseInfo("users", "email", $username)) 	{ 		//Since we have unique cookies I do not think we need to have this
 																//loop. Can anyone confirm?
 			if ($pass != $info['PASSWORD']) {
 				//ID cookie doesn't match password cookie
@@ -27,11 +27,6 @@
 				return TRUE;
  			}
 		//}
-	}
-	function getDatabaseInfo($username){
-		//Returns an array of strings that corresponds to the fetched row
- 	 	$check = mysql_query("SELECT * FROM users WHERE email = '$username'")or die(mysql_error());
-		return mysql_fetch_array($check);
 	}
 	function login(){
 		//This function logs in the user when they press the login button
@@ -122,6 +117,21 @@
 			die('This email has already been registered.  click here if you forgot your password.');
 		}
 	}
+	function getDatabaseInfo($table, $attribute, $value){
+		//Returns an array of strings that corresponds to the fetched row
+ 	 	//$check = mysql_query("SELECT * FROM $table WHERE $attribute = '$value'")or die(mysql_error());
+		$check = getResourceIDs($table, $attribute, $value); //when getResourceIDs is removed delete this 
+															 //line and use the above line													 
+		return mysql_fetch_array($check);
+	}
+	function getResourceIDs($table, $attribute, $value){
+		//This function will be used until the database stores IDs that are not Primary keys as an array
+		//i.e. user_networks table: network_id
+		//i.e. networks table: activity_id  <- (too list networks i temporarily changed the pk of this
+		//table to network_id and activity_id. It was just network_id
+		$check = mysql_query("SELECT * FROM $table WHERE $attribute = '$value'")or die(mysql_error()); //retuns true if you do not assign
+		return $check;																				   //mysql_query() to a variable
+	}
 	function getName(){
 		//This function returns the users First and Last name
 		if(cookieExists())
@@ -130,9 +140,65 @@
 			if (validCookie()) {
 				//Cookie matches display their name
 				$username = $_COOKIE['ID_my_site'];
-				$info = getDatabaseInfo($username);
-				echo $info['FIRST_NAME'] . " " . $info['LAST_NAME'];
+				$info = getDatabaseInfo("users", "email", $username);
+				return $info['FIRST_NAME'] . " " . $info['LAST_NAME'];
 			}
+		}
+	}
+	function getUserID(){
+		//This function retusn the users ID
+		if(cookieExists())
+		//if there is a username cookie, we need to check it against our password cookie
+		{
+			if (validCookie()) {
+				//Cookie matches display their name
+				$username = $_COOKIE['ID_my_site'];
+				$info = getDatabaseInfo("users", "email", $username);
+				return $info['USER_ID'];
+			}
+		}
+	}
+	function getNetworkNames(){
+		//This function returns an array of network names
+		$user_id = getUserID();
+		$networkName = array();
+		$resourceID = getResourceIDs("user_networks", "user_id", $user_id);
+		while($info = mysql_fetch_array($resourceID)){
+			$network = getDatabaseInfo("networks","network_id", $info['NETWORK_ID']);
+			$networkName[] = $network['AREA'];
+		}
+		
+		return $networkName;
+	}
+	function getNetworkActivites(){
+		//This function returns an array of all network activities
+		$networkNames = getNetworkNames();
+		$networkActivities = array();
+		
+		for($i = 0; $i < count($networkNames); $i++){
+			$resourceID = getResourceIDs("networks", "area", $networkNames[$i]);
+			while($info = mysql_fetch_array($resourceID)){
+				$activity = getDatabaseInfo("activities","activity_id", $info['ACTIVITY_ID']);
+				$networkActivities[] = $activity['ACTIVITY_NAME'];
+			}
+		}
+		return $networkActivities;
+	}
+	function getNetworkActivites($networkName){
+		//This function returns an array of all network activities
+		$networkActivities = array();
+		
+		$resourceID = getResourceIDs("networks", "area", $networkName);
+		while($info = mysql_fetch_array($resourceID)){
+			$activity = getDatabaseInfo("activities","activity_id", $info['ACTIVITY_ID']);
+			$networkActivities[] = $activity['ACTIVITY_NAME'];
+		}
+		return $networkActivities;
+	}
+	function printArray($array){
+		//This function echos the passed in array
+		for($i = 0; $i < count($array); $i++){
+			echo $array[$i];
 		}
 	}
 ?>
