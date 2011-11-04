@@ -170,7 +170,7 @@
 		
 		return $networkName;
 	}
-	function getNetworkActivites(){
+	function getAllNetworkActivites(){
 		//This function returns an array of all network activities
 		$networkNames = getNetworkNames();
 		$networkActivities = array();
