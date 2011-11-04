@@ -15,8 +15,9 @@
 		//Check to make sure the user ID cookie matches the password cookie
 		$username = $_COOKIE['ID_my_site']; 
 		$pass = $_COOKIE['Key_my_site'];
- 	 	$check = mysql_query("SELECT * FROM users WHERE email = '$username'")or die(mysql_error());
-		while($info = mysql_fetch_array( $check )) 	{
+		$info = getDatabaseInfo($username);
+		//while($info = getDatabaseInfo($username)) 	{ 		//Since we have unique cookies I do not think we need to have this
+																//loop. Can anyone confirm?
 			if ($pass != $info['PASSWORD']) {
 				//ID cookie doesn't match password cookie
 				return FALSE;
@@ -25,7 +26,12 @@
 				//ID cookie matches, password cookie
 				return TRUE;
  			}
-		}
+		//}
+	}
+	function getDatabaseInfo($username){
+		//Returns an array of strings that corresponds to the fetched row
+ 	 	$check = mysql_query("SELECT * FROM users WHERE email = '$username'")or die(mysql_error());
+		return mysql_fetch_array($check);
 	}
 	function login(){
 		//This function logs in the user when they press the login button
@@ -115,10 +121,18 @@
 		else{
 			die('This email has already been registered.  click here if you forgot your password.');
 		}
-			
-			
-
-			
 	}
-
+	function getName(){
+		//This function returns the users First and Last name
+		if(cookieExists())
+		//if there is a username cookie, we need to check it against our password cookie
+		{
+			if (validCookie()) {
+				//Cookie matches display their name
+				$username = $_COOKIE['ID_my_site'];
+				$info = getDatabaseInfo($username);
+				echo $info['FIRST_NAME'] . " " . $info['LAST_NAME'];
+			}
+		}
+	}
 ?>

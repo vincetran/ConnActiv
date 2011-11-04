@@ -22,7 +22,7 @@ $('#logout').click(function(e) {
 </script>
 
 <a id="user_login" href="#">
-<?php include("config.php");getName(); ?>
+<?php include("config.php"); getName(); ?>
 </a>
 
 <span id="top-nav">
