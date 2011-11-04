@@ -119,16 +119,12 @@
 	}
 	function getDatabaseInfo($table, $attribute, $value){
 		//Returns an array of strings that corresponds to the fetched row
- 	 	//$check = mysql_query("SELECT * FROM $table WHERE $attribute = '$value'")or die(mysql_error());
-		$check = getResourceIDs($table, $attribute, $value); //when getResourceIDs is removed delete this 
-															 //line and use the above line													 
+		$check = getResourceIDs($table, $attribute, $value); 
+		
 		return mysql_fetch_array($check);
 	}
 	function getResourceIDs($table, $attribute, $value){
-		//This function will be used until the database stores IDs that are not Primary keys as an array
-		//i.e. user_networks table: network_id
-		//i.e. networks table: activity_id  <- (too list networks i temporarily changed the pk of this
-		//table to network_id and activity_id. It was just network_id
+		//This function returns resource IDs
 		$check = mysql_query("SELECT * FROM $table WHERE $attribute = '$value'")or die(mysql_error()); //retuns true if you do not assign
 		return $check;																				   //mysql_query() to a variable
 	}
@@ -178,8 +174,12 @@
 		for($i = 0; $i < count($networkNames); $i++){
 			$resourceID = getResourceIDs("networks", "area", $networkNames[$i]);
 			while($info = mysql_fetch_array($resourceID)){
-				$activity = getDatabaseInfo("activities","activity_id", $info['ACTIVITY_ID']);
-				$networkActivities[] = $activity['ACTIVITY_NAME'];
+				$activityToken = strtok($info['ACTIVITY_ID'], ",");
+				while($activityToken != NULL){
+					$activity = getDatabaseInfo("activities","activity_id", $activityToken);
+					$networkActivities[] = $activity['ACTIVITY_NAME'];
+					$activityToken = strtok(",");
+				}
 			}
 		}
 		return $networkActivities;
@@ -190,8 +190,12 @@
 		
 		$resourceID = getResourceIDs("networks", "area", $networkName);
 		while($info = mysql_fetch_array($resourceID)){
-			$activity = getDatabaseInfo("activities","activity_id", $info['ACTIVITY_ID']);
-			$networkActivities[] = $activity['ACTIVITY_NAME'];
+			$activityToken = strtok($info['ACTIVITY_ID'], ",");
+			while($activityToken != NULL){
+				$activity = getDatabaseInfo("activities","activity_id", $activityToken);
+				$networkActivities[] = $activity['ACTIVITY_NAME'];
+				$activityToken = strtok(",");
+			}
 		}
 		return $networkActivities;
 	}

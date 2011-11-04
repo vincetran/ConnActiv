@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 04, 2011 at 05:45 AM
+-- Generation Time: Nov 04, 2011 at 07:19 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -31,8 +31,8 @@ DROP TABLE `networks`;
 CREATE TABLE IF NOT EXISTS `networks` (
   `NETWORK_ID` int(11) NOT NULL,
   `AREA` varchar(25) NOT NULL,
-  `ACTIVITY_ID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`NETWORK_ID`,`ACTIVITY_ID`)
+  `ACTIVITY_ID` varchar(25) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`NETWORK_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -40,9 +40,8 @@ CREATE TABLE IF NOT EXISTS `networks` (
 --
 
 INSERT INTO `networks` (`NETWORK_ID`, `AREA`, `ACTIVITY_ID`) VALUES
-(0, 'Oakland', 0),
-(0, 'Oakland', 1),
-(1, 'Pittsburgh', 0);
+(0, 'Oakland', '0,1'),
+(1, 'Pittsburgh', '0');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

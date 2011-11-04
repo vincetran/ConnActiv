@@ -2,6 +2,7 @@
 
 include("config.php");
 
+
 $networks = getNetworkActivites("Oakland");
 
 print_r($networks);
