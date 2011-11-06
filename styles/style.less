@@ -3,7 +3,7 @@
 @white: #fff;
 @green: #5CBD00;
 @darkgreen: #004a1e;
-@bg: #F8F8F8;
+@blue: #2348de;
 
 .clickable {
 	cursor:pointer;
@@ -61,6 +61,10 @@ a:hover {
 	text-decoration: underline;
 }
 
+a:visited {
+	color: @blue;
+}
+
 h1, h2, h3, h4 {
 	color: @green;	
 }
@@ -91,18 +95,18 @@ header {
 	padding: 10px 10px 0px 10px;
 	width: 100%;
 	position: fixed;
-	background: #000;
+	background: @darkgreen;
 	color: @white;
 	z-index:99;
 	height: 30px;
 }
 
 #content {
-	align: center;
+	text-align: center;
 	height: 100%;
 	width: 100%;
 	margin: 20px 40px 0px 0px;
-	padding: 30px 0px 10px 0px;
+	padding: 20px 0px 10px 0px;
 }
 
 h1 {
@@ -128,14 +132,49 @@ div.main {
 	.rounded;
 }
 
-#banner {
-	z-index: 50;
-	margin-left: 0;
-	padding-left: -10px;
-	left: 0;
-	positive: absolute;
-}
-
 div.page {
 	margin-left: 180px;
+}
+
+div#credentials, div#new_user {
+	text-align:center;
+	margin: 0px auto;
+}
+
+/* WELCOME.PHP ROLLOVER EFFECTS */
+
+#rollover_imgs {
+	margin: 0px auto;
+	width: 280px;
+	height: 140px;
+	text-align: center;
+}
+
+#welcome_form {
+	width: 400px;
+	text-align: center;
+	margin: 0px auto;
+}
+
+.rollover {
+	height: 140px;
+	width: 140px;
+	overflow: hidden;
+	float:left;
+}
+
+.rollover:hover {
+	background-position: -140px 0px;
+}
+
+.active {
+	background-position: -140px 0px;
+}
+
+#login {
+	background-image: url('../public/images/loginbutton.png');
+}
+
+#signup {
+	background-image: url('../public/images/signupbutton.png');
 }

@@ -1,3 +1,5 @@
+<?php include("config.php");?>
+
 <script type="text/javascript">
 
 $('.top_links').click(function(e) {
@@ -22,18 +24,20 @@ $('#logout').click(function(e) {
 </script>
 
 <a id="user_login" href="#">
-<?php include("config.php");getName(); ?>
+<?php echo getName(); ?>
 </a>
-
-<span id="top-nav">
-	<ul id="nav">
-		<li class="headerlink" id="link_home"><a class="top_links" id="home" href="">Home</a></li>
-		<li class="headerlink" id="link_profile"><a class="top_links" id="profile" href="">Profile</a></li>
-		<li class="headerlink" id="link_requests"><a class="top_links" id="requests" href="">Requests</a></li>
-		<li class="headerlink" id="link_settings"><a class="top_links" id="settings" href="">Settings</a></li>
-	</ul>
-</span>
-
+<?php 
+	if(cookieExists() && validCookie()){ ?>
+		<span id="top-nav">
+			<ul id="nav">
+				<li class="headerlink" id="link_home"><a class="top_links" id="home" href="">Home</a></li>
+				<li class="headerlink" id="link_profile"><a class="top_links" id="profile" href="">Profile</a></li>
+				<li class="headerlink" id="link_requests"><a class="top_links" id="requests" href="">Requests</a></li>
+				<li class="headerlink" id="link_settings"><a class="top_links" id="settings" href="">Settings</a></li>
+			</ul>
+		</span>
+	<?php } ?>
+	
 <div id="user_menu" style="display:none; border:1px solid #000; height:2em; width:80px; padding: 2px 2px; text-align: center; background: #fff; color: #333;">
 	<a href="" autofocus id="logout">Sign out</a>
 </div>
