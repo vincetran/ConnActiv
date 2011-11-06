@@ -1,9 +1,13 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// Connects to Database
 	//mysql_connect("localhost", "xgamings_connact", "connactive123") or die(mysql_error()); //This is our database credentials
 	mysql_connect("localhost", "root", "atreyu89") or die(mysql_error()); 	//This is wamp database credentials
 	mysql_select_db("ConnActiv") or die(mysql_error()); 
+=======
+	include("config.php");
+>>>>>>> 9bf30d5d18590074399920ac182a827bd46b5e40
 =======
 	include("config.php");
 >>>>>>> 9bf30d5d18590074399920ac182a827bd46b5e40
@@ -22,6 +26,7 @@
  		}
 	}
 	if (isset($_POST['login'])) { 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// makes sure they filled it in
 		if(!$_POST['username'] | !$_POST['pass']) {
@@ -56,6 +61,10 @@
 			header("Location: ../index.html"); 
 			} 
 		} 
+=======
+		//If user pressed login
+		login(); 
+>>>>>>> 9bf30d5d18590074399920ac182a827bd46b5e40
 =======
 		//If user pressed login
 		login(); 
@@ -97,6 +106,7 @@
 	</div>
 	<br/>
 	
+<<<<<<< HEAD
 <<<<<<< HEAD
 	<div id="new_user" style="display:none">
 		<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
@@ -169,6 +179,8 @@
 		</form>
 	</div>
 =======
+=======
+>>>>>>> 9bf30d5d18590074399920ac182a827bd46b5e40
 	<div id="welcome_form">
 	
 		<div id="credentials" style="display:none">
@@ -263,6 +275,9 @@
 			</form>
 		</div>
 		</div> <!-- /welcome_form-->
+<<<<<<< HEAD
+>>>>>>> 9bf30d5d18590074399920ac182a827bd46b5e40
+=======
 >>>>>>> 9bf30d5d18590074399920ac182a827bd46b5e40
 	
  <?php 
