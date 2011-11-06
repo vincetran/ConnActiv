@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 04, 2011 at 07:19 AM
+-- Generation Time: Nov 06, 2011 at 03:24 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `networks` (
 
 INSERT INTO `networks` (`NETWORK_ID`, `AREA`, `ACTIVITY_ID`) VALUES
 (0, 'Oakland', '0,1'),
-(1, 'Pittsburgh', '0');
+(1, 'Pittsburgh', '0,1');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

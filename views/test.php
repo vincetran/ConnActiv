@@ -3,10 +3,10 @@
 include("config.php");
 
 
-$networks = getNetworkActivites("Oakland");
+$activities = getUserNetworkActivities("Oakland");
 
-print_r($networks);
-echo $networks[0];
-echo $networks[1];
+print_r($activities);
+echo $activities[0];
+//echo $activities[1];
 
 ?>

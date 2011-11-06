@@ -125,7 +125,14 @@
 	}
 	function getResourceIDs($table, $attribute, $value){
 		//This function returns resource IDs
+		
 		$check = mysql_query("SELECT * FROM $table WHERE $attribute = '$value'")or die(mysql_error()); //retuns true if you do not assign
+		return $check;																				   //mysql_query() to a variable
+	}
+	function getResourceIDs2($table, $attribute1, $value1, $attribute2, $value2){
+		//This function returns resource IDs
+		
+		$check = mysql_query("SELECT * FROM $table WHERE $attribute1 = '$value1' AND $attribute2 = '$value2'")or die(mysql_error()); //retuns true if you do not assign
 		return $check;																				   //mysql_query() to a variable
 	}
 	function getName(){
@@ -154,11 +161,19 @@
 			}
 		}
 	}
+	function getNetworkID($networkName){
+		//This function returns the ID value of the network name that is inputed
+		
+		$network = getDatabaseInfo("networks","area", $networkName);
+		$networkID = $network['NETWORK_ID'];
+		
+		return $networkID;
+	}
 	function getNetworkNames(){
-		//This function returns an array of network names
-		$user_id = getUserID();
+		//This function returns an array of user's network names
+		$userID = getUserID();
 		$networkName = array();
-		$resourceID = getResourceIDs("user_networks", "user_id", $user_id);
+		$resourceID = getResourceIDs("user_networks", "user_id", $userID);
 		while($info = mysql_fetch_array($resourceID)){
 			$network = getDatabaseInfo("networks","network_id", $info['NETWORK_ID']);
 			$networkName[] = $network['AREA'];
@@ -198,6 +213,34 @@
 			}
 		}
 		return $networkActivities;
+	}
+	function getUserNetworkActivities($networkName){
+		//This function returns an array of the user's network activites
+		$userID = getUserID();
+		$userActivities = array();
+		$resourceID = getResourceIDs2("user_networks", "user_id", $userID, "network_id", getNetworkID($networkName));
+		while($info = mysql_fetch_array($resourceID)){
+			$activityToken = strtok($info['ACTIVITY_ID'], ",");
+			while($activityToken != NULL){
+				$activity = getDatabaseInfo("activities","activity_id", $activityToken);
+				$UsersNetworkActivities[] = $activity['ACTIVITY_NAME'];
+				$activityToken = strtok(",");
+			}
+		}
+		return $UsersNetworkActivities;
+		
+	}
+	function getUserActivities(){
+		//This function returns an array of all the activities a user has
+		$userID = getUserID();
+		$userActivities = array();
+		
+		$resourceID = getResourceIDs("user_activities", "user_id", $userID);
+		while($info = mysql_fetch_array($resourceID)){
+			$activity = getDatabaseInfo("activities", "activity_id", $info['ACTIVITY_ID']);
+			$userActivities[] = $activity['ACTIVITY_NAME'];
+		}
+		return $userActivities;
 	}
 	function printArray($array){
 		//This function echos the passed in array

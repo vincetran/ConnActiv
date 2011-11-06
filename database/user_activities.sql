@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 04, 2011 at 05:46 AM
+-- Generation Time: Nov 06, 2011 at 03:24 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -40,7 +40,8 @@ CREATE TABLE IF NOT EXISTS `user_activities` (
 --
 
 INSERT INTO `user_activities` (`USER_ID`, `ACTIVITY_ID`, `LOW_LEVEL`, `HIGH_LEVEL`, `PREFERRED`) VALUES
-(1, 0, 2, 4, 4);
+(1, 0, 2, 4, 4),
+(1, 1, 2, 4, 4);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

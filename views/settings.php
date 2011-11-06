@@ -17,9 +17,9 @@
 			<h3>
 			Settings
 			</h3>
-			Networks: <br/>
-			<table>
-				<tr>
+			<table style="border:1px solid #004a1e;">
+			<tr style="border:1px solid #004a1e;"Align="Center"><td Colspan="3">Current Networks:</td></tr>
+				<tr style="border:1px solid #004a1e;">
 					<td>Area</td>
 					<td>Activity</td>
 					<td>Action</td>
@@ -28,14 +28,14 @@
 				$networks = getNetworkNames();
 				for($i = 0; $i < count($networks); $i++){
 					?>
-					<tr>
+					<tr style="border:1px solid #004a1e;">
 						<td><?php echo $networks[$i]; ?></td>
 					</tr>
 					<?php
-					$activities = getNetworkActivites($networks[$i]);
+					$activities = getUserNetworkActivities($networks[$i]);
 					for($k = 0; $k < count($activities); $k++){
 						?>
-						<tr>
+						<tr style="border:1px solid #004a1e;">
 							<td></td>
 							<td><?php echo $activities[$k]; ?></td>
 							<td><input type="submit" name="remove" value="Remove"/></td>
