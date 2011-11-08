@@ -32,16 +32,19 @@
 						<td><?php echo $networks[$i]; ?></td>
 					</tr>
 					<?php
-					$activities = getUserNetworkActivities($networks[$i]);
+					$activities = getUserNetworkActivities();
 					for($k = 0; $k < count($activities); $k++){
-						?>
-						<tr style="border:1px solid #004a1e;">
-							<td></td>
-							<td><?php echo $activities[$k]; ?></td>
-							<td><input type="submit" name="remove" value="Remove"/></td>
-						</tr>
-						<?php 
-					
+						if($networks[$i] != $activities[$k]){
+							?>
+							<tr style="border:1px solid #004a1e;">
+								<td></td>
+								<td>
+									<?php echo $activities[$k]; ?>
+								</td>
+								<td><input type="submit" name="remove" value="Remove"/></td>
+							</tr>
+							<?php 
+						}
 					}
 					
 				}

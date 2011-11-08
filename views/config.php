@@ -1,5 +1,5 @@
 <?php
-	var_dump($_POST);
+	//var_dump($_POST);
 	// Connects to Database
 	//mysql_connect("localhost", "xgamings_connact", "connactive123") or die(mysql_error()); //This is our database credentials
 	mysql_connect("localhost", "root", "") or die(mysql_error()); 	//This is wamp database credentials
@@ -164,6 +164,14 @@
 			}
 		}
 	}
+	function getActivity($activityID){
+		//This function returns the name of the inputed activity ID
+		
+		$activity = getDatabaseInfo("activities","activity_id", $activityID);
+		$activityName = $activity['ACTIVITY_NAME'];
+		
+		return $activityName;
+	}
 	function getNetworkID($networkName){
 		//This function returns the ID value of the network name that is inputed
 		
@@ -172,14 +180,23 @@
 		
 		return $networkID;
 	}
+	function getNetworkName($networkID){
+		//This function retuns the network name of the network ID that is inputed
+		
+		$network = getDatabaseInfo("networks", "network_id", $networkID);
+		$networkName = $network['AREA'];
+		
+		return $networkName;
+	}
 	function getNetworkNames(){
 		//This function returns an array of user's network names
 		$userID = getUserID();
 		$networkName = array();
 		$resourceID = getResourceIDs("user_networks", "user_id", $userID);
 		while($info = mysql_fetch_array($resourceID)){
-			$network = getDatabaseInfo("networks","network_id", $info['NETWORK_ID']);
-			$networkName[] = $network['AREA'];
+			$uniqueNetwork = getDatabaseInfo("unique_networks","unique_network_id", $info['UNIQUE_NETWORK_ID']);
+			$networkID = $uniqueNetwork['NETWORK_ID'];
+			$networkName[] = getNetworkName($networkID);
 		}
 		
 		return $networkName;
@@ -190,45 +207,47 @@
 		$networkActivities = array();
 		
 		for($i = 0; $i < count($networkNames); $i++){
-			$resourceID = getResourceIDs("networks", "area", $networkNames[$i]);
+			$networkID = $networkNames[$i];
+			$resourceID = getResourceIDs("unique_networks", "network_id", $networkID);
 			while($info = mysql_fetch_array($resourceID)){
-				$activityToken = strtok($info['ACTIVITY_ID'], ",");
-				while($activityToken != NULL){
-					$activity = getDatabaseInfo("activities","activity_id", $activityToken);
-					$networkActivities[] = $activity['ACTIVITY_NAME'];
-					$activityToken = strtok(",");
-				}
+				$activity = getDatabaseInfo("activities","activity_id", $info['ACTIVITY_ID']);
+				$networkActivities[] = $activity['ACTIVITY_NAME'];
 			}
 		}
 		return $networkActivities;
 	}
 	function getNetworkActivites($networkName){
-		//This function returns an array of all network activities
+		//This function returns an array of activities in a given network
 		$networkActivities = array();
-		
-		$resourceID = getResourceIDs("networks", "area", $networkName);
+		$networkID = $networkName;
+		$resourceID = getResourceIDs("unique_networks", "network_id", $networkID);
 		while($info = mysql_fetch_array($resourceID)){
-			$activityToken = strtok($info['ACTIVITY_ID'], ",");
-			while($activityToken != NULL){
-				$activity = getDatabaseInfo("activities","activity_id", $activityToken);
+			$activity = getDatabaseInfo("activities","activity_id", $info['ACTIVITY_ID']);
 				$networkActivities[] = $activity['ACTIVITY_NAME'];
-				$activityToken = strtok(",");
-			}
 		}
 		return $networkActivities;
 	}
-	function getUserNetworkActivities($networkName){
-		//This function returns an array of the user's network activites
+	function getUserNetworkActivities(){
+		//This function returns an array of the user's networks and activites
 		$userID = getUserID();
 		$userActivities = array();
-		$resourceID = getResourceIDs2("user_networks", "user_id", $userID, "network_id", getNetworkID($networkName));
+		$oldNetwork = null;
+		
+		$resourceID = getResourceIDs("user_networks", "user_id", $userID);
 		while($info = mysql_fetch_array($resourceID)){
-			$activityToken = strtok($info['ACTIVITY_ID'], ",");
-			while($activityToken != NULL){
-				$activity = getDatabaseInfo("activities","activity_id", $activityToken);
-				$UsersNetworkActivities[] = $activity['ACTIVITY_NAME'];
-				$activityToken = strtok(",");
+			$uniqueNetworkID = getDatabaseInfo("unique_networks","unique_network_id", $info['UNIQUE_NETWORK_ID']);
+			$networkID = $uniqueNetworkID['NETWORK_ID'];
+			$network = getNetworkName($networkID);
+			$activityID = $uniqueNetworkID['ACTIVITY_ID'];
+			$activity = getActivity($activityID);
+			if($oldNetwork != $network){
+				//this prevents multiple network names to be stored in the array.
+				$UsersNetworkActivities[] = $network;
 			}
+			$UsersNetworkActivities[] = $activity;
+			
+			$oldNetwork = $network;
+			
 		}
 		return $UsersNetworkActivities;
 		
