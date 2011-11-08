@@ -66,8 +66,8 @@ CREATE TABLE IF NOT EXISTS `COMMENTS` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 
-INSERT INTO COMMENTS VALUES(1, 1, 1, `Its too cold to go running`, CURRDATE());
-INSERT INTO COMMENTS VALUES(2, 2, 1, `Oh well, suit yourself pussy`, CURRDATE());
+INSERT INTO COMMENTS VALUES(1, 1, 1, 'Its too cold to go running', CURDATE());
+INSERT INTO COMMENTS VALUES(2, 2, 1, 'Oh well, suit yourself', CURDATE());
 
 -- --------------------------------------------------------
 
@@ -84,12 +84,12 @@ CREATE TABLE IF NOT EXISTS `CONNACTIONS` (
   `END_TIME` date DEFAULT NULL,
   `ACTIVITY_ID` int(11) NOT NULL,
   `NETWORK_ID` int(11) NOT NULL,
-  'IS_PRIVATE' int(11) DEFAULT 0,
+  `IS_PRIVATE` int(11) DEFAULT 0,
   PRIMARY KEY (`CONNACTION_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 
-INSERT INTO CONNACTIONS VALUES(1, 1, `Oakland (atwood and bates)`, CURDATE(), `Come Running with me!`, CURDATE(), 3, 1);
+INSERT INTO CONNACTIONS VALUES(1, 1, 'Oakland (atwood and bates)', CURDATE(), 'Come Running with me!', CURDATE(), 3, 1, 0);
 -- --------------------------------------------------------
 
 --
@@ -144,8 +144,8 @@ CREATE TABLE IF NOT EXISTS `EVENT_ATTENDING` (
 CREATE TABLE IF NOT EXISTS `FAVORITES` (
   `USER_ID` int(11) NOT NULL,
   `NETWORK_ID` int(11),
-  `ACTVITIY_ID` int(11),
-  PRIMARY KEY (`USER_ID`,`NETWORK_ID`, 'ACTIVITY_ID')
+  `ACTIVITY_ID` int(11),
+  PRIMARY KEY (`USER_ID`,`NETWORK_ID`, `ACTIVITY_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 
@@ -199,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `MESSAGES` (
   PRIMARY KEY (`FROM_USER`,`TO_USER`,`DATE`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-INSERT INTO MESSAGES VALUES(1,2,`Running Tomorrow`, `Lets go running around 4pm...`, CURDATE());
+INSERT INTO MESSAGES VALUES(1,2,'Running Tomorrow', 'Lets go running around 4pm...', CURDATE());
 -- --------------------------------------------------------
 
 --
@@ -232,15 +232,15 @@ INSERT INTO PREFERENCES VALUES(1, 0);
 -- --------------------------------------------------------
 
 --
--- Table structure for table `REQUESTS`
+-- Table structure for table `CONNACTION_REQUESTS`
 --
 
 CREATE TABLE IF NOT EXISTS `CONNACTION_REQUESTS` (
   `FROM_USER` int(11) NOT NULL,
   `TO_USER` int(11) NOT NULL,
-  `CONACTION_ID` int(11) NOT NULL,
+  `CONNACTION_ID` int(11) NOT NULL,
   `MESSAGE` varchar(4000) DEFAULT NULL,
-  `APPROVED` int(11) DEFAULT 0,
+  `APPROVED` int(11) DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 
@@ -321,7 +321,7 @@ INSERT INTO USER_ACTIVITIES VALUES(2,3,2,5,4,4);
 CREATE TABLE IF NOT EXISTS `USER_NETWORKS` (
   `USER_ID` int(11) NOT NULL,
   `UNIQUE_NETWORK_ID` int(11) NOT NULL,
-  PRIMARY KEY (`USER_ID`,`NETWORK_ID`)
+  PRIMARY KEY (`USER_ID`,`UNIQUE_NETWORK_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 INSERT INTO USER_NETWORKS VALUES(1,1);
