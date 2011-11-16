@@ -55,14 +55,16 @@
 						<li id="link_feeds_all"><a href="#">All</a></li>
 						<?php 
 						$networkNames = getNetworkNames();
-						for($i = 0; $i < count($networkNames); $i++){
+						for($i = 0; $i  < count($networkNames); $i++){
 							?>
 							<li id="link_feeds_<?php $networkNames[$i]; ?>"><a href="#"><?php echo $networkNames[$i]; ?></a></li>
 							<?php
 						}
 						?>
 					</ul>
-					
+						<?php
+							loadConnactions();
+						?>
 						<div class="post"> <!-- begin post -->
 							<div class="post-author">
 								<img src="public/images/face1.png" height="120" /><br/>

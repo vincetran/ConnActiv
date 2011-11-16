@@ -264,6 +264,64 @@
 		}
 		return $userActivities;
 	}
+	
+	/*		///This function was replaced by the getConnactions functions
+	function getConnactionUsers($n_aID, $option){
+		//The option is whether the ID is network_ID or Activity_ID
+		//0 = Activity_ID, 1 = network_ID
+		//This function returns an array of all users names who posted a connaction
+		$connactionUsers = array();
+		
+		if($option == 0){
+			//ID is activity
+			$resourceID = getResourceIDs("connactions", "activity_id", $n_aID);
+			while($info = mysql_fetch_array($resourceID)){
+				$connactionUsers[] = $info["USER_ID"];
+			}
+			return $connactionUsers;
+		}
+		else if($option == 1){
+			//ID is network
+			//print $n_aID;
+			$resourceID = getResourceIDs("connactions", "network_id", $n_aID);
+			while($info = mysql_fetch_array($resourceID)){
+				$connactionUsers[] = $info["USER_ID"];
+			}
+			return $connactionUsers;
+		}
+		else{
+			return "error";
+		}
+		
+	}*/
+	
+	function getConnactions($n_aID, $option){
+		//The option is whether the ID is network_ID or Activity_ID
+		//0 = Activity_ID, 1 = network_ID
+		//This function returns an array of all users names who posted a connaction
+		$connactionUsers = array();
+		
+		if($option == 0){
+			//ID is activity
+			$resourceID = getResourceIDs("connactions", "activity_id", $n_aID);
+			while($info = mysql_fetch_array($resourceID)){
+				$connactionUsers[] = $info;
+			}
+			return $connactionUsers;
+		}
+		else if($option == 1){
+			//ID is network
+			//print $n_aID;
+			$resourceID = getResourceIDs("connactions", "network_id", $n_aID);
+			while($info = mysql_fetch_array($resourceID)){
+				$connactionUsers[] = $info;
+			}
+			return $connactionUsers;
+		}
+		else{
+			return "error";
+		}
+	}
 	function printArray($array){
 		//This function echos the passed in array
 		for($i = 0; $i < count($array); $i++){

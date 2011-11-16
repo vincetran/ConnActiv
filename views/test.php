@@ -3,10 +3,10 @@
 include("config.php");
 
 
-$activities = getUserNetworkActivities("Oakland");
+$connactionUsers = getConnactions(getNetworkID("Oakland"), 1);
 
-print_r($activities);
-echo $activities[0];
+//print_r($connactionUsers);
+echo $connactionUsers[0][2];
 //echo $activities[1];
 
 ?>
