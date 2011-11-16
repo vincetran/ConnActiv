@@ -62,9 +62,6 @@
 						}
 						?>
 					</ul>
-						<?php
-							loadConnactions();
-						?>
 						<div class="post"> <!-- begin post -->
 							<div class="post-author">
 								<img src="public/images/face1.png" height="120" /><br/>
