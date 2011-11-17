@@ -164,6 +164,10 @@
 			}
 		}
 	}
+	function getUserPic($userID){
+		$info = getDatabaseInfo("users", "user_id", $userID);
+		return $info['PROFILE_PIC'];
+	}
 	function getActivity($activityID){
 		//This function returns the name of the inputed activity ID
 		
@@ -171,6 +175,46 @@
 		$activityName = $activity['ACTIVITY_NAME'];
 		
 		return $activityName;
+	}
+	function getActivityLevel($userID, $activityID, $num){
+		//This returns an activity level of the given user in a given activity based on num
+		//		0 = low level
+		//		1 = high level
+		//		2 = preferred
+		//		3 = own level
+		//		4 = all
+		$activityLevels = array();
+		
+		$resourceID = getResourceIDs2("user_activities", "user_id", $userID, "activity_id", $activityID);
+		$info = mysql_fetch_array($resourceID);
+		$activityLevels[] = $info["LOW_LEVEL"];
+		$activityLevels[] = $info["HIGH_LEVEL"];
+		$activityLevels[] = $info["PREFERRED"];
+		$activityLevels[] = $info["OWN_LEVEL"];
+		if($num == 0){
+			//return low level
+			return $activityLevels[0];
+		}
+		else if($num == 1){
+			//return high level
+			return $activityLevels[1];
+		}
+		else if($num == 2){
+			//return preferred
+			return $activityLevels[2];
+		}
+		else if($num == 3){
+			//return own level
+			return $activityLevels[3];
+		}
+		else if($num == 4){
+			//return all
+			return $activityLevels;
+		}
+		else{
+			//return error
+			return "error";
+		}
 	}
 	function getNetworkID($networkName){
 		//This function returns the ID value of the network name that is inputed

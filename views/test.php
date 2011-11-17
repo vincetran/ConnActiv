@@ -2,11 +2,8 @@
 
 include("config.php");
 
-
-$connactionUsers = getConnactions(getNetworkID("Oakland"), 1);
-
-//print_r($connactionUsers);
-echo $connactionUsers[0][2];
+//print_r($activityLevels);
+echo getUserPic(1);
 //echo $activities[1];
 
 ?>

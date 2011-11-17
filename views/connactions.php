@@ -23,35 +23,44 @@
 	$connactions = getConnactions(getNetworkID("Oakland"), 1); //1 means passing in network id
 																//0 would mean passing in activity id
 	for($i = count($connactions)-1; $i >= 0; $i--){
-	
+		$userID = $connactions[$i][1];
+		$location = $connactions[$i][2];
+		$startTime = $connactions[$i][3];
+		$message = $connactions[$i][4];
+		$endTime = $connactions[$i][5];
+		$activityID = $connactions[$i][6];
+		$networkID = $connactions[$i][7];
+		$isPrivate = $connactions[$i][8];
 ?>
 	<div class="post"> <!-- begin post -->
 		<div class="post-author">
-			<img src="public/images/face1.png" height="120" /><br/>
-			<?php echo getName($connactions[$i][1]); ?>
+			<img src="<?php echo getUserPic($userID); ?>" height="120" /><br/>
+			<?php echo getName($userID); ?>
 		</div>
 		<div class="post-body">
 			<p><?php
 				//TODO: make dates look good
-				//$start = date_parse($connactions[$i][3]);
+				//$start = date_parse($startTime);
 				//$end = date_parse($connactions[$i][5]);
 				
-				$start = $connactions[$i][3];
-				$end = $connactions[$i][5];
-				
-				echo "Time: ", $start, " to ", $end;
-				
-			?></p>
-			<p><?php echo $connactions[$i][4]; ?></p>
+				echo "Time: ", $startTime, " to ", $endTime;
+				?>
+			</p>
+			<p><?php echo $message; ?></p>
 		<div class="post-levels">
-			<p>I am a 6-7 seeking levels 4-8 accepting levels 3-8.</p>
+			<p>
+				I am a level <?php echo getActivityLevel($userID,$activityID, 3); ?>.
+				I prefer level <?php echo getActivityLevel($userID,$activityID, 2); ?>.
+				I accept levels <?php echo getActivityLevel($userID,$activityID, 0); ?>-
+				<?php echo getActivityLevel($userID,$activityID, 1); ?>.
+			</p>
 			<p>Open to joiners | <a class="join" href="#">Ask to join</a></p>					
 		</div><!-- begin tags -->
 		<br/>
 				Tags:
 				<ul class="tags">
-					<li><?php echo getActivity($connactions[$i][6]); ?></li>
-					<li><?php echo getNetworkName($connactions[$i][7]); ?></li>
+					<li><?php echo getActivity($activityID); ?></li>
+					<li><?php echo getNetworkName($networkID); ?></li>
 				</ul><!-- end tags -->
 		</div><!-- end post-body -->
 	</div><!-- end post -->

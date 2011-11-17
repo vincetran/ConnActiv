@@ -64,7 +64,7 @@
 					</ul>
 						<div class="post"> <!-- begin post -->
 							<div class="post-author">
-								<img src="public/images/face1.png" height="120" /><br/>
+								<img src="public/images/avatar.png" height="120" /><br/>
 								Anita Napp
 							</div>
 							<div class="post-body">
@@ -84,7 +84,7 @@
 					
 						<div class="post"><!-- begin post -->
 							<div class="post-author">
-								<img src="public/images/face2.png" height="120"/><br/>
+								<img src="public/images/avatar.png" height="120"/><br/>
 								Bob Kelly
 							</div>
 							<div class="post-body">
@@ -102,7 +102,7 @@
 						
 							<div class="post"> <!-- begin post -->
 							<div class="post-author">
-								<img src="public/images/face1.png" height="120"/><br/>
+								<img src="public/images/avatar.png" height="120"/><br/>
 								Foo Bar
 							</div>
 							<div class="post-body">
