@@ -1,9 +1,9 @@
 <?php //echo "hi you dumb ass mutha plucka"; 
 
 include("config.php");
-
-//print_r($activityLevels);
-echo getUserPic(1);
+$date = getCurMonth();
+print_r($date);
+echo $date["month"];
 //echo $activities[1];
 
 ?>

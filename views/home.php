@@ -11,6 +11,12 @@
 		}
 		else{
 			//Cookie matches, show what they want
+			if (isset($_POST['postConnaction'])) { 
+				//If user pressed login
+				postConnaction();
+			}
+
+		
 			?>
 			<script type="text/javascript">
 			$('a.join').click(function() {
@@ -21,6 +27,10 @@
 			$('a.stream').click(function() {
 				type = $(this).attr('id');
 				alert("STUB: Sorting to display " +type.toUpperCase()+ " stream only");
+			});
+			
+			$('input.button').click(function() {
+				alert("ConnAction submited to database! If it was to the Oakland network you can view it here: \nhttp://localhost/ConnActiv/views/connactions.php");
 			});
 
 			$('div.post-author').click(function() {
@@ -38,12 +48,122 @@
 			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
 			<table>
 				<tr>
-					<td>Post a ConnAction: <input id="connaction"  type="text" name="connaction" maxlength="25"/><br/><br/></td>
+					<td colspan="4"><h3>Post a Connaction:</h3></td>
+				</tr>
+				<tr>
+					<td>Location:</td>
+					<td colspan="3"><input id="location"  type="text" name="location" maxlength="255"/></td>
+				</tr>
+				<tr>
+					<td>Start Time:</td>
+					<td><?php echo getCurMonth(0), ":";?>
+						<select name="startDay">
+							<option value="-1">Day:</option>
+							<?php
+								for($i = getCurDay(); $i <= getDays(getCurMonth(1)); $i++){
+									echo "<option value=\"",$i,"\">", $i, "</option>";
+								}
+							?>
+						</select>
+					</td>
+					<td>
+						<select name="startHour">
+							<option value="-1">Hour:</option>
+							<?php
+								for($i = getCurHour(); $i < 24; $i++){
+									echo "<option value=\"",$i,"\">", $i, "</option>";
+								}
+							?>
+						</select>
+						:
+					</td>
+					<td>
+						<select name="startMin">
+							<option value="-1">Min:</option>
+							<?php
+								for($i = getCurMin(); $i < 60; $i++){
+									echo "<option value=\"",$i,"\">", $i, "</option>";
+								}
+							?>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>End Time:</td>
+					<td><?php echo getCurMonth(0), ":";?>
+						<select name="endDay">
+							<option value="-1">Day:</option>
+							<?php
+								for($i = getCurDay(); $i <= getDays(getCurMonth(1)); $i++){
+									echo "<option value=\"",$i,"\">", $i, "</option>";
+								}
+							?>
+						</select>
+					</td>
+					<td>
+						<select name="endHour">
+							<option value="-1">Hour:</option>
+							<?php
+								for($i = 0; $i < 24; $i++){
+									echo "<option value=\"",$i,"\">", $i, "</option>";
+								}
+							?>
+						</select>
+						:
+					</td>
+					<td>
+						<select name="endMin">
+							<option value="-1">Min:</option>
+							<?php
+								for($i = 0; $i < 60; $i++){
+									echo "<option value=\"",$i,"\">", $i, "</option>";
+								}
+							?>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Message:</td>
+					<td colspan="3"><input id="message"  type="text" name="message" maxlength="4000"/></td>
+				</tr>
+				<tr>
+					<td>
+						<select name="network">
+							<option value="-1">Network:</option>
+							<?php
+								$networks = getNetworkNames();
+								for($i = 0; $i < count($networks); $i++){
+									echo "<option value=\"",getNetworkID($networks[$i]), "\">", $networks[$i], "</option>";
+								}
+							?>
+						</select>
+					</td>
+					<td>
+						<select name="activity">
+							<option value="-1">Activity:</option>
+							<?php
+								$activities = getUserActivities();
+								for($i = 0; $i < count($activities); $i++){
+									echo "<option value=\"",getActivityID($activities[$i]), "\">", $activities[$i], "</option>";
+								}
+							?>
+						</select>
+					</td>
+					<td colspan="2">
+						<select name="private">
+							<option value="-1">Private:</option>
+							<option value="0">No</option>
+							<option value="1">Yes</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4"><input class="button" type="submit" name="postConnaction" value="Post this connaction!"/></td>
 				</tr>
 			</table>
 			</form>
 				
-				
+				<br/><br/>
 				<h3>
 				<a class="stream" id="public" href="#public-stream">Public Stream</a> | 
 				<a class="stream" id="buddy" href="#buddy-stream">Buddy Stream</a>
