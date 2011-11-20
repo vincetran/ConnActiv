@@ -55,7 +55,7 @@
 	<img src="public/images/logo.png"/><br/>
 	
 	<div id="rollover_imgs">
-		<div id="login" class="rollover clickable"></div>
+		<div id="login" class="rollover clickable active"></div>
 		<div id="signup" class="rollover clickable"></div>
 	</div>
 	<br/>
@@ -63,7 +63,7 @@
 
 	<div id="welcomeForm">
 	
-		<div id="credentials" style="display:none">
+		<div id="credentials">
 			<br/>
 			<form id="signinForm" action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
 			<table>
