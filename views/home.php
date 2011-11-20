@@ -19,6 +19,8 @@
 		
 			?>
 			<script type="text/javascript">
+			$('header').show();
+			
 			$('a.join').click(function() {
 				t = confirm("Are you sure you want to join?");
 				t == true? alert("Your request to join has been sent! The user will contact you if he/she approves.") : alert('No join request made.');
