@@ -20,6 +20,7 @@
 			?>
 			<script type="text/javascript">
 			$('header').show();
+			$('#side').show();
 			
 			$('a.join').click(function() {
 				t = confirm("Are you sure you want to join?");
