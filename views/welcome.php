@@ -59,19 +59,19 @@
 	<br/>
 	
 
-	<div id="welcome_form">
+	<div id="welcomeForm">
 	
 		<div id="credentials" style="display:none">
 			<br/>
-			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
+			<form id="signinForm" action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
 			<table>
 				<tr>
 					<td>Email:</td>
-					<td><input id="username"  type="text" name="username" maxlength="25"/><br/><br/></td>
+					<td><input id="username"  type="text" name="username" maxlength="25" class="required"/><br/><br/></td>
 				</tr>
 				<tr>
 					<td>Password:</td>
-					<td><input id="password" type="password" name="pass" maxlength="100"/></td>
+					<td><input id="password" type="password" name="pass" maxlength="100" class="required"/></td>
 				</tr>
 				<tr><td colspan="2">&nbsp;</td></tr>
 				<tr>
@@ -83,19 +83,19 @@
 	
 		<div id="new_user" style="display:none">
 			<br/>
-			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
+			<form id="registerForm" action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
 			<table>
 				<tr>
-					<td>Email(required):</td>
-					<td><input id="username"  type="text" name="username" maxlength="25" /><br/><br/></td>
+					<td>Email (required):</td>
+					<td><input id="username"  type="text" name="username" maxlength="25" class="required email"/><br/><br/></td>
 				</tr>
 				<tr>
 					<td>First Name:</td>
-					<td><input id="firstName"  type="text" name="firstName" maxlength="20" /><br/><br/></td>
+					<td><input id="firstName"  type="text" name="firstName" maxlength="20" class="required"/><br/><br/></td>
 				</tr>
 				<tr>
 					<td>Last Name:</td>
-					<td><input id="lastName" type="text" name="lastName" maxlength="20" /></td>
+					<td><input id="lastName" type="text" name="lastName" maxlength="20" class="required"/></td>
 				</tr>
 				<tr>
 					<td>Street:</td>
@@ -132,12 +132,12 @@
 					</table>
 				</tr>
 				<tr>
-					<td>Password(required):</td>
-					<td><input id="password" type="password" name="password" maxlength="100"/></td>
+					<td>Password (required):</td>
+					<td><input id="password" type="password" name="password" maxlength="100" class="required" minlength="6"/></td>
 				</tr>
 				<tr>
-					<td>Confirm Password(required):</td>
-					<td><input id="confirm" type="password" name="confirm" maxlength="100"/></td>
+					<td>Confirm Password (required):</td>
+					<td><input id="confirm" type="password" name="confirm" maxlength="100" equalTo="#password"/></td>
 				</tr>
 				<tr><td colspan="2">&nbsp;</td></tr>
 				<tr>

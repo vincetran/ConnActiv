@@ -12,6 +12,7 @@
 
 <script type="text/javascript" src="js/less.min.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 
 <script type="text/javascript">
 
@@ -21,8 +22,12 @@ $(function() {
 	$('header').load('views/header.php');
 	$('#content').load('views/welcome.php'); 
 	
-	$('a#home').addClass('active');	
 	$('#side').hide();
+	//$('header').hide();
+	
+	$('#registerForm').validate();
+	$('#signinForm').validate();
+	
 });
 
 $.fn.nav = function(e) {
