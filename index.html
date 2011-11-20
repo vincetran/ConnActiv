@@ -12,7 +12,6 @@
 
 <script type="text/javascript" src="js/less.min.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 
 <script type="text/javascript">
 
@@ -25,9 +24,6 @@ $(function() {
 	$('#side').hide();
 	//$('header').hide();
 	
-	$('#registerForm').validate();
-	$('#signinForm').validate();
-	
 });
 
 $.fn.nav = function(e) {
@@ -37,6 +33,12 @@ $.fn.nav = function(e) {
 		$('#'+page).addClass('active');
 		$('#content').load('views/'+page+'.php');
 	};
+	
+$.fn.validate = function() {
+	$(this).siblings('.required').each(function() {
+		alert($(this).attr('id'));
+	});
+}
 
 
 </script>
