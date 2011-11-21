@@ -177,7 +177,7 @@
 	}
 	function addUserActivity($userid, $activityid){
 		$insert = mysql_query("Insert into user_activities(user_id, activity_id) values(".(int)$userid.",".(int)$activityid.")") or die(mysql_error());
-\
+}
 	function postConnaction(){
 	
 	/*
@@ -198,7 +198,6 @@
 					
 		$insert = mysql_query($query) or die(mysql_error());
 		header("Location: ../index.html");
->>>>>>> 3df16e94b8c2525755207696c64bd30aa6f0daa3
 	}
 	function getDatabaseInfo($table, $attribute, $value){
 		//Returns an array of strings that corresponds to the fetched row
