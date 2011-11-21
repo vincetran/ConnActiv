@@ -126,7 +126,7 @@
 					<table align = left>
 					<?php $activities = mysql_query("select * from activities");
 						while($activities1 = mysql_fetch_array($activities)){
-							echo "<tr><input id='activities'  type='checkbox' name='activities[]' value='".
+							echo "<tr><input id='activities'  type='checkbox' name='activities' value='".
 							$activities1[1]."' />".$activities1[1]."</tr><br>";
 						}?>
 					</table>
