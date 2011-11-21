@@ -46,6 +46,8 @@ function getReviews($which) {
 	while($row = mysql_fetch_array($result)){
 		$reviews[] = $row;
 	}
+	
+	return $reviews;
 }
 
 

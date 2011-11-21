@@ -61,7 +61,7 @@
 				<th>Acceptance range</th>
 				<th>Your skill level</th>
 			</tr>
-			<tr>
+			<tr> <!-- TODO: make these editable and auto-populating -->
 				<td>asdf</td>
 				<td>asdf</td>
 				<td>asdf</td>
@@ -76,9 +76,32 @@
 			
 			</table>
 			
+			<br/><br/>
+			<h2>Your favorites</h2>
 			
+			<table class="settings regular_table">
 			
+			<tr>
+				<th>Activity</th>
+				<th>Action</th>
+			</tr>
+			<? $favs = getFavorites(); 
+				if (!$favs): ?>
+				<tr>
+					<td colspan="2">You haven't selected any favorites!</td>
+				</tr>
+			<? else: 
+				foreach($favs as $fav):
+			?>
+					<tr>
+						<td><? echo $fav ?></td> <!-- Rob can you make the remove work for these? -->
+						<td><input type="submit" name="remove" value="Remove"/></td>
+					</tr>
+				<? endforeach; ?>
+			<? endif; ?>
 			
+			</table>
+						
 			</div><!-- /page -->
 			<?php
 		}
