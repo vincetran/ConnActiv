@@ -25,8 +25,8 @@ $('.thumbs_down').click(function() {
 			<td class="thumbs_down clickable"><img class="thumbs" src="public/images/thumbs_down1.png" height="60"/></td>
 		</tr>
 		<tr>
-			<td class="thumbs_up clickable"><h3>10</h3></td>
-			<td class="thumbs_down clickable"><h3>0</h3></td>
+			<td class="thumbs_up clickable"><h3><? echo totalReviews('positive') ?></h3></td>
+			<td class="thumbs_down clickable"><h3><? echo totalReviews('negative') ?></h3></td>
 		</tr>
 		
 		

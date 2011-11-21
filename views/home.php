@@ -46,7 +46,7 @@
 			<table class="regular_table" id="postConnaction">
 				<tr>
 					<td colspan="4">
-						<h3>Post a Connaction:</h3>
+						<h2>Post a Connaction</h2>
 					</td>
 				</tr>
 				<tr>
