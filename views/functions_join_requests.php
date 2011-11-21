@@ -1,7 +1,10 @@
 <?
 
-/* I'm working on this stuff but wanted to push up in case someone
- * wanted to modify the requests page layout. -Kim
+/* Actually, Rob this is listed as your action item. Feel free to take it away :)
+ * What I've done here just links to the "Join" button in the user's ConnAction stream (home.php)
+ * And also I broke your post connaction business, probably because I'm unsure how to link a form
+ * to a specific function. So yeahhhh oops. Let me know if I can clarify anything else.
+ * --Kim
  */
 
 
