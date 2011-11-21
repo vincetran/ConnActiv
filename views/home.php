@@ -60,11 +60,11 @@
 				</tr>
 				<tr>
 					<td>Message:</td>
-					<td colspan="3"><textarea id="message" name="message" maxlength="4000"/></td>
+					<td colspan="3"><textarea id="message" name="message" placeholder="Say what you're up to!" maxlength="4000"/></td>
 				</tr>
 				<tr>
 					<td>Location:</td>
-					<td colspan="3"><textarea class="small" id="location" name="location" maxlength="255"/></td>
+					<td colspan="3"><textarea class="small" id="location" placeholder="Where?" name="location" maxlength="255"/></td>
 				</tr>
 				<tr>
 					<td>Start Time:</td>
