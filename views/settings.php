@@ -2,7 +2,7 @@
 	include("config.php");
 
 	//Checks if there is a login cookie
-	if(cookieExists())
+	if(cookieExists() && validCookie())
 	//if there is a username cookie, we need to check it against our password cookie
 	{
 		if (!validCookie()) {

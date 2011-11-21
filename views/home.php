@@ -12,11 +12,6 @@
 			<script type="text/javascript">
 				$('header').show();
 				$('#side').show();
-				
-				$('a.join').click(function() {
-					t = confirm("Are you sure you want to join?");
-					t == true? alert("Your request to join has been sent! The user will contact you if he/she approves.") : alert('No join request made.');
-				});
 	
 				$('a.stream').click(function() {
 					type = $(this).attr('id');
@@ -169,6 +164,8 @@
 						?>
 					</ul>
 					
+					<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
+					
 					<? 
 					$connactions = getConnactions(getNetworkID($network), 1);
 					foreach($connactions as $post){
@@ -195,7 +192,10 @@
 									I accept levels <?php echo getActivityLevel($userID,$activityID, 0); ?>-
 									<? echo getActivityLevel($userID,$activityID, 1); ?>.
 								</p>
-								<p>Open to joiners | <a class="join" href="#">Ask to join</a></p>					
+								<p>Open to joiners | 
+										<input type="submit" class="join" name="joinRequest" value="Ask to join"/>
+									</form>
+								</p>					
 							</div><!-- begin tags -->
 							<br/>
 									Tags:
