@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 08, 2011 at 06:09 AM
+-- Generation Time: Nov 18, 2011 at 05:07 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -71,24 +71,26 @@ INSERT INTO `comments` (`COMMENT_ID`, `USER_ID`, `CONNACTION_ID`, `COMMENT`, `CO
 --
 
 CREATE TABLE IF NOT EXISTS `connactions` (
-  `CONNACTION_ID` int(11) NOT NULL,
+  `CONNACTION_ID` int(11) NOT NULL AUTO_INCREMENT,
   `USER_ID` int(11) NOT NULL,
   `LOCATION` varchar(255) NOT NULL,
-  `START_TIME` date DEFAULT NULL,
+  `START_TIME` datetime DEFAULT NULL,
   `MESSAGE` varchar(4000) DEFAULT NULL,
-  `END_TIME` date DEFAULT NULL,
+  `END_TIME` datetime DEFAULT NULL,
   `ACTIVITY_ID` int(11) NOT NULL,
   `NETWORK_ID` int(11) NOT NULL,
   `IS_PRIVATE` int(11) DEFAULT '0',
   PRIMARY KEY (`CONNACTION_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `connactions`
 --
 
 INSERT INTO `connactions` (`CONNACTION_ID`, `USER_ID`, `LOCATION`, `START_TIME`, `MESSAGE`, `END_TIME`, `ACTIVITY_ID`, `NETWORK_ID`, `IS_PRIVATE`) VALUES
-(1, 1, 'Oakland (atwood and bates)', '2011-11-08', 'Come Running with me!', '2011-11-08', 3, 1, 0);
+(1, 1, 'Oakland (atwood and bates)', '2011-11-08 12:00:00', 'Come Running with me!', '2011-11-08 13:00:00', 3, 1, 0),
+(2, 1, 'Forbes Ave. at Sennot Square', '2011-11-20 11:59:00', 'Bring a hat!', '2011-11-20 13:00:00', 3, 1, 0),
+(3, 1, 'Bigelow Blvd and Fith ave', '2011-11-28 10:10:00', 'Near the Union', '2011-11-28 11:11:00', 3, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -339,8 +341,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`USER_ID`, `PASSWORD`, `FIRST_NAME`, `LAST_NAME`, `STREET`, `CITY`, `STATE`, `ZIP`, `PHONE`, `INTERESTS`, `PROFILE_PIC`, `email`) VALUES
-(1, '8f53e82e508c96115551317048cba97e', 'Rob', 'Filippi', '42 Derp Street', 'Pittsburgh', 'PA', 15232, '412-600-0031', NULL, NULL, 'flippi273@gmail.com'),
-(2, 'e46087d5106e99a7bfe8f4bee9ed8aee', 'Dave', 'Johnson', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'mxpxpunk7789@gmail.com');
+(1, '8f53e82e508c96115551317048cba97e', 'Rob', 'Filippi', '42 Derp Street', 'Pittsburgh', 'PA', 15232, '412-600-0031', NULL, 'public/images/avatar.png', 'flippi273@gmail.com'),
+(2, 'e46087d5106e99a7bfe8f4bee9ed8aee', 'Dave', 'Johnson', NULL, NULL, NULL, NULL, NULL, NULL, 'public/images/avatar.png', 'mxpxpunk7789@gmail.com');
 
 -- --------------------------------------------------------
 

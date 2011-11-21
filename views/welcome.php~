@@ -47,35 +47,37 @@
 		$('#credentials').hide();
 	});
 	
+	
+	
 </script>
 
 
 	<img src="public/images/logo.png"/><br/>
 	
 	<div id="rollover_imgs">
-		<div id="login" class="rollover clickable"></div>
+		<div id="login" class="rollover clickable active"></div>
 		<div id="signup" class="rollover clickable"></div>
 	</div>
 	<br/>
 	
 
-	<div id="welcome_form">
+	<div id="welcomeForm">
 	
-		<div id="credentials" style="display:none">
+		<div id="credentials">
 			<br/>
-			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
+			<form id="signinForm" action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
 			<table>
 				<tr>
-					<td>Email:</td>
-					<td><input id="username"  type="text" name="username" maxlength="25"/><br/><br/></td>
+					<th>Email:</th>
+					<td><input id="username"  type="text" name="username" maxlength="25" class="required"/><br/><br/></td>
 				</tr>
 				<tr>
-					<td>Password:</td>
-					<td><input id="password" type="password" name="pass" maxlength="100"/></td>
+					<th>Password:</th>
+					<td><input id="password" type="password" name="pass" maxlength="100" class="required"/></td>
 				</tr>
 				<tr><td colspan="2">&nbsp;</td></tr>
 				<tr>
-					<td colspan="2" align="center"><input type="submit" name="login" value="Login"/></td>
+					<td colspan="2" align="center"><input type="submit" id="do_login" name="login" value="Login"/></td>
 				</tr>
 			</table>
 			</form>
@@ -83,65 +85,75 @@
 	
 		<div id="new_user" style="display:none">
 			<br/>
-			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
+			<form id="registerForm" action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
 			<table>
 				<tr>
-					<td>Email(required):</td>
-					<td><input id="username"  type="text" name="username" maxlength="25" /><br/><br/></td>
+					<th>Email (required):</th>
+					<td><input id="username"  type="text" name="username" maxlength="25" class="required email"/><br/><br/></td>
 				</tr>
 				<tr>
-					<td>First Name:</td>
-					<td><input id="firstName"  type="text" name="firstName" maxlength="20" /><br/><br/></td>
+					<th>First name:</th>
+					<td><input id="firstName"  type="text" name="firstName" maxlength="20" class="required"/><br/><br/></td>
 				</tr>
 				<tr>
-					<td>Last Name:</td>
-					<td><input id="lastName" type="text" name="lastName" maxlength="20" /></td>
+					<th>Last name:</th>
+					<td><input id="lastName" type="text" name="lastName" maxlength="20" class="required"/></td>
 				</tr>
 				<tr>
-					<td>Street:</td>
+					<th>Street:</th>
 					<td><input id="street"  type="text" name="street" maxlength="25" /><br/><br/></td>
 				</tr>
 				<tr>
-					<td>City:</td>
+					<th>City:</th>
 					<td><input id="city" type="text" name="city" maxlength="25" /></td>
 				</tr>
 				<tr>
-					<td>State:</td>
+					<th>State:</th>
 					<td><input id="state"  type="text" name="state" maxlength="2"/><br/><br/></td>
 				</tr>
 				<tr>
-					<td>Zip:</td>
+					<th>Zip:</th>
 					<td><input id="zip" type="text" name="zip" maxlength="5" /></td>
 				</tr>
 				<tr>
-					<td>Phone:</td>
+					<th>Phone:</th>
 					<td><input id="phone"  type="text" name="phone" maxlength="25"/><br/><br/></td>
 				</tr>
 				<tr>
-					<td>Interests:</td>
+					<th>Interests:</th>
 					<td><input id="interests" type="text" name="interests" maxlength="4000" /></td>
 				</tr>
 				<tr>
+<<<<<<< HEAD
 					<td>Activities:</td>
 					<table align = left>
 					<?php $activities = mysql_query("select * from activities");
 						while($activities1 = mysql_fetch_array($activities)){
-							echo "<tr><input id='activities'  type='checkbox' name='activities' value='".
+							echo "<tr><input id='activities'  type='checkbox' name='activities[]' value='".
 							$activities1[1]."' />".$activities1[1]."</tr><br>";
 						}?>
+=======
+					<th>Activities:</th>
+					<table align="left">
+					<!--<?php $activities = mysql_query("select * from ACTIVITIES");
+						while($activities1 = mysql_fetch_array($activities)){
+							echo "<tr><input id='activities'  type='checkbox' name='activities' value='".
+							$activities1['ACTIVITY_NAME']."' />".$activities1['ACTIVITY_NAME']."</tr></br>";
+						}?>-->
+>>>>>>> 3df16e94b8c2525755207696c64bd30aa6f0daa3
 					</table>
 				</tr>
 				<tr>
-					<td>Password(required):</td>
-					<td><input id="password" type="password" name="password" maxlength="100"/></td>
+					<th>Password (required):</th>
+					<td><input id="password" type="password" name="password" maxlength="100" class="required" minlength="6"/></td>
 				</tr>
 				<tr>
-					<td>Confirm Password(required):</td>
-					<td><input id="confirm" type="password" name="confirm" maxlength="100"/></td>
+					<th>Confirm Password (required):</th>
+					<td><input id="confirm" type="password" name="confirm" maxlength="100" class="required" equalTo="#password"/></td>
 				</tr>
 				<tr><td colspan="2">&nbsp;</td></tr>
 				<tr>
-					<td colspan="2" align="center"><input type="submit" name="register" value="Get ConnActed!"/></td>
+					<td colspan="2" align="center"><input type="submit" id="do_register" name="register" value="Get ConnActed!"/></td>
 				</tr>
 			</table>
 			</form>

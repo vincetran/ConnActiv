@@ -2,30 +2,35 @@
 
 <script type="text/javascript">
 
+$('#user_menu').hide();
+
 $('.top_links').click(function(e) {
 	$(this).nav(e); // function routes to index.html script (for now, index holds more global functions)
 });
 
 $('#user_login').click(function(e) {
-	e.preventDefault();
-	$('#user_menu').slideDown();
+		e.preventDefault();
+		$('#user_menu').show();
 	});
 
 $('#logout').click(function(e) {
-	e.preventDefault();
-	t = confirm('Are you sure you want to sign out?');
-	if (t) {
+		e.preventDefault();
 		window.location.replace('views/logout.php');
-		//alert('Signed out.'); 
-	}
+		$('#user_menu').hide();
+});
+
+$('.signout_opt').mouseout(function() {
 	$('#user_menu').hide();
 });
 	
 </script>
 
-<a id="user_login" href="#">
-<?php echo getName(); ?>
-</a>
+<a id="user_login" href="#"><?php echo getName(); ?>&nbsp;&raquo;</a>
+
+<div id="user_menu" class="signout_opt" style="display:inline; padding: 2px 2px; width: 60px; text-align: left; color: #fff;">
+	<a href="" id="logout">Sign out</a>
+</div>
+
 <?php 
 	if(cookieExists() && validCookie()){ ?>
 		<span id="top-nav">
@@ -37,7 +42,3 @@ $('#logout').click(function(e) {
 			</ul>
 		</span>
 	<?php } ?>
-	
-<div id="user_menu" style="display:none; border:1px solid #000; height:2em; width:80px; padding: 2px 2px; text-align: center; background: #fff; color: #333;">
-	<a href="" autofocus id="logout">Sign out</a>
-</div>

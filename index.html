@@ -12,6 +12,7 @@
 
 <script type="text/javascript" src="js/less.min.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 
 <script type="text/javascript">
 
@@ -20,9 +21,11 @@ $(function() {
 //Load the content from the appropriate views.
 	$('header').load('views/header.php');
 	$('#content').load('views/welcome.php'); 
+	$('#side').load('views/sidebar.html');
 	
-	$('a#home').addClass('active');	
 	$('#side').hide();
+	$('header').hide();
+	
 });
 
 $.fn.nav = function(e) {
@@ -32,6 +35,12 @@ $.fn.nav = function(e) {
 		$('#'+page).addClass('active');
 		$('#content').load('views/'+page+'.php');
 	};
+	
+$.fn.validate = function() {
+	$(this).siblings('.required').each(function() {
+		alert($(this).attr('id'));
+	});
+}
 
 
 </script>

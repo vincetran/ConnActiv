@@ -41,13 +41,12 @@ body {
 
 #container {
 	width:780px;
-	height: 100%;
 	margin:0px auto;
 	text-align:left;
 	padding:0px;
 	overflow:hidden;
 	position: absolute;
-	top: 55px;
+	padding-top: 40px;
 }
 
 a {
@@ -62,10 +61,12 @@ a:hover {
 }
 
 a:visited {
-	color: @blue;
+	color: @green;
 }
 
 h1, h2, h3, h4 {
+	margin: 0 0 0 0;
+	padding: 4px 4px 4px 4px;
 	color: @green;	
 }
 
@@ -105,7 +106,7 @@ header {
 	text-align: center;
 	height: 100%;
 	width: 100%;
-	margin: 20px 40px 0px 0px;
+	margin: 0px 40px 0px 0px;
 	padding: 20px 0px 10px 0px;
 }
 
@@ -133,12 +134,13 @@ div.main {
 }
 
 div.page {
-	margin-left: 180px;
+	float:left;
 }
 
 div#credentials, div#new_user {
 	text-align:center;
 	margin: 0px auto;
+	width: 300px;
 }
 
 /* WELCOME.PHP ROLLOVER EFFECTS */
@@ -148,12 +150,6 @@ div#credentials, div#new_user {
 	width: 280px;
 	height: 140px;
 	text-align: center;
-}
-
-#welcome_form {
-	width: 400px;
-	text-align: center;
-	margin: 0px auto;
 }
 
 .rollover {
@@ -177,4 +173,22 @@ div#credentials, div#new_user {
 
 #signup {
 	background-image: url('../public/images/signupbutton.png');
+}
+
+table {
+	width: 100%;
+	cell-padding: 2px;
+}
+
+table td {
+	padding: 4px 2px 6px 2px;
+}
+
+table th {
+	color: @green;
+	vertical-align: baseline;
+}
+
+div#ui-datepicker-div {
+	background: #fff;
 }
