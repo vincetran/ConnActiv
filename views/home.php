@@ -19,39 +19,44 @@
 		
 			?>
 			<script type="text/javascript">
-			$('header').show();
-			$('#side').show();
-			
-			$('a.join').click(function() {
-				t = confirm("Are you sure you want to join?");
-				t == true? alert("Your request to join has been sent! The user will contact you if he/she approves.") : alert('No join request made.');
-			});
-
-			$('a.stream').click(function() {
-				type = $(this).attr('id');
-				alert("STUB: Sorting to display " +type.toUpperCase()+ " stream only");
-			});
-			
-			$('input.button').click(function() {
-				alert("ConnAction submited to database! If it was to the Oakland network you can view it here: \nhttp://localhost/ConnActiv/views/connactions.php");
-			});
-
-			$('div.post-author').click(function() {
-				auth = $(this).text().trim();
-				alert("STUB: Going to profile of " +auth.toUpperCase());
-			});
-
-			$('.top_links').removeClass('active');
-			$('#home').addClass('active');
+				$('header').show();
+				$('#side').show();
+				
+				$('a.join').click(function() {
+					t = confirm("Are you sure you want to join?");
+					t == true? alert("Your request to join has been sent! The user will contact you if he/she approves.") : alert('No join request made.');
+				});
+	
+				$('a.stream').click(function() {
+					type = $(this).attr('id');
+					alert("STUB: Sorting to display " +type.toUpperCase()+ " stream only");
+				});
+				
+				$('input.button').click(function() {
+					alert("ConnAction submited to database! If it was to the Oakland network you can view it here: \nhttp://localhost/ConnActiv/views/connactions.php");
+				});
+	
+				$('div.post-author').click(function() {
+					auth = $(this).text().trim();
+					alert("STUB: Going to profile of " +auth.toUpperCase());
+				});
+	
+				$('.top_links').removeClass('active');
+				$('#home').addClass('active');
+				
+				$('#startDate').datepicker();
+				$('#endDate').datepicker();
 
 			</script>
 				
 			<div class="page">
 				
 			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
-			<table>
+			<table id="postConnaction">
 				<tr>
-					<td colspan="4"><h3>Post a Connaction:</h3></td>
+					<td colspan="4">
+						<h3>Post a Connaction:</h3>
+					</td>
 				</tr>
 				<tr>
 					<td>Location:</td>
@@ -59,15 +64,7 @@
 				</tr>
 				<tr>
 					<td>Start Time:</td>
-					<td><?php echo getCurMonth(0), ":";?>
-						<select name="startDay">
-							<option value="-1">Day:</option>
-							<?php
-								for($i = getCurDay(); $i <= getDays(getCurMonth(1)); $i++){
-									echo "<option value=\"",$i,"\">", $i, "</option>";
-								}
-							?>
-						</select>
+					<td><input type="text" id="startDate"/>
 					</td>
 					<td>
 						<select name="startHour">
@@ -93,15 +90,8 @@
 				</tr>
 				<tr>
 					<td>End Time:</td>
-					<td><?php echo getCurMonth(0), ":";?>
-						<select name="endDay">
-							<option value="-1">Day:</option>
-							<?php
-								for($i = getCurDay(); $i <= getDays(getCurMonth(1)); $i++){
-									echo "<option value=\"",$i,"\">", $i, "</option>";
-								}
-							?>
-						</select>
+					<td>
+						<input id="endDate" type="text"/>
 					</td>
 					<td>
 						<select name="endHour">
@@ -160,6 +150,8 @@
 						</select>
 					</td>
 				</tr>
+				<tr>
+					<td colspan="4">&nbsp;</td>
 				<tr>
 					<td colspan="4"><input class="button" type="submit" name="postConnaction" value="Post this connaction!"/></td>
 				</tr>

@@ -126,11 +126,11 @@
 				<tr>
 					<th>Activities:</th>
 					<table align="left">
-					<?php $activities = mysql_query("select * from ACTIVITIES");
+					<!--<?php $activities = mysql_query("select * from ACTIVITIES");
 						while($activities1 = mysql_fetch_array($activities)){
 							echo "<tr><input id='activities'  type='checkbox' name='activities' value='".
 							$activities1['ACTIVITY_NAME']."' />".$activities1['ACTIVITY_NAME']."</tr></br>";
-						}?>
+						}?>-->
 					</table>
 				</tr>
 				<tr>
@@ -139,7 +139,7 @@
 				</tr>
 				<tr>
 					<th>Confirm Password (required):</th>
-					<td><input id="confirm" type="password" name="confirm" maxlength="100" equalTo="#password"/></td>
+					<td><input id="confirm" type="password" name="confirm" maxlength="100" class="required" equalTo="#password"/></td>
 				</tr>
 				<tr><td colspan="2">&nbsp;</td></tr>
 				<tr>

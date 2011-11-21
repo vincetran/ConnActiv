@@ -121,6 +121,14 @@
 		}
 	}
 	function postConnaction(){
+	
+	/*
+	**
+	* HEY ROBBBBBER ROB can you fix this so it takes the date the way datepicker inputs it? KCOOOOOL -Kim
+	*
+	**
+	*/
+	
 		//This function will post the connaction to the database!
 		$startTime = getCurYear()."-".getCurMonth(1)."-".$_POST['startDay']." ".$_POST['startHour'].":".$_POST['startMin'].":00";
 		$endTime = getCurYear()."-".getCurMonth(1)."-".$_POST['endDay']." ".$_POST['endHour'].":".$_POST['endMin'].":00";
