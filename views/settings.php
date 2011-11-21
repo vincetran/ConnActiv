@@ -13,37 +13,35 @@
 			//Cookie matches, show what they want.";
 			?>
 			<div class="page">
-
-			<h3>
-			Settings
-			</h3>
-			<table style="border:1px solid #004a1e;">
-			<tr style="border:1px solid #004a1e;"Align="Center"><td Colspan="3">Current Networks:</td></tr>
-				<tr style="border:1px solid #004a1e;">
-					<td>Area</td>
-					<td>Activity</td>
-					<td>Action</td>
+			
+			<h2>Your subscribed networks</h2>
+			
+			<table class="settings regular_table">
+				<tr>
+					<th>Area</th>
+					<th>Activity</th>
+					<th>Action</th>
 				</tr>
-			<?php 
+			<?
 				$networks = getNetworkNames();
-				for($i = 0; $i < count($networks); $i++){
-					?>
-					<tr style="border:1px solid #004a1e;">
-						<td><?php echo $networks[$i]; ?></td>
+				foreach($networks as $network){
+			?>
+					<tr>
+						<td colspan="3" style="text-align:left"><? echo $network; ?></td>
 					</tr>
-					<?php
+					<?
 					$activities = getUserNetworkActivities();
 					for($k = 0; $k < count($activities); $k++){
-						if($networks[$i] != $activities[$k]){
+						if($network != $activities[$k]){
 							?>
-							<tr style="border:1px solid #004a1e;">
-								<td></td>
+							<tr>
+								<td>&nbsp;</td>
 								<td>
-									<?php echo $activities[$k]; ?>
+									<? echo $activities[$k]; ?>
 								</td>
 								<td><input type="submit" name="remove" value="Remove"/></td>
 							</tr>
-							<?php 
+							<? 
 						}
 					}
 					
@@ -51,7 +49,37 @@
 				
 			?>
 			</table>	
-			</div>
+			
+			<br/><br/>
+			<h2>Your skill level preferences</h2>
+			
+			<table class="settings regular_table">
+			
+			<tr>
+				<th>Activity</th>
+				<th>Seeking level</th>
+				<th>Acceptance range</th>
+				<th>Your skill level</th>
+			</tr>
+			<tr>
+				<td>asdf</td>
+				<td>asdf</td>
+				<td>asdf</td>
+				<td>asdf</td>
+			</tr>
+			<tr>
+				<td>asdf</td>
+				<td>asdf</td>
+				<td>asdf</td>
+				<td>asdf</td>
+			</tr>
+			
+			</table>
+			
+			
+			
+			
+			</div><!-- /page -->
 			<?php
 		}
  	//

@@ -43,7 +43,7 @@
 			<div class="page">
 				
 			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
-			<table id="postConnaction">
+			<table class="regular_table" id="postConnaction">
 				<tr>
 					<td colspan="4">
 						<h3>Post a Connaction:</h3>

@@ -1,9 +1,8 @@
-@grey: #555;
+@lightgrey: #ddd;
 @dark: #555;
 @white: #fff;
 @green: #5CBD00;
 @darkgreen: #004a1e;
-@blue: #2348de;
 
 .clickable {
 	cursor:pointer;
@@ -187,6 +186,19 @@ table td {
 table th {
 	color: @green;
 	vertical-align: baseline;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+table#settings {
+	width: 330px;
+}
+
+.settings th {
+	width: 130px;
+	border: thin solid @lightgrey;
+	background: @green;
+	color: @white;
 }
 
 div#ui-datepicker-div {
