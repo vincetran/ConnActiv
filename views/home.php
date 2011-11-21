@@ -1,23 +1,14 @@
 <?php 
 	include("config.php");
 
-	//Checks if there is a login cookie
-	if(cookieExists())
-	//if there is a username cookie, we need to check it against our password cookie
-	{ 
-		if (!validCookie()) {
-			//Cookie doesn't match password go to index
-			header("Location: ../index.html"); 
+	if(cookieExists() && validCookie()):
+	
+		if (isset($_POST['postConnaction'])) { 
+			//If user pressed login
+			postConnaction();
 		}
-		else{
-			//Cookie matches, show what they want
-			if (isset($_POST['postConnaction'])) { 
-				//If user pressed login
-				postConnaction();
-			}
 
-		
-			?>
+	?>
 			<script type="text/javascript">
 				$('header').show();
 				$('#side').show();
@@ -168,83 +159,54 @@
 				<div class="main feeds-container">
 					<ul class="feeds">
 						<li id="link_feeds_all"><a href="#">All</a></li>
-						<?php 
+						<?
 						$networkNames = getNetworkNames();
-						for($i = 0; $i  < count($networkNames); $i++){
+						foreach ($networkNames as $network){
 							?>
-							<li id="link_feeds_<?php $networkNames[$i]; ?>"><a href="#"><?php echo $networkNames[$i]; ?></a></li>
-							<?php
-						}
+							<li id="link_feeds_<? $network; ?>"><a href="#"><? echo $network; ?></a></li>
+							<?
+						//}
 						?>
 					</ul>
+					
+					<? 
+					$connactions = getConnactions(getNetworkID($network), 1);
+					foreach($connactions as $post){
+						$userID = $post[1];
+						$location = $post[2];
+						$startTime = $post[3];
+						$message = $post[4];
+						$endTime = $post[5];
+						$activityID = $post[6];
+						$networkID = $post[7];
+						$isPrivate = $post[8];
+					?>					
 						<div class="post"> <!-- begin post -->
 							<div class="post-author">
-								<img src="public/images/avatar.png" height="120" /><br/>
-								Anita Napp
+								<img src="<? echo getUserPic($userID); ?>" height="120" /><br/>
+								<? echo getName($userID) ?>
 							</div>
 							<div class="post-body">
-								<p>Needs a running buddy for tmw morning!  8am anyone?</p>
+								<p><? echo $message; ?></p>
 							<div class="post-levels">
-								<p>I am a 6-7 seeking levels 4-8 accepting levels 3-8.</p>
+								<p>
+									I am a level <?php echo getActivityLevel($userID,$activityID, 3); ?>.
+									I prefer level <?php echo getActivityLevel($userID,$activityID, 2); ?>.
+									I accept levels <?php echo getActivityLevel($userID,$activityID, 0); ?>-
+									<? echo getActivityLevel($userID,$activityID, 1); ?>.
+								</p>
 								<p>Open to joiners | <a class="join" href="#">Ask to join</a></p>					
 							</div><!-- begin tags -->
 							<br/>
 									Tags:
 									<ul class="tags">
-										<li>Running</li>
-										<li>Pittsburgh</li>
+										<li><?php echo getActivity($activityID); ?></li>
+										<li><?php echo getNetworkName($networkID); ?></li>
 									</ul><!-- end tags -->
 							</div><!-- end post-body -->
 						</div><!-- end post -->
-					
-						<div class="post"><!-- begin post -->
-							<div class="post-author">
-								<img src="public/images/avatar.png" height="120"/><br/>
-								Bob Kelly
-							</div>
-							<div class="post-body">
-								<p>Going to the gym early tomorrow. Gonna get in a great morning workout!</p>
-							<!-- begin tags -->
-							<br/>
-									Tags:
-									<ul class="tags">
-										<li>Gym</li>
-										<li>Pittsburgh</li>
-									</ul><!-- end tags -->
-							</div><!-- end post-body -->
-						</div><!-- end post -->
-						
-						
-							<div class="post"> <!-- begin post -->
-							<div class="post-author">
-								<img src="public/images/avatar.png" height="120"/><br/>
-								Foo Bar
-							</div>
-							<div class="post-body">
-								<p>Wants to play squash tomorrow morning at 10. Looking for a partner.</p>
-							<div class="post-levels">
-								<p>I am a 6-7 seeking levels 4-8 accepting levels 3-8.</p>
-								<p>Open to joiners | <a class="join" href="#">Ask to join</a></p>			
-							</div><!-- begin tags -->
-							<br/>
-									Tags:
-									<ul class="tags">
-										<li>Squash</li>
-										<li>Minneapolis</li>
-									</ul><!-- end tags -->
-							</div><!-- end post-body -->
-						</div><!-- end post -->
-						
-						
-				</div><!-- end feed container -->
-				
+		<?		}		//end foreach($post) ?> 				
+				</div><!-- end feed container -->		
 			</div><!-- end page-->
-		<?php
-		}
- 		
-	}
-	else {	 
-		//if they are not logged in
-		header("Location: ../index.html");
-	}
-?>
+	<?  } // end foreach($network)
+endif; ?>
