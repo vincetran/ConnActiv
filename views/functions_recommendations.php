@@ -51,4 +51,25 @@ function getReviews($which) {
 }
 
 
+function getUpcoming($network_id, $activity_id) {
+//Return the number of notifications for a certain unique network ($unique) since the user's last login
+		
+	$upcoming = 0;
+	$connactions = array();
+		
+	$query = "SELECT * FROM connactions"
+	." WHERE network_id = $network_id AND activity_id = $activity_id";
+	
+	$result = mysql_query($query) or die(mysql_error());
+	while($row = mysql_fetch_array($result)){
+		if( $row['start_time'] > currDate()) {
+			$notifications++;
+		}
+	}//end while
+		
+	return $upcoming;
+}
+
+
+
 ?>

@@ -185,6 +185,7 @@
 							</div>
 							<div class="post-body">
 								<p><? echo $message; ?></p>
+								<p><? echo date('l, F jS, Y h:i a'); ?></p>
 							<div class="post-levels">
 								<p>
 									I am a level <?php echo getActivityLevel($userID,$activityID, 3); ?>.
