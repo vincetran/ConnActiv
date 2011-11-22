@@ -326,11 +326,25 @@ include("functions_join_requests.php");
 		//This function returns an array of user's network names
 		$userID = getUserID();
 		$networkName = array();
+		$index = 0;
+		$previousID;
 		$resourceID = getResourceIDs("user_networks", "user_id", $userID);
 		while($info = mysql_fetch_array($resourceID)){
 			$uniqueNetwork = getDatabaseInfo("unique_networks","unique_network_id", $info['UNIQUE_NETWORK_ID']);
 			$networkID = $uniqueNetwork['NETWORK_ID'];
-			$networkName[] = getNetworkName($networkID);
+			if($index == 0){
+				$previousID = $networkID;
+				$index++;
+				$networkName[] = getNetworkName($networkID);
+			}
+			else{
+				//Need to see if we have the same network ID
+				if($previousID != $networkID){
+					//yay not the same
+					$previousID = $networkID;
+					$networkName[] = getNetworkName($networkID);
+				}
+			}
 		}
 		
 		return $networkName;
