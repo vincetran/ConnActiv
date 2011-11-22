@@ -14,12 +14,12 @@ $('.thumbs_down').click(function() {
 
 <div id="sidebar">
 	<br/>
-	<p><img src="public/images/face2.png" height="120"/></p>
-	<p><strong><? echo getName(); ?></strong></p>
+	<img src="<? echo getUserPic(getUserId()); ?>" height="120"/>
+	<h2 class="sidebar"><? echo getName(); ?></h2>
 	
 	<br/>
 	
-	<table border="0" align="center">
+	<table class="top_border" border="0" align="center">
 		<tr>
 			<td class="thumbs_up clickable"><img class="thumbs" src="public/images/thumbs_up1.png" height="60"/></td>
 			<td class="thumbs_down clickable"><img class="thumbs" src="public/images/thumbs_down1.png" height="60"/></td>
@@ -27,13 +27,11 @@ $('.thumbs_down').click(function() {
 		<tr>
 			<td class="thumbs_up clickable"><h3><? echo totalReviews('positive') ?></h3></td>
 			<td class="thumbs_down clickable"><h3><? echo totalReviews('negative') ?></h3></td>
-		</tr>
-		
-		
+		</tr>		
 	</table>
 	
 	<div id="favorites">
-		<strong>My Favorites</strong><br/>
+		<h3 class="sidebar">Favorites</h3>
 		
 		<div>
 		<?
