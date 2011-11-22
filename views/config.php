@@ -101,7 +101,7 @@ include("functions_join_requests.php");
 				var_dump($checkNetwork1);
 				$networkid = (int)$checkNetwork1[0];
 				if(mysql_num_rows($checkNetwork) == 0){
-					addNetwork($_POST['city']);
+					$networkid = addNetwork($_POST['city']);
 				}	
 				
 				
@@ -127,7 +127,7 @@ include("functions_join_requests.php");
 					//if there is no record for the unique network, insert it and overwrite the uniqueID variable
 					if(mysql_num_rows($checkUniqueNetworks) == 0){
 						
-						addUniqueNetwork($networkid, $activityid1[0]);
+						$uniqueID = addUniqueNetwork($networkid, $activityid1[0]);
 					}
 					//add to user_networks
 					addUserNetwork($userid2, $uniqueID);
@@ -168,6 +168,7 @@ include("functions_join_requests.php");
 		$uniqueID = (int)$nextID[0];
 		$uniqueID++;
 		$insertUN = mysql_query("insert into unique_networks values(".(int)$uniqueID.", ".(int)$networkID.", ".(int)$activityID.")") or die(mysql_error());
+		return $uniqueID;
 	}	
 
 	function addNetwork($area){
@@ -176,7 +177,8 @@ include("functions_join_requests.php");
 		$networkid = (int)$getnextid1[0];
 		$networkid++;
 					
-		$insert = mysql_query("insert into networks values(".$networkid.",'".$area."')") or die(mysql_error());		
+		$insert = mysql_query("insert into networks values(".$networkid.",'".$area."')") or die(mysql_error());	
+		return $networkid;	
 	}
 	function addUserActivity($userid, $activityid){
 		$insert = mysql_query("Insert into user_activities(user_id, activity_id) values(".(int)$userid.",".(int)$activityid.")") or die(mysql_error());
