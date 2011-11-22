@@ -145,11 +145,7 @@
 			</form>
 				
 				<br/><br/>
-				<h3>
-				<a class="stream" id="public" href="#public-stream">Public Stream</a> | 
-				<a class="stream" id="buddy" href="#buddy-stream">Buddy Stream</a>
-				</h3>
-				
+				<h2>Stream</h2>				
 					
 				<div class="main feeds-container">
 					<ul class="feeds">
@@ -164,7 +160,7 @@
 						?>
 					</ul>
 					
-					<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
+					<form method="post">
 					
 					<? 
 					$connactions = getConnactions(getNetworkID($network), 1);
@@ -184,7 +180,7 @@
 								<? echo getName($userID) ?>
 							</div>
 							<div class="post-body">
-								<p><? echo $message; ?></p>
+								<p class="quote"><? echo $message; ?></p>
 								<p><? echo date('l, F jS, Y h:i a'); ?></p>
 							<div class="post-levels">
 								<p>

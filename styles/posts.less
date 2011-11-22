@@ -2,14 +2,21 @@
 @darkgreen: 004a1e;
 @green: #5CBD00;
 @dark: #555;
+@ghostwhite: ghostWhite;
+@lightblue: #E2E4FF;
+
+.handwriting { 
+	font-family: 'Reenie Beanie', cursive; 
+	font-size: 2em;
+}
 
 .clickable {
 	cursor:pointer;
 }
 
 .rounded {
-	border-radius: 5px;
-	-moz-border-radius: 5px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
 }
 
 div.post {
@@ -17,6 +24,7 @@ div.post {
 	margin: 10px 10px 10px 10px;
 	overflow: hidden;
 	border: 1px solid @light;
+	background: @ghostwhite;
 }
 
 div.post-author {
@@ -37,6 +45,15 @@ div.post-body {
 	width: 340px;
 }
 
+p.quote {
+	background: #fff;
+	text-align: center;
+	padding: 5px 7px 5px 7px;
+	.rounded;
+	.handwriting;
+	border: 1px solid @light;
+}
+
 .post-body p {
 	padding: 10px 0px 10px 0px;
 }
@@ -45,6 +62,11 @@ ul.tags {
 	display:inline;
 	padding-left: 4px;
 	margin-bottom: -10px;
+}
+
+ul.tags li {
+	background: #fff;
+	.rounded;
 }
 
 div.feeds-container {
@@ -56,10 +78,18 @@ div.feeds-container {
 }
 
 ul.feeds {
-	border-bottom: thin solid @light;
+	border-top: thin solid @light;
 	overflow: hidden;
-	margin: 3px 0px 3px 1px;
-	padding: 3px 3px 0px 0px;
+	margin: 0px 0px 3px 0px;
+	padding: 7px 2px 0px 3px;
+	background: @green;
+	text-align:left;
+}
+
+ul.feeds li {
+	color: @light;
+	background: #fff;
+	border: thin solid @light;
 }
 
 .regular_table {
