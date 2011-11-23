@@ -5,13 +5,20 @@
 	if(cookieExists() && validCookie())
 	//if there is a username cookie, we need to check it against our password cookie
 	{
-		if (!validCookie()) {
-			//Cookie doesn't match password go to index";
-			header("Location: ../index.html"); 
-		}
-		else{
-			//Cookie matches, show what they want.";
+		
 			?>
+			<script type="text/javascript">
+			 $('#addNetwork').dataTable( {
+        "aaSorting": [[ 0, "asc" ]],
+        "bPaginate": false,
+				"bLengthChange": false,
+				"bFilter": true,
+				"bSort": true,
+				"bInfo": false,
+				"bAutoWidth": false
+   		 });
+			</script>
+			
 			<div class="page">
 			
 			<h2>Your subscribed networks</h2>
@@ -44,11 +51,34 @@
 							<? 
 						}
 					}
-					
 				}
-				
 			?>
-			</table>	
+			</table>
+			
+			<br/><br/>			
+			<h3>Add a new network</h3>
+			
+			<div id="allNetworks">
+				<table class="requests regular_table" id="addNetwork">
+				<thead>
+					<tr>
+						<th>Network ID</th>
+						<th>Network name</th>
+						<th>Add Network</th>
+					</tr>
+				</thead>
+					<tbody>
+					
+					<? $networkNames = getAllNetworkNames();	
+						 $networkIDs = getAllNetworkIDs();
+							
+							for($i = 0; $i < count($networkNames); $i++){
+								echo "<tr><td>$networkIDs[$i]</td><td>$networkNames[$i]</td><td><input type='checkbox' name='$networkIDs[$i]' value='Add' /></td></tr>";
+							}
+					?>
+					</tbody>
+				</table>			
+			</div>			
 			
 			<br/><br/>
 			<h2>Your skill level preferences</h2>
@@ -105,8 +135,6 @@
 			</div><!-- /page -->
 			<?php
 		}
- 	//
-	}
 	else {	 
 		//if they are not logged in";
 		header("Location: ../index.html");

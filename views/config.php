@@ -6,6 +6,7 @@
 	mysql_select_db("xgamings_connactiv") or die(mysql_error()); 
 
 include("functions_recommendations.php");
+include("functions_networks.php");
 include("functions_join_requests.php");
 
 	function cookieExists(){
