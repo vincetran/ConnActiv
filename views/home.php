@@ -164,6 +164,9 @@
 					
 					<? 
 					$connactions = getConnactions(getNetworkID($network), 1);
+					
+					if ($connactions) {
+					
 					foreach($connactions as $post){
 						$userID = $post[1];
 						$location = $post[2];
@@ -206,4 +209,6 @@
 				</div><!-- end feed container -->		
 			</div><!-- end page-->
 	<?  } // end foreach($network)
+		else echo "<br/>No connactions yet!<br/><br/>";
+	}
 endif; ?>
