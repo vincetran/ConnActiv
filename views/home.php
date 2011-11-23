@@ -32,6 +32,10 @@
 				
 				$('#startDate').datepicker();
 				$('#endDate').datepicker();
+				
+			 $('.joinExpander').click(function(){
+				$(this).siblings('.expand').toggle();
+				});
 
 			</script>
 				
@@ -184,18 +188,20 @@
 							</div>
 							<div class="post-body">
 								<p class="quote"><? echo $message; ?></p>
-								<p><? echo date('l, F jS, Y h:i a'); ?></p>
+								<? echo date('l, F jS, Y h:i a'); ?>
 							<div class="post-levels">
-								<p>
 									I am a level <?php echo getActivityLevel($userID,$activityID, 3); ?>.
 									I prefer level <?php echo getActivityLevel($userID,$activityID, 2); ?>.
 									I accept levels <?php echo getActivityLevel($userID,$activityID, 0); ?>-
 									<? echo getActivityLevel($userID,$activityID, 1); ?>.
-								</p>
-								<p>Open to joiners | 
-										<input type="submit" class="join" name="joinRequest" value="Ask to join"/>
-									</form>
-								</p>					
+								<br/>
+								Open to joiners&nbsp;&raquo; 
+										<span class="clickable joinExpander">Ask to join</span>
+										<div class="expand" style="display:none">
+											<textarea maxlength="255" style="width:80%;" class="small" placeholder="Hi! I was hoping to join your activity."></textarea>
+											<input type="submit" class="join" name="joinRequest" value="Send"/>
+										</div>
+									</form>					
 							</div><!-- begin tags -->
 							<br/>
 									Tags:
