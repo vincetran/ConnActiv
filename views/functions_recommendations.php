@@ -1,5 +1,11 @@
 <?
 
+/*
+*
+** Favorites (Bookmarks)
+*
+*/
+
 function getFavorites(){
 
 	$id = getUserID();
@@ -13,6 +19,12 @@ function getFavorites(){
 	}
 	return $favs;
 }
+
+/*
+*
+** Reviews
+*
+*/
 
 function totalReviews($which) {
 //$which tells which reviews to return (positive or negative)
@@ -50,6 +62,11 @@ function getReviews($which) {
 	return $reviews;
 }
 
+/*
+*
+** Work in progress - Kim
+*
+*/
 
 function getUpcoming($network_id, $activity_id) {
 //Return the number of notifications for a certain unique network ($unique) since the user's last login

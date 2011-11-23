@@ -111,25 +111,24 @@
 			<h2>Your skill level preferences</h2>
 			
 			<table class="settings regular_table">
+			<thead>
+				<tr>
+					<th>Activity</th>
+					<th>Seeking level</th>
+					<th>Acceptance range</th>
+					<th>Your skill level</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?
+				$levels = getUserActivityLevels();
+				foreach($levels as $level){
+					echo "<tr>$level</tr>";
+				}
+				
+				?>
+			</tbody>
 			
-			<tr>
-				<th>Activity</th>
-				<th>Seeking level</th>
-				<th>Acceptance range</th>
-				<th>Your skill level</th>
-			</tr>
-			<tr> <!-- TODO: make these editable and auto-populating -->
-				<td>asdf</td>
-				<td>asdf</td>
-				<td>asdf</td>
-				<td>asdf</td>
-			</tr>
-			<tr>
-				<td>asdf</td>
-				<td>asdf</td>
-				<td>asdf</td>
-				<td>asdf</td>
-			</tr>
 			
 			</table>
 			
