@@ -3,11 +3,11 @@
 
 	if(cookieExists() && validCookie()):
 	
-		if (isset($_POST['postConnaction'])) { 
-			//If user pressed login
+		if (isset($_POST['postConnaction'])) {
 			postConnaction();
+		} else if (isset($_POST['joinRequest'])) { 
+			joinRequest();
 		}
-
 	?>
 			<script type="text/javascript">
 				$('header').show();
@@ -164,7 +164,7 @@
 						?>
 					</ul>
 					
-					<form method="post">
+					<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 					
 					<? 
 					$connactions = getConnactions(getNetworkID($network), 1);
@@ -172,6 +172,7 @@
 					if ($connactions) {
 					
 					foreach($connactions as $post){
+						$connactionID = $post[0];
 						$userID = $post[1];
 						$location = $post[2];
 						$startTime = $post[3];
@@ -198,7 +199,9 @@
 								Open to joiners&nbsp;&raquo; 
 										<span class="clickable joinExpander">Ask to join</span>
 										<div class="expand" style="display:none">
-											<textarea maxlength="255" style="width:80%;" class="small" placeholder="Hi! I was hoping to join your activity."></textarea>
+											<input type="hidden" name="connactionID" value="<?= $connactionID?>"/>
+											<input type="hidden" name="postingUserID" value="<?= $userID?>"/>
+											<textarea name="message" maxlength="255" style="width:80%;" class="small" placeholder="Hi! I was hoping to join your activity."></textarea>
 											<input type="submit" class="join" name="joinRequest" value="Send"/>
 										</div>
 									</form>					
