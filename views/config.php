@@ -454,17 +454,19 @@ include("functions_join_requests.php");
 		
 		if($option == 0){
 			//ID is activity
-			$resourceID = getResourceIDs("connactions", "activity_id", $n_aID);
-			while($info = mysql_fetch_array($resourceID)){
+			//$resourceID = getResourceIDs("connactions", "activity_id", $n_aID);
+			$result = mysql_query("SELECT * FROM connactions WHERE activity_id = '$n_aID' ORDER BY connaction_id DESC")or die(mysql_error()); //returns true if you do not assign
+
+			while($info = mysql_fetch_array($result)){
 				$connactionUsers[] = $info;
 			}
 			return $connactionUsers;
 		}
 		else if($option == 1){
-			//ID is network
-			//print $n_aID;
-			$resourceID = getResourceIDs("connactions", "network_id", $n_aID);
-			while($info = mysql_fetch_array($resourceID)){
+			//$resourceID = getResourceIDs("connactions", "network_id", $n_aID);
+			$result = mysql_query("SELECT * FROM connactions WHERE network_id = '$n_aID' ORDER BY connaction_id DESC")or die(mysql_error()); //returns true if you do not assign
+
+			while($info = mysql_fetch_array($result)){
 				$connactionUsers[] = $info;
 			}
 			return $connactionUsers;
