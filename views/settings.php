@@ -17,6 +17,28 @@
 				"bInfo": false,
 				"bAutoWidth": false
    		 });
+   		 
+   		 $('.clickExpand').click(function(){
+   		 
+   		 	$plusMinus = $(this).html();
+   		 	if ($plusMinus == '[ + ]') {
+   		 		$('div.doExpand').show();
+   		 		$(this).html('[ - ]');
+   		 	} else {
+   		 		$('div.doExpand').hide();
+   		 		$(this).html('[ + ]');
+   		 	}
+   		 	
+   		 	$('#addNetworksForm').submit( function() {
+					var sData = $('input', oTable.fnGetNodes()).serialize();
+					alert( "The following data would have been submitted to the server: \n\n"+sData );
+					return false;
+				});
+   		 	
+   		 
+   		 });
+   		 
+   		 
 			</script>
 			
 			<div class="page">
@@ -56,28 +78,33 @@
 			</table>
 			
 			<br/><br/>			
-			<h3>Add a new network</h3>
+			<h3>New network subscription <span class="clickable clickExpand">[ + ]</span></h3>
 			
-			<div id="allNetworks">
-				<table class="requests regular_table" id="addNetwork">
-				<thead>
-					<tr>
-						<th>Network ID</th>
-						<th>Network name</th>
-						<th>Add Network</th>
-					</tr>
-				</thead>
+			<!-- submission doesn't work yet - Kim -->
+			<div class="doExpand" id="allNetworks" style="display:none">
+			<form id="addNetworksForm" method="post" action="../index.html">
+					<table class="requests regular_table" id="addNetwork">
+					<thead>
+						<tr>
+							<th>Network ID</th>
+							<th>Network name</th>
+							<th>Add Network</th>
+						</tr>
+					</thead>
 					<tbody>
-					
-					<? $networkNames = getAllNetworkNames();	
-						 $networkIDs = getAllNetworkIDs();
-							
-							for($i = 0; $i < count($networkNames); $i++){
-								echo "<tr><td>$networkIDs[$i]</td><td>$networkNames[$i]</td><td><input type='checkbox' name='$networkIDs[$i]' value='Add' /></td></tr>";
-							}
-					?>
-					</tbody>
-				</table>			
+						
+						<? $networkNames = getAllNetworkNames();	
+							 $networkIDs = getAllNetworkIDs();
+								
+								for($i = 0; $i < count($networkNames); $i++){
+									echo "<tr><td>$networkIDs[$i]</td><td>$networkNames[$i]</td><td><input type='checkbox' name='$networkIDs[$i]' value='Add' /></td></tr>";
+								}
+						?>
+						</tbody>
+					</table>	
+					<br/>
+					<input style="float:right; margin-right:40px" type="submit" name="addNetworks" value="Add Selected"/>
+				</form>
 			</div>			
 			
 			<br/><br/>
