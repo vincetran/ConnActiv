@@ -23,6 +23,7 @@
 	$connactions = getConnactions(getNetworkID("Oakland"), 1); //1 means passing in network id
 																//0 would mean passing in activity id
 	for($i = count($connactions)-1; $i >= 0; $i--){
+		$connactionid = $connactions[$i][0];
 		$userID = $connactions[$i][1];
 		$location = $connactions[$i][2];
 		$startTime = $connactions[$i][3];
@@ -56,6 +57,19 @@
 			</p>
 			<p>Open to joiners | <a class="join" href="#">Ask to join</a></p>					
 		</div><!-- begin tags -->
+		<div class="post-reviews">
+			
+			
+			<?php echo "this shit is working";
+				if(isAttending($connaction_id, $userid)){
+					$attending = getConnactionAttendees($connactionid, $userid);
+					foreach($attending as $attendingUser){
+
+						
+				echo "<p>Review | <a class='review' href='#'>".getUserName($attendingUser)."</a></p>";
+					}
+				}?>					
+		</div>
 		<br/>
 				Tags:
 				<ul class="tags">
@@ -63,6 +77,7 @@
 					<li><?php echo getNetworkName($networkID); ?></li>
 				</ul><!-- end tags -->
 		</div><!-- end post-body -->
+
 	</div><!-- end post -->
 	
 	<?php
