@@ -27,6 +27,11 @@ function getAllNetworkIDs() {
 	return $networks;
 }
 
+function subscribeNetworks() {
+	echo 'testing';
+	//header("Location: ../index.html");
+}
+
 /*
 *
 ** Skill levels
