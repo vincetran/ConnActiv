@@ -185,8 +185,9 @@
 									</ul><!-- end tags -->
 							</div><!-- end post-body -->
 						</div><!-- end post -->
-		<?		}		//end foreach($post) ?> 				
-				</div><!-- end feed container -->		
+		<?		}		//end foreach($post) ?> 
+				</div><!-- end feed container -->	
+				<div id="footer">&copy; 2011; Kim Cooperrider &middot; Rob Filippi &middot; Dave Johnson &middot; Vince Tran &middot; Ray Wang</div>
 			</div><!-- end page-->
 	<?  } // end foreach($network)
 		else echo "<br/>No connactions yet!<br/><br/>";
