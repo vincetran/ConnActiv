@@ -86,22 +86,21 @@ include("functions_join_requests.php");
 				//check to make sure the password is longer than 6 characters, may want to use regexp to improve
 				//security				
 				
-				//echo "inside the password length check";
-				//get userid of new user since the user_id is auto incremented and will not be explicitly added.
-				$userid = mysql_query("select max(user_id) from users") or die(mysql_error());
-				$userid1 = mysql_fetch_array($userid);					
-				$userid2 = (int)$userid1['0'] + 1;				
+							
 				//insert information into users tables.
-				$query = "Insert into users(user_id, email,first_Name, last_Name, Street, city, state, zip, phone, interests, password)  values(".$userid2.",'".$_POST['username']."','".$_POST['firstName']."','".$_POST['lastName']."','".$_POST['street']."','".$_POST['city']."','".$_POST['state']."','".$_POST['zip']."','".$_POST['phone']."','".$_POST['interests']."','".md5($_POST['password'])."')";
+				$query = "Insert into users(email,first_Name, last_Name, Street, city, state, zip, phone, interests, password)  values('".$_POST['username']."','".$_POST['firstName']."','".$_POST['lastName']."','".$_POST['street']."','".$_POST['city']."','".$_POST['state']."','".$_POST['zip']."','".$_POST['phone']."','".$_POST['interests']."','".md5($_POST['password'])."')";
 				$insert = mysql_query($query) or die(mysql_error());
-				
+				$id = mysql_query("select max(user_id) from users");
+				$id1 = mysql_fetch_array($id);
+				$userid2 = $id1[0];		
+			
 				//If the network doesn't already exist, add it to the networks table.
-				$checkNetwork = mysql_query("Select network_id from networks where area = '".$_POST['city']."'") or die(mysql_error());				
+				$checkNetwork = mysql_query("Select network_id from networks where area = '".$_POST['city']."' and area = '".$_POST['state']."'") or die(mysql_error());				
 				$checkNetwork1 = mysql_fetch_array($checkNetwork);
 				var_dump($checkNetwork1);
 				$networkid = (int)$checkNetwork1[0];
 				if(mysql_num_rows($checkNetwork) == 0){
-					$networkid = addNetwork($_POST['city']);
+					$networkid = addNetwork($_POST['city'], $_POST['state']);
 				}	
 				
 				
@@ -163,22 +162,20 @@ include("functions_join_requests.php");
 	}
 
 	function addUniqueNetwork($networkID, $activityID){
-		$getnextid = mysql_query("select max(unique_network_id) from unique_networks") or die(mysql_error());
-		$nextID = mysql_fetch_array($getnextid);
-		$uniqueID = (int)$nextID[0];
-		$uniqueID++;
-		$insertUN = mysql_query("insert into unique_networks values(".(int)$uniqueID.", ".(int)$networkID.", ".(int)$activityID.")") or die(mysql_error());
-		return $uniqueID;
+		$insertUN = mysql_query("insert into unique_networks(network_id, activity_id) values(".(int)$networkID.", ".(int)$activityID.")") or die(mysql_error());
+		$id = mysql_query("select max(unique_network_id) from unique_networks");
+		$uniqueid1 = mysql_fetch_array($id);
+		$uniqueid2 = $uniqueid1[0];	
+		return $uniqueid2;
 	}	
 
-	function addNetwork($area){
-		$getnextid = mysql_query("Select max(network_id) from networks") or die(mysql_error());
-		$getnextid1 = mysql_fetch_array($getnextid);
-		$networkid = (int)$getnextid1[0];
-		$networkid++;
+	function addNetwork($area, $state){
 					
-		$insert = mysql_query("insert into networks values(".$networkid.",'".$area."')") or die(mysql_error());	
-		return $networkid;	
+		$insert = mysql_query("insert into networks(`area`, `state`) values('".$area."', '".$state."')") or die(mysql_error());
+		$id = mysql_query("select max(network_id) from networks");
+		$id1 = mysql_fetch_array($id);
+		$id2 = $id1[0];	
+		return $id2;	
 	}
 	function addUserActivity($userid, $activityid){
 		$insert = mysql_query("Insert into user_activities(user_id, activity_id) values(".(int)$userid.",".(int)$activityid.")") or die(mysql_error());
@@ -203,6 +200,30 @@ include("functions_join_requests.php");
 					
 		$insert = mysql_query($query) or die(mysql_error());
 		header("Location: ../index.html");
+	}
+	function getUserName($userid){
+		$query = "select first_name, last_name from users where users_id = ".$userid;
+		$person = mysql_query($query);
+		$names = mysql_fetch_array($person);
+		$name = $names['first_name']." ".$names['last_name'];
+		return $name;
+	}
+	function getConnactionAttendees($connactionid, $userid){
+		$query = "select user_id from connaction_attending where connaction_id = ".$connactionid." and user_id <> ".$userid;
+		$attendees = mysql_query($query);
+
+		while($info = mysql_fetch_array($attendees)){
+			$connactionattendees[] = $info;
+		}
+
+		return $connactionattendees;
+	}
+
+	function isAttending($connactionid, $userid){
+		$query = "select * from connaction_attending where user_id = ".$userid." and connaction_id = ".$connactionid;
+		$isattending = mysql_query($query) or die(mysql_error());
+		if(mysql_num_rows($isattending) == 0){return false;}
+		else if(mysql_num_rows($isattending) == 1){return true;}	
 	}
 	function getDatabaseInfo($table, $attribute, $value){
 		//Returns an array of strings that corresponds to the fetched row

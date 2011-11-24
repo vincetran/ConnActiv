@@ -56,8 +56,7 @@
 				<?php echo getActivityLevel($userID,$activityID, 1); ?>.
 			</p>
 			<p>Open to joiners | <a class="join" href="#">Ask to join</a></p>					
-		</div><!-- begin tags -->
-		<div class="post-reviews">
+
 			
 			
 			<?php echo "this shit is working";

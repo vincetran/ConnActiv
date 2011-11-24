@@ -269,8 +269,8 @@ CREATE TABLE IF NOT EXISTS `networks` (
 --
 
 INSERT INTO `networks` (`AREA`, `STATE`) VALUES
-('Oakland', 'PA'),
-('Pittsburgh', 'PA');
+(`Oakland`, `PA`),
+(`Pittsburgh`, `PA`);
 
 -- --------------------------------------------------------
 
