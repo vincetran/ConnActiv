@@ -7,15 +7,33 @@
 <script type="text/javascript">
 	$(document).ready(function() {
     $('#incoming').dataTable( {
-        "aaSorting": [[ 2, "desc" ]]
+        "aaSorting": [[ 2, "desc" ]],
+        "bPaginate": false,
+				"bLengthChange": false,
+				"bFilter": false,
+				"bSort": true,
+				"bInfo": false,
+				"bAutoWidth": false
    	 });
    	 
    	 $('#pending').dataTable( {
-        "aaSorting": [[ 2, "desc" ]]
+        "aaSorting": [[ 2, "desc" ]],
+        "bPaginate": false,
+				"bLengthChange": false,
+				"bFilter": false,
+				"bSort": true,
+				"bInfo": false,
+				"bAutoWidth": false
    	 });
    	 
    	 $('#past').dataTable( {
-        "aaSorting": [[ 2, "desc" ]]
+        "aaSorting": [[ 2, "desc" ]],
+        "bPaginate": false,
+				"bLengthChange": false,
+				"bFilter": false,
+				"bSort": true,
+				"bInfo": false,
+				"bAutoWidth": false
    	 });  	 
    	 
    	 

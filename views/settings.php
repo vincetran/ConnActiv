@@ -5,13 +5,42 @@
 	if(cookieExists() && validCookie())
 	//if there is a username cookie, we need to check it against our password cookie
 	{
-		if (!validCookie()) {
-			//Cookie doesn't match password go to index";
-			header("Location: ../index.html"); 
-		}
-		else{
-			//Cookie matches, show what they want.";
+		
 			?>
+			<script type="text/javascript">
+			 $('#addNetwork').dataTable( {
+        "aaSorting": [[ 0, "asc" ]],
+        "bPaginate": false,
+				"bLengthChange": false,
+				"bFilter": true,
+				"bSort": true,
+				"bInfo": false,
+				"bAutoWidth": false
+   		 });
+   		 
+   		 $('.clickExpand').click(function(){
+   		 
+   		 	$plusMinus = $(this).html();
+   		 	if ($plusMinus == '[ + ]') {
+   		 		$('div.doExpand').show();
+   		 		$(this).html('[ - ]');
+   		 	} else {
+   		 		$('div.doExpand').hide();
+   		 		$(this).html('[ + ]');
+   		 	}
+   		 	
+   		 	$('#addNetworksForm').submit( function() {
+					var sData = $('input', oTable.fnGetNodes()).serialize();
+					alert( "The following data would have been submitted to the server: \n\n"+sData );
+					return false;
+				});
+   		 	
+   		 
+   		 });
+   		 
+   		 
+			</script>
+			
 			<div class="page">
 			
 			<h2>Your subscribed networks</h2>
@@ -44,35 +73,62 @@
 							<? 
 						}
 					}
-					
 				}
-				
 			?>
-			</table>	
+			</table>
+			
+			<br/><br/>			
+			<h3>New network subscription <span class="clickable clickExpand">[ + ]</span></h3>
+			
+			<!-- submission doesn't work yet - Kim -->
+			<div class="doExpand" id="allNetworks" style="display:none">
+			<form id="addNetworksForm" method="post" action="../index.html">
+					<table class="requests regular_table" id="addNetwork">
+					<thead>
+						<tr>
+							<th>Network ID</th>
+							<th>Network name</th>
+							<th>Add Network</th>
+						</tr>
+					</thead>
+					<tbody>
+						
+						<? $networkNames = getAllNetworkNames();	
+							 $networkIDs = getAllNetworkIDs();
+								
+								for($i = 0; $i < count($networkNames); $i++){
+									echo "<tr><td>$networkIDs[$i]</td><td>$networkNames[$i]</td><td><input type='checkbox' name='$networkIDs[$i]' value='Add' /></td></tr>";
+								}
+						?>
+						</tbody>
+					</table>	
+					<br/>
+					<input style="float:right; margin-right:40px" type="submit" name="addNetworks" value="Add Selected"/>
+				</form>
+			</div>			
 			
 			<br/><br/>
 			<h2>Your skill level preferences</h2>
 			
 			<table class="settings regular_table">
+			<thead>
+				<tr>
+					<th>Activity</th>
+					<th>Seeking level</th>
+					<th>Acceptance range</th>
+					<th>Your skill level</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?
+				$levels = getUserActivityLevels();
+				foreach($levels as $level){
+					echo "<tr>$level</tr>";
+				}
+				
+				?>
+			</tbody>
 			
-			<tr>
-				<th>Activity</th>
-				<th>Seeking level</th>
-				<th>Acceptance range</th>
-				<th>Your skill level</th>
-			</tr>
-			<tr> <!-- TODO: make these editable and auto-populating -->
-				<td>asdf</td>
-				<td>asdf</td>
-				<td>asdf</td>
-				<td>asdf</td>
-			</tr>
-			<tr>
-				<td>asdf</td>
-				<td>asdf</td>
-				<td>asdf</td>
-				<td>asdf</td>
-			</tr>
 			
 			</table>
 			
@@ -105,8 +161,6 @@
 			</div><!-- /page -->
 			<?php
 		}
- 	//
-	}
 	else {	 
 		//if they are not logged in";
 		header("Location: ../index.html");
