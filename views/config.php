@@ -252,8 +252,67 @@ include("functions_join_requests.php");
 		}
 	}
 	function getUserPic($userID){
+		//This function returns the user's profile pic
 		$info = getDatabaseInfo("users", "user_id", $userID);
 		return $info['PROFILE_PIC'];
+	}
+	function getAboutMe($userID){
+		//This function returns the user's interests
+		$info = getDatabaseInfo("users", "user_id", $userID);
+		if($info['INTERESTS'])
+			return $info['INTERESTS'];
+		else
+			return "--";
+	}
+	function getUserLocation($userID){
+		//This function returns the user's location
+		$location;
+		$city;
+		$state;
+		$info = getDatabaseInfo("users", "user_id", $userID);
+		$city = $info['CITY'];
+		$state = $info['STATE'];
+		$location = $city.", ".$state;
+		return $location;
+	}
+	function getUserGender($userID){
+		//This function returns the user's gender
+		$gender;
+		$info = getDatabaseInfo("users", "user_id", $userID);
+		if($info['GENDER'] == 'M')
+			$gender = "Male";
+		else if($info['GENDER'] == 'F')
+			$gender = "Female";
+		else
+			$gender = "--";
+		return $gender;
+	}
+	function getAge($userID){
+		//This function returns the user's Age
+		$DOB;
+		$age;
+		$today = getDate();
+		$info = getDatabaseInfo("users", "user_id", $userID);
+		if($info['DOB']){
+			//DOB has been set
+			$DOB = date_parse($info['DOB']);
+			$age = $today["year"] - $DOB["year"];
+			if(($today["mon"] - $DOB["month"]) < 0)
+				return $age - 1;	//Birthday hasn't happened yet minus 1
+			else if(($today["mon"] - $DOB["month"]) > 0)
+				return $age;		//Birthday already happened 
+			else{
+				//Birth month
+				if(($today["mday"] - $DOB["day"]) < 0)
+						return $age - 1;	//Birthday hasn't happened yet minus 1
+				//else if(($today["mday"] - $DOB["mday"]) > 0)
+				//	return $age;		//Birthday already happened
+				else
+					return $age; 
+			}
+		}
+		else
+			return "--";	//No DOB set
 	}
 	function getActivity($activityID){
 		//This function returns the name of the inputed activity ID

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 18, 2011 at 05:07 AM
+-- Generation Time: Nov 24, 2011 at 08:24 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -21,24 +21,7 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-drop table activities;
-drop table comments;
-drop table connaction_attending;
-drop table user_activities;
-drop table user_networks;
-drop table unique_networks;
-drop table connaction_requests;
-drop table connactions;
-drop table messages;
-drop table event_attending;
-drop table events;
-drop table users;
-drop table favorites;
-drop table friend_requests;
-drop table friends;
-drop table preferences;
-drop table reviews;
-drop table networks;
+
 --
 -- Table structure for table `activities`
 --
@@ -47,16 +30,16 @@ CREATE TABLE IF NOT EXISTS `activities` (
   `ACTIVITY_ID` int(11) NOT NULL AUTO_INCREMENT,
   `ACTIVITY_NAME` varchar(20) NOT NULL,
   PRIMARY KEY (`ACTIVITY_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `activities`
 --
 
-INSERT INTO `activities` (`ACTIVITY_NAME`) VALUES
-('Baseball'),
-('Swimming'),
-('Running');
+INSERT INTO `activities` (`ACTIVITY_ID`, `ACTIVITY_NAME`) VALUES
+(1, 'Baseball'),
+(2, 'Swimming'),
+(3, 'Running');
 
 -- --------------------------------------------------------
 
@@ -71,15 +54,15 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `COMMENT` varchar(4000) NOT NULL,
   `COMMENT_DATE` date NOT NULL,
   PRIMARY KEY (`COMMENT_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `comments`
 --
 
-INSERT INTO `comments` (`USER_ID`, `CONNACTION_ID`, `COMMENT`, `COMMENT_DATE`) VALUES
-(1, 1, 'Its too cold to go running', '2011-11-08'),
-(2, 1, 'Oh well, suit yourself', '2011-11-08');
+INSERT INTO `comments` (`COMMENT_ID`, `USER_ID`, `CONNACTION_ID`, `COMMENT`, `COMMENT_DATE`) VALUES
+(1, 1, 1, 'Its too cold to go running', '2011-11-08'),
+(2, 2, 1, 'Oh well, suit yourself', '2011-11-08');
 
 -- --------------------------------------------------------
 
@@ -89,7 +72,7 @@ INSERT INTO `comments` (`USER_ID`, `CONNACTION_ID`, `COMMENT`, `COMMENT_DATE`) V
 
 CREATE TABLE IF NOT EXISTS `connactions` (
   `CONNACTION_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `POST_TIME` DATE NOT NULL,
+  `POST_TIME` date NOT NULL,
   `USER_ID` int(11) NOT NULL,
   `LOCATION` varchar(255) NOT NULL,
   `START_TIME` datetime DEFAULT NULL,
@@ -99,16 +82,16 @@ CREATE TABLE IF NOT EXISTS `connactions` (
   `NETWORK_ID` int(11) NOT NULL,
   `IS_PRIVATE` int(11) DEFAULT '0',
   PRIMARY KEY (`CONNACTION_ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `connactions`
 --
 
-INSERT INTO `connactions` (`POST_TIME`, `USER_ID`, `LOCATION`, `START_TIME`, `MESSAGE`, `END_TIME`, `ACTIVITY_ID`, `NETWORK_ID`, `IS_PRIVATE`) VALUES
-('2011-11-08 12:00:00', 1, 'Oakland (atwood and bates)', '2011-11-08 12:00:00', 'Come Running with me!', '2011-11-08 13:00:00', 3, 1, 0),
-('2011-11-08 12:00:00', 1, 'Forbes Ave. at Sennot Square', '2011-11-20 11:59:00', 'Bring a hat!', '2011-11-20 13:00:00', 3, 1, 0),
-('2011-11-08 12:00:00', 1, 'Bigelow Blvd and Fith ave', '2011-11-28 10:10:00', 'Near the Union', '2011-11-28 11:11:00', 3, 1, 0);
+INSERT INTO `connactions` (`CONNACTION_ID`, `POST_TIME`, `USER_ID`, `LOCATION`, `START_TIME`, `MESSAGE`, `END_TIME`, `ACTIVITY_ID`, `NETWORK_ID`, `IS_PRIVATE`) VALUES
+(4, '2011-11-08', 1, 'Oakland (atwood and bates)', '2011-11-08 12:00:00', 'Come Running with me!', '2011-11-08 13:00:00', 3, 1, 0),
+(5, '2011-11-08', 1, 'Forbes Ave. at Sennot Square', '2011-11-20 11:59:00', 'Bring a hat!', '2011-11-20 13:00:00', 3, 1, 0),
+(6, '2011-11-08', 1, 'Bigelow Blvd and Fith ave', '2011-11-28 10:10:00', 'Near the Union', '2011-11-28 11:11:00', 3, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -160,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `LOCATION` varchar(20) DEFAULT NULL,
   `RECURRENCE` int(11) DEFAULT NULL,
   PRIMARY KEY (`EVENT_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -262,15 +245,15 @@ CREATE TABLE IF NOT EXISTS `networks` (
   `AREA` varchar(25) NOT NULL,
   `STATE` varchar(2) NOT NULL,
   PRIMARY KEY (`NETWORK_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `networks`
 --
 
-INSERT INTO `networks` (`AREA`, `STATE`) VALUES
-('Oakland', 'PA'),
-('Pittsburgh', 'PA');
+INSERT INTO `networks` (`NETWORK_ID`, `AREA`, `STATE`) VALUES
+(1, 'Oakland', 'PA'),
+(2, 'Pittsburgh', 'PA');
 
 -- --------------------------------------------------------
 
@@ -319,19 +302,19 @@ CREATE TABLE IF NOT EXISTS `unique_networks` (
   `NETWORK_ID` int(11) DEFAULT NULL,
   `ACTIVITY_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`UNIQUE_NETWORK_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `unique_networks`
 --
 
-INSERT INTO `unique_networks` (`NETWORK_ID`, `ACTIVITY_ID`) VALUES
-(1, 1),
-(1, 2),
-(1, 3),
-(2, 1),
-(2, 2),
-(2, 3);
+INSERT INTO `unique_networks` (`UNIQUE_NETWORK_ID`, `NETWORK_ID`, `ACTIVITY_ID`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 2, 1),
+(5, 2, 2),
+(6, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -352,16 +335,18 @@ CREATE TABLE IF NOT EXISTS `users` (
   `INTERESTS` varchar(4000) DEFAULT NULL,
   `PROFILE_PIC` varchar(45) DEFAULT NULL,
   `email` varchar(25) DEFAULT NULL,
+  `DOB` date DEFAULT NULL,
+  `GENDER` char(1) DEFAULT NULL,
   PRIMARY KEY (`USER_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`PASSWORD`, `FIRST_NAME`, `LAST_NAME`, `STREET`, `CITY`, `STATE`, `ZIP`, `PHONE`, `INTERESTS`, `PROFILE_PIC`, `email`) VALUES
-('8f53e82e508c96115551317048cba97e', 'Rob', 'Filippi', '42 Derp Street', 'Pittsburgh', 'PA', 15232, '412-600-0031', NULL, 'public/images/avatar.png', 'flippi273@gmail.com'),
-('e46087d5106e99a7bfe8f4bee9ed8aee', 'Dave', 'Johnson', NULL, NULL, NULL, NULL, NULL, NULL, 'public/images/avatar.png', 'mxpxpunk7789@gmail.com');
+INSERT INTO `users` (`USER_ID`, `PASSWORD`, `FIRST_NAME`, `LAST_NAME`, `STREET`, `CITY`, `STATE`, `ZIP`, `PHONE`, `INTERESTS`, `PROFILE_PIC`, `email`, `DOB`, `GENDER`) VALUES
+(1, '8f53e82e508c96115551317048cba97e', 'Rob', 'Filippi', '42 Derp Street', 'Pittsburgh', 'PA', 15232, '412-600-0031', NULL, 'public/images/avatar.png', 'flippi273@gmail.com', NULL, NULL),
+(2, 'e46087d5106e99a7bfe8f4bee9ed8aee', 'Dave', 'Johnson', NULL, NULL, NULL, NULL, NULL, NULL, 'public/images/avatar.png', 'mxpxpunk7789@gmail.com', NULL, NULL);
 
 -- --------------------------------------------------------
 
