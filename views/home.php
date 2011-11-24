@@ -173,14 +173,15 @@
 					
 					foreach($connactions as $post){
 						$connactionID = $post[0];
-						$userID = $post[1];
-						$location = $post[2];
-						$startTime = $post[3];
-						$message = $post[4];
-						$endTime = $post[5];
-						$activityID = $post[6];
-						$networkID = $post[7];
-						$isPrivate = $post[8];
+						$postTime = $post[1];
+						$userID = $post[2];
+						$location = $post[3];
+						$startTime = $post[4];
+						$message = $post[5];
+						$endTime = $post[6];
+						$activityID = $post[7];
+						$networkID = $post[8];
+						$isPrivate = $post[9];
 					?>					
 						<div class="post"> <!-- begin post -->
 							<div class="post-author">

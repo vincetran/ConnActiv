@@ -182,26 +182,6 @@ include("functions_join_requests.php");
 	function addUserActivity($userid, $activityid){
 		$insert = mysql_query("Insert into user_activities(user_id, activity_id) values(".(int)$userid.",".(int)$activityid.")") or die(mysql_error());
 	}
-	
-	/*
-	**
-	* HEY ROBBBBBER ROB can you fix this so it takes the date the way datepicker inputs it? KCOOOOOL -Kim
-	*
-	**
-	*/
-	
-		//This function will post the connaction to the database!
-		$startTime = getCurYear()."-".getCurMonth(1)."-".$_POST['startDay']." ".$_POST['startHour'].":".$_POST['startMin'].":00";
-		$endTime = getCurYear()."-".getCurMonth(1)."-".$_POST['endDay']." ".$_POST['endHour'].":".$_POST['endMin'].":00";
-		
-		
-		$query = "INSERT INTO connactions(USER_ID, LOCATION, START_TIME, MESSAGE, END_TIME, ACTIVITY_ID, NETWORK_ID, IS_PRIVATE)
-			VALUES ('".getUserID()."', '".$_POST['location']."', '".$startTime."', '".$_POST['message']."', '".$endTime."'
-					, '".$_POST['activity']."', '".$_POST['network']."', '".$_POST['private']."')";
-					
-		$insert = mysql_query($query) or die(mysql_error());
-		header("Location: ../index.html");
-	}
 	function getUserName($userid){
 		$query = "select first_name, last_name from users where users_id = ".$userid;
 		$person = mysql_query($query);
