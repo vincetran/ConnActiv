@@ -79,8 +79,15 @@ function getUserUniqueNetworks() {
 		$n[] = $row;
 	}
 	return $n;
-
 }
+
+function favoriteNetworks($unique_id) { //Kim TODO - After Dave changes db schema for favorites table
+	$id = getUserID();
+	$query = "INSERT IGNORE INTO favorites VALUES($id, $unique_id)";
+	$insert = mysql_query($query) or die(mysql_error());
+	header("Location: ../index.html");
+}
+
 
 /*
 *
@@ -104,6 +111,53 @@ function getUserUniqueNetworks() {
 	return $levels;
 	
 	}
+	
+	function addUserNetwork($userid, $uniqueID){
+		$insert = mysql_query("insert into user_networks values(".$userid.",".$uniqueID.")") or die(mysql_error());
+		return $insert;
+	}
 
+	function addUniqueNetwork($networkID, $activityID){
+		$insertUN = mysql_query("insert into unique_networks values(".(int)$networkID.", ".(int)$activityID.")") or die(mysql_error());
+		$id = mysql_query("select max(unique_network_id) from unique_networks");
+		$uniqueid1 = mysql_fetch_array($id);
+		$uniqueid2 = $uniqueid1[0];	
+		return $uniqueid2;
+	}	
+
+	function addNetwork($area, $state){
+		$insert = mysql_query("insert into networks(`area`, `state`) values('".$area."', '".$state."')") or die(mysql_error());
+		$id = mysql_query("select max(network_id) from networks");
+		$id1 = mysql_fetch_array($id);
+		$id2 = $id1[0];	
+		return $id2;	
+	}
+	
+	function activityExists($act) {
+		$query = "SELECT * FROM activities";
+		$result = mysql_query($query) or die(mysql_error());
+		
+		while ($row = mysql_fetch_array($result)) {
+			if ($row['ACTIVITY_NAME'] == $act) return true;
+		}
+		
+		return false;
+	}
+	
+	function createUniqueNetwork($area, $state, $activity) {
+		//first, check if the user's inputted activity is already in the db
+		if (!activityExists($activity)) $act_ID = addActivity($activity);
+		else $act_ID = getActivityID($activity);
+		
+		$net_ID = addNetwork($area, $state);
+		return addUniqueNetwork($net_ID, $act_ID);		
+	}
+	
+	function createAndSubscribeNetwork($area, $state, $activity) {
+	//based on user-inputted text, create the network he/she is looking for and subscribe.
+		$id = createUniqueNetwork($area, $state, $activity);
+		$u_id = getUserID();
+		addUserNetwork($u_id, $id);
+	}
 
 ?>

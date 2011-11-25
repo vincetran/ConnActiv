@@ -116,9 +116,6 @@ include("functions_join_requests.php");
 					$activityid1 = mysql_fetch_array($activityid);
 					
 					addUserActivity($userid2, $activityid1[0]);
-					
-					
-					
 
 					//check and insert into unique networks table
 					var_dump($activityid1);
@@ -158,27 +155,6 @@ include("functions_join_requests.php");
 	}
 
 
-	function addUserNetwork($userid, $uniqueID){
-		$insert = mysql_query("insert into user_networks values(".$userid.",".$uniqueID.")") or die(mysql_error());
-
-	}
-
-	function addUniqueNetwork($networkID, $activityID){
-		$insertUN = mysql_query("insert into unique_networks(network_id, activity_id) values(".(int)$networkID.", ".(int)$activityID.")") or die(mysql_error());
-		$id = mysql_query("select max(unique_network_id) from unique_networks");
-		$uniqueid1 = mysql_fetch_array($id);
-		$uniqueid2 = $uniqueid1[0];	
-		return $uniqueid2;
-	}	
-
-	function addNetwork($area, $state){
-					
-		$insert = mysql_query("insert into networks(`area`, `state`) values('".$area."', '".$state."')") or die(mysql_error());
-		$id = mysql_query("select max(network_id) from networks");
-		$id1 = mysql_fetch_array($id);
-		$id2 = $id1[0];	
-		return $id2;	
-	}
 	function addUserActivity($userid, $activityid){
 		$insert = mysql_query("Insert into user_activities(user_id, activity_id) values(".(int)$userid.",".(int)$activityid.")") or die(mysql_error());
 	}
@@ -513,6 +489,13 @@ include("functions_join_requests.php");
 			$userActivities[] = $activity['ACTIVITY_NAME'];
 		}
 		return $userActivities;
+	}
+	
+	
+	function addActivity($name) {
+		$query = "INSERT INTO activities(activity_id, activity_name) VALUES('', ".$name.")";
+		$insert = mysql_query($query) or die(mysql_error());
+		return getActivityID($name); // return the ID of our activity
 	}
 	
 ?>

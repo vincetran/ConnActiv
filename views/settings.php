@@ -17,11 +17,26 @@
 		} else if (isset($_POST['doUnsubscribe'])) {
 			if ($_POST['unsubscribeTo']) {
 				$unsubscrips = $_POST['unsubscribeTo'];
-				foreach($unsubscrips as $u) { //$ is passed in as unique_network_id
+				foreach($unsubscrips as $u) {
 					unsubscribeNetworks($u);
 				} // end foreach
 				header("Location: ../index.html");
 			} //end if ($_POST[unsubscribeTo])
+		} else if (isset($_POST['doFavorite'])) {
+			if ($_POST['favorite']) {
+				$favs = $_POST['favorite'];
+				foreach($favs as $f) {
+					favoriteNetworks($f);
+				} // end foreach
+				header("Location: ../index.html");
+			} //end if ($_POST[favorite])
+		} else if (isset($_POST['doAddNetwork'])) {
+		echo 'testing!';
+				$area = $_POST['area'];
+				$state = $_POST['state'];
+				$activity = $_POST['activity'];
+				createAndSubscribeNetwork($area, $state, $activity);
+				header("Location: ../index.html");
 		}
 		
 			?>
@@ -51,6 +66,10 @@
    		 	   		 
    		 });
    		 
+   		 $('#expandAddNewNetwork').click(function() {
+   		 	$('#hiddenNewNetwork').toggle();   		 
+   		 });
+   		 
    		 
 			</script>
 			
@@ -64,6 +83,7 @@
 					<th>Area</th>
 					<th>Activity</th>
 					<th>Unsubscribe</th>
+					<th>Favorite</th>
 				</tr>
 			<?
 				$networks = getUserUniqueNetworks();
@@ -72,17 +92,19 @@
 						echo "<tr>";
 							echo "<td>".$network[1].", ".$network[2]."</td><td>".$network[3]."</td>";
 							echo "<td><input type='checkbox' value='".$network[0]."' name='unsubscribeTo[]' /></td>";
+							echo "<td><input type='checkbox' value='".$network[0]."' name='favorite[]' /></td>";
 						echo "</tr>";
 					} //end foreach
 			} else echo "<tr><td colspan='3'>You aren't subscribed to any networks yet!<br/>Click below to get started.</td></tr>";
 			?>
 			</table>
-			<input style="float:right; margin-right:30px; margin-top: 5px;" type="submit" name="doUnsubscribe" value="Unsubscribe"/>
+			<div class="below_table">
+				<input style="float:right; margin-left:10px; margin-right:20px" type="submit" name="doFavorite" value="Favorite"/>
+				<input style="float:right;" type="submit" name="doUnsubscribe" value="Unsubscribe"/>
+			</div>
 		</form>
-			
+			<span style="clear:both;margin-top:-1.5em;" class="clickable below_table">Want more updates? <a class="clickExpand" href="#">Subscribe to a new network&nbsp;&raquo;</a></span>
 			<br/>
-			<h3 style="clear:both">Subscribe to a new network <span class="clickable clickExpand">[ + ]</span></h3>
-			
 			<div class="doExpand" id="allNetworks" style="display:none">
 			
 			<br/>
@@ -104,9 +126,20 @@
 						?>
 						</tbody>
 					</table>
-					<input style="float:right; margin-right:30px; margin-top: 5px;" type="submit" name="doSubscribe" value="Subscribe"/>
+					<span class="clickable below_table">Can't find your network?&nbsp;<a id="expandAddNewNetwork"href="#">Add a new one&nbsp;&raquo;</a></span>
+					<input style="float:right; margin-right:30px;" class="below_table" type="submit" name="doSubscribe" value="Subscribe"/>
 				</form>
-			</div>			
+				
+				<div id="hiddenNewNetwork" style="display:none">
+					<form id="createNetworkForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
+						Area: <input class="medium_input" type="text" name="area" value="" placeholder="ex: San Fran"/>
+						State:  <input class="small_input" type="text" name="state" maxlength="2" value=""/>
+						Activity: <input class="medium_input"type="text" name="activity" value="" placeholder="ex: fencing"/>
+						<input type="submit" name="doAddNetwork" value="Add"/>	
+					</form>
+				</div>
+			
+			</div>
 			
 			<br/><br/>
 			<h2>Your skill level preferences</h2>
