@@ -47,8 +47,8 @@
 		$('#credentials').hide();
 	});
 	
-	
-	
+	$('#registerForm').validationEngine();
+	$('#signinForm').validationEngine();
 </script>
 
 
@@ -68,12 +68,12 @@
 			<form id="signinForm" action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
 			<table>
 				<tr>
-					<th>Email:</th>
-					<td><input id="username"  type="text" name="username" maxlength="25" class="required"/><br/><br/></td>
+					<th><label>Email:</label></th>
+					<td><input id="username"  type="text" name="username" maxlength="25" class="validate[required,custom[email]]"/><br/><br/></td>
 				</tr>
 				<tr>
 					<th>Password:</th>
-					<td><input id="password" type="password" name="pass" maxlength="100" class="required"/></td>
+					<td><input id="password" type="password" name="pass" maxlength="100" class="validate[required]"/></td>
 				</tr>
 				<tr><td colspan="2">&nbsp;</td></tr>
 				<tr>
@@ -89,15 +89,15 @@
 			<table>
 				<tr>
 					<th>Email (required):</th>
-					<td><input id="username"  type="text" name="username" maxlength="25" class="required email"/><br/><br/></td>
+					<td><input id="username"  type="text" name="username" maxlength="25" class="validate[required,custom[email]]"/><br/><br/></td>
 				</tr>
 				<tr>
 					<th>First name:</th>
-					<td><input id="firstName"  type="text" name="firstName" maxlength="20" class="required"/><br/><br/></td>
+					<td><input id="firstName"  type="text" name="firstName" maxlength="20" class="validate[required]"/><br/><br/></td>
 				</tr>
 				<tr>
 					<th>Last name:</th>
-					<td><input id="lastName" type="text" name="lastName" maxlength="20" class="required"/></td>
+					<td><input id="lastName" type="text" name="lastName" maxlength="20" class="validate[required]"/></td>
 				</tr>
 				<tr>
 					<th>Street:</th>
@@ -145,11 +145,11 @@
 				</tr>
 				<tr>
 					<th>Password (required):</th>
-					<td><input id="password" type="password" name="password" maxlength="100" class="required" minlength="6"/></td>
+					<td><input id="password" type="password" name="password" maxlength="100" class="validate[required]" minlength="6"/></td>
 				</tr>
 				<tr>
 					<th>Confirm Password (required):</th>
-					<td><input id="confirm" type="password" name="confirm" maxlength="100" class="required" equalTo="#password"/></td>
+					<td><input id="confirm" type="password" name="confirm" maxlength="100" class="validate[required]" equalTo="#password"/></td>
 				</tr>
 				<tr><td colspan="2">&nbsp;</td></tr>
 				<tr>
