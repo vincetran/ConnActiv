@@ -180,6 +180,11 @@ table.display td.center {
 	border: thin solid #DDD;
 }
 
+.sorting_disabled {
+	background: #fff;
+	border: thin solid #DDD;
+}
+
 
 
 

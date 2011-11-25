@@ -7,19 +7,26 @@
 	{
 		
 		if (isset($_POST['doSubscribe'])) {
-			$newSubscriptions = $_POST['subscribeTo'];
-			if ($newSubscriptions) {
-				foreach($newSubscriptions as $s) {
-					echo 'TODO: subscribing user to network ID='.$s. ", ";
-					//call to subscribe function - KIM TODO
-				} //endforeach				
-			} //endif
+			if ($_POST['subscribeTo']) {
+				$newSubscriptions = $_POST['subscribeTo'];
+				foreach($newSubscriptions as $s) { //$ is passed in as unique_network_id
+					subscribeNetworks($s);
+				} // end foreach
+				header("Location: ../index.html");
+			} //end if ($_POST[subscribeTo])
+		} else if (isset($_POST['doUnsubscribe'])) {
+			if ($_POST['unsubscribeTo']) {
+				$unsubscrips = $_POST['unsubscribeTo'];
+				foreach($unsubscrips as $u) { //$ is passed in as unique_network_id
+					unsubscribeNetworks($u);
+				} // end foreach
+				header("Location: ../index.html");
+			} //end if ($_POST[unsubscribeTo])
 		}
 		
 			?>
 			<script type="text/javascript">
-			
-			
+						
 			 $('#addNetwork').dataTable( {
         "aaSorting": [[ 0, "asc" ]],
         "bPaginate": false,
@@ -27,7 +34,8 @@
 				"bFilter": true,
 				"bSort": true,
 				"bInfo": false,
-				"bAutoWidth": false
+				"bAutoWidth": false,
+				"aoColumns": [ null, null, { "bSortable": false }]
    		 });
    		 
    		 $('.clickExpand').click(function(){
@@ -50,63 +58,53 @@
 			
 			<h2>Your subscribed networks</h2>
 			
+			<form id="unsubNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 			<table class="settings regular_table">
 				<tr>
 					<th>Area</th>
 					<th>Activity</th>
-					<th>Action</th>
+					<th>Unsubscribe</th>
 				</tr>
 			<?
-				$networks = getNetworkNames();
-				foreach($networks as $network){
-			?>
-					<tr>
-						<td colspan="3" style="text-align:left"><? echo $network; ?></td>
-					</tr>
-					<?
-					$activities = getUserNetworkActivities();
-					for($k = 0; $k < count($activities); $k++){
-						if($network != $activities[$k]){
-							?>
-							<tr>
-								<td>&nbsp;</td>
-								<td>
-									<? echo $activities[$k]; ?>
-								</td>
-								<td><input type="submit" name="remove" value="Remove"/></td>
-							</tr>
-							<? 
-						}
-					}
-				}
+				$networks = getUserUniqueNetworks();
+				if ($networks) {				
+					foreach($networks as $network) {
+						echo "<tr>";
+							echo "<td>".$network[1].", ".$network[2]."</td><td>".$network[3]."</td>";
+							echo "<td><input type='checkbox' value='".$network[0]."' name='unsubscribeTo[]' /></td>";
+						echo "</tr>";
+					} //end foreach
+			} else echo "<tr><td colspan='3'>You aren't subscribed to any networks yet!<br/>Click below to get started.</td></tr>";
 			?>
 			</table>
+			<input style="float:right; margin-right:30px; margin-top: 5px;" type="submit" name="doUnsubscribe" value="Unsubscribe"/>
+		</form>
 			
-			<br/><br/>			
-			<h3>Subscribe to a new network <span class="clickable clickExpand">[ + ]</span></h3>
+			<br/>
+			<h3 style="clear:both">Subscribe to a new network <span class="clickable clickExpand">[ + ]</span></h3>
 			
 			<div class="doExpand" id="allNetworks" style="display:none">
-			<form id="addNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
+			
+			<br/>
+			<form id="subscribeNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 					<table class="requests regular_table" id="addNetwork">
 					<thead>
 						<tr>
-							<th>Network ID</th>
-							<th>Network name</th>
-							<th>Add Network</th>
+							<th>Area</th>
+							<th>Activity</th>
+							<th>Subscribe</th>
 						</tr>
 					</thead>
 					<tbody>
 						
-						<? $networkNames = getAllNetworkNames();	
-							 $networkIDs = getAllNetworkIDs();
-								
-								for($i = 0; $i < count($networkNames); $i++){
-									echo "<tr><td>$networkIDs[$i]</td><td>$networkNames[$i]</td><td><input type='checkbox' value='$networkIDs[$i]' name='subscribeTo[]' /></td></tr>";
+						<? $unique = getAllUniqueNetworks(); //row(unique_network_id, area, state, activity_name).
+								foreach($unique as $un) {
+									echo "<tr><td>". $un[1] .", ". $un[2] ."</td><td>". $un[3] ."</td><td><input type='checkbox' value='".$un[0]."' name='subscribeTo[]' /></td></tr>";
 								}
 						?>
 						</tbody>
 					</table>
-					<input style="float:right; margin-right:20px; margin-top: 5px;" type="submit" name="doSubscribe" value="Subscribe to Selected"/>
+					<input style="float:right; margin-right:30px; margin-top: 5px;" type="submit" name="doSubscribe" value="Subscribe"/>
 				</form>
 			</div>			
 			
@@ -126,7 +124,20 @@
 				<?
 				$levels = getUserActivityLevels();
 				foreach($levels as $level){
-					echo "<tr>$level</tr>";
+					echo "<tr>";
+					/* Null values come up as 0. TODO.
+					*
+						$level[0]? echo "<td>$level[0]</td>" : echo "<td>Not set.</td>";
+						$level[1]? echo "<td>$level[1]</td>" : echo "<td>Not set.</td>";
+						($level[2] && $level[3])? echo "<td>$level[2] - $level[3]</td>" : echo "<td>Not set.</td>";
+						$level[4]? echo "<td>$level[4]</td>" : echo "<td>Not set.</td>";
+					*/
+					
+					echo "<td>$level[0]</td>";
+					echo "<td>$level[1]</td>";
+					echo "<td>$level[2] - $level[3]</td>";
+					echo "<td>$level[4]</td>";
+				echo "</tr>";
 				}
 				
 				?>
