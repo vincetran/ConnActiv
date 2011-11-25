@@ -492,10 +492,4 @@ include("functions_join_requests.php");
 	}
 	
 	
-	function addActivity($name) {
-		$query = "INSERT INTO activities(activity_id, activity_name) VALUES('', ".$name.")";
-		$insert = mysql_query($query) or die(mysql_error());
-		return getActivityID($name); // return the ID of our activity
-	}
-	
 ?>

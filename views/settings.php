@@ -31,12 +31,10 @@
 				header("Location: ../index.html");
 			} //end if ($_POST[favorite])
 		} else if (isset($_POST['doAddNetwork'])) {
-		echo 'testing!';
 				$area = $_POST['area'];
 				$state = $_POST['state'];
 				$activity = $_POST['activity'];
 				createAndSubscribeNetwork($area, $state, $activity);
-				header("Location: ../index.html");
 		}
 		
 			?>

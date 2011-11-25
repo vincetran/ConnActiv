@@ -113,43 +113,47 @@ function favoriteNetworks($unique_id) { //Kim TODO - After Dave changes db schem
 	}
 	
 	function addUserNetwork($userid, $uniqueID){
-		$insert = mysql_query("insert into user_networks values(".$userid.",".$uniqueID.")") or die(mysql_error());
+		$insert = mysql_query("INSERT INTO user_networks values(".$userid.",".$uniqueID.")") or die(mysql_error());
 		return $insert;
 	}
 
 	function addUniqueNetwork($networkID, $activityID){
-		$insertUN = mysql_query("insert into unique_networks values(".(int)$networkID.", ".(int)$activityID.")") or die(mysql_error());
-		$id = mysql_query("select max(unique_network_id) from unique_networks");
-		$uniqueid1 = mysql_fetch_array($id);
-		$uniqueid2 = $uniqueid1[0];	
-		return $uniqueid2;
+		$insertUN = mysql_query("INSERT INTO unique_networks VALUES('', '".$networkID."', '".$activityID."')") or die(mysql_error());
+		$query = mysql_query("select max(unique_network_id) from unique_networks");
+		$result = mysql_fetch_array($query);
+		return $result[0];
 	}	
 
 	function addNetwork($area, $state){
-		$insert = mysql_query("insert into networks(`area`, `state`) values('".$area."', '".$state."')") or die(mysql_error());
-		$id = mysql_query("select max(network_id) from networks");
-		$id1 = mysql_fetch_array($id);
-		$id2 = $id1[0];	
-		return $id2;	
+		$insert = mysql_query("INSERT INTO networks(NETWORK_ID, AREA, STATE) VALUES('', $area, $state)") or die(mysql_error());
+		$query = mysql_query("select max(network_id) from networks");
+		$result = mysql_fetch_array($query);
+		return $result[0];
+	}
+	
+	function networkExists($area, $state) {
+	
+		$query = "SELECT count(*) FROM networks WHERE area = '".$area."' AND state = '".$state."'";
+		$result = mysql_query($query) or die(mysql_error());
+		if (mysql_num_rows($result) > 1) return true;
+		else return false;
 	}
 	
 	function activityExists($act) {
-		$query = "SELECT * FROM activities";
+		$query = "SELECT count(activity_id) FROM activities WHERE activity_name = '$act'";
 		$result = mysql_query($query) or die(mysql_error());
-		
-		while ($row = mysql_fetch_array($result)) {
-			if ($row['ACTIVITY_NAME'] == $act) return true;
-		}
-		
-		return false;
+		if (mysql_num_rows($result) > 1) return true;
+		else return false;
 	}
 	
 	function createUniqueNetwork($area, $state, $activity) {
 		//first, check if the user's inputted activity is already in the db
-		if (!activityExists($activity)) $act_ID = addActivity($activity);
-		else $act_ID = getActivityID($activity);
+		if (activityExists($activity)) $act_ID = getActivityID($activity);
+		else $act_ID = addActivity($activity);
 		
-		$net_ID = addNetwork($area, $state);
+		if (networkExists($area, $state)) $net_ID = getNetworkWithStateID($area, $state);
+		else $net_ID = addNetworkWithState($area, $state);
+		
 		return addUniqueNetwork($net_ID, $act_ID);		
 	}
 	
@@ -158,6 +162,26 @@ function favoriteNetworks($unique_id) { //Kim TODO - After Dave changes db schem
 		$id = createUniqueNetwork($area, $state, $activity);
 		$u_id = getUserID();
 		addUserNetwork($u_id, $id);
+		return true;
+	}
+	
+	function addActivity($name) {
+		$query = "INSERT INTO activities(ACTIVITY_ID, ACTIVITY_NAME) VALUES('', '".$name."')";
+		$insert = mysql_query($query) or die(mysql_error());
+		return getActivityID($name); // return the ID of our activity
+	}
+	
+	function addNetworkWithState($area, $state) {
+		$query = "INSERT INTO networks VALUES('', '".$area."', '".$state."')";
+		$insert = mysql_query($query) or die(mysql_error());
+		return getNetworkWithStateID($area, $state); // return the ID of our newly-added network
+	}
+	
+	function getNetworkWithStateID($area, $state) {
+		$query = "SELECT network_id FROM networks WHERE area = '".$area."' AND state = '".$state."'";
+		$result = mysql_query($query) or die(mysql_error());
+		$id = mysql_fetch_array($result);
+		return $id[0];
 	}
 
 ?>
