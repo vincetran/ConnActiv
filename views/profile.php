@@ -25,8 +25,14 @@
 			$('.edit_about_me').click(function() {
 					$('div.about_me').contentEditable="true";
 			});
+			
+			$('.joinExpander').click(function(){
+			$(this).siblings('.expand').toggle();
+			});
 	
 			</script>
+			
+	</script>
 			
 			<div class="page">
 			<h2>Your Profile:</h2>
@@ -39,13 +45,22 @@
 				</tr>
 				<tr>
 					<td>About Me:</td>
-					<td width="400"><div class="about_me"><?php echo getAboutMe($userID);?></div></td>
+					<td width="350"><div class="about_me"><?php echo getAboutMe($userID);?></div></td>
 					<td class="edit_about_me clickable"><b>Edit</b></td>
 				</tr>
 				<tr>
 					<td>Gender:</td>
 					<td><?php echo getUserGender($userID);?></td>
-					<td>Edit</td>
+					<td>
+						<span class="clickable joinExpander">Edit</span>
+						<div class="expand" style="display:none">
+							<input type="radio" name="gender" value="M"/>Male
+							<input type="radio" name="gender" value="F"/>Female
+						</div>
+					</td>
+				</tr>
+				<tr>
+					
 				</tr>
 				<tr>
 					<td>Location:</td>
