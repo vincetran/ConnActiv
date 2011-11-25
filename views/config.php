@@ -314,6 +314,44 @@ include("functions_join_requests.php");
 		else
 			return "--";	//No DOB set
 	}
+	function saveInfo(){
+		if(isset($_POST['gender'])){
+			$gender = $_POST['gender'];
+			$query = "UPDATE users SET GENDER = '".$gender."' WHERE USER_ID = '".getUserID()."'";
+			$update = mysql_query($query) or die(mysql_error());
+		}
+		if(isset($_POST['about_me'])){
+			$interests = $_POST['about_me']; 
+			$query = "UPDATE users SET INTERESTS = '".$interests."' WHERE USER_ID = '".getUserID()."'";
+			$update = mysql_query($query) or die(mysql_error());
+			
+		}
+		if (isset($_POST['DOB'])){
+			$DOB = myDateParser($_POST['DOB']);
+			$query = "UPDATE users SET DOB = '".$DOB."' WHERE USER_ID = '".getUserID()."'";
+			$update = mysql_query($query) or die(mysql_error());
+		}
+		//echo $query;		
+		$update = mysql_query($query) or die(mysql_error());
+		header("Location: ../index.html");
+	}
+	function myDateParser($dateToParse){
+		//This function takes a string date in the format of mm/dd/yyyy
+		//and returns a string date in the format of yyyy-mm-dd
+		$DOB = array(); // array to store each name
+		$date;
+			if (is_int(strpos($dateToParse, '/'))){
+				$DOB = explode('/', $dateToParse); // Multiple names
+				//index 0 is month
+				//index 1 is day of the month
+				//index 2 is the year
+				$date =$DOB[2]."-".$DOB[0]."-".$DOB[1];
+				return $date;
+			}
+			else{
+				return "Error";
+			}
+	}
 	function getActivity($activityID){
 		//This function returns the name of the inputed activity ID
 		
