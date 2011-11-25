@@ -13,6 +13,17 @@
 		$('header').show();
 		$('#side').show();
 		$('#restOfBoxes').hide();
+		
+		$('#link_feeds_all').css('text-decoration','underline');
+		
+		$('.stream').click(function(){
+			var id=$(this).attr('id');
+			var el=$('#'+id);
+			el.css('text-decoration','underline');
+			el.siblings().each(function(){
+				$(this).css('text-decoration','none');
+			});
+		});
 
 		$('a.stream').click(function() {
 		type = $(this).attr('id');
@@ -112,7 +123,7 @@
 							<option value="0">No</option>
 							<option value="1">Yes</option>
 						</select>
-						<td colspan="4"><input class="button" type="submit" name="postConnaction" value="Post this connaction!"/>
+						<input class="button" type="submit" name="postConnaction" value="Post this connaction!"/>
 					</div>
 				</div>
 			</div>
@@ -120,17 +131,16 @@
 				
 				<br/><br/>
 				<h2>Stream</h2>				
-					
 				<div class="main feeds-container">
 					<ul class="feeds">
-						<li id="link_feeds_all"><a href="#">All</a></li>
+						<li id="link_feeds_all" class="stream"><a href="#">All</a></li>
 						<?
-						$networkNames = getNetworkNames();
-						foreach ($networkNames as $network){
-							?>
-							<li id="link_feeds_<? $network; ?>"><a href="#"><? echo $network; ?></a></li>
-							<?
-						//}
+							$networkNames = getNetworkNames();
+							foreach ($networkNames as $network){
+								?>
+									<li id="link_feeds_<? echo $network; ?>" class="stream"><a href="#"><? echo $network; ?></a></li>
+								<?
+							//}
 						?>
 					</ul>
 					
@@ -187,9 +197,9 @@
 						</div><!-- end post -->
 		<?		}		//end foreach($post) ?> 
 				</div><!-- end feed container -->	
-				<div id="footer">&copy; 2011; Kim Cooperrider &middot; Rob Filippi &middot; Dave Johnson &middot; Vince Tran &middot; Ray Wang</div>
 			</div><!-- end page-->
 	<?  } // end foreach($network)
 		else echo "<br/>No connactions yet!<br/><br/>";
 	}
 endif; ?>
+<div id="footer">&copy; 2011; Kim Cooperrider &middot; Rob Filippi &middot; Dave Johnson &middot; Vince Tran &middot; Ray Wang</div>

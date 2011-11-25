@@ -8,9 +8,9 @@ $('.top_links').click(function(e) {
 	$(this).nav(e); // function routes to index.html script (for now, index holds more global functions)
 });
 
-$('#user_login').hover(function(e) {
+$('#user_login').click(function(e) {
 		e.preventDefault();
-		$('#user_menu').show();
+		$('#user_menu').toggle();
 });
 
 $('#logout').click(function(e) {
