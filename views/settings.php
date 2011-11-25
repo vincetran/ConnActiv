@@ -51,24 +51,14 @@
 				"aoColumns": [ null, null, { "bSortable": false }]
    		 });
    		 
-   		 $('.clickExpand').click(function(){
-   		 
-   		 	$plusMinus = $(this).html();
-   		 	if ($plusMinus == '[ + ]') {
-   		 		$('div.doExpand').show();
-   		 		$(this).html('[ - ]');
-   		 	} else {
-   		 		$('div.doExpand').hide();
-   		 		$(this).html('[ + ]');
-   		 	}
-   		 	   		 
+   		 $('#expandNetworks').click(function(){
+   		 	$('#allNetworks').toggle();   		  		 	   		 
    		 });
    		 
    		 $('#expandAddNewNetwork').click(function() {
    		 	$('#hiddenNewNetwork').toggle();   		 
    		 });
-   		 
-   		 
+   		    		    		 
 			</script>
 			
 			<div class="page">
@@ -101,11 +91,9 @@
 				<input style="float:right;" type="submit" name="doUnsubscribe" value="Unsubscribe"/>
 			</div>
 		</form>
-			<span style="clear:both;margin-top:-1.5em;" class="clickable below_table">Want more updates? <a class="clickExpand" href="#">Subscribe to a new network&nbsp;&raquo;</a></span>
+			<span style="clear:both;margin-top:-1.5em;" class="clickable below_table">Want more updates? <span id="expandNetworks" class="clickExpand">Subscribe to a new network&nbsp;&raquo;</span></span>
 			<br/>
-			<div class="doExpand" id="allNetworks" style="display:none">
-			
-			<br/>
+			<div class="doExpand" id="allNetworks" style="display:none"><br/>
 			<form id="subscribeNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 					<table class="requests regular_table" id="addNetwork">
 					<thead>
@@ -124,15 +112,15 @@
 						?>
 						</tbody>
 					</table>
-					<span class="clickable below_table">Can't find your network?&nbsp;<a id="expandAddNewNetwork"href="#">Add a new one&nbsp;&raquo;</a></span>
+					<span class="clickable below_table">Can't find your network?&nbsp;<span class="clickExpand" id="expandAddNewNetwork">Add a new one&nbsp;&raquo;</span></span>
 					<input style="float:right; margin-right:30px;" class="below_table" type="submit" name="doSubscribe" value="Subscribe"/>
 				</form>
 				
 				<div id="hiddenNewNetwork" style="display:none">
 					<form id="createNetworkForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
-						Area: <input class="medium_input" type="text" name="area" value="" placeholder="ex: San Fran"/>
-						State:  <input class="small_input" type="text" name="state" maxlength="2" value=""/>
-						Activity: <input class="medium_input"type="text" name="activity" value="" placeholder="ex: fencing"/>
+						Area: <input class="medium_input" type="text" name="area" value="" placeholder="ex: Pittsburgh"/>
+						State:  <input class="small_input" type="text" name="state" maxlength="2" value="" placeholder="PA"/>
+						Activity: <input class="medium_input"type="text" name="activity" value="" placeholder="ex: being awesome"/>
 						<input type="submit" name="doAddNetwork" value="Add"/>	
 					</form>
 				</div>
