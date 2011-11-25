@@ -23,7 +23,7 @@
 				saveInfo();
 			?>
 			<script type="text/javascript">
-			
+			/*
 			//This line until the next comment block is for 
 			//editing the about me.
 			//I stole this code from here: http://www.quirksmode.org/dom/cms.html
@@ -82,13 +82,30 @@
 			//This is the end of the code I stole!
 			//
 			//
-			
+			*/
 			
 			/*$('.edit_about_me').click(function() {
 				//This is an old way of how I was trying to make the edit about me work
 					document.all.about_me.contentEditable="true";
 					alert("test");
 			});*/
+			$(".editable_textarea").editable("http://localhost/ConnActiv/ConnActiv/views/save.php", { 
+				indicator : "<img src='http://localhost/ConnActiv/ConnActiv/public/images/indicator.gif'>",
+				type   : 'textarea',
+				select : true,
+				submit : 'OK',
+				cancel : 'cancel',
+				cssclass : "editable"
+			});
+			$(".editable_textile").editable("http://localhost/ConnActiv/ConnActiv/views/save.php?renderer=textile", { 
+				indicator : "<img src='http://localhost/ConnActiv/ConnActiv/public/images/indicator.gif'>",
+				//loadurl   : "http://www.appelsiini.net/projects/jeditable/php/load.php",
+				type      : "textarea",
+				submit    : "OK",
+				cancel    : "Cancel",
+				tooltip   : "Click to edit..."
+			});
+
 			
 			$('.joinExpander').click(function(){
 			$(this).siblings('.expand').toggle();
@@ -98,7 +115,6 @@
 	
 			</script>
 			
-	</script>
 			
 			<div class="page">
 			<h2>Your Profile:</h2>
@@ -111,9 +127,11 @@
 				</tr>
 				<tr>
 					<td>About Me:</td>
-					<td width="300"><p id="about_me"><?php echo getAboutMe($userID);?>
-					Click here to edit, Please look at the javascript comment for this because
-					it doesn't work.</p></td>
+					<td width="300">
+						<!--<p class="editable_textarea" id="paragraph_1"><?php// echo getAboutMe($userID);?></p>-->
+						    <div class="editable_textile" id="paragraph_2"><?php echo getAboutMe($userID);?></div>
+
+					</td>
 					<td class="clickable edit_about_me"><u>Edit</u></td>
 				</tr>
 				<tr>
