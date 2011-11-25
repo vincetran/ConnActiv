@@ -93,7 +93,7 @@
 							echo "<td><input type='checkbox' value='".$network[0]."' name='favorite[]' /></td>";
 						echo "</tr>";
 					} //end foreach
-			} else echo "<tr><td colspan='3'>You aren't subscribed to any networks yet!<br/>Click below to get started.</td></tr>";
+			} else echo "<tr><td colspan='4'>You aren't subscribed to any networks yet!<br/>Click below to get started.</td></tr>";
 			?>
 			</table>
 			<div class="below_table">
