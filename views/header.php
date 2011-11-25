@@ -8,19 +8,15 @@ $('.top_links').click(function(e) {
 	$(this).nav(e); // function routes to index.html script (for now, index holds more global functions)
 });
 
-$('#user_login').click(function(e) {
+$('#user_login').hover(function(e) {
 		e.preventDefault();
 		$('#user_menu').show();
-	});
+});
 
 $('#logout').click(function(e) {
 		e.preventDefault();
 		window.location.replace('views/logout.php');
 		$('#user_menu').hide();
-});
-
-$('.signout_opt').mouseout(function() {
-	$('#user_menu').hide();
 });
 	
 </script>

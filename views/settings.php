@@ -6,8 +6,20 @@
 	//if there is a username cookie, we need to check it against our password cookie
 	{
 		
+		if (isset($_POST['doSubscribe'])) {
+			$newSubscriptions = $_POST['subscribeTo'];
+			if ($newSubscriptions) {
+				foreach($newSubscriptions as $s) {
+					echo 'TODO: subscribing user to network ID='.$s. ", ";
+					//call to subscribe function - KIM TODO
+				} //endforeach				
+			} //endif
+		}
+		
 			?>
 			<script type="text/javascript">
+			
+			
 			 $('#addNetwork').dataTable( {
         "aaSorting": [[ 0, "asc" ]],
         "bPaginate": false,
@@ -28,14 +40,7 @@
    		 		$('div.doExpand').hide();
    		 		$(this).html('[ + ]');
    		 	}
-   		 	
-   		 	$('#addNetworksForm').submit( function() {
-					var sData = $('input', oTable.fnGetNodes()).serialize();
-					alert( "The following data would have been submitted to the server: \n\n"+sData );
-					return false;
-				});
-   		 	
-   		 
+   		 	   		 
    		 });
    		 
    		 
@@ -78,11 +83,10 @@
 			</table>
 			
 			<br/><br/>			
-			<h3>New network subscription <span class="clickable clickExpand">[ + ]</span></h3>
+			<h3>Subscribe to a new network <span class="clickable clickExpand">[ + ]</span></h3>
 			
-			<!-- submission doesn't work yet - Kim -->
 			<div class="doExpand" id="allNetworks" style="display:none">
-			<form id="addNetworksForm" method="post" action="../index.html">
+			<form id="addNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 					<table class="requests regular_table" id="addNetwork">
 					<thead>
 						<tr>
@@ -97,13 +101,12 @@
 							 $networkIDs = getAllNetworkIDs();
 								
 								for($i = 0; $i < count($networkNames); $i++){
-									echo "<tr><td>$networkIDs[$i]</td><td>$networkNames[$i]</td><td><input type='checkbox' name='$networkIDs[$i]' value='Add' /></td></tr>";
+									echo "<tr><td>$networkIDs[$i]</td><td>$networkNames[$i]</td><td><input type='checkbox' value='$networkIDs[$i]' name='subscribeTo[]' /></td></tr>";
 								}
 						?>
 						</tbody>
-					</table>	
-					<br/>
-					<input style="float:right; margin-right:40px" type="submit" name="addNetworks" value="Add Selected"/>
+					</table>
+					<input style="float:right; margin-right:20px; margin-top: 5px;" type="submit" name="doSubscribe" value="Subscribe to Selected"/>
 				</form>
 			</div>			
 			
@@ -157,7 +160,7 @@
 			<? endif; ?>
 			
 			</table>
-						
+			<div id="footer">&copy; 2011; Kim Cooperrider &middot; Rob Filippi &middot; Dave Johnson &middot; Vince Tran &middot; Ray Wang</div>			
 			</div><!-- /page -->
 			<?php
 		}
