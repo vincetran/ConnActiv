@@ -9,29 +9,20 @@
 
 
 function joinRequest(){
-
-	$id = getUserID();
-	/*
-		$userID = $post[1];
-		$location = $post[2];
-		$startTime = $post[3];
-		$message = $post[4];
-		$endTime = $post[5];
-		$activityID = $post[6];
-		$networkID = $post[7];
-		$isPrivate = $post[8];
 	
+	$from_user = getUserID();
+	$to_user = $_POST['postingUserID'];
+	$connactionID = $_POST['connactionID'];
+	$message = $_POST['message'];
 	
-	$query = "INSERT INTO connaction_requests".
-	" (from_user, to_user, connaction_ID, message, approved)".
-	" VALUES(".$id.", '".$_POST['$userID']."', '".$_POST['connactionID']."', NULL, NULL)";
+	$query = sprintf("INSERT INTO connaction_requests (from_user, to_user, connaction_ID, message) values(%s,%s,%s,'%s')", $from_user, $to_user, $connactionID, $message);
 	$insert = mysql_query($query) or die(mysql_error());	
 	header("Location: ../index.html");
-	*/
-	//echo $_POST['message'];
-	header("Location: ../index.html");
+	//echo $query;
 	
 }
+function getApproval(){
 
+}
 
 ?>

@@ -166,7 +166,7 @@
 						<div class="post"> <!-- begin post -->
 							<div class="post-author">
 								<img src="<? echo getUserPic($userID); ?>" height="120" /><br/>
-								<? echo getName($userID) ?>
+								<? echo getUserName($userID) ?>
 							</div>
 							<div class="post-body">
 								<p class="quote"><? echo $message; ?></p>

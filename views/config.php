@@ -158,13 +158,13 @@ include("functions_join_requests.php");
 	function addUserActivity($userid, $activityid){
 		$insert = mysql_query("Insert into user_activities(user_id, activity_id) values(".(int)$userid.",".(int)$activityid.")") or die(mysql_error());
 	}
-	function getUserName($userid){
+	/*function getUserName($userid){
 		$query = "select first_name, last_name from users where users_id = ".$userid;
 		$person = mysql_query($query);
 		$names = mysql_fetch_array($person);
 		$name = $names['first_name']." ".$names['last_name'];
 		return $name;
-	}
+	}*/
 	function getConnactionAttendees($connactionid, $userid){
 		$query = "select user_id from connaction_attending where connaction_id = ".$connactionid." and user_id <> ".$userid;
 		$attendees = mysql_query($query);
@@ -226,6 +226,11 @@ include("functions_join_requests.php");
 				return $info['USER_ID'];
 			}
 		}
+	}
+	function getUserName($userID){
+		//This function returns the user's name
+		$info = getDatabaseInfo("users", "user_id", $userID);
+		return $info['FIRST_NAME'] . " " . $info['LAST_NAME'];
 	}
 	function getUserPic($userID){
 		//This function returns the user's profile pic
