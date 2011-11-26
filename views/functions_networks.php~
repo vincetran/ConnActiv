@@ -118,14 +118,14 @@ function favoriteNetworks($unique_id) { //Kim TODO - After Dave changes db schem
 	}
 
 	function addUniqueNetwork($networkID, $activityID){
-		$insertUN = mysql_query("INSERT INTO unique_networks(netowrk_id, activity_id) VALUES('', '".$networkID."', '".$activityID."')") or die(mysql_error());
+		$insertUN = mysql_query("INSERT INTO unique_networks (netowrk_id, activity_id) VALUES('', '".$networkID."', '".$activityID."')") or die(mysql_error());
 		$query = mysql_query("select max(unique_network_id) from unique_networks");
 		$result = mysql_fetch_array($query);
 		return $result[0];
 	}	
 
 	function addNetwork($area, $state){
-		$insert = mysql_query("INSERT INTO networks(AREA, STATE) VALUES('$area', '$state')") or die(mysql_error());
+		$insert = mysql_query("INSERT INTO networks(NETWORK_ID, AREA, STATE) VALUES('', '$area', '$state')") or die(mysql_error());
 		$query = mysql_query("select max(network_id) from networks");
 		$result = mysql_fetch_array($query);
 		return $result[0];

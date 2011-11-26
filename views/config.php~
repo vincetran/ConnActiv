@@ -102,7 +102,7 @@ include("functions_join_requests.php");
 				var_dump($checkNetwork1);
 				$networkid = (int)$checkNetwork1[0];
 				if(mysql_num_rows($checkNetwork) == 0){
-					$networkid = addNetworkWithState($_POST['city'], $_POST['state']);
+					$networkid = addNetwork($_POST['city'], $_POST['state']);
 				}	
 				
 				
