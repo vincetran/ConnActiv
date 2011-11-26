@@ -60,7 +60,7 @@
 	
 
 	function getPastConnactions($userid){
-		$query = "select connaction_id from connactions c, connaction_attending ca where ca.user_id = ".$userid." and c.end_time < getdate() and c.connaction_id = ca.connaction_id";
+		$query = "select connaction_id from connactions c, connaction_attending ca where ca.user_id = ".$userid." and c.end_time < CURRENT_TIMESTAMP() and c.connaction_id = ca.connaction_id";
 		$past = mysql_query($query);
 		return $past;
 		
