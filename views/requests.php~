@@ -110,7 +110,7 @@
 			
 		<?php
 			$past = getPastConnactions(getUserID());
-			
+			var_dump($past);
 			
 			
 			echo "<thead>";
@@ -130,7 +130,7 @@
 									$attending = getConnactionAttendees(1, getUserID());
 									echo "<tr>";			
 									foreach($attending as $attendee){
-										echo "<td>".getName($attendee[0])."     "."<input id = 'review' type = 'submit' name = 'review[]' value = 'Review this connaction' action = 'post' action = 'review.php'/></td>";
+										echo "<td>".getName($attendee[0])."     "."<input id = 'review' type = 'submit' name = 'review[]' value = 'Review this Attendee' action = 'post' action = 'review.php'/></td>";
 										
 									}
 									echo "</tr>";
