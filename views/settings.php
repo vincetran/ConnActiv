@@ -51,24 +51,14 @@
 				"aoColumns": [ null, null, { "bSortable": false }]
    		 });
    		 
-   		 $('.clickExpand').click(function(){
-   		 
-   		 	$plusMinus = $(this).html();
-   		 	if ($plusMinus == '[ + ]') {
-   		 		$('div.doExpand').show();
-   		 		$(this).html('[ - ]');
-   		 	} else {
-   		 		$('div.doExpand').hide();
-   		 		$(this).html('[ + ]');
-   		 	}
-   		 	   		 
+   		 $('#expandNetworks').click(function(){
+   		 	$('#allNetworks').toggle();   		  		 	   		 
    		 });
    		 
    		 $('#expandAddNewNetwork').click(function() {
    		 	$('#hiddenNewNetwork').toggle();   		 
    		 });
-   		 
-   		 
+   		    		    		 
 			</script>
 			
 			<div class="page">
@@ -101,11 +91,9 @@
 				<input style="float:right;" type="submit" name="doUnsubscribe" value="Unsubscribe"/>
 			</div>
 		</form>
-			<span style="clear:both;margin-top:-1.5em;" class="clickable below_table">Want more updates? <a class="clickExpand" href="#">Subscribe to a new network&nbsp;&raquo;</a></span>
+			<span style="clear:both;margin-top:-1.5em;" class="clickable below_table">Want more updates? <span id="expandNetworks" class="clickExpand">Subscribe to a new network&nbsp;&raquo;</span></span>
 			<br/>
-			<div class="doExpand" id="allNetworks" style="display:none">
-			
-			<br/>
+			<div class="doExpand" id="allNetworks" style="display:none"><br/>
 			<form id="subscribeNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 					<table class="requests regular_table" id="addNetwork">
 					<thead>
@@ -124,15 +112,15 @@
 						?>
 						</tbody>
 					</table>
-					<span class="clickable below_table">Can't find your network?&nbsp;<a id="expandAddNewNetwork"href="#">Add a new one&nbsp;&raquo;</a></span>
+					<span class="clickable below_table">Can't find your network?&nbsp;<span class="clickExpand" id="expandAddNewNetwork">Add a new one&nbsp;&raquo;</span></span>
 					<input style="float:right; margin-right:30px;" class="below_table" type="submit" name="doSubscribe" value="Subscribe"/>
 				</form>
 				
 				<div id="hiddenNewNetwork" style="display:none">
 					<form id="createNetworkForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
-						Area: <input class="medium_input" type="text" name="area" value="" placeholder="ex: San Fran"/>
-						State:  <input class="small_input" type="text" name="state" maxlength="2" value=""/>
-						Activity: <input class="medium_input"type="text" name="activity" value="" placeholder="ex: fencing"/>
+						Area: <input class="medium_input" type="text" name="area" value="" placeholder="ex: Pittsburgh"/>
+						State:  <input class="small_input" type="text" name="state" maxlength="2" value="" placeholder="PA"/>
+						Activity: <input class="medium_input"type="text" name="activity" value="" placeholder="ex: being awesome"/>
 						<input type="submit" name="doAddNetwork" value="Add"/>	
 					</form>
 				</div>
@@ -154,22 +142,26 @@
 			<tbody>
 				<?
 				$levels = getUserActivityLevels();
-				foreach($levels as $level){
-					echo "<tr>";
-					/* Null values come up as 0. TODO.
-					*
-						$level[0]? echo "<td>$level[0]</td>" : echo "<td>Not set.</td>";
-						$level[1]? echo "<td>$level[1]</td>" : echo "<td>Not set.</td>";
-						($level[2] && $level[3])? echo "<td>$level[2] - $level[3]</td>" : echo "<td>Not set.</td>";
-						$level[4]? echo "<td>$level[4]</td>" : echo "<td>Not set.</td>";
-					*/
-					
-					echo "<td>$level[0]</td>";
-					echo "<td>$level[1]</td>";
-					echo "<td>$level[2] - $level[3]</td>";
-					echo "<td>$level[4]</td>";
-				echo "</tr>";
-				}
+				if ($levels) {
+					foreach($levels as $level){
+						echo "<tr>";
+						/* Null values come up as 0. TODO.
+						*
+							$level[0]? echo "<td>$level[0]</td>" : echo "<td>Not set.</td>";
+							$level[1]? echo "<td>$level[1]</td>" : echo "<td>Not set.</td>";
+							($level[2] && $level[3])? echo "<td>$level[2] - $level[3]</td>" : echo "<td>Not set.</td>";
+							$level[4]? echo "<td>$level[4]</td>" : echo "<td>Not set.</td>";
+						*/
+						
+						echo "<td>$level[0]</td>";
+						echo "<td>$level[1]</td>";
+						echo "<td>$level[2] - $level[3]</td>";
+						echo "<td>$level[4]</td>";
+					echo "</tr>";
+					}//end foreach
+					} else {
+					echo "<tr><td colspan='4'>You're missing some skill levels. Subscribe to networks to get started.</td></tr>";
+				}//endif
 				
 				?>
 			</tbody>
@@ -187,11 +179,9 @@
 				<th>Action</th>
 			</tr>
 			<? $favs = getFavorites(); 
-				if (!$favs): ?>
-				<tr>
-					<td colspan="2">You haven't selected any favorites!</td>
-				</tr>
-			<? else: 
+				if (!$favs) 
+					echo "<tr><td colspan='2'>Subscribe to and favorite networks to see them as bookmarks in your sidebar.</td></tr>";
+				else
 				foreach($favs as $fav):
 			?>
 					<tr>
@@ -199,7 +189,6 @@
 						<td><input type="submit" name="remove" value="Remove"/></td>
 					</tr>
 				<? endforeach; ?>
-			<? endif; ?>
 			
 			</table>
 			<div id="footer">&copy; 2011; Kim Cooperrider &middot; Rob Filippi &middot; Dave Johnson &middot; Vince Tran &middot; Ray Wang</div>			
