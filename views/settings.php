@@ -36,6 +36,15 @@
 				$activity = $_POST['activity'];
 				createAndSubscribeNetwork($area, $state, $activity);
 				header("Location: ../index.html");
+		} else if (isset($_POST['doDefavorite'])) {
+			if ($_POST['defavorite']) {
+				$defavs = $_POST['defavorite'];
+				foreach($defavs as $d) {
+					$defav_id = getUniqueNetworkIdByFav($d);
+					defavoriteNetwork($defav_id);
+				} // end foreach
+				header("Location: ../index.html");
+			} //end if ($_POST[defavorite])
 		}
 		
 			?>
@@ -173,25 +182,31 @@
 			<br/><br/>
 			<h2>Your favorites</h2>
 			
+			<form id="deFavForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 			<table class="settings regular_table">
 			
 			<tr>
 				<th>Activity</th>
-				<th>Action</th>
+				<th>Unfavorite</th>
 			</tr>
 			<? $favs = getFavorites(); 
 				if (!$favs) 
-					echo "<tr><td colspan='2'>Subscribe to and favorite networks to see them as bookmarks in your sidebar.</td></tr>";
+					echo "<tr><td colspan='2'>Favorite networks to bookmark them in your sidebar.</td></tr>";
 				else
 				foreach($favs as $fav):
 			?>
 					<tr>
-						<td><? echo $fav ?></td> <!-- Rob can you make the remove work for these? -->
-						<td><input type="submit" name="remove" value="Remove"/></td>
+						<td><? echo $fav ?></td>
+						<td><input type='checkbox' value='<? echo $fav ?>' name='defavorite[]' /></td>
 					</tr>
 				<? endforeach; ?>
 			
 			</table>
+			<div class="below_table">
+				<input style="float:right;margin-right: 100px;" type="submit" name="doDefavorite" value="Remove"/>
+			</div>
+			</form>
+			
 			<div id="footer">&copy; 2011; Kim Cooperrider &middot; Rob Filippi &middot; Dave Johnson &middot; Vince Tran &middot; Ray Wang</div>			
 			</div><!-- /page -->
 			<?php
