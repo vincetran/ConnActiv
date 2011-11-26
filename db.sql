@@ -165,18 +165,17 @@ CREATE TABLE IF NOT EXISTS `event_attending` (
 
 CREATE TABLE IF NOT EXISTS `favorites` (
   `USER_ID` int(11) NOT NULL,
-  `UNIQUE_NETWORK_ID` int(11) NOT NULL DEFAULT '0',
-  `ACTIVITY_ID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`USER_ID`,`NETWORK_ID`,`ACTIVITY_ID`)
+  `UNIQUE_NETWORK_ID` int(11) NOT NULL DEFAULT '0'
+  PRIMARY KEY ('USER_ID','UNIQUE_NETWORK_ID')
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `favorites`
 --
 
-INSERT INTO `favorites` (`USER_ID`, `UNIQUE_NETWORK_ID`, `ACTIVITY_ID`) VALUES
-(1, 1, 1),
-(1, 1, 2);
+INSERT INTO `favorites` (`USER_ID`, `UNIQUE_NETWORK_ID`) VALUES
+(1, 1),
+(1, 2);
 
 -- --------------------------------------------------------
 
