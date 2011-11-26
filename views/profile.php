@@ -53,14 +53,9 @@
 			
 			
 			<div class="page">
-			<h2>Your Profile:</h2>
+			<h2>Profile</h2>
 			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
-			<table class="regular_table" id="myInfo" >
-				<tr>
-					<td colspan="2">
-						<h2>My Info</h2>
-					</td>
-				</tr>
+			<table class="alternating regular_table" id="myInfo">
 				<tr>
 					<td>About Me:</td>
 					<td width="300">
@@ -77,9 +72,6 @@
 							<input class="button" type="submit" name="saveInfo" value="Save"/>
 						</div>
 					</td>
-				</tr>
-				<tr>
-					
 				</tr>
 				<tr>
 					<td>Location:</td>

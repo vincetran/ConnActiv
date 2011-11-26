@@ -48,11 +48,14 @@ function getAllNetworkIDs() {
 function subscribeNetworks($unique_id) {
 	$id = getUserID();
 	$query = "INSERT IGNORE INTO user_networks(USER_ID, UNIQUE_NETWORK_ID) VALUES($id, $unique_id)";
-	// TODO (Kim) : newly-subscribed unique networks need to have by default "NULL" for the user's skill preferences.
-	//$query2 = "INSERT INTO user_activities VALUES($id, $unique_id, 'NULL', 'NULL', 'NULL', 'NULL')";
-	$insert = mysql_query($query) or die(mysql_error());
-	//$insert2 = mysql_query($query2) or die(mysql_error());
-	header("Location: ../index.html");
+	$result = mysql_query($query) or die(mysql_error());
+	// newly-subscribed unique networks need to have by default "NULL" for the user's skill preferences.
+	$user_acts = getUserActivities();
+	$act_name = getActivityNameFromUnique($unique_id);
+	if (!in_array($act_name, $user_acts)) {	//If the user hasn't already subscribed to this activity, add it
+		$query2 = "INSERT IGNORE INTO user_activities VALUES('".$id."', '".$unique_id."', 'NULL', 'NULL', 'NULL', 'NULL')";	
+	  $result2 = mysql_query($query2) or die(mysql_error());
+	}
 }
 
 function unsubscribeNetworks($unique_id) {
@@ -60,7 +63,14 @@ function unsubscribeNetworks($unique_id) {
 	$query = "DELETE FROM user_networks WHERE user_id = $id AND unique_network_id = $unique_id";
 	// TODO: When we need to remove the activity from the user's skill preferences.
 	$delete = mysql_query($query) or die(mysql_error());
-	header("Location: ../index.html");
+}
+
+function getActivityNameFromUnique($unique_id){
+	$query = "SELECT activities.activity_name FROM unique_networks, activities"
+	." WHERE unique_networks.activity_id = activities.activity_id AND unique_networks.unique_network_id = '$unique_id'";
+	$result = mysql_query($query) or die(mysql_error());
+	$name = mysql_fetch_array($result);
+	return $name[0];
 }
 
 function getUserUniqueNetworks() {
@@ -85,7 +95,6 @@ function favoriteNetworks($unique_id) { //Kim TODO - After Dave changes db schem
 	$id = getUserID();
 	$query = "INSERT IGNORE INTO favorites VALUES($id, $unique_id)";
 	$insert = mysql_query($query) or die(mysql_error());
-	header("Location: ../index.html");
 }
 
 
@@ -100,9 +109,7 @@ function favoriteNetworks($unique_id) { //Kim TODO - After Dave changes db schem
 	$userID = getUserID();
 	
 	$query = "SELECT DISTINCT activities.activity_name, user_activities.preferred, user_activities.low_level, user_activities.high_level, user_activities.own_level"
-	." FROM user_activities, activities"
-	." WHERE user_id = $userID"
-	." GROUP BY activities.activity_name";
+	." FROM user_activities, activities WHERE user_activities.user_id = $userID AND user_activities.activity_id = activities.activity_id GROUP BY activities.activity_name";
 	$levels = array();
 	$result=mysql_query($query);
 	while ($row = mysql_fetch_array($result)) {
@@ -124,7 +131,7 @@ function favoriteNetworks($unique_id) { //Kim TODO - After Dave changes db schem
 		return $result[0];
 	}	
 
-	function addNetwork($area, $state){
+	function addNetwork($area, $state){ //Deprecated. Please use addNetworkWithState.
 		$insert = mysql_query("INSERT INTO networks(NETWORK_ID, AREA, STATE) VALUES('', $area, $state)") or die(mysql_error());
 		$query = mysql_query("select max(network_id) from networks");
 		$result = mysql_fetch_array($query);
@@ -161,7 +168,15 @@ function favoriteNetworks($unique_id) { //Kim TODO - After Dave changes db schem
 		$id = createUniqueNetwork($area, $state, $activity);
 		$u_id = getUserID();
 		addUserNetwork($u_id, $id);
-		return true;
+		
+	//subscribe
+		$user_acts = getUserActivities();
+		$act_name = getActivityNameFromUnique($u_id);
+		if (!in_array($act_name, $user_acts)) {	//If the user hasn't already subscribed to this activity, add it
+			$query2 = "INSERT INTO user_activities VALUES('".$id."', '".$u_id."', 'NULL', 'NULL', 'NULL', 'NULL')";	
+			$result2 = mysql_query($query2) or die(mysql_error());
+		}
+		
 	}
 	
 	function addActivity($name) {
