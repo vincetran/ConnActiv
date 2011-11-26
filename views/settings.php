@@ -26,7 +26,7 @@
 			if ($_POST['favorite']) {
 				$favs = $_POST['favorite'];
 				foreach($favs as $f) {
-					favoriteNetworks($f);
+					favoriteNetwork($f);
 				} // end foreach
 				header("Location: ../index.html");
 			} //end if ($_POST[favorite])

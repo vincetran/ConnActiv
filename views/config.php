@@ -139,8 +139,8 @@ include("functions_join_requests.php");
 				//create cookie
 				$_POST['username'] = stripslashes($_POST['username']); 
 				$hour = time() + 100000; 
-				setcookie(ID_my_site, $_POST['username'], $hour); 
-				setcookie(Key_my_site, md5($_POST['password']), $hour);
+				setcookie('ID_my_site', $_POST['username'], $hour); 
+				setcookie('Key_my_site', md5($_POST['password']), $hour);
 				//redirect to home				
 				header("Location: ../index.html");
 				

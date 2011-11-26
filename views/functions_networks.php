@@ -89,13 +89,6 @@ function getUserUniqueNetworks() {
 	return $n;
 }
 
-function favoriteNetworks($unique_id) { //Kim TODO - After Dave changes db schema for favorites table
-	$id = getUserID();
-	$query = "INSERT IGNORE INTO favorites VALUES($id, $unique_id)";
-	$insert = mysql_query($query) or die(mysql_error());
-}
-
-
 /*
 *
 ** Skill levels

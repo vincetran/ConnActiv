@@ -40,6 +40,8 @@ $('.thumbs_down').click(function() {
 				foreach ($favs as $fav):
 					echo "$fav <br/>";
 				endforeach;
+			else:
+				echo "None yet!";
 			endif;
 		?>
 		</div>

@@ -1,4 +1,4 @@
-<?
+<? //FAVORITES and REVIEWS //
 
 /*
 *
@@ -9,9 +9,10 @@
 function getFavorites(){
 
 	$id = getUserID();
-	$query = "SELECT networks.area, activities.activity_name FROM favorites, networks, activities WHERE user_id = ".$id.
-					" AND favorites.network_id = networks.network_id".
-					" AND favorites.activity_id = activities.activity_id";
+	$query = "SELECT networks.area, activities.activity_name FROM favorites, networks, activities, unique_networks WHERE user_id = ".$id.""
+					." AND favorites.unique_network_id = unique_networks.unique_network_id"
+					." AND unique_networks.activity_id = activities.activity_id"
+					." AND unique_networks.network_id = networks.network_id";
 	$result = mysql_query($query) or die(mysql_error());
 	$favs = array();
 	while($row = mysql_fetch_array($result)){
@@ -19,6 +20,14 @@ function getFavorites(){
 	}
 	return $favs;
 }
+
+
+function favoriteNetwork($unique_id) {
+	$id = getUserID();
+	$query = "INSERT IGNORE INTO favorites VALUES($id, $unique_id)";
+	$insert = mysql_query($query) or die(mysql_error());
+}
+
 
 /*
 *
