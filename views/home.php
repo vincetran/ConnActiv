@@ -14,20 +14,19 @@
 		$('#side').show();
 		$('#restOfBoxes').hide();
 		
-		$('#link_feeds_all').css('text-decoration','underline');
+		$('#link_feeds_all').addClass('tab_active');
 		
-		$('.stream').click(function(){
+		$('.link_stream').click(function(){
 			var id=$(this).attr('id');
 			var el=$('#'+id);
-			el.css('text-decoration','underline');
-			el.siblings().each(function(){
-				$(this).css('text-decoration','none');
-			});
+			$('.stream').hide();
+			$('.link_stream').removeClass('tab_active');
+			el.addClass('tab_active');
 		});
 
-		$('a.stream').click(function() {
-		type = $(this).attr('id');
-		alert("STUB: Sorting to display " +type.toUpperCase()+ " stream only");
+		$('.link_stream').click(function() {
+			type = $(this).attr('id');
+			$('#stream_' +type).show();
 		});
 
 		$('input.button').click(function() {
@@ -133,21 +132,20 @@
 					
 				<div class="main feeds-container">
 					<ul class="feeds">
-						<li id="link_feeds_all" class="stream"><a href="#">All</a></li>
+						<li id="link_feeds_all" class="link_stream"><a href="#">All</a></li>
 						<?
 						$networkNames = getNetworkNames();
-						foreach ($networkNames as $network){
-							?>
-							<li id="link_feeds_<? echo $network; ?>" class="stream"><a href="#"><? echo $network; ?></a></li>
-							<?
-						//}
-						?>
+						foreach ($networkNames as $network): ?>
+							<li id="<? echo $network; ?>" class="link_stream"><a href="#"><? echo $network; ?></a></li>
+							<? endforeach; ?>
 					</ul>
+						
+				 <? $networkNames = getNetworkNames();
+						foreach ($networkNames as $network) { ?> 
 					
-					<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
+					<div class="stream" id="stream_<? echo $network; ?>"> 
 					
-					<? 
-					$connactions = getConnactions(getNetworkID($network), 1);
+				<? $connactions = getConnactions(getNetworkID($network), 1);
 					
 					if ($connactions) {
 					
@@ -168,10 +166,11 @@
 								<img src="<? echo getUserPic($userID); ?>" height="120" /><br/>
 								<? echo getName($userID) ?>
 							</div>
-							<div class="post-body">
+							<div class="post-body"> <!-- begin post body -->
 								<p class="quote"><? echo $message; ?></p>
 								<? echo date('l, F jS, Y h:i a'); ?>
 							<div class="post-levels">
+							<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 									I am a level <?php echo getActivityLevel($userID,$activityID, 3); ?>.
 									I prefer level <?php echo getActivityLevel($userID,$activityID, 2); ?>.
 									I accept levels <?php echo getActivityLevel($userID,$activityID, 0); ?>-
@@ -197,10 +196,13 @@
 
 							</div><!-- end post-body -->
 						</div><!-- end post -->
-		<?		}		//end foreach($post) ?> 				
-				</div><!-- end feed container -->		
-			</div><!-- end page-->
-	<?  } // end foreach($network)
-		else echo "<br/>No connactions yet!<br/><br/>";
-	}
-endif; ?>
+		<?		}		//end foreach($post) ?>
+	<?  } else echo "<br/>No connactions yet!<br/><br/>"; ?>
+	
+	</div><!-- end stream for $network -->
+	<? } // end foreach($network)
+	echo "</div>"; // end main feeds-container
+	echo "</div>"; // end page
+	?> 
+	
+<? endif; ?>
