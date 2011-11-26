@@ -23,72 +23,25 @@
 				saveInfo();
 			?>
 			<script type="text/javascript">
-			
-			//This line until the next comment block is for 
-			//editing the about me.
-			//I stole this code from here: http://www.quirksmode.org/dom/cms.html
-			//Pretty much if something is in a <p> tag then it can be edited and saved.
-			//We cannot send anything in a <p> over with the form though. Kim with your
-			//awesome web experience do you know of a better way to do this?
-			var editing  = false;
+			$(".editable_textarea").editable("http://localhost/ConnActiv/ConnActiv/views/save.php", { 
+				indicator : "<img src='http://localhost/ConnActiv/ConnActiv/public/images/indicator.gif'>",
+				type   : 'textarea',
+				select : true,
+				submit : 'Save',
+				cancel : 'cancel',
+				tooltip   : "Click to edit..."
+			});
+			$(".editable_textile").editable("http://localhost/ConnActiv/ConnActiv/views/save.php?renderer=textile", {
+				//Use this if you want the html tags to show
+				//If you choose to use this you also need to uncomment some stuff in save.php, but then editable_textarea will not work.
+				indicator : "<img src='http://localhost/ConnActiv/ConnActiv/public/images/indicator.gif'>",
+				//loadurl   : "http://localhost/ConnActiv/ConnActiv/views/load.php", //This is suppose to make the html tags disappear. Doesn't work though
+				type      : "textarea",
+				submit    : "Save",
+				cancel    : "Cancel",
+				tooltip   : "Click to edit..."
+			});
 
-			if (document.getElementById && document.createElement) {
-				var butt = document.createElement('BUTTON');
-				var buttext = document.createTextNode('Done Editing');
-				butt.appendChild(buttext);
-				butt.onclick = saveEdit;
-			}
-
-			function catchIt(e) {
-				if (editing) return;
-				if (!document.getElementById || !document.createElement) return;
-				if (!e) var obj = window.event.srcElement;
-				else var obj = e.target;
-				while (obj.nodeType != 1) {
-					obj = obj.parentNode;
-				}
-				if (obj.tagName == 'TEXTAREA' || obj.tagName == 'A') return;
-				while (obj.nodeName != 'P' && obj.nodeName != 'HTML') {
-					obj = obj.parentNode;
-				}
-				if (obj.nodeName == 'HTML') return;
-				var x = obj.innerHTML;
-				var y = document.createElement('TEXTAREA');
-			//	y.appendChild(document.createTextNode(x));
-				var z = obj.parentNode;
-				z.insertBefore(y,obj);
-				z.insertBefore(butt,obj);
-				z.removeChild(obj);
-				y.value = x;
-				y.focus();
-				editing = true;
-				return false;
-			}
-
-			function saveEdit() {
-				var area = document.getElementsByTagName('TEXTAREA')[0];
-				var y = document.createElement('P');
-				var z = area.parentNode;
-				y.innerHTML = area.value;
-				z.insertBefore(y,area);
-				z.removeChild(area);
-				z.removeChild(document.getElementsByTagName('button')[0]);
-				editing = false;
-				return false;
-			}
-
-
-			document.onclick = catchIt;
-			//This is the end of the code I stole!
-			//
-			//
-			
-			
-			/*$('.edit_about_me').click(function() {
-				//This is an old way of how I was trying to make the edit about me work
-					document.all.about_me.contentEditable="true";
-					alert("test");
-			});*/
 			
 			$('.joinExpander').click(function(){
 			$(this).siblings('.expand').toggle();
@@ -98,32 +51,30 @@
 	
 			</script>
 			
-	</script>
 			
 			<div class="page">
 			<h2>Your Profile:</h2>
 			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
 			<table class="regular_table" id="myInfo" >
 				<tr>
-					<td colspan="3">
+					<td colspan="2">
 						<h2>My Info</h2>
 					</td>
 				</tr>
 				<tr>
 					<td>About Me:</td>
-					<td width="300"><p id="about_me"><?php echo getAboutMe($userID);?>
-					Click here to edit, Please look at the javascript comment for this because
-					it doesn't work.</p></td>
-					<td class="clickable edit_about_me"><u>Edit</u></td>
+					<td width="300">
+						<div style="width:300px; height:200px; white-space: normal;" class="editable_textarea" id="about_me"><?php echo getAboutMe($userID);?></div>
+					</td>
 				</tr>
 				<tr>
 					<td>Gender:</td>
-					<td><?php echo getUserGender($userID);?></td>
 					<td>
-						<span class="clickable joinExpander">Edit</span>
+						<span class="clickable joinExpander"><?php echo getUserGender($userID);?></span>
 						<div class="expand" style="display:none">
 							<input type="radio" name="gender" value="M"/>Male
 							<input type="radio" name="gender" value="F"/>Female
+							<input class="button" type="submit" name="saveInfo" value="Save"/>
 						</div>
 					</td>
 				</tr>
@@ -133,20 +84,19 @@
 				<tr>
 					<td>Location:</td>
 					<td><?php echo getUserLocation($userID);?></td>
-					<td>Edit</td>
 				</tr>
 				<tr>
 					<td>Age:</td>
-					<td><?php echo getAge($userID);?></td>
 					<td>
-						<span class="clickable joinExpander">Edit</span>
+						<span class="clickable joinExpander"><?php echo getAge($userID);?></span>
 						<div class="expand" style="display:none">
-							DOB:<input type="text" name="DOB" id="DOB"/>
+							DOB:<input type="text" name="DOB" id="DOB" placeholder="Click here to choose DOB."/>
+							<input class="button" type="submit" name="saveInfo" value="Save"/>
 						</div>
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3"><input class="button" type="submit" name="saveInfo" value="Save!"/>
+					<td colspan="2">
 				</tr>
 			</table>
 			</form>
