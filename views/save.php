@@ -20,14 +20,15 @@ $update = mysql_query($query) or die(mysql_error());
 /* sleep for a while so we can see the indicator in demo */
 usleep(2000);
 
-$renderer = $_GET['renderer'] ? $_GET['renderer'] : $_POST['renderer'];
+//This block of commented out code needs to be uncommented if you choose the editable textile
+/*$renderer = $_GET['renderer'] ? $_GET['renderer'] : $_POST['renderer'];
 if ('textile' == $renderer) {
     require_once './Textile.php';
     $t = new Textile();
-    /* What is echoed back will be shown in webpage after editing.*/
+    // What is echoed back will be shown in webpage after editing.
     print $t->TextileThis(stripslashes($_POST['value']));
-} else {
-    /* What is echoed back will be shown in webpage after editing.*/
+} else {*/
+    // What is echoed back will be shown in webpage after editing.
     print $_POST['value'];
-}
+//}
 

@@ -238,7 +238,7 @@ include("functions_join_requests.php");
 		if($info['INTERESTS'])
 			return $info['INTERESTS'];
 		else
-			return "--";
+			return "Click to specify";
 	}
 	function getUserLocation($userID){
 		//This function returns the user's location
@@ -260,7 +260,7 @@ include("functions_join_requests.php");
 		else if($info['GENDER'] == 'F')
 			$gender = "Female";
 		else
-			$gender = "--";
+			$gender = "Click to specify";
 		return $gender;
 	}
 	function getAge($userID){
@@ -288,7 +288,7 @@ include("functions_join_requests.php");
 			}
 		}
 		else
-			return "--";	//No DOB set
+			return "Click to specify";	//No DOB set
 	}
 	function saveInfo(){
 		if(isset($_POST['gender'])){
