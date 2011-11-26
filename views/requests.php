@@ -50,23 +50,38 @@
 				<tr>
 					<th>User</th>
 					<th>Activity</th>
-					<th>Date</th>
+					<th>Location</th>
+					<th>ConnAction Posted Date</th>
+					<th>ConnAction Date</th>
+					<th>Request Date</th>
 					<th>Message</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr> <!-- TODO: make these editable and auto-populating -->
-					<td>asdasdff</td>
-					<td>asdaasdff</td>
-					<td>asdfasdf</td>
-					<td>asdfasdf</td>
-				</tr>
-				<tr>
-					<td>asdf</td>
-					<td>asdf</td>
-					<td>asdf</td>
-					<td>asdf</td>
-				</tr>
+				<?php
+					$incRequests = getIncRequests(getUserID());
+					if ($incRequests) {
+					
+						foreach($incRequests as $incoming){
+							$fromUser = $incoming[0];
+							$toUser = $incoming[1];
+							$connactionID = $incoming[2];
+							$message = $incoming[3];
+							$approved = $incoming[4];
+							$date = date_parse($incoming[5]); ?>
+				
+							<tr> <!-- TODO: make these editable and auto-populating -->
+								<td><?php echo getUserName($fromUser); ?></td>
+								<td><?php echo getConnactionActivity($connactionID); ?></td>
+								<td><?php echo getConnactionNetwork($connactionID); ?></td>
+								<td><?php echo getConnactionDate($connactionID, "POST"); ?></td>
+								<td><?php echo getConnactionDate($connactionID, "START"); ?></td>
+								<td><?php echo $date["month"].'/'.$date["day"].'/'.$date["year"]; ?></td>
+								<td><?php echo $message; ?></td>
+							</tr>
+						<?php } 
+					}
+				?>
 			</tbody>
 			
 			</table>
@@ -81,23 +96,38 @@
 				<tr>
 					<th>User</th>
 					<th>Activity</th>
-					<th>Date</th>
+					<th>Location</th>
+					<th>ConnAction Posted Date</th>
+					<th>ConnAction Date</th>
+					<th>Request Date</th>
 					<th>Message</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr> <!-- TODO: make these editable and auto-populating -->
-					<td>asdf</td>
-					<td>asdf</td>
-					<td>asdf</td>
-					<td>asdf</td>
-				</tr>
-				<tr>
-					<td>asdf</td>
-					<td>asdf</td>
-					<td>asdf</td>
-					<td>asdf</td>
-				</tr>
+				<?php
+					$pendingRequests = getPendingRequests(getUserID());
+					if ($pendingRequests) {
+					
+						foreach($pendingRequests as $incoming){
+							$fromUser = $incoming[0];
+							$toUser = $incoming[1];
+							$connactionID = $incoming[2];
+							$message = $incoming[3];
+							$approved = $incoming[4];
+							$date = date_parse($incoming[5]); ?>
+				
+							<tr> <!-- TODO: make these editable and auto-populating -->
+								<td><?php echo getUserName($toUser); ?></td>
+								<td><?php echo getConnactionActivity($connactionID); ?></td>
+								<td><?php echo getConnactionNetwork($connactionID); ?></td>
+								<td><?php echo getConnactionDate($connactionID, "POST"); ?></td>
+								<td><?php echo getConnactionDate($connactionID, "START"); ?></td>
+								<td><?php echo $date["month"].'/'.$date["day"].'/'.$date["year"]; ?></td>
+								<td><?php echo $message; ?></td>
+							</tr>
+						<?php } 
+					}
+				?>
 			</tbody>
 			
 			</table>

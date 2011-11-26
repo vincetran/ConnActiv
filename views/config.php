@@ -296,17 +296,18 @@ include("functions_join_requests.php");
 			return "Click to specify";	//No DOB set
 	}
 	function saveInfo(){
+		//This function sends the my info to the database
 		if(isset($_POST['gender'])){
 			$gender = $_POST['gender'];
 			$query = "UPDATE users SET GENDER = '".$gender."' WHERE USER_ID = '".getUserID()."'";
 			$update = mysql_query($query) or die(mysql_error());
 		}
-		if(isset($_POST['about_me'])){
+		/*if(isset($_POST['about_me'])){
 			$interests = $_POST['about_me']; 
 			$query = "UPDATE users SET INTERESTS = '".$interests."' WHERE USER_ID = '".getUserID()."'";
 			$update = mysql_query($query) or die(mysql_error());
 			
-		}
+		}*/
 		if (isset($_POST['DOB'])){
 			$DOB = myDateParser($_POST['DOB']);
 			$query = "UPDATE users SET DOB = '".$DOB."' WHERE USER_ID = '".getUserID()."'";

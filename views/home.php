@@ -66,7 +66,7 @@
 					<div id="restOfBoxes">
 						Location: <textarea class="small" id="location" placeholder="Where?" name="location" maxlength="255"/>
 						<br><br>
-						Start Time: <input type="text" id="startDate"/> <select name="startHour">
+						Start Time: <input type="text" name="startDate" id="startDate"/> <select name="startHour">
 							<option value="-1">Hour:</option>
 							<?php
 								for($i = 1; $i < 24; $i++){
@@ -82,7 +82,7 @@
 								?>
 							</select>
 						<br><br>
-						End Time: <input id="endDate" type="text"/> <select name="endHour">
+						End Time: <input type="text" name="endDate" id="endDate" /> <select name="endHour">
 							<option value="-1">Hour:</option>
 							<?php
 								for($i = 1; $i < 24; $i++){
@@ -168,7 +168,8 @@
 							</div>
 							<div class="post-body"> <!-- begin post body -->
 								<p class="quote"><? echo $message; ?></p>
-								<? echo date('l, F jS, Y h:i a'); ?>
+								<? //echo date_format($startTime, 'l, F jS, Y h:i a'); 
+									echo $startTime." To ".$endTime?>
 							<div class="post-levels">
 							<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 									I am a level <?php echo getActivityLevel($userID,$activityID, 3); ?>.
@@ -177,8 +178,8 @@
 									<? echo getActivityLevel($userID,$activityID, 1); ?>.
 								<br/>
 								Open to joiners&nbsp;&raquo;
-										<?php if($userID != getUserID()){ ?>
-											<?php 
+										<?php 
+											if($userID != getUserID()){ 
 												if(getApproval($connactionID, getUserID()) == -1){
 													echo "Request Pending!";
 												}
@@ -189,6 +190,9 @@
 												else if(getApproval($connactionID, getUserID()) == 1){
 													echo "Request Accepted!";
 												}
+												//else if(check cur date and end date){
+												//	$echo "ConnAction Is Over!";
+												//}
 												else{?>
 													<span class="clickable joinExpander">Ask to join</span>
 													

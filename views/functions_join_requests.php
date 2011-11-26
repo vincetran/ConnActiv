@@ -49,5 +49,15 @@ function getIncRequests($userID){
 	}
 	return $incRequests;
 }
+function getPendingRequests($userID){
+	//This function returns an array of incoming requests
+	$pendingRequests = array();
+	$result = mysql_query("SELECT * FROM connaction_requests WHERE from_user = '$userID' ORDER BY date DESC")or die(mysql_error()); //returns true if you do not assign
+
+	while($info = mysql_fetch_array($result)){
+		$pendingRequests[] = $info;
+	}
+	return $pendingRequests;
+}
 
 ?>

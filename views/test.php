@@ -1,4 +1,4 @@
-<?php //echo "hi you dumb ass mutha plucka"; 
+<?php  
 
 include("config.php");
 
@@ -12,15 +12,18 @@ include("config.php");
 							$connactionID = $incoming[2];
 							$message = $incoming[3];
 							$approved = $incoming[4];
-							$date = $incoming[5];
+							$date = date_parse($incoming[5]);
+							
+							echo $fromUser;
+							echo $toUser;
+							echo $connactionID;
+							echo $message;
+							echo $approved;
+							echo $date["month"].'/'.$date["day"].'/'.$date["year"];
+							echo "<br/>";
+							
 						}
-						echo $fromUser;
-						echo $toUser;
-						echo $connactionID;
-						echo $message;
-						echo $approved;
-						echo $date;
-						echo "<br/>";
+						
 					}
 
 ?>
