@@ -177,14 +177,30 @@
 									I accept levels <?php echo getActivityLevel($userID,$activityID, 0); ?>-
 									<? echo getActivityLevel($userID,$activityID, 1); ?>.
 								<br/>
-								Open to joiners&nbsp;&raquo; 
-										<span class="clickable joinExpander">Ask to join</span>
-										<div class="expand" style="display:none">
-											<input type="hidden" name="connactionID" value="<?= $connactionID?>"/>
-											<input type="hidden" name="postingUserID" value="<?= $userID?>"/>
-											<textarea name="message" maxlength="255" style="width:80%;" class="small" placeholder="Hi! I was hoping to join your activity."></textarea>
-											<input type="submit" class="join" name="joinRequest" value="Send"/>
-										</div>
+								Open to joiners&nbsp;&raquo;
+										<?php if($userID != getUserID()){ ?>
+											<?php 
+												if(getApproval($connactionID, getUserID()) == -1){
+													echo "Request Pending!";
+												}
+												else if(getApproval($connactionID, getUserID()) == 2){
+													echo getApproval($connactionID, getUserID());
+													echo "Request Denied.";
+												}
+												else if(getApproval($connactionID, getUserID()) == 1){
+													echo "Request Accepted!";
+												}
+												else{?>
+													<span class="clickable joinExpander">Ask to join</span>
+													
+													<div class="expand" style="display:none">
+														<input type="hidden" name="connactionID" value="<?= $connactionID?>"/>
+														<input type="hidden" name="postingUserID" value="<?= $userID?>"/>
+														<textarea name="message" maxlength="255" style="width:80%;" class="small" placeholder="Hi! I was hoping to join your activity."></textarea>
+														<input type="submit" class="join" name="joinRequest" value="Send"/>
+													</div>
+											<?php } ?>
+										<?php } ?>
 									</form>					
 							</div><!-- begin tags -->
 							<br/>

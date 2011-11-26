@@ -9,7 +9,7 @@
 
 
 function joinRequest(){
-	
+	//This insert a join request into the datbase
 	$from_user = getUserID();
 	$to_user = $_POST['postingUserID'];
 	$connactionID = $_POST['connactionID'];
@@ -21,8 +21,33 @@ function joinRequest(){
 	//echo $query;
 	
 }
-function getApproval(){
+function getApproval($connactionID, $from_user){
+	/*This checks the approval of a connaction
+	* -1 means pending
+	* 0 means the join request is not sent yet, Sorry that is what the database returns when it doesn't exist
+	* 1 means approved
+	* 2 means denied
+	*/
+	$status;
+	//while($info = getDatabaseInfo("connaction_requests", "connaction_id", $connactionID)){
+	//	echo $info['APPROVED'];
+	//}
+	$resourceID = getResourceIDs2("connaction_requests", "connaction_id", $connactionID, "from_user", $from_user);
+	$info = mysql_fetch_array($resourceID);
+	$status = $info['APPROVED'];
+	
+	//echo $status;
+	return $status;
+}
+function getIncRequests($userID){
+	//This function returns an array of incoming requests
+	$incRequests = array();
+	$result = mysql_query("SELECT * FROM connaction_requests WHERE to_user = '$userID' ORDER BY date DESC")or die(mysql_error()); //returns true if you do not assign
 
+	while($info = mysql_fetch_array($result)){
+		$incRequests[] = $info;
+	}
+	return $incRequests;
 }
 
 ?>
