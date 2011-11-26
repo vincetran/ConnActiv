@@ -132,7 +132,6 @@ function favoriteNetworks($unique_id) { //Kim TODO - After Dave changes db schem
 	}
 	
 	function networkExists($area, $state) {
-	
 		$query = "SELECT count(*) FROM networks WHERE area = '".$area."' AND state = '".$state."'";
 		$result = mysql_query($query) or die(mysql_error());
 		if (mysql_num_rows($result) > 1) return true;

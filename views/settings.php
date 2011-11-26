@@ -142,22 +142,26 @@
 			<tbody>
 				<?
 				$levels = getUserActivityLevels();
-				foreach($levels as $level){
-					echo "<tr>";
-					/* Null values come up as 0. TODO.
-					*
-						$level[0]? echo "<td>$level[0]</td>" : echo "<td>Not set.</td>";
-						$level[1]? echo "<td>$level[1]</td>" : echo "<td>Not set.</td>";
-						($level[2] && $level[3])? echo "<td>$level[2] - $level[3]</td>" : echo "<td>Not set.</td>";
-						$level[4]? echo "<td>$level[4]</td>" : echo "<td>Not set.</td>";
-					*/
-					
-					echo "<td>$level[0]</td>";
-					echo "<td>$level[1]</td>";
-					echo "<td>$level[2] - $level[3]</td>";
-					echo "<td>$level[4]</td>";
-				echo "</tr>";
-				}
+				if ($levels) {
+					foreach($levels as $level){
+						echo "<tr>";
+						/* Null values come up as 0. TODO.
+						*
+							$level[0]? echo "<td>$level[0]</td>" : echo "<td>Not set.</td>";
+							$level[1]? echo "<td>$level[1]</td>" : echo "<td>Not set.</td>";
+							($level[2] && $level[3])? echo "<td>$level[2] - $level[3]</td>" : echo "<td>Not set.</td>";
+							$level[4]? echo "<td>$level[4]</td>" : echo "<td>Not set.</td>";
+						*/
+						
+						echo "<td>$level[0]</td>";
+						echo "<td>$level[1]</td>";
+						echo "<td>$level[2] - $level[3]</td>";
+						echo "<td>$level[4]</td>";
+					echo "</tr>";
+					}//end foreach
+					} else {
+					echo "<tr><td colspan='4'>You're missing some skill levels. Subscribe to networks to get started.</td></tr>";
+				}//endif
 				
 				?>
 			</tbody>
@@ -175,11 +179,9 @@
 				<th>Action</th>
 			</tr>
 			<? $favs = getFavorites(); 
-				if (!$favs): ?>
-				<tr>
-					<td colspan="2">You haven't selected any favorites!</td>
-				</tr>
-			<? else: 
+				if (!$favs) 
+					echo "<tr><td colspan='2'>Subscribe to and favorite networks to see them as bookmarks in your sidebar.</td></tr>";
+				else
 				foreach($favs as $fav):
 			?>
 					<tr>
@@ -187,7 +189,6 @@
 						<td><input type="submit" name="remove" value="Remove"/></td>
 					</tr>
 				<? endforeach; ?>
-			<? endif; ?>
 			
 			</table>
 			<div id="footer">&copy; 2011; Kim Cooperrider &middot; Rob Filippi &middot; Dave Johnson &middot; Vince Tran &middot; Ray Wang</div>			
