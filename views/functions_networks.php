@@ -61,6 +61,10 @@ function unsubscribeNetworks($unique_id) {
 	$query = "DELETE FROM user_networks WHERE user_id = $id AND unique_network_id = $unique_id";
 	// TODO: When we need to remove the activity from the user's skill preferences.
 	$delete = mysql_query($query) or die(mysql_error());
+	// Also delete from favorites
+	$query = "DELETE FROM favorites WHERE user_id = $id AND unique_network_id = $unique_id";
+	$delete = mysql_query($query) or die(mysql_error());
+
 }
 
 function getActivityNameFromUnique($unique_id){
@@ -160,6 +164,7 @@ function getUserUniqueNetworks() {
 	//based on user-inputted text, create the network he/she is looking for and subscribe.
 		$id = createUniqueNetwork($area, $state, $activity);
 		$u_id = getUserID();
+		addUserActivity($u_id, $id);
 		addUserNetwork($u_id, $id);
 		
 	//subscribe
