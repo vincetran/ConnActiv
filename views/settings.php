@@ -85,12 +85,14 @@
 				</tr>
 			<?
 				$networks = getUserUniqueNetworks();
+				$favs = getFavoriteIDs();
 				if ($networks) {				
 					foreach($networks as $network) {
 						echo "<tr>";
 							echo "<td>".$network[1].", ".$network[2]."</td><td>".$network[3]."</td>";
 							echo "<td><input type='checkbox' value='".$network[0]."' name='unsubscribeTo[]' /></td>";
-							echo "<td><input type='checkbox' value='".$network[0]."' name='favorite[]' /></td>";
+							in_array($network[0], $favs)? $checked="checked disabled" : $checked = "";  // if in $favs, checkbox "favorite" is checked
+							echo sprintf("<td><input type='checkbox' %s value='%s' name='favorite[]' /></td>", $checked, $network[0]);
 						echo "</tr>";
 					} //end foreach
 			} else echo "<tr><td colspan='4'>You aren't subscribed to any networks yet!<br/>Click below to get started.</td></tr>";

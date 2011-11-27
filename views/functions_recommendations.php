@@ -1,7 +1,8 @@
 <? /*-----------------------------------
 * Functions for FAVORITES and REVIEWS
 *
-** array getFavoites()
+** array(string) getFavorites()
+** array(int) getFavoriteIDs()
 ** void favoriteNetwork($unique_id)
 ** int getUniqueNetworkIdByFav($fav_as_string)
 ** void defavoriteNetwork($unique_id)
@@ -29,6 +30,18 @@ function getFavorites(){
 		$favs[] = $row['area']. ", ". $row['state']. " - " .$row['activity_name'];
 	}
 	return $favs;
+}
+
+function getFavoriteIDs(){
+//returns array of unique_network_ids based on $user_id
+	$id = getUserID();
+	$query = "SELECT unique_network_id FROM favorites WHERE user_id = $id";
+	$result = mysql_query($query) or die(mysql_error());
+	$favIDs = array();
+	while($row = mysql_fetch_array($result)){
+		$favIDs[] = $row[0];// this is unique_network_id
+	}
+	return $favIDs;
 }
 
 
