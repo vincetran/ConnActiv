@@ -37,16 +37,17 @@
 		$('.top_links').removeClass('active');
 		$('#home').addClass('active');
 
-		$('#startDate').datepicker();
-		$('#endDate').datepicker();
-
 		$('.joinExpander').click(function(){
 		$(this).siblings('.expand').toggle();
 		});
 
 		$('#messageBox').click(function(){
+		alert('test');
 			$('#restOfBoxes').slideDown();
 		});
+		
+		$('#startDate').datepicker();
+		$('#endDate').datepicker();
 	});
 	</script>
 	
