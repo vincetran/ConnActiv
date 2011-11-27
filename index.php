@@ -1,4 +1,5 @@
-<? include_once('views/config.php'); 
+<?
+	include_once('views/config.php'); 
 	if (isset($_POST['login'])) { 
 		//If user pressed login
 		login(); 
@@ -14,7 +15,6 @@
 <title>ConnActiv | The place for activ people.</title>
 
 <link rel="shortcut icon" type="image/x-icon" href="public/images/favicon.ico">
-
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <link type="text/css" rel="stylesheet" href="styles/defaults.css"/>
