@@ -8,6 +8,7 @@
 		} else if (isset($_POST['joinRequest'])) { 
 			joinRequest();
 		}
+		
 	?>
 	<script type="text/javascript">
 	

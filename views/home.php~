@@ -1,5 +1,5 @@
-<?php 
-	include("config.php");
+<? 
+	include("header.php");
 
 	if(cookieExists() && validCookie()):
 	
@@ -8,26 +8,24 @@
 		} else if (isset($_POST['joinRequest'])) { 
 			joinRequest();
 		}
+		if(isset($_POST['review'])){
+			alert("inserting review");
+		}
 	?>
 	<script type="text/javascript">
-		$('header').show();
-		$('#side').show();
+	
+	$(document).ready(function(){
 		$('#restOfBoxes').hide();
 		
-		$('#link_feeds_all').css('text-decoration','underline');
+		$('#link_feeds_all').addClass('tab_active');
 		
-		$('.stream').click(function(){
+		$('.link_stream').click(function(){
 			var id=$(this).attr('id');
 			var el=$('#'+id);
-			el.css('text-decoration','underline');
-			el.siblings().each(function(){
-				$(this).css('text-decoration','none');
-			});
-		});
-
-		$('a.stream').click(function() {
-		type = $(this).attr('id');
-		alert("STUB: Sorting to display " +type.toUpperCase()+ " stream only");
+			$('.stream').hide();
+			$('.link_stream').removeClass('tab_active');
+			el.addClass('tab_active');
+			$('#stream_' +id).show();
 		});
 
 		$('input.button').click(function() {
@@ -52,6 +50,7 @@
 		$('#messageBox').click(function(){
 			$('#restOfBoxes').slideDown();
 		});
+	});
 	</script>
 	
 		<div class="page">		
@@ -61,13 +60,11 @@
 					<h2>Post a ConnAction</h2>
 				</div>
 				<div id="postBoxes">
-					<div id="messageBox">
-						Message: <textarea id="message" name="message" placeholder="Say what you're up to!" maxlength="4000"/>
-					</div>
+					<div id="messageBox">Message: <textarea id="message" name="message" placeholder="Say what you're up to!" maxlength="4000"></textarea></div>
 					<div id="restOfBoxes">
-						Location: <textarea class="small" id="location" placeholder="Where?" name="location" maxlength="255"/>
-						<br><br>
-						Start Time: <input type="text" id="startDate"/> <select name="startHour">
+						Location: <textarea class="small" id="location" placeholder="Where?" name="location" maxlength="255"></textarea>
+						<br/><br/>
+						Start Time: <input type="text" name="startDate" id="startDate"/> <select name="startHour">
 							<option value="-1">Hour:</option>
 							<?php
 								for($i = 1; $i < 24; $i++){
@@ -82,8 +79,8 @@
 								}
 								?>
 							</select>
-						<br><br>
-						End Time: <input id="endDate" type="text"/> <select name="endHour">
+						<br/><br/>
+						End Time: <input type="text" name="endDate" id="endDate" /> <select name="endHour">
 							<option value="-1">Hour:</option>
 							<?php
 								for($i = 1; $i < 24; $i++){
@@ -133,21 +130,20 @@
 					
 				<div class="main feeds-container">
 					<ul class="feeds">
-						<li id="link_feeds_all" class="stream"><a href="#">All</a></li>
+						<li id="link_feeds_all" class="link_stream"><a href="#">All</a></li>
 						<?
 						$networkNames = getNetworkNames();
-						foreach ($networkNames as $network){
-							?>
-							<li id="link_feeds_<? echo $network; ?>" class="stream"><a href="#"><? echo $network; ?></a></li>
-							<?
-						//}
-						?>
+						foreach ($networkNames as $network): ?>
+							<li id="<? echo $network; ?>" class="link_stream"><a href="#"><? echo $network; ?></a></li>
+							<? endforeach; ?>
 					</ul>
+						
+				 <? $networkNames = getNetworkNames();
+						foreach ($networkNames as $network) { ?> 
 					
-					<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
+					<div class="stream" id="stream_<? echo $network; ?>"> 
 					
-					<? 
-					$connactions = getConnactions(getNetworkID($network), 1);
+				<? $connactions = getConnactions(getNetworkID($network), 1);
 					
 					if ($connactions) {
 					
@@ -166,25 +162,46 @@
 						<div class="post"> <!-- begin post -->
 							<div class="post-author">
 								<img src="<? echo getUserPic($userID); ?>" height="120" /><br/>
-								<? echo getName($userID) ?>
+								<? echo getUserName($userID) ?>
 							</div>
-							<div class="post-body">
+							<div class="post-body"> <!-- begin post body -->
 								<p class="quote"><? echo $message; ?></p>
-								<? echo date('l, F jS, Y h:i a'); ?>
+								<? //echo date_format($startTime, 'l, F jS, Y h:i a'); 
+									echo $startTime." To ".$endTime?>
 							<div class="post-levels">
+							<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 									I am a level <?php echo getActivityLevel($userID,$activityID, 3); ?>.
 									I prefer level <?php echo getActivityLevel($userID,$activityID, 2); ?>.
 									I accept levels <?php echo getActivityLevel($userID,$activityID, 0); ?>-
 									<? echo getActivityLevel($userID,$activityID, 1); ?>.
 								<br/>
-								Open to joiners&nbsp;&raquo; 
-										<span class="clickable joinExpander">Ask to join</span>
-										<div class="expand" style="display:none">
-											<input type="hidden" name="connactionID" value="<?= $connactionID?>"/>
-											<input type="hidden" name="postingUserID" value="<?= $userID?>"/>
-											<textarea name="message" maxlength="255" style="width:80%;" class="small" placeholder="Hi! I was hoping to join your activity."></textarea>
-											<input type="submit" class="join" name="joinRequest" value="Send"/>
-										</div>
+								Open to joiners&nbsp;&raquo;
+										<?php 
+											if($userID != getUserID()){ 
+												if(getApproval($connactionID, getUserID()) == -1){
+													echo "Request Pending!";
+												}
+												else if(getApproval($connactionID, getUserID()) == 2){
+													echo getApproval($connactionID, getUserID());
+													echo "Request Denied.";
+												}
+												else if(getApproval($connactionID, getUserID()) == 1){
+													echo "Request Accepted!";
+												}
+												//else if(check cur date and end date){
+												//	$echo "ConnAction Is Over!";
+												//}
+												else{?>
+													<span class="clickable joinExpander">Ask to join</span>
+													
+													<div class="expand" style="display:none">
+														<input type="hidden" name="connactionID" value="<?= $connactionID?>"/>
+														<input type="hidden" name="postingUserID" value="<?= $userID?>"/>
+														<textarea name="message" maxlength="255" style="width:80%;" class="small" placeholder="Hi! I was hoping to join your activity."></textarea>
+														<input type="submit" class="join" name="joinRequest" value="Send"/>
+													</div>
+											<?php } ?>
+										<?php } ?>
 									</form>					
 							</div><!-- begin tags -->
 							<br/>
@@ -197,10 +214,15 @@
 
 							</div><!-- end post-body -->
 						</div><!-- end post -->
-		<?		}		//end foreach($post) ?> 				
-				</div><!-- end feed container -->		
-			</div><!-- end page-->
-	<?  } // end foreach($network)
-		else echo "<br/>No connactions yet!<br/><br/>";
-	}
-endif; ?>
+		<?		}		//end foreach($post) ?>
+	<?  } else echo "<br/>No connactions yet!<br/><br/>"; ?>
+	
+	</div><!-- end stream for $network -->
+	<? } // end foreach($network)
+	echo "</div>"; // end main feeds-container
+	echo "</div>"; // end page
+	?> 
+	
+<? endif; ?>
+
+<? include('footer.php'); ?>
