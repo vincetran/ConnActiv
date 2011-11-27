@@ -290,7 +290,7 @@ CREATE TABLE IF NOT EXISTS `reviews` (
   `IS_POSITIVE` int(11) DEFAULT NULL,
   `REVIEW_DATE` date DEFAULT NULL,
   `REVIEW` varchar(4000) DEFAULT NULL,
-  PRIMARY KEY (`USER_ID`,`CONNACTION_ID`)
+  PRIMARY KEY (`FROM_USER`,`CONNACTION_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
