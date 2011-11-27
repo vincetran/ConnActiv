@@ -1,5 +1,5 @@
 <?php 
-	include("config.php");
+	include("header.php");
 
 	if(cookieExists() && validCookie()) {
 			?>
@@ -34,7 +34,11 @@
 				"bSort": true,
 				"bInfo": false,
 				"bAutoWidth": false
-   	 });  	 
+   	 });  
+   	 
+   	 
+		$('.top_links').removeClass('active');
+		$('#requests').addClass('active');
    	 
    	 
 		});		
@@ -185,10 +189,9 @@
 			
 			<br/><br/>
 			
-		<div id="footer">&copy; 2011; Kim Cooperrider &middot; Rob Filippi &middot; Dave Johnson &middot; Vince Tran &middot; Ray Wang</div>
 		</div> <!-- end page -->
 			
 			<?
 		}
- 		
+ 		include('footer.php');
 ?>

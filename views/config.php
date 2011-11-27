@@ -38,7 +38,7 @@ include("functions_join_requests.php");
 		//This function logs in the user when they press the login button
 		// makes sure they filled it in
 		if(!$_POST['username'] | !$_POST['pass']) {
-			die('You did not fill in a required field.');
+			die('Oops. You did not fill in a required field.');
 		}
 		// checks it against the database
 		//if (!get_magic_quotes_gpc()) {
@@ -48,7 +48,7 @@ include("functions_join_requests.php");
 		//Gives error if user dosen't exist
 		$check2 = mysql_num_rows($check);
 		if ($check2 == 0) {
-			die('That user does not exist in our database. <a href=registration.php>Click Here to Register</a>');
+			die('Sorry, that user does not exist in our database. Why don\'t you <a href="index.php">register?</a>');
 		}
 		while($info = mysql_fetch_array( $check )) 	
 		{
@@ -66,7 +66,7 @@ include("functions_join_requests.php");
 			setcookie('ID_my_site', $_POST['username'], $hour);
 			setcookie('Key_my_site', $_POST['pass'], $hour);
 			//then redirect them to the members area 
-			header("Location: ../index.html");
+			header("Location: views/home.php");
 			} 
 		}
 	}
@@ -108,6 +108,7 @@ include("functions_join_requests.php");
 				
 				//insert all of the user selected activities into the user_activities table and unique networks if needed.	
 				$acts = $_POST['activities'];
+				if ($acts) {
 				var_dump($acts);							
 				$i = 0;				
 				while($i < sizeof($acts)){
@@ -129,12 +130,10 @@ include("functions_join_requests.php");
 					}
 					//add to user_networks
 					addUserNetwork($userid2, $uniqueID);
-					
 	
-					$i++;					
-					
-								
+					$i++;		
 				}
+				} //end if($acts)
 
 				//create cookie
 				$_POST['username'] = stripslashes($_POST['username']); 
@@ -142,7 +141,7 @@ include("functions_join_requests.php");
 				setcookie('ID_my_site', $_POST['username'], $hour); 
 				setcookie('Key_my_site', md5($_POST['password']), $hour);
 				//redirect to home				
-				header("Location: ../index.html");
+				header("Location: views/home.php");
 				
 			}	
 			//if the passwords do not match ask them to enter the information again
@@ -150,13 +149,13 @@ include("functions_join_requests.php");
 		}
 		//if the email is already registered then display message
 		else{
-			die('This email has already been registered.  click here if you forgot your password.');
+			die('This email has already been registered.');
 		}
 	}
 
 
 	function addUserActivity($userid, $activityid){
-		$insert = mysql_query("Insert into user_activities(user_id, activity_id) values(".(int)$userid.",".(int)$activityid.")") or die(mysql_error());
+		$insert = mysql_query("INSERT IGNORE INTO user_activities(user_id, activity_id) values(".(int)$userid.",".(int)$activityid.")") or die(mysql_error());
 	}
 	/*function getUserName($userid){
 		$query = "select first_name, last_name from users where users_id = ".$userid;
@@ -315,7 +314,6 @@ include("functions_join_requests.php");
 		}
 		//echo $query;		
 		$update = mysql_query($query) or die(mysql_error());
-		header("Location: ../index.html");
 	}
 	function myDateParser($dateToParse){
 		//This function takes a string date in the format of mm/dd/yyyy

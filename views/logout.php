@@ -8,6 +8,6 @@
 
  setcookie('Key_my_site', 'gone', $past); 
 
- header("Location: ../index.html"); 
+ header("Location: ../index.php"); 
 
  ?> 

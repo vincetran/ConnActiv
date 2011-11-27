@@ -1,5 +1,4 @@
-<?php 
-	include("config.php");
+<? include("header.php");
 
 	//Checks if there is a login cookie
 	if(cookieExists() && validCookie())
@@ -12,7 +11,6 @@
 				foreach($newSubscriptions as $s) { //$ is passed in as unique_network_id
 					subscribeNetworks($s);
 				} // end foreach
-				header("Location: ../index.html");
 			} //end if ($_POST[subscribeTo])
 		} else if (isset($_POST['doUnsubscribe'])) {
 			if ($_POST['unsubscribeTo']) {
@@ -20,7 +18,6 @@
 				foreach($unsubscrips as $u) {
 					unsubscribeNetworks($u);
 				} // end foreach
-				header("Location: ../index.html");
 			} //end if ($_POST[unsubscribeTo])
 		} else if (isset($_POST['doFavorite'])) {
 			if ($_POST['favorite']) {
@@ -28,14 +25,12 @@
 				foreach($favs as $f) {
 					favoriteNetwork($f);
 				} // end foreach
-				header("Location: ../index.html");
 			} //end if ($_POST[favorite])
 		} else if (isset($_POST['doAddNetwork'])) {
 				$area = $_POST['area'];
 				$state = $_POST['state'];
 				$activity = $_POST['activity'];
 				createAndSubscribeNetwork($area, $state, $activity);
-				header("Location: ../index.html");
 		} else if (isset($_POST['doDefavorite'])) {
 			if ($_POST['defavorite']) {
 				$defavs = $_POST['defavorite'];
@@ -43,33 +38,38 @@
 					$defav_id = getUniqueNetworkIdByFav($d);
 					defavoriteNetwork($defav_id);
 				} // end foreach
-				header("Location: ../index.html");
 			} //end if ($_POST[defavorite])
 		}
 		
 			?>
 			<script type="text/javascript">
+		$(function() {
+		
+				$('.top_links').removeClass('active');
+				$('#settings').addClass('active');
 						
-			 $('#addNetwork').dataTable( {
-        "aaSorting": [[ 0, "asc" ]],
-        "bPaginate": false,
-				"bLengthChange": false,
-				"bFilter": true,
-				"bSort": true,
-				"bInfo": false,
-				"bAutoWidth": false,
-				"aoColumns": [ null, null, { "bSortable": false }]
-   		 });
-   		 
-   		 $('#expandNetworks').click(function(){
-   		 	$('#allNetworks').toggle();   		  		 	   		 
-   		 });
-   		 
-   		 $('#expandAddNewNetwork').click(function() {
-   		 	$('#hiddenNewNetwork').toggle();   		 
-   		 });
-   		    		    		 
-			</script>
+					 $('#addNetwork').dataTable( {
+						"aaSorting": [[ 0, "asc" ]],
+						"bPaginate": false,
+						"bLengthChange": false,
+						"bFilter": true,
+						"bSort": true,
+						"bInfo": false,
+						"bAutoWidth": false,
+						"aoColumns": [ null, null, { "bSortable": false }]
+					 });
+					 
+					 $('#expandNetworks').click(function(){
+						$('#allNetworks').toggle();   		  		 	   		 
+					 });
+					 
+					 $('#expandAddNewNetwork').click(function() {
+						$('#hiddenNewNetwork').toggle();   		 
+					 });
+					 
+   		});
+   		
+   		</script>
 			
 			<div class="page">
 			
@@ -209,12 +209,13 @@
 			</div>
 			</form>
 			
-			<div id="footer">&copy; 2011; Kim Cooperrider &middot; Rob Filippi &middot; Dave Johnson &middot; Vince Tran &middot; Ray Wang</div>			
 			</div><!-- /page -->
 			<?php
 		}
 	else {	 
 		//if they are not logged in";
-		header("Location: ../index.html");
+		header("Location: ");
 	}
+	
+	include('footer.php');
 ?>

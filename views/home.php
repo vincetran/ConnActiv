@@ -1,5 +1,5 @@
-<?php 
-	include("config.php");
+<? 
+	include("header.php");
 
 	if(cookieExists() && validCookie()):
 	
@@ -10,8 +10,8 @@
 		}
 	?>
 	<script type="text/javascript">
-		$('header').show();
-		$('#side').show();
+	
+	$(document).ready(function(){
 		$('#restOfBoxes').hide();
 		
 		$('#link_feeds_all').addClass('tab_active');
@@ -22,11 +22,7 @@
 			$('.stream').hide();
 			$('.link_stream').removeClass('tab_active');
 			el.addClass('tab_active');
-		});
-
-		$('.link_stream').click(function() {
-			type = $(this).attr('id');
-			$('#stream_' +type).show();
+			$('#stream_' +id).show();
 		});
 
 		$('input.button').click(function() {
@@ -51,6 +47,7 @@
 		$('#messageBox').click(function(){
 			$('#restOfBoxes').slideDown();
 		});
+	});
 	</script>
 	
 		<div class="page">		
@@ -60,12 +57,10 @@
 					<h2>Post a ConnAction</h2>
 				</div>
 				<div id="postBoxes">
-					<div id="messageBox">
-						Message: <textarea id="message" name="message" placeholder="Say what you're up to!" maxlength="4000"/>
-					</div>
+					<div id="messageBox">Message: <textarea id="message" name="message" placeholder="Say what you're up to!" maxlength="4000"></textarea></div>
 					<div id="restOfBoxes">
-						Location: <textarea class="small" id="location" placeholder="Where?" name="location" maxlength="255"/>
-						<br><br>
+						Location: <textarea class="small" id="location" placeholder="Where?" name="location" maxlength="255"></textarea>
+						<br/><br/>
 						Start Time: <input type="text" name="startDate" id="startDate"/> <select name="startHour">
 							<option value="-1">Hour:</option>
 							<?php
@@ -81,7 +76,7 @@
 								}
 								?>
 							</select>
-						<br><br>
+						<br/><br/>
 						End Time: <input type="text" name="endDate" id="endDate" /> <select name="endHour">
 							<option value="-1">Hour:</option>
 							<?php
@@ -226,3 +221,5 @@
 	?> 
 	
 <? endif; ?>
+
+<? include('footer.php'); ?>

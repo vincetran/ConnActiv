@@ -1,5 +1,4 @@
-<?php 
-	include("config.php");
+<? include("header.php");
 
 	//Checks if there is a login cookie
 	if(cookieExists())
@@ -23,6 +22,8 @@
 				saveInfo();
 			?>
 			<script type="text/javascript">
+		$(function() {
+		
 			$(".editable_textarea").editable("http://localhost/ConnActiv/ConnActiv/views/save.php", { 
 				indicator : "<img src='http://localhost/ConnActiv/ConnActiv/public/images/indicator.gif'>",
 				type   : 'textarea',
@@ -31,6 +32,7 @@
 				cancel : 'cancel',
 				tooltip   : "Click to edit..."
 			});
+			
 			$(".editable_textile").editable("http://localhost/ConnActiv/ConnActiv/views/save.php?renderer=textile", {
 				//Use this if you want the html tags to show
 				//If you choose to use this you also need to uncomment some stuff in save.php, but then editable_textarea will not work.
@@ -47,7 +49,13 @@
 			$(this).siblings('.expand').toggle();
 			});
 			
-			$('#DOB').datepicker();
+			
+			
+			$('.top_links').removeClass('active');
+			$('#profile').addClass('active');
+		});
+		
+		$('#DOB').datepicker();
 	
 			</script>
 			
@@ -82,7 +90,7 @@
 					<td>
 						<span class="clickable joinExpander"><?php echo getAge($userID);?></span>
 						<div class="expand" style="display:none">
-							DOB:<input type="text" name="DOB" id="DOB" placeholder="Click here to choose DOB."/>
+							Birthday:<input type="text" name="DOB" id="DOB" placeholder="Click here to select."/>
 							<input class="button" type="submit" name="saveInfo" value="Save"/>
 						</div>
 					</td>
@@ -92,7 +100,6 @@
 				</tr>
 			</table>
 			</form>
-			<div id="footer">&copy; 2011; Kim Cooperrider &middot; Rob Filippi &middot; Dave Johnson &middot; Vince Tran &middot; Ray Wang</div>
 			</div>
 			<?php
 		}
@@ -101,4 +108,6 @@
 		//if they are not logged in";
 		header("Location: ../index.html");
 	}
+	
+	include('footer.php');
 ?>

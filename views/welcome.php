@@ -2,14 +2,14 @@
 
 	// Connects to Database
 
-	include("config.php");
+	include("header.php");
 	//Checks if there is a login cookie
 	if(cookieExists())
 	//if there is a username cookie, we need to check it against our password cookie
 	{ 
 		if (!validCookie()) {
 			//Cookie doesn't match password go to index
-			header("Location: ../index.html"); 
+			header("Location: ../welcome.php"); 
 		}
 		else{
 			//Cookie matches, show what they want
@@ -30,6 +30,9 @@
 	//If they are not logged in
 	?> 
 <script type="text/javascript">
+
+	$('header').hide();
+	$('#side').hide();
 	
 	$('#login').click(function(e) {
 		e.preventDefault();
@@ -51,8 +54,9 @@
 	$('#signinForm').validationEngine();
 </script>
 
+I'm not sure we need this file. TODO - see about deleting this.
 
-	<img src="public/images/logo.png"/><br/>
+	<img src="../public/images/logo.png"/><br/>
 	
 	<div id="rollover_imgs">
 		<div id="login" class="rollover clickable active"></div>
@@ -158,9 +162,10 @@
 			</table>
 			</form>
 		</div>
-		<div id="footer">&copy; 2011; Kim Cooperrider &middot; Rob Filippi &middot; Dave Johnson &middot; Vince Tran &middot; Ray Wang</div>
 		</div> <!-- /welcome_form-->
 	
  <?php 
  } 
+ 
+ include('footer.php');
  ?>
