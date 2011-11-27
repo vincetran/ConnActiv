@@ -134,8 +134,8 @@ CREATE TABLE IF NOT EXISTS `connaction_requests` (
 --
 
 INSERT INTO `connaction_requests` (`FROM_USER`, `TO_USER`, `CONNACTION_ID`, `MESSAGE`, `APPROVED`, `DATE`) VALUES
-(4, 1, 6, 'test', -1, '2011-11-26 03:56:33'),
-(4, 1, 5, 'testing', -1, '2011-11-26 04:04:45');
+(4, 1, 6, 'test', -1, '2011-11-26 03:56:33' ),
+(4, 1, 5, 'testing', -1, '2011-11-26 03:56:33');
 
 -- --------------------------------------------------------
 
@@ -234,7 +234,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
 --
 
 INSERT INTO `messages` (`FROM_USER`, `TO_USER`, `SUBJECT`, `BODY`, `DATE`) VALUES
-(1, 2, 'Running Tomorrow', 'Lets go running around 4pm...', '2011-11-08');
+(1, 2, 'Running Tomorrow', 'Lets go running around 4pm...', '2011-11-26 03:56:33');
 
 -- --------------------------------------------------------
 

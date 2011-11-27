@@ -11,17 +11,20 @@
 	/*
 	**
 	* HEY ROBBBBBER ROB can you fix this so it takes the date the way datepicker inputs it? KCOOOOOL -Kim
-	*
+	* Done - Rob
 	**
 	*/
 	
 		//This function will post the connaction to the database!
-		$startTime = getCurYear()."-".getCurMonth(1)."-".$_POST['startDay']." ".$_POST['startHour'].":".$_POST['startMin'].":00";
-		$endTime = getCurYear()."-".getCurMonth(1)."-".$_POST['endDay']." ".$_POST['endHour'].":".$_POST['endMin'].":00";
+		$start = myDateParser($_POST['startDate']);
+		$end = myDateParser($_POST['endDate']);
+		$today = date("Y-m-d");
+		$startTime = $start." ".$_POST['startHour'].":".$_POST['startMin'].":00";
+		$endTime = $end." ".$_POST['endHour'].":".$_POST['endMin'].":00";
 		
 		
-		$query = "INSERT INTO connactions(USER_ID, LOCATION, START_TIME, MESSAGE, END_TIME, ACTIVITY_ID, NETWORK_ID, IS_PRIVATE)
-			VALUES ('".getUserID()."', '".$_POST['location']."', '".$startTime."', '".$_POST['message']."', '".$endTime."'
+		$query = "INSERT INTO connactions(POST_TIME, USER_ID, LOCATION, START_TIME, MESSAGE, END_TIME, ACTIVITY_ID, NETWORK_ID, IS_PRIVATE)
+			VALUES ('".$today."', '".getUserID()."', '".$_POST['location']."', '".$startTime."', '".$_POST['message']."', '".$endTime."'
 					, '".$_POST['activity']."', '".$_POST['network']."', '".$_POST['private']."')";
 					
 		$insert = mysql_query($query) or die(mysql_error());
@@ -60,9 +63,13 @@
 	
 
 	function getPastConnactions($userid){
-		$query = "select connaction_id from connactions c, connaction_attending ca where ca.user_id = ".$userid." and c.end_time < CURRENT_TIMESTAMP() and c.connaction_id = ca.connaction_id";
-		$past = mysql_query($query);
-		return $past;
+		$pastcon = array();		
+		$query = "select c.connaction_id, c.user_id, c.activity_id, c.start_time, c.message from connactions c, connaction_attending ca where ca.user_id = ".$userid." and c.end_time < sysdate() and c.connaction_id = ca.connaction_id";
+		$past = mysql_query($query) or die(mysql_error());
+		while($info = mysql_fetch_array($past)){
+			$pastcon[] = $info;
+		}
+		return $pastcon;
 		
 	}
 
@@ -94,6 +101,31 @@
 		else{
 			return "error";
 		}
+	}
+	function getConnactionActivity($connactionID){
+		//This function will return the activity of connaction
+		$activityID = getDatabaseInfo("connactions", "connaction_id", $connactionID);
+		$activity = getDatabaseInfo("activities", "activity_id", $activityID['ACTIVITY_ID']);	
+		$activityName = $activity['ACTIVITY_NAME'];
+		
+		return $activityName;
+	}
+	function getConnactionNetwork($connactionID){
+		//This function will return the network of connaction
+		$networkID = getDatabaseInfo("connactions", "connaction_id", $connactionID);
+		$network = getDatabaseInfo("networks", "network_id", $networkID['NETWORK_ID']);	
+		$networkName = $network['AREA'];
+		
+		return $networkName;
+	}
+	function getConnactionDate($connactionID, $argument){
+		//This function will return the date of connaction
+		//Argument should be POST, START or END
+		$dateID = getDatabaseInfo("connactions", "connaction_id", $connactionID);	
+		$date = $dateID[$argument.'_TIME'];
+		$dateParsed = date_parse($date);
+		$newDate = $dateParsed["month"].'/'.$dateParsed["day"].'/'.$dateParsed["year"];
+		return $newDate;
 	}
 	function printArray($array){
 		//This function echos the passed in array

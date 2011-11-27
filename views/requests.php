@@ -134,36 +134,47 @@
 			
 			<br/><br/>
 			
-		<h2>Past Requests</h2>
+		<h2>Attended Connactions</h2>
 			
 		<table id="past" class="requests regular_table">
 			
+
+			
+			<thead>
+				<tr>
+					<th>Posted By</th>
+					<th>Activity</th>
+					<th>Date</th>
+					<th>Message</th>
+					<th>Review</th>
+				</tr>
+			</thead>
 		<?php
 			$past = getPastConnactions(getUserID());
 			
 			
-			
-			echo "<thead>";
-				echo "<tr>";
-					echo "<th>User</th>";
-					echo "<th>Activity</th>";
-					echo "<th>Date</th>";
-					echo "<th>Message</th>";
-					echo "<th>Review</th>";
-				echo "</tr>";
-			echo "</thead>";
 			foreach($past as $pc){
 			echo "<tbody>";
 											
 						
-								
-									$attending = getConnactionAttendees(1, getUserID());
-									echo "<tr>";			
-									foreach($attending as $attendee){
-										echo "<td>".getName($attendee[0])."     "."<input id = 'review' type = 'submit' name = 'review[]' value = 'Review this connaction' action = 'post' action = 'review.php'/></td>";
+				echo "<tr>";
+
+
+					echo "<td>".getUserName($pc[1])."</td>";
+					echo "<td>".getConnactionActivity($pc[0])."</td>";
+					echo "<td>".$pc[3]."</td>";
+					echo "<td>".$pc[4]."</td>";
+				if(ReviewedByUser($pc[0],getUserID()) == false){					
+					echo "<td><input id = 'review' type = 'textbox' name = 'reviewMessage' value = 'Review this connaction' action = 'post' action = 'review.php'/><br/><input name = 'review' type = 'radio' value = 1 />Thumbs Up<input name = 'review' type = 'radio' value = 0 />Thumbs Down<br/><input name = 'review' type = 'submit' value = 'Submit Review'/></td>";
+				}
+				else{echo "<td> Review Submitted </td>";}
+				/*$attending = getConnactionAttendees(1, getUserID());
+							
+				foreach($attending as $attendee){
+					echo "<td>".getName($attendee[0])."     "."<input id = 'review' type = 'submit' name = 'review[]' value = 'Review this connaction' action = 'post' action = 'review.php'/></td>";
 										
-									}
-									echo "</tr>";
+				}*/
+				echo "</tr>";
 
 								
 			echo "</tbody>";

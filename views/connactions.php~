@@ -57,7 +57,19 @@
 			</p>
 			<p>Open to joiners | <a class="join" href="#">Ask to join</a></p>					
 		</div><!-- begin tags -->
+		<div class="post-reviews">
+			
+			
+			<?php echo "this shit is working";
+				if(isAttending($connaction_id, $userid)){
+					$attending = getConnactionAttendees($connactionid, $userid);
+					foreach($attending as $attendingUser){
 
+						
+				echo "<p>Review | <a class='review' href='#'>".getUserName($attendingUser)."</a></p>";
+					}
+				}?>					
+		</div>
 		<br/>
 				Tags:
 				<ul class="tags">

@@ -63,12 +63,23 @@
 	
 
 	function getPastConnactions($userid){
-		$query = "select connaction_id from connactions c, connaction_attending ca where ca.user_id = ".$userid." and c.end_time < getdate() and c.connaction_id = ca.connaction_id";
-		$past = mysql_query($query);
-		return $past;
+		$pastcon = array();		
+		$query = "select c.connaction_id, c.user_id, c.activity_id, c.start_time, c.message from connactions c, connaction_attending ca where ca.user_id = ".$userid." and c.end_time < sysdate() and c.connaction_id = ca.connaction_id";
+		$past = mysql_query($query) or die(mysql_error());
+		while($info = mysql_fetch_array($past)){
+			$pastcon[] = $info;
+		}
+		return $pastcon;
 		
 	}
 
+	function reviewedByUser($connactionid, $userid){
+		$query = "select * from reviews where from_user = ".$userid." and connaction_id = ".$connactionid;
+		$result = mysql_query($query);
+		if(mysql_num_rows($result) == 0){return false;}
+		else{return true;}
+	}
+	
 	function getConnactions($n_aID, $option){
 		//The option is whether the ID is network_ID or Activity_ID
 		//0 = Activity_ID, 1 = network_ID
