@@ -20,6 +20,9 @@ SET time_zone = "+00:00";
 -- Database: `xgamings_connactiv`
 --
 
+drop database xgamings_connactiv;
+create database xgamings_connactiv;
+use xgamings_connactiv;
 -- --------------------------------------------------------
 
 --
