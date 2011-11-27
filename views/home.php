@@ -42,7 +42,6 @@
 		});
 
 		$('#messageBox').click(function(){
-		alert('test');
 			$('#restOfBoxes').slideDown();
 		});
 		
