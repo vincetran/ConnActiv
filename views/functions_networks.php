@@ -164,17 +164,13 @@ function getUserUniqueNetworks() {
 	//based on user-inputted text, create the network he/she is looking for and subscribe.
 		$id = createUniqueNetwork($area, $state, $activity);
 		$u_id = getUserID();
-		addUserActivity($u_id, $id);
 		addUserNetwork($u_id, $id);
 		
 	//subscribe
 		$user_acts = getUserActivities();
 		$act_name = getActivityNameFromUnique($u_id);
-		if (!in_array($act_name, $user_acts)) {	//If the user hasn't already subscribed to this activity, add it
-			$query2 = "INSERT INTO user_activities VALUES('".$id."', '".$u_id."', 'NULL', 'NULL', 'NULL', 'NULL')";	
-			$result2 = mysql_query($query2) or die(mysql_error());
-		}
-		
+		if (!in_array($act_name, $user_acts)) //If the user hasn't already subscribed to this activity, add it
+			addUserActivity($id, $u_id);
 	}
 	
 	function addActivity($name) {
