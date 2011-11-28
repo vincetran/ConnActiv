@@ -173,14 +173,14 @@
 										<?php 
 											if($userID != getUserID()){ 
 												if(getApproval($connactionID, getUserID()) == -1){
-													echo "Request Pending!";
+													echo "<span class='request_pending'>Request pending!</span>";
 												}
 												else if(getApproval($connactionID, getUserID()) == 2){
 													echo getApproval($connactionID, getUserID());
-													echo "Request Denied.";
+													echo "<span class='request_denied'>Request denied.</span>";
 												}
 												else if(getApproval($connactionID, getUserID()) == 1){
-													echo "Request Accepted!";
+													echo "<span class='request_accepted'>Request accepted!</span>";
 												}
 												//else if(check cur date and end date){
 												//	$echo "ConnAction Is Over!";
