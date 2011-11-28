@@ -27,7 +27,13 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		$('#user_menu').hide();
 		$('#side').load('sidebar.php');
+		
+		$('#user_login').click(function(e) {
+			e.preventDefault();
+			$('#user_menu').toggle();
+		});
 	});
 </script>
 

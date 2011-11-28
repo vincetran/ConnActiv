@@ -36,14 +36,14 @@
 				type   : 'textarea',
 				select : true,
 				submit : 'Save',
-				cancel : 'cancel',
+				cancel : 'Cancel',
 				tooltip   : "Click to edit..."
 			});
 			
 			$(".editable_textile").editable("http://localhost/ConnActiv/ConnActiv/views/save.php?renderer=textile", {
 				//Use this if you want the html tags to show
 				//If you choose to use this you also need to uncomment some stuff in save.php, but then editable_textarea will not work.
-				indicator : "<img src='http://localhost/ConnActiv/ConnActiv/public/images/indicator.gif'>",
+				indicator : "<img src='../public/images/indicator.gif'>",
 				//loadurl   : "http://localhost/ConnActiv/ConnActiv/views/load.php", //This is suppose to make the html tags disappear. Doesn't work though
 				type      : "textarea",
 				submit    : "Save",
@@ -55,8 +55,6 @@
 			$('.joinExpander').click(function(){
 			$(this).siblings('.expand').toggle();
 			});
-			
-			
 			
 			$('.top_links').removeClass('active');
 			$('#profile').addClass('active');
@@ -73,8 +71,8 @@
 			<table class="alternating regular_table" id="myInfo">
 				<tr>
 					<td>About Me:</td>
-					<td width="300">
-						<div style="width:300px; height:200px; white-space: normal;" class="editable_textarea" id="about_me"><?php echo getAboutMe($userID);?></div>
+					<td width="300" >
+						<div style="width:400px; height:100px; white-space: normal; padding-bottom:30px; padding-right:20px;" class="editable_textarea" id="about_me"><?php echo getAboutMe($userID);?></div>
 					</td>
 				</tr>
 				<tr>
