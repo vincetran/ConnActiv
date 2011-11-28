@@ -117,7 +117,7 @@
 			$string = substr($string, 0, strlen($string)-1);
 
 			$getun = "select unique_network_id from unique_networks where network_id = ".$n_aID." and activity_id in(".$string.")";
-			echo $getun;
+			
 			$stuff = mysql_query($getun);		
 			while($info = mysql_fetch_array($stuff)){
 				$string1 = $string1."'".$info[0]."',";
