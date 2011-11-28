@@ -81,11 +81,14 @@
 		$query = "select unique_network_id from user_networks where user_id = ".$userid;
 		$result = mysql_query($query);
 		while($info = mysql_fetch_array($result)){
-				
-			
-			
+			$unique_network_id = $info[0];
+			$result1 = mysql_query("select * from connactions where unique_network_id = ".$unique_network_id);
+			while($info1 = mysql_fetch_array($result1)){
+				$connactions[] = $info1;
+			}
 			
 		}
+		return $connactions;
 	}
 	function reviewedByUser($connactionid, $userid){
 		$query = "select * from reviews where from_user = ".$userid." and connaction_id = ".$connactionid;
