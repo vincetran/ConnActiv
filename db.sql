@@ -81,8 +81,7 @@ CREATE TABLE IF NOT EXISTS `connactions` (
   `START_TIME` datetime DEFAULT NULL,
   `MESSAGE` varchar(4000) DEFAULT NULL,
   `END_TIME` datetime DEFAULT NULL,
-  `ACTIVITY_ID` int(11) NOT NULL,
-  `NETWORK_ID` int(11) NOT NULL,
+  `UNIQUE_NETWORK_ID` int(11) NOT NULL,
   `IS_PRIVATE` int(11) DEFAULT '0',
   PRIMARY KEY (`CONNACTION_ID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
@@ -92,10 +91,10 @@ CREATE TABLE IF NOT EXISTS `connactions` (
 --
 
 INSERT INTO `connactions` (`CONNACTION_ID`, `POST_TIME`, `USER_ID`, `LOCATION`, `START_TIME`, `MESSAGE`, `END_TIME`, `ACTIVITY_ID`, `NETWORK_ID`, `IS_PRIVATE`) VALUES
-(4, '2011-11-08', 1, 'Oakland (atwood and bates)', '2011-11-08 12:00:00', 'Come Running with me!', '2011-11-08 13:00:00', 3, 1, 0),
-(5, '2011-11-08', 1, 'Forbes Ave. at Sennot Square', '2011-11-20 11:59:00', 'Bring a hat!', '2011-11-20 13:00:00', 3, 1, 0),
-(6, '2011-11-08', 1, 'Bigelow Blvd and Fith ave', '2011-11-28 10:10:00', 'Near the Union', '2011-11-28 11:11:00', 3, 1, 0),
-(11, '2011-11-26', 4, 'Cathedral Lawn', '2011-11-24 12:00:00', 'Turkey Run!', '2011-11-24 12:30:00', 3, 1, 0);
+(4, '2011-11-08', 1, 'Oakland (atwood and bates)', '2011-11-08 12:00:00', 'Come Running with me!', '2011-11-08 13:00:00', 1, 0),
+(5, '2011-11-08', 1, 'Forbes Ave. at Sennot Square', '2011-11-20 11:59:00', 'Bring a hat!', '2011-11-20 13:00:00', 1, 0),
+(6, '2011-11-08', 1, 'Bigelow Blvd and Fith ave', '2011-11-28 10:10:00', 'Near the Union', '2011-11-28 11:11:00', 1, 0),
+(11, '2011-11-26', 4, 'Cathedral Lawn', '2011-11-24 12:00:00', 'Turkey Run!', '2011-11-24 12:30:00', 1, 0);
 
 -- --------------------------------------------------------
 

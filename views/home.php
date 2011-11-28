@@ -125,6 +125,8 @@
 				<div class="main feeds-container">
 					<ul class="feeds">
 						<li id="link_feeds_all" class="link_stream"><a href="#">All</a></li>
+						
+						
 						<?
 						$networkNames = getNetworkNames();
 						foreach ($networkNames as $network): ?>
@@ -132,8 +134,11 @@
 							<? endforeach; ?>
 					</ul>
 						
+				
+
+
 				 <? $networkNames = getNetworkNames();
-						foreach ($networkNames as $network) { ?> 
+					foreach ($networkNames as $network) { ?> 
 					
 					<div class="stream" id="stream_<? echo $network; ?>"> 
 					
@@ -149,9 +154,14 @@
 						$startTime = $post[4];
 						$message = $post[5];
 						$endTime = $post[6];
-						$activityID = $post[7];
-						$networkID = $post[8];
-						$isPrivate = $post[9];
+						$unique_network_ID = $post[7];
+						$isPrivate = $post[8];
+						$act = mysql_query("select activity_id from unique_networks where unique_network_id = ".$unique_network_ID);
+						$net = mysql_query("select network_id from unique_networks where unique_network_id = ".$unique_network_ID);
+						$net1 = mysql_fetch_array($net);
+						$act1 = mysql_fetch_array($act);
+						$networkID = $net1[0];
+						$activityID = $act1[0];
 					?>					
 						<div class="post"> <!-- begin post -->
 							<div class="post-author">

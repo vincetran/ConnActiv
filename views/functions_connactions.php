@@ -21,14 +21,17 @@
 		$today = date("Y-m-d");
 		$startTime = $start." ".$_POST['startHour'].":".$_POST['startMin'].":00";
 		$endTime = $end." ".$_POST['endHour'].":".$_POST['endMin'].":00";
+		$getun = "select unique_network_id from unique_networks where activity_id = ".$_POST['activity']." and network_id = ".$_POST['network'];
 		
+		$stuff = mysql_query($getun);		
+		$un = mysql_fetch_array($stuff);
+		$unID = $un[0];		
 		
-		$query = "INSERT INTO connactions(POST_TIME, USER_ID, LOCATION, START_TIME, MESSAGE, END_TIME, ACTIVITY_ID, NETWORK_ID, IS_PRIVATE)
-			VALUES ('".$today."', '".getUserID()."', '".$_POST['location']."', '".$startTime."', '".$_POST['message']."', '".$endTime."'
-					, '".$_POST['activity']."', '".$_POST['network']."', '".$_POST['private']."')";
+		$query = "INSERT INTO connactions(POST_TIME, USER_ID, LOCATION, START_TIME, MESSAGE, END_TIME, UNIQUE_NETWORK_ID, IS_PRIVATE)
+			VALUES ('".$today."', '".getUserID()."', '".$_POST['location']."', '".$startTime."', '".$_POST['message']."', '".$endTime."', '".$unID."', '".$_POST['private']."')";
 					
 		$insert = mysql_query($query) or die(mysql_error());
-		header("Location: ../index.html");
+		
 	}
 	
 	/*		///This function was replaced by the getConnactions functions
@@ -73,6 +76,17 @@
 		
 	}
 
+
+	function getAllConnactions($userid){
+		$query = "select unique_network_id from user_networks where user_id = ".$userid;
+		$result = mysql_query($query);
+		while($info = mysql_fetch_array($result)){
+				
+			
+			
+			
+		}
+	}
 	function reviewedByUser($connactionid, $userid){
 		$query = "select * from reviews where from_user = ".$userid." and connaction_id = ".$connactionid;
 		$result = mysql_query($query);
@@ -98,7 +112,13 @@
 		}
 		else if($option == 1){
 			//$resourceID = getResourceIDs("connactions", "network_id", $n_aID);
-			$result = mysql_query("SELECT * FROM connactions WHERE network_id = '$n_aID' ORDER BY connaction_id DESC")or die(mysql_error()); //returns true if you do not assign
+			$getun = "select unique_netowrk_id from unique_networks where network_id = ".$n_aID;
+			$stuff = mysql_query($getun);		
+			while($info = mysql_fetch_array($stuff)){
+				$string = $string.$info;
+			}
+			var_dump($string);
+			$result = mysql_query("SELECT * FROM connactions WHERE unique_network_id in ('4','5','6') ORDER BY connaction_id DESC")or die(mysql_error()); //returns true if you do not assign
 
 			while($info = mysql_fetch_array($result)){
 				$connactionUsers[] = $info;
