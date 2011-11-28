@@ -31,4 +31,4 @@ if ('textile' == $renderer) {
     // What is echoed back will be shown in webpage after editing.
     print $_POST['value'];
 //}
-
+?>

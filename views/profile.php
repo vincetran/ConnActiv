@@ -35,7 +35,7 @@
 			<script type="text/javascript">
 		$(function() {
 		
-			$(".editable_textarea").editable("http://localhost/ConnActiv/ConnActiv/views/save.php", { 
+			$(".editable_textarea").editable("http://localhost/ConnActiv/views/save.php", { 
 				indicator : "<img src='http://localhost/ConnActiv/ConnActiv/public/images/indicator.gif'>",
 				type   : 'textarea',
 				select : true,
@@ -44,7 +44,7 @@
 				tooltip   : "Click to edit..."
 			});
 			
-			$(".editable_textile").editable("http://localhost/ConnActiv/ConnActiv/views/save.php?renderer=textile", {
+			$(".editable_textile").editable("http://localhost/ConnActiv/views/save.php?renderer=textile", {
 				//Use this if you want the html tags to show
 				//If you choose to use this you also need to uncomment some stuff in save.php, but then editable_textarea will not work.
 				indicator : "<img src='../public/images/indicator.gif'>",
