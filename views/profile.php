@@ -4,11 +4,14 @@
 	if(cookieExists())
 	//if there is a username cookie, we need to check it against our password cookie
 	{ 
+		
 		if (!validCookie()) {
 			//Cookie doesn't match password go to index";
 			header("Location: ../index.html"); 
 		}
 		else{
+			
+			var_dump($_FILES);
 			//Cookie matches, show what they want.";
 			
 			//if (name is clicked)
@@ -18,9 +21,13 @@
 				//viewing our profile
 				$userID = getUserID();
 				
-			if (isset($_POST['saveInfo'])) 
-				saveInfo();
+			if (isset($_POST['saveInfo'])){
+				saveInfo();}
+			if(isset($_POST['userfile'])){
+				upload_file($_FILES);
+			}
 			?>
+			
 			<script type="text/javascript">
 		$(function() {
 		
@@ -94,11 +101,24 @@
 						</div>
 					</td>
 				</tr>
+				</form>
+				<tr>
+					<td>Profile Picture:</td>
+					<td>
+						
+						<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
+ 							  <p>
+    							  <label for="file">Select a file:</label> <input type="file" name="userfile" id="file"> <br />
+    						  <button>Upload File</button>
+						   <p>
+						</form>
+					</td>
+				</tr>
 				<tr>
 					<td colspan="2">
 				</tr>
 			</table>
-			</form>
+			
 			</div>
 			<?php
 		}
