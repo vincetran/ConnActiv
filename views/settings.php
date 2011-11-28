@@ -42,13 +42,24 @@
 		}
 		
 			?>
-			<script type="text/javascript">
+	<script type="text/javascript">
 		$(function() {
 		
 				$('.top_links').removeClass('active');
 				$('#settings').addClass('active');
 						
-					 $('#addNetwork').dataTable( {
+				 $('#addNetwork').dataTable( {
+					"aaSorting": [[ 0, "asc" ]],
+					"bPaginate": false,
+					"bLengthChange": false,
+					"bFilter": true,
+					"bSort": true,
+					"bInfo": false,
+					"bAutoWidth": false,
+					"aoColumns": [ null, null, { "bSortable": false }]
+				 });
+				 
+				  $('#userNetworks').dataTable( {
 						"aaSorting": [[ 0, "asc" ]],
 						"bPaginate": false,
 						"bLengthChange": false,
@@ -56,16 +67,16 @@
 						"bSort": true,
 						"bInfo": false,
 						"bAutoWidth": false,
-						"aoColumns": [ null, null, { "bSortable": false }]
+					  "aoColumns": [ null, null, { "bSortable": false }, { "bSortable": false }	]
 					 });
-					 
-					 $('#expandNetworks').click(function(){
-						$('#allNetworks').toggle();   		  		 	   		 
-					 });
-					 
-					 $('#expandAddNewNetwork').click(function() {
-						$('#hiddenNewNetwork').toggle();   		 
-					 });
+				 
+				 $('#expandNetworks').click(function(){
+					$('#allNetworks').toggle();   		  		 	   		 
+				 });
+				 
+				 $('#expandAddNewNetwork').click(function() {
+					$('#hiddenNewNetwork').toggle();   		 
+				 });
 					 
    		});
    		
@@ -76,13 +87,16 @@
 			<h2>Your subscribed networks</h2>
 			
 			<form id="unsubNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
-			<table class="settings regular_table">
+			<table id="userNetworks" class="alternating regular_table">
+				<thead>
 				<tr>
 					<th>Area</th>
 					<th>Activity</th>
 					<th>Unsubscribe</th>
 					<th>Favorite</th>
 				</tr>
+				</thead>
+				<tbody>
 			<?
 				$networks = getUserUniqueNetworks();
 				$favs = getFavoriteIDs();
@@ -97,6 +111,7 @@
 					} //end foreach
 			} else echo "<tr><td colspan='4'>You aren't subscribed to any networks yet!<br/>Click below to get started.</td></tr>";
 			?>
+			</tbody>
 			</table>
 			<div class="below_table">
 				<input style="float:right; margin-left:10px; margin-right:20px" type="submit" name="doFavorite" value="Favorite"/>

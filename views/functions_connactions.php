@@ -8,13 +8,6 @@
 
 	function postConnaction(){
 	
-	/*
-	**
-	* HEY ROBBBBBER ROB can you fix this so it takes the date the way datepicker inputs it? KCOOOOOL -Kim
-	* Done - Rob
-	**
-	*/
-	
 		//This function will post the connaction to the database!
 		$start = myDateParser($_POST['startDate']);
 		$end = myDateParser($_POST['endDate']);

@@ -57,15 +57,15 @@
 		<h3>People asking to join you</h3>
 			
 			<table id="incoming" class="requests regular_table">
-			<thead>
+			<thead class="reqHeader">
 				<tr>
-					<th id="reqHeader">User</th>
-					<th id="reqHeader">Activity</th>
-					<th id="reqHeader">Location</th>
-					<th id="reqHeader">ConnAction Posted Date</th>
-					<th id="reqHeader">ConnAction Date</th>
-					<th id="reqHeader">Request Date</th>
-					<th id="reqHeader">Message</th>
+					<th>User</th>
+					<th>Activity</th>
+					<th>Location</th>
+					<th>ConnAction Post Date</th>
+					<th>ConnAction Date</th>
+					<th>Request Date</th>
+					<th>Message</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -81,7 +81,7 @@
 							$approved = $incoming[4];
 							$date = date_parse($incoming[5]); ?>
 				
-							<tr> <!-- TODO: make these editable and auto-populating -->
+							<tr> 
 								<td><?php echo getUserName($fromUser); ?></td>
 								<td><?php echo getConnactionActivity($connactionID); ?></td>
 								<td><?php echo getConnactionNetwork($connactionID); ?></td>
@@ -103,15 +103,15 @@
 		<h3>Activities you've asked to join</h3>
 			
 			<table id="pending" class="requests regular_table">
-			<thead>
+			<thead class="reqHeader">
 				<tr>
-					<th id="reqHeader">User</th>
-					<th id="reqHeader">Activity</th>
-					<th id="reqHeader">Location</th>
-					<th id="reqHeader">ConnAction Posted Date</th>
-					<th id="reqHeader">ConnAction Date</th>
-					<th id="reqHeader">Request Date</th>
-					<th id="reqHeader">Message</th>
+					<th>User</th>
+					<th>Activity</th>
+					<th>Location</th>
+					<th>ConnAction Post Date</th>
+					<th>ConnAction Date</th>
+					<th>Request Date</th>
+					<th>Message</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -151,13 +151,13 @@
 			
 
 			
-			<thead>
+			<thead class="reqHeader">
 				<tr>
-					<th id="reqHeader">Posted By</th>
-					<th id="reqHeader">Activity</th>
-					<th id="reqHeader">Date</th>
-					<th id="reqHeader">Message</th>
-					<th id="reqHeader">Review</th>
+					<th>Posted By</th>
+					<th>Activity</th>
+					<th>Date</th>
+					<th>Message</th>
+					<th>Review</th>
 				</tr>
 			</thead>
 		<?php

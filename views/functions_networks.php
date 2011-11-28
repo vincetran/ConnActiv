@@ -195,7 +195,7 @@ function getUserUniqueNetworks() {
 	//based on user-inputted text, create the network he/she is looking for and subscribe.
 		$id = createUniqueNetwork($area, $state, $activity);
 		$user_id = getUserID();
-		subscribeNetworks($id);
+		subscribeNetwork($id);
 	}
 	
 	function addActivity($name) {
