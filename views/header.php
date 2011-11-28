@@ -6,22 +6,20 @@
 <title>ConnActiv | The place for activ people.</title>
 
 <link rel="shortcut icon" type="image/x-icon" href="../public/images/favicon.ico">
-
-
-<script type="text/javascript" src="../js/jquery.min.js"></script>
 <link type="text/css" rel="stylesheet" href="../styles/defaults.css"/>
-
 <link type="text/css" rel="stylesheet/less" href="../styles/style.less"/>
 <link type="text/css" rel="stylesheet/less" href="../styles/posts.less"/>
 <link type="text/css" rel="stylesheet/less" href="../styles/sidebar.less"/>
 <link type="text/css" rel="stylesheet" href="../styles/demo_table.css"/>
 <link type="text/css" rel="stylesheet" href="../styles/validationEngine.jquery.css" />
 
+<script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/less.min.js"></script>
 <script type="text/javascript" src="../js/jquery.jeditable.mini.js"></script>
 <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../js/jquery.validationEngine-en.js" charset="utf-8"></script>
 <script type="text/javascript" src="../js/jquery.validationEngine.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 
 <link href='http://fonts.googleapis.com/css?family=Reenie+Beanie' rel='stylesheet' type='text/css'>
 

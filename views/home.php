@@ -46,8 +46,8 @@
 			$('#restOfBoxes').slideDown();
 		});
 		
-		$('#startDate').datepicker();
-		$('#endDate').datepicker();
+		$('#startDate').datepicker({ showButtonPanel: true, selectOtherMonths: true, changeMonth: true, changeYear: true, minDate: new Date(0) });
+		$('#endDate').datepicker({ showButtonPanel: true, selectOtherMonths: true, changeMonth: true, changeYear: true, minDate: new Date(0) });
 	});
 	</script>
 	
