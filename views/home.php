@@ -127,14 +127,15 @@
 						<li id="link_feeds_all" class="link_stream"><a href="#">All</a></li>
 						
 						
+
+
+
 						<?
 						$networkNames = getNetworkNames();
 						foreach ($networkNames as $network): ?>
 							<li id="<? echo $network; ?>" class="link_stream"><a href="#"><? echo $network; ?></a></li>
 							<? endforeach; ?>
 					</ul>
-						
-				
 
 
 				 <? $networkNames = getNetworkNames();
