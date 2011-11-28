@@ -1,10 +1,4 @@
-.error {
-    font: normal 10px arial;
-    padding: 3px;
-    margin: 3px;
-    background-color: #ffc;
-    border: 1px solid #c00;
-}
+
 
 /* =============================================================================
    HTML5 display definitions
@@ -37,7 +31,7 @@ body, button, input, select, textarea { font-family: sans-serif; color: #222; }
  * Also: hot pink! (or customize the background color to match your design)
  */
 
-::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
+::-moz-selection { background: #5CBD00; color: #fff; text-shadow: none; }
 ::selection { background: #5CBD00; color: #fff; text-shadow: none; }
 
 
