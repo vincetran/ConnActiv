@@ -28,7 +28,6 @@
 					, '".$_POST['activity']."', '".$_POST['network']."', '".$_POST['private']."')";
 					
 		$insert = mysql_query($query) or die(mysql_error());
-		header("Location: ../index.html");
 	}
 	
 	/*		///This function was replaced by the getConnactions functions
