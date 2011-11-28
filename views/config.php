@@ -9,6 +9,7 @@ include("functions_connactions.php");
 include("functions_recommendations.php");
 include("functions_networks.php");
 include("functions_join_requests.php");
+include("upload_file.php");
 
 	function cookieExists(){
 		//Check to see if user ID cookie exists
