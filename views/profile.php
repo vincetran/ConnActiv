@@ -64,8 +64,9 @@
 			$('#profile').addClass('active');
 		});
 		
-		$('#DOB').datepicker();
-	
+		$(document).ready(function(){
+			$('#DOB').datepicker({ showButtonPanel: true, selectOtherMonths: true, changeMonth: true, changeYear: true, minDate: new Date(0) });
+		});
 			</script>
 			
 			

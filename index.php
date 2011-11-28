@@ -55,6 +55,17 @@ $(function() {
 	$('#registerForm').validationEngine();
 	$('#signinForm').validationEngine();
 	
+	$('#subscribeTable').dataTable({
+        "aaSorting": [[ 0, "desc" ]],
+        "bPaginate": false,
+				"bLengthChange": false,
+				"bFilter": false,
+				"bSort": true,
+				"bInfo": false,
+				"bAutoWidth": true,
+				"aoColumns": [ null, null, { "bSortable": false }]
+				});
+	
 	});
 </script>
 
@@ -73,19 +84,17 @@ $(function() {
 	</div>
 	<br/>
 	
-
 	<div id="welcomeForm">
 	
 		<div id="credentials">
-			<br/>
 			<form id="signinForm" action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
 			<table>
 				<tr>
-					<th><label>Email:</label></th>
+					<th id="formHeader"><label>Email:</label></th>
 					<td><input id="username"  type="text" name="username" maxlength="25" class="validate[required,custom[email]]"/><br/><br/></td>
 				</tr>
 				<tr>
-					<th>Password:</th>
+					<th id="formHeader">Password:</th>
 					<td><input id="password" type="password" name="pass" maxlength="100" class="validate[required]"/></td>
 				</tr>
 				<tr><td colspan="2">&nbsp;</td></tr>
@@ -101,74 +110,71 @@ $(function() {
 			<form id="registerForm" action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
 			<table>
 				<tr>
-					<th>Email (required):</th>
-					<td><input id="username"  type="text" name="username" maxlength="25" class="validate[required,custom[email]]"/><br/><br/></td>
+					<th id="formHeader">Email*:</th>
+					<td><input id="username"  type="text" name="username" maxlength="25" class="validate[required,custom[email]]"/><br/></td>
 				</tr>
 				<tr>
-					<th>First name:</th>
-					<td><input id="firstName"  type="text" name="firstName" maxlength="20" class="validate[required]"/><br/><br/></td>
+					<th id="formHeader">First name*:</th>
+					<td><input id="firstName"  type="text" name="firstName" maxlength="20" class="validate[required]"/><br/></td>
 				</tr>
 				<tr>
-					<th>Last name:</th>
+					<th id="formHeader">Last name*:</th>
 					<td><input id="lastName" type="text" name="lastName" maxlength="20" class="validate[required]"/></td>
 				</tr>
 				<tr>
-					<th>Street:</th>
-					<td><input id="street"  type="text" name="street" maxlength="25" /><br/><br/></td>
+					<th id="formHeader">Street:</th>
+					<td><input id="street"  type="text" name="street" maxlength="25" /><br/></td>
 				</tr>
 				<tr>
-					<th>City:</th>
+					<th id="formHeader">City:</th>
 					<td><input id="city" type="text" name="city" maxlength="25" /></td>
 				</tr>
 				<tr>
-					<th>State:</th>
-					<td><input id="state"  type="text" name="state" maxlength="2"/><br/><br/></td>
+					<th id="formHeader">State:</th>
+					<td><input id="state"  type="text" name="state" maxlength="2"/><br/></td>
 				</tr>
 				<tr>
-					<th>Zip:</th>
+					<th id="formHeader">Zip:</th>
 					<td><input id="zip" type="text" name="zip" maxlength="5" /></td>
 				</tr>
 				<tr>
-					<th>Phone:</th>
-					<td><input id="phone"  type="text" name="phone" maxlength="25"/><br/><br/></td>
+					<th id="formHeader">Phone:</th>
+					<td><input id="phone"  type="text" name="phone" maxlength="25"/><br/></td>
 				</tr>
 				<tr>
-					<th>Interests:</th>
+					<th id="formHeader">Interests:</th>
 					<td><input id="interests" type="text" name="interests" maxlength="4000" /></td>
 				</tr>
 				<tr>
-
-					<td>Activities:</td>
-					<table align = left>
-					<?php $activities = mysql_query("select * from activities");
-						while($activities1 = mysql_fetch_array($activities)){
-							echo "<tr><input id='activities'  type='checkbox' name='activities[]' value='".
-							$activities1[1]."' />".$activities1[1]."</tr><br>";
-						}?>
-
-					<th>Activities:</th>
-					<table align="left">
-					<?php $activities = mysql_query("select * from ACTIVITIES");
-						while($activities1 = mysql_fetch_array($activities)){
-							echo "<tr><input id='activities'  type='checkbox' name='activities' value='".
-							$activities1['ACTIVITY_NAME']."' />".$activities1['ACTIVITY_NAME']."</tr></br>";
-						}?>
-
-					</table>
+					<th id="formHeader">Password*:</th>
+					<td><input id="password" type="password" name="password" maxlength="100" class="validate[required]" minlength="6"/><br/></td>
 				</tr>
 				<tr>
-					<th>Password (required):</th>
-					<td><input id="password" type="password" name="password" maxlength="100" class="validate[required]" minlength="6"/></td>
-				</tr>
-				<tr>
-					<th>Confirm Password (required):</th>
+					<th id="formHeader">Confirm Password*:</th>
 					<td><input id="confirm" type="password" name="confirm" maxlength="100" class="validate[required]" equalTo="#password"/></td>
 				</tr>
-				<tr><td colspan="2">&nbsp;</td></tr>
-				<tr>
-					<td colspan="2" align="center"><input type="submit" id="do_register" name="register" value="Get ConnActed!"/></td>
-				</tr>
-			</table>
+				
+				</table>
+				<table style="margin-bottom:10px" class="small requests regular_table" id="subscribeTable">
+						<thead>
+							<tr>
+								<th>Area</th>
+								<th>Activity</th>
+								<th>Subscribe</th>
+							</tr>
+						</thead>
+						<tbody>
+							
+							<? $unique = getAllUniqueNetworks(); //row(unique_network_id, area, state, activity_name).
+									foreach($unique as $un) {
+										echo "<tr><td>". $un[1] .", ". $un[2] ."</td><td>". $un[3] ."</td><td><input type='checkbox' value='".$un[0]."' name='activity[]' /></td></tr>";
+									}
+							?>
+							</tbody>
+						</table><!-- Kim TODO add network capability -->
+					
+					<input type="submit" id="do_register" name="register" value="Get ConnActed!"/>
+					
 			</form>
 		</div>
 		</div> <!-- /welcome_form-->
