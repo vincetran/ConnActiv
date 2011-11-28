@@ -26,10 +26,6 @@
 			$('#stream_' +id).show();
 		});
 
-		$('input.button').click(function() {
-		alert("ConnAction submited to database! If it was to the Oakland network you can view it here: \nhttp://localhost/ConnActiv/views/connactions.php");
-		});
-
 		$('div.post-author').click(function() {
 		auth = $(this).text().trim();
 		alert("STUB: Going to profile of " +auth.toUpperCase());
