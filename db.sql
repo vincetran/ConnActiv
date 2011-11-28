@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 26, 2011 at 07:20 AM
+-- Generation Time: Nov 28, 2011 at 09:35 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -20,9 +20,6 @@ SET time_zone = "+00:00";
 -- Database: `xgamings_connactiv`
 --
 
-drop database xgamings_connactiv;
-create database xgamings_connactiv;
-use xgamings_connactiv;
 -- --------------------------------------------------------
 
 --
@@ -59,14 +56,6 @@ CREATE TABLE IF NOT EXISTS `comments` (
   PRIMARY KEY (`COMMENT_ID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
---
--- Dumping data for table `comments`
---
-
-INSERT INTO `comments` (`COMMENT_ID`, `USER_ID`, `CONNACTION_ID`, `COMMENT`, `COMMENT_DATE`) VALUES
-(1, 1, 1, 'Its too cold to go running', '2011-11-08'),
-(2, 2, 1, 'Oh well, suit yourself', '2011-11-08');
-
 -- --------------------------------------------------------
 
 --
@@ -84,17 +73,14 @@ CREATE TABLE IF NOT EXISTS `connactions` (
   `UNIQUE_NETWORK_ID` int(11) NOT NULL,
   `IS_PRIVATE` int(11) DEFAULT '0',
   PRIMARY KEY (`CONNACTION_ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `connactions`
 --
 
 INSERT INTO `connactions` (`CONNACTION_ID`, `POST_TIME`, `USER_ID`, `LOCATION`, `START_TIME`, `MESSAGE`, `END_TIME`, `UNIQUE_NETWORK_ID`, `IS_PRIVATE`) VALUES
-(4, '2011-11-08', 1, 'Oakland (atwood and bates)', '2011-11-08 12:00:00', 'Come Running with me!', '2011-11-08 13:00:00', 1, 0),
-(5, '2011-11-08', 1, 'Forbes Ave. at Sennot Square', '2011-11-20 11:59:00', 'Bring a hat!', '2011-11-20 13:00:00', 1, 0),
-(6, '2011-11-08', 1, 'Bigelow Blvd and Fith ave', '2011-11-28 10:10:00', 'Near the Union', '2011-11-28 11:11:00', 1, 0),
-(11, '2011-11-26', 4, 'Cathedral Lawn', '2011-11-24 12:00:00', 'Turkey Run!', '2011-11-24 12:30:00', 1, 0);
+(13, '2011-11-28', 11, 'Cathedral lawn', '2011-11-30 12:00:00', 'Getting cold, bring a hat!', '2011-11-30 13:00:00', 3, 0);
 
 -- --------------------------------------------------------
 
@@ -107,13 +93,6 @@ CREATE TABLE IF NOT EXISTS `connaction_attending` (
   `CONNACTION_ID` int(11) NOT NULL,
   PRIMARY KEY (`CONNACTION_ID`,`USER_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `connaction_attending`
---
-
-INSERT INTO `connaction_attending` (`USER_ID`, `CONNACTION_ID`) VALUES
-(1, 1);
 
 -- --------------------------------------------------------
 
@@ -130,14 +109,6 @@ CREATE TABLE IF NOT EXISTS `connaction_requests` (
   `DATE` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`FROM_USER`,`CONNACTION_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `connaction_requests`
---
-
-INSERT INTO `connaction_requests` (`FROM_USER`, `TO_USER`, `CONNACTION_ID`, `MESSAGE`, `APPROVED`, `DATE`) VALUES
-(4, 1, 6, 'test', -1, '2011-11-26 03:56:33' ),
-(4, 1, 5, 'testing', -1, '2011-11-26 03:56:33');
 
 -- --------------------------------------------------------
 
@@ -194,14 +165,6 @@ CREATE TABLE IF NOT EXISTS `friends` (
   PRIMARY KEY (`USER_ID`,`FRIEND_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `friends`
---
-
-INSERT INTO `friends` (`USER_ID`, `FRIEND_ID`) VALUES
-(1, 2),
-(2, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -231,13 +194,6 @@ CREATE TABLE IF NOT EXISTS `messages` (
   PRIMARY KEY (`FROM_USER`,`TO_USER`,`DATE`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `messages`
---
-
-INSERT INTO `messages` (`FROM_USER`, `TO_USER`, `SUBJECT`, `BODY`, `DATE`) VALUES
-(1, 2, 'Running Tomorrow', 'Lets go running around 4pm...', '2011-11-26 03:56:33');
-
 -- --------------------------------------------------------
 
 --
@@ -249,7 +205,7 @@ CREATE TABLE IF NOT EXISTS `networks` (
   `AREA` varchar(25) NOT NULL,
   `STATE` varchar(2) NOT NULL,
   PRIMARY KEY (`NETWORK_ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `networks`
@@ -270,13 +226,6 @@ CREATE TABLE IF NOT EXISTS `preferences` (
   `SECURITY` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`USER_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `preferences`
---
-
-INSERT INTO `preferences` (`USER_ID`, `SECURITY`) VALUES
-(1, 0);
 
 -- --------------------------------------------------------
 
@@ -342,16 +291,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   `DOB` date DEFAULT NULL,
   `GENDER` char(1) DEFAULT NULL,
   PRIMARY KEY (`USER_ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`USER_ID`, `PASSWORD`, `FIRST_NAME`, `LAST_NAME`, `STREET`, `CITY`, `STATE`, `ZIP`, `PHONE`, `INTERESTS`, `PROFILE_PIC`, `email`, `DOB`, `GENDER`) VALUES
-(1, '8f53e82e508c96115551317048cba97e', 'Rob', 'Filippi', '42 Derp Street', 'Pittsburgh', 'PA', 15232, '412-600-0031', 'asdvasdasdcsadc', 'public/images/avatar.png', 'flippi273@gmail.com', '1989-11-28', 'M'),
-(2, 'e46087d5106e99a7bfe8f4bee9ed8aee', 'Dave', 'Johnson', NULL, NULL, NULL, NULL, NULL, NULL, 'public/images/avatar.png', 'mxpxpunk7789@gmail.com', NULL, NULL),
-(4, '8f53e82e508c96115551317048cba97e', 'Amy', 'Reehl', '', 'Oakland', 'PA', 15232, '', 'casdc', 'public/images/avatar.png', 'amy4reehl@gmail.com', NULL, NULL);
+(11, '8f53e82e508c96115551317048cba97e', 'Rob', 'Filippi', '', 'Pittsburgh', 'PA', 15232, '', '', '../public/images/avatar.png', 'flippi273@gmail.com', NULL, NULL),
+(12, '8f53e82e508c96115551317048cba97e', 'Amy', 'Reehl', '', 'Pittsburgh', 'PA', 15232, '', '', '../public/images/avatar.png', 'amy4reehl@gmail.com', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -374,9 +322,10 @@ CREATE TABLE IF NOT EXISTS `user_activities` (
 --
 
 INSERT INTO `user_activities` (`USER_ID`, `ACTIVITY_ID`, `LOW_LEVEL`, `HIGH_LEVEL`, `PREFERRED`, `OWN_LEVEL`) VALUES
-(1, 3, 2, 5, 3, 3),
-(2, 3, 2, 5, 4, 4),
-(4, 3, 0, 0, 0, 0);
+(11, 3, NULL, NULL, NULL, NULL),
+(11, 1, NULL, NULL, NULL, NULL),
+(12, 3, NULL, NULL, NULL, NULL),
+(12, 1, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -395,12 +344,12 @@ CREATE TABLE IF NOT EXISTS `user_networks` (
 --
 
 INSERT INTO `user_networks` (`USER_ID`, `UNIQUE_NETWORK_ID`) VALUES
-(1, 1),
-(1, 2),
-(1, 3),
-(1, 6),
-(2, 6),
-(4, 3);
+(11, 1),
+(11, 3),
+(11, 6),
+(12, 1),
+(12, 3),
+(12, 6);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

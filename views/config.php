@@ -98,7 +98,7 @@ include("upload_file.php");
 			
 				if ($_POST['city'] && $_POST['state']) {
 					//If the network doesn't already exist, add it to the networks table.
-					$query = sprintf("SELECT network_id FROM networks WHERE area = %s AND state = %s", $_POST['city'], $_POST['state']);
+					$query = sprintf("SELECT network_id FROM networks WHERE area = '%s' AND state = '%s'", $_POST['city'], $_POST['state']);
 					$checkNetwork = mysql_query($query) or die(mysql_error());				
 					$checkNetwork1 = mysql_fetch_array($checkNetwork);
 					$networkid = (int)$checkNetwork1[0];
