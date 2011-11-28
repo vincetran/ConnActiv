@@ -24,7 +24,7 @@
 			if (isset($_POST['saveInfo'])){
 				saveInfo();}
 			//upload the file and set the users profile pic.			
-			if(isset($_FILES)){
+			if(isset($_POST['fileupload'])){
 				upload_file($_FILES, getUserID());
 				$query = "update users set profile_pic = 'profile_pics/".getUserID()."' where user_id = ".getUserID();
 				mysql_query($query);
@@ -113,6 +113,7 @@
 						<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
  							  <p>
     							  <label for="file">Select a file:</label> <input type="file" name="userfile" id="file"> <br />
+							<input type = 'hidden' name = 'fileupload' />
     						  <button>Upload File</button>
 						   <p>
 						</form>
