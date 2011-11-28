@@ -58,13 +58,13 @@
 			<table id="incoming" class="requests regular_table">
 			<thead>
 				<tr>
-					<th>User</th>
-					<th>Activity</th>
-					<th>Location</th>
-					<th>ConnAction Posted Date</th>
-					<th>ConnAction Date</th>
-					<th>Request Date</th>
-					<th>Message</th>
+					<th id="reqHeader">User</th>
+					<th id="reqHeader">Activity</th>
+					<th id="reqHeader">Location</th>
+					<th id="reqHeader">ConnAction Posted Date</th>
+					<th id="reqHeader">ConnAction Date</th>
+					<th id="reqHeader">Request Date</th>
+					<th id="reqHeader">Message</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -104,13 +104,13 @@
 			<table id="pending" class="requests regular_table">
 			<thead>
 				<tr>
-					<th>User</th>
-					<th>Activity</th>
-					<th>Location</th>
-					<th>ConnAction Posted Date</th>
-					<th>ConnAction Date</th>
-					<th>Request Date</th>
-					<th>Message</th>
+					<th id="reqHeader">User</th>
+					<th id="reqHeader">Activity</th>
+					<th id="reqHeader">Location</th>
+					<th id="reqHeader">ConnAction Posted Date</th>
+					<th id="reqHeader">ConnAction Date</th>
+					<th id="reqHeader">Request Date</th>
+					<th id="reqHeader">Message</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -152,11 +152,11 @@
 			
 			<thead>
 				<tr>
-					<th>Posted By</th>
-					<th>Activity</th>
-					<th>Date</th>
-					<th>Message</th>
-					<th>Review</th>
+					<th id="reqHeader">Posted By</th>
+					<th id="reqHeader">Activity</th>
+					<th id="reqHeader">Date</th>
+					<th id="reqHeader">Message</th>
+					<th id="reqHeader">Review</th>
 				</tr>
 			</thead>
 		<?php

@@ -31,7 +31,7 @@
 			VALUES ('".$today."', '".getUserID()."', '".$_POST['location']."', '".$startTime."', '".$_POST['message']."', '".$endTime."', '".$unID."', '".$_POST['private']."')";
 					
 		$insert = mysql_query($query) or die(mysql_error());
-		
+
 	}
 	
 	/*		///This function was replaced by the getConnactions functions

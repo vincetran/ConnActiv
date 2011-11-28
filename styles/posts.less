@@ -1,5 +1,5 @@
 @light: #c7c7c7;
-@darkgreen: 004a1e;
+@darkgreen: #004a1e;
 @green: #5CBD00;
 @dark: #555;
 @ghostwhite: ghostWhite;
@@ -34,6 +34,9 @@ div.post-author {
 	padding: 15px;
 	font-weight: bold;
 	.clickable;
+	max-width: 80px;
+	max-height: 80px;
+	overflow: hidden;
 }
 
 div.post-body {
@@ -117,4 +120,16 @@ textarea.small {
 
 .joinExpander {
 	text-decoration: underline;
+}
+
+span.request_pending {
+	color: @green;
+}
+
+span.request_denied {
+ 	color: #c00;
+}
+
+span.request_accepted {
+	color: @green;
 }

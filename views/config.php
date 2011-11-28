@@ -50,7 +50,7 @@ include("upload_file.php");
 		//Gives error if user dosen't exist
 		$check2 = mysql_num_rows($check);
 		if ($check2 == 0) {
-			die('Sorry, that user does not exist in our database. Why don\'t you <a href="index.php">register?</a>');
+			echo '<div class="error">Sorry, that user does not exist in our database. Why don\'t you register?</div>';
 		}
 		while($info = mysql_fetch_array( $check )) 	
 		{
@@ -59,7 +59,7 @@ include("upload_file.php");
 			$_POST['pass'] = md5($_POST['pass']);
 			//gives error if the password is wrong
 			if ($_POST['pass'] != $info['PASSWORD']) {
-				die('Incorrect password, please try again.');
+				echo '<div class="error">Incorrect password, please try again.</div>';
 			}
 			else { 
 			// if login is ok then we add a cookie 
@@ -76,7 +76,7 @@ include("upload_file.php");
 	//This function registers the user when they press the register button
 	//check to make sure the required fields were filled in.
 		if(!$_POST['username'] || !$_POST['password'] || !$_POST['confirm']) {
-			die('You did not fill in a required field. Required fields include: email, password, and confirm password.');
+			echo '<div class="error">You did not fill in a required field. Required fields include: email, password, and confirm password.</div>';
 		}
 		//check to make sure the email is not already registered.
 		$check = mysql_query("SELECT * FROM users WHERE email = '".$_POST['username']."'")or die(mysql_error());
@@ -90,7 +90,7 @@ include("upload_file.php");
 				//security
 							
 				//insert information into users tables.
-				$query = "Insert into users(email,first_Name, last_Name, Street, city, state, zip, phone, interests, password) values('".$_POST['username']."','".$_POST['firstName']."','".$_POST['lastName']."','".$_POST['street']."','".$_POST['city']."','".$_POST['state']."','".$_POST['zip']."','".$_POST['phone']."','".$_POST['interests']."','".md5($_POST['password'])."')";
+				$query = "Insert into users(email,first_Name, last_Name, Street, city, state, zip, phone, interests, profile_pic, password) values('".$_POST['username']."','".$_POST['firstName']."','".$_POST['lastName']."','".$_POST['street']."','".$_POST['city']."','".$_POST['state']."','".$_POST['zip']."','".$_POST['phone']."','".$_POST['interests']."','../public/images/avatar.png','".md5($_POST['password'])."')";
 				$insert = mysql_query($query) or die(mysql_error());
 				$id = mysql_query("select max(user_id) from users");
 				$id1 = mysql_fetch_array($id);
@@ -127,7 +127,7 @@ include("upload_file.php");
 		}
 		//if the email is already registered then display message
 		else{
-			die('This email has already been registered.');
+			echo '<div class="error">This email has already been registered.</div>';
 		}
 	}
 
