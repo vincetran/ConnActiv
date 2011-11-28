@@ -87,7 +87,7 @@
 			<h2>Your subscribed networks</h2>
 			
 			<form id="unsubNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
-			<table id="userNetworks" class="regular_table">
+			<table id="userNetworks" class="alternating regular_table">
 				<thead>
 				<tr>
 					<th>Area</th>
