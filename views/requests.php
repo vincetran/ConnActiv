@@ -2,6 +2,7 @@
 	include("header.php");
 
 	if(cookieExists() && validCookie()) {
+	var_dump($_POST);
 	if(isset($_POST['review'])){
 		if($_POST['review'][4] == 'on'){$anonymous = 1;} else{$anonymous = 0;}
 		$query = "insert into reviews values(".$_POST['review'][2].", ".getUserID().", ".$anonymous.", ".$_POST['review'][1].", ".$_POST['review'][3].", sysdate(), '".$_POST['review'][0]."')";
@@ -179,7 +180,7 @@
 					echo "<input id = 'review' type = 'textbox' name = 'review[]' placeholder='Review this ConnAction	'/><br/>";					
 					echo "<input type = 'hidden' name = 'review[]' value = $pc[0] />";
 					echo "<input type = 'hidden' name = 'review[]' value = $pc[1] />";
-					echo "<input id = 'review' name = 'review[]' type = 'radio' value = 1 />Thumbs Up<input name = 'review' type = 'radio' value = 0 />Thumbs Down<br/>";
+					echo "<input id = 'review' name = 'review[]' type = 'radio' value = 1 />Thumbs Up<input name = 'review[]' type = 'radio' value = 0 />Thumbs Down<br/>";
 					echo "<input id = 'review' name = 'review[]' type = 'checkbox'/>Anonymous";		
 					echo "<input id = 'review' name = 'review[]' type = 'submit' value = 'Submit Review'/>";
 					

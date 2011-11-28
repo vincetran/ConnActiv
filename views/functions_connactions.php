@@ -67,7 +67,7 @@
 
 	function getPastConnactions($userid){
 		$pastcon = array();		
-		$query = "select c.connaction_id, c.user_id, c.activity_id, c.start_time, c.message from connactions c, connaction_attending ca where ca.user_id = ".$userid." and c.end_time < sysdate() and c.connaction_id = ca.connaction_id";
+		$query = "select c.connaction_id, c.user_id, un.activity_id, c.start_time, c.message from connactions c, connaction_attending ca, unique_networks un where ca.user_id = ".$userid." and c.end_time < sysdate() and c.connaction_id = ca.connaction_id and un.unique_network_id = c.unique_network_id" ;
 		$past = mysql_query($query) or die(mysql_error());
 		while($info = mysql_fetch_array($past)){
 			$pastcon[] = $info;
@@ -115,13 +115,24 @@
 		}
 		else if($option == 1){
 			//$resourceID = getResourceIDs("connactions", "network_id", $n_aID);
-			$getun = "select unique_netowrk_id from unique_networks where network_id = ".$n_aID;
+			$getsubscract = "select distinct ua.activity_id from user_activities ua, user_networks usn, unique_networks un where ua.user_id = ".getUserID()." and usn.user_id = ".getUserID()." and un.network_id = ".$n_aID." and usn.unique_network_id = un.unique_network_id";
+			
+			$stuff = mysql_query($getsubscract);		
+			while($info = mysql_fetch_array($stuff)){
+				$string = $string."'".$info[0]."',";
+			}			
+			$string = substr($string, 0, strlen($string)-1);
+
+			$getun = "select unique_network_id from unique_networks where network_id = ".$n_aID." and activity_id in(".$string.")";
+			echo $getun;
 			$stuff = mysql_query($getun);		
 			while($info = mysql_fetch_array($stuff)){
-				$string = $string.$info;
+				$string1 = $string1."'".$info[0]."',";
 			}
-			var_dump($string);
-			$result = mysql_query("SELECT * FROM connactions WHERE unique_network_id in ('4','5','6') ORDER BY connaction_id DESC")or die(mysql_error()); //returns true if you do not assign
+			$string1 = substr($string1, 0, strlen($string1)-1);
+			$query = "SELECT * FROM connactions WHERE unique_network_id in (".$string1.") ORDER BY connaction_id DESC";
+			
+			$result = mysql_query($query)or die(mysql_error()); //returns true if you do not assign
 
 			while($info = mysql_fetch_array($result)){
 				$connactionUsers[] = $info;
@@ -135,7 +146,8 @@
 	function getConnactionActivity($connactionID){
 		//This function will return the activity of connaction
 		$activityID = getDatabaseInfo("connactions", "connaction_id", $connactionID);
-		$activity = getDatabaseInfo("activities", "activity_id", $activityID['ACTIVITY_ID']);	
+		$act = getDatabaseInfo("unique_networks", "unique_network_id", $activityID['UNIQUE_NETWORK_ID']);
+		$activity = getDatabaseInfo("activities", "activity_id", $act['ACTIVITY_ID']);	
 		$activityName = $activity['ACTIVITY_NAME'];
 		
 		return $activityName;
@@ -143,7 +155,8 @@
 	function getConnactionNetwork($connactionID){
 		//This function will return the network of connaction
 		$networkID = getDatabaseInfo("connactions", "connaction_id", $connactionID);
-		$network = getDatabaseInfo("networks", "network_id", $networkID['NETWORK_ID']);	
+		$net = getDatabaseInfo("unique_networks", "unique_network_id", $networkID['UNIQUE_NETWORK_ID']);
+		$network = getDatabaseInfo("networks", "network_id", $net['NETWORK_ID']);	
 		$networkName = $network['AREA'];
 		
 		return $networkName;

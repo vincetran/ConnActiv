@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `connactions` (
 -- Dumping data for table `connactions`
 --
 
-INSERT INTO `connactions` (`CONNACTION_ID`, `POST_TIME`, `USER_ID`, `LOCATION`, `START_TIME`, `MESSAGE`, `END_TIME`, `ACTIVITY_ID`, `NETWORK_ID`, `IS_PRIVATE`) VALUES
+INSERT INTO `connactions` (`CONNACTION_ID`, `POST_TIME`, `USER_ID`, `LOCATION`, `START_TIME`, `MESSAGE`, `END_TIME`, `UNIQUE_NETWORK_ID`, `IS_PRIVATE`) VALUES
 (4, '2011-11-08', 1, 'Oakland (atwood and bates)', '2011-11-08 12:00:00', 'Come Running with me!', '2011-11-08 13:00:00', 1, 0),
 (5, '2011-11-08', 1, 'Forbes Ave. at Sennot Square', '2011-11-20 11:59:00', 'Bring a hat!', '2011-11-20 13:00:00', 1, 0),
 (6, '2011-11-08', 1, 'Bigelow Blvd and Fith ave', '2011-11-28 10:10:00', 'Near the Union', '2011-11-28 11:11:00', 1, 0),
