@@ -37,6 +37,10 @@
 	width: 560px;
 }
 
+.dataTables_wrapper table.small {
+	width: 400px;
+}
+
 .dataTables_processing {
 	position: absolute;
 	top: 50%;

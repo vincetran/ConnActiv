@@ -9,7 +9,7 @@
 			if ($_POST['subscribeTo']) {
 				$newSubscriptions = $_POST['subscribeTo'];
 				foreach($newSubscriptions as $s) { //$ is passed in as unique_network_id
-					subscribeNetworks($s);
+					subscribeNetwork($s);
 				} // end foreach
 			} //end if ($_POST[subscribeTo])
 		} else if (isset($_POST['doUnsubscribe'])) {
@@ -103,6 +103,7 @@
 				<input style="float:right;" type="submit" name="doUnsubscribe" value="Unsubscribe"/>
 			</div>
 		</form>
+			
 			<span style="clear:both;margin-top:-1.5em;" class="clickable below_table">Want more updates? <span id="expandNetworks" class="clickExpand">Subscribe to a new network&nbsp;&raquo;</span></span>
 			<br/>
 			<div class="doExpand" id="allNetworks" style="display:none"><br/>
@@ -137,7 +138,7 @@
 					</form>
 				</div>
 			
-			</div>
+			</div><!-- end #allNetworks -->
 			
 			<br/><br/>
 			<h2>Your skill level preferences</h2>
