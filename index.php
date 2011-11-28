@@ -66,6 +66,14 @@ $(function() {
 				"aoColumns": [ null, null, { "bSortable": false }]
 				});
 	
+	$('#expand').click(function() {
+		$('#subscribeTable').toggle();
+	});
+	
+	$('#expand a').click(function(e) {
+		e.preventDefault();
+	});
+	
 	});
 </script>
 
@@ -153,9 +161,14 @@ $(function() {
 					<th id="formHeader">Confirm Password*:</th>
 					<td><input id="confirm" type="password" name="confirm" maxlength="100" class="validate[required]" equalTo="#password"/></td>
 				</tr>
-				
+				<tr>
+					<td id="expand" colspan="2">
+					Select networks to view and make posts about the activities that interest you. <a href="#">Start browsing&nbsp;&raquo;</a></td>
+				</tr>
 				</table>
-				<table style="margin-bottom:10px" class="small requests regular_table" id="subscribeTable">
+				
+				<br>
+				<table style="margin-bottom:10px; display:none;" class="small requests regular_table" id="subscribeTable">
 						<thead>
 							<tr>
 								<th>Area</th>
