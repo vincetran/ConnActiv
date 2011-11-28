@@ -1,9 +1,9 @@
 .error {
-    font: normal 10px arial;
     padding: 3px;
     margin: 3px;
     background-color: #ffc;
     border: 1px solid #c00;
+		text-align: center;
 }
 
 /* =============================================================================
