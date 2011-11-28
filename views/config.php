@@ -90,7 +90,7 @@ include("upload_file.php");
 				//security
 							
 				//insert information into users tables.
-				$query = "Insert into users(email,first_Name, last_Name, Street, city, state, zip, phone, interests, password) values('".$_POST['username']."','".$_POST['firstName']."','".$_POST['lastName']."','".$_POST['street']."','".$_POST['city']."','".$_POST['state']."','".$_POST['zip']."','".$_POST['phone']."','".$_POST['interests']."','".md5($_POST['password'])."')";
+				$query = "Insert into users(email,first_Name, last_Name, Street, city, state, zip, phone, interests, profile_pic, password) values('".$_POST['username']."','".$_POST['firstName']."','".$_POST['lastName']."','".$_POST['street']."','".$_POST['city']."','".$_POST['state']."','".$_POST['zip']."','".$_POST['phone']."','".$_POST['interests']."','../public/images/avatar.png','".md5($_POST['password'])."')";
 				$insert = mysql_query($query) or die(mysql_error());
 				$id = mysql_query("select max(user_id) from users");
 				$id1 = mysql_fetch_array($id);
