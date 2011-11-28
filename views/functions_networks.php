@@ -43,13 +43,20 @@ function getAllNetworkIDs() {
 	return $networks;
 }
 
-function subscribeNetworks($unique_id) {
+function forceSubscribe($id, $unique_id){
+//used in registering, since we can't call getUserID() at registration time (cookies not set)
+	$query = "INSERT INTO user_networks(USER_ID, UNIQUE_NETWORK_ID) VALUES($id, $unique_id)";
+	$result = mysql_query($query) or die(mysql_error());
+	$act_id = forceGetActivityID($id, $unique_id);
+	addUserActivity($id, $act_id);
+}
+
+function subscribeNetwork($unique_id) {
 	$id = getUserID();
 	$query = "INSERT IGNORE INTO user_networks(USER_ID, UNIQUE_NETWORK_ID) VALUES($id, $unique_id)";
 	$result = mysql_query($query) or die(mysql_error());
 	// newly-subscribed unique networks need to have by default "NULL" for the user's skill preferences.
 	$act_id = getActivityIDFromUnique($unique_id);
-	
 	addUserActivity($id, $act_id);
 }
 
@@ -66,10 +73,24 @@ function unsubscribeNetworks($unique_id) {
 function getActivityNameFromUnique($unique_id){
 //TODO (Kim) - does this actually work?
 	$query = "SELECT activities.activity_name FROM unique_networks, activities"
-	." WHERE unique_networks.activity_id = activities.activity_id AND unique_networks.unique_network_id = '$unique_id'";
+	." WHERE unique_networks.activity_id = activities.activity_id AND unique_networks.unique_network_id = $unique_id";
 	$result = mysql_query($query) or die(mysql_error());
 	$name = mysql_fetch_array($result);
 	return $name[0];
+}
+
+function forceGetActivityID($user_id, $unique_id) {
+//used during registration since cookies aren't set (can't call getUserID())
+
+	$query = "SELECT activities.activity_id FROM unique_networks, activities, user_networks"
+	." WHERE unique_networks.activity_id = activities.activity_id"
+	." AND unique_networks.unique_network_id = $unique_id"
+	." AND unique_networks.unique_network_id = user_networks.unique_network_id "
+	." AND user_networks.user_id = $user_id";
+	
+	$result = mysql_query($query) or die(mysql_error());
+	$id = mysql_fetch_array($result);
+	return $id[0];
 }
 
 function getActivityIDFromUnique($unique_id){

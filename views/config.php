@@ -5,6 +5,7 @@
 	mysql_connect("localhost", "root", "") or die(mysql_error()); 	//This is wamp database credentials
 	mysql_select_db("xgamings_connactiv") or die(mysql_error()); 
 
+
 include("functions_connactions.php");
 include("functions_recommendations.php");
 include("functions_networks.php");
@@ -74,76 +75,52 @@ include("upload_file.php");
 	function register(){
 	//This function registers the user when they press the register button
 	//check to make sure the required fields were filled in.
-		if(!$_POST['username'] || !$_POST['password'] || !$_POST['confirm'] ||!$_POST['city']) {
-			die('You did not fill in a required field.');
+		if(!$_POST['username'] || !$_POST['password'] || !$_POST['confirm']) {
+			die('You did not fill in a required field. Required fields include: email, password, and confirm password.');
 		}
 		//check to make sure the email is not already registered.
 		$check = mysql_query("SELECT * FROM users WHERE email = '".$_POST['username']."'")or die(mysql_error());
 		$check2 = mysql_num_rows($check);
-		
 		
 		//if email has not been registered before
 		if($check2 == 0){
 			//check to make sure the password was confirmed			
 			if(strcmp($_POST['password'], $_POST['confirm'])==0){			
 				//check to make sure the password is longer than 6 characters, may want to use regexp to improve
-				//security				
-				
+				//security
 							
 				//insert information into users tables.
-				$query = "Insert into users(email,first_Name, last_Name, Street, city, state, zip, phone, interests, password)  values('".$_POST['username']."','".$_POST['firstName']."','".$_POST['lastName']."','".$_POST['street']."','".$_POST['city']."','".$_POST['state']."','".$_POST['zip']."','".$_POST['phone']."','".$_POST['interests']."','".md5($_POST['password'])."')";
+				$query = "Insert into users(email,first_Name, last_Name, Street, city, state, zip, phone, interests, password) values('".$_POST['username']."','".$_POST['firstName']."','".$_POST['lastName']."','".$_POST['street']."','".$_POST['city']."','".$_POST['state']."','".$_POST['zip']."','".$_POST['phone']."','".$_POST['interests']."','".md5($_POST['password'])."')";
 				$insert = mysql_query($query) or die(mysql_error());
 				$id = mysql_query("select max(user_id) from users");
 				$id1 = mysql_fetch_array($id);
-				$userid2 = $id1[0];		
+				$userid2 = $id1[0];
 			
-				//If the network doesn't already exist, add it to the networks table.
-				$checkNetwork = mysql_query("Select network_id from networks where area = '".$_POST['city']."' and area = '".$_POST['state']."'") or die(mysql_error());				
-				$checkNetwork1 = mysql_fetch_array($checkNetwork);
-				var_dump($checkNetwork1);
-				$networkid = (int)$checkNetwork1[0];
-				if(mysql_num_rows($checkNetwork) == 0){
-					$networkid = addNetworkWithState($_POST['city'], $_POST['state']);
-				}	
+				if ($_POST['city'] && $_POST['state']) {
+					//If the network doesn't already exist, add it to the networks table.
+					$query = sprintf("SELECT network_id FROM networks WHERE area = %s AND state = %s", $_POST['city'], $_POST['state']);
+					$checkNetwork = mysql_query($query) or die(mysql_error());				
+					$checkNetwork1 = mysql_fetch_array($checkNetwork);
+					$networkid = (int)$checkNetwork1[0];
+					if(mysql_num_rows($checkNetwork) == 0){
+						$networkid = addNetworkWithState($_POST['city'], $_POST['state']);
+					}	
+				} //end if $city and $state
 				
-				
-				//insert all of the user selected activities into the user_activities table and unique networks if needed.	
-				$acts = $_POST['activities'];
-				if ($acts) {
-				var_dump($acts);							
-				$i = 0;				
-				while($i < sizeof($acts)){
+				//subscribe the user to all of the user-selected unique networks	
+				if ($_POST['activity']) {
+					$acts = $_POST['activity'];				
+						foreach($acts as $act) {
+								forceSubscribe($userid2, $act); //where $userid2 is the user id
+							}//end foreach($act)
+					} //end if ($_POST['activity'])
 					
-					$activityid = mysql_query("select activity_id from activities where activity_name = '".$acts[$i]."'") or die(mysql_error());
-					$activityid1 = mysql_fetch_array($activityid);
-					
-					addUserActivity($userid2, $activityid1[0]);
-
-					//check and insert into unique networks table
-					var_dump($activityid1);
-					$checkUniqueNetworks = mysql_query("select unique_network_id from unique_networks where network_id = ".(int)$networkid." and activity_id = ".(int)$activityid1[0]) or die(mysql_error());
-					$uniqueN = mysql_fetch_array($checkUniqueNetworks);
-					$uniqueID = $uniqueN[0];
-					//if there is no record for the unique network, insert it and overwrite the uniqueID variable
-					if(mysql_num_rows($checkUniqueNetworks) == 0){
-						
-						$uniqueID = addUniqueNetwork($networkid, $activityid1[0]);
-					}
-					//add to user_networks
-					addUserNetwork($userid2, $uniqueID);
-	
-					$i++;		
-				}
-				} //end if($acts)
-
-				//create cookie
+				// Now, create the cookie
 				$_POST['username'] = stripslashes($_POST['username']); 
 				$hour = time() + 100000; 
 				setcookie('ID_my_site', $_POST['username'], $hour); 
 				setcookie('Key_my_site', md5($_POST['password']), $hour);
-				//redirect to home				
 				header("Location: views/home.php");
-				
 			}	
 			//if the passwords do not match ask them to enter the information again
 			else{ die("the passwords do not match, please re-enter your information");}
@@ -156,7 +133,7 @@ include("upload_file.php");
 
 
 	function addUserActivity($userid, $activityid){
-		$insert = mysql_query("INSERT IGNORE INTO user_activities(user_id, activity_id) values(".(int)$userid.",".(int)$activityid.")") or die(mysql_error());
+		$insert = mysql_query("INSERT IGNORE INTO user_activities(user_id, activity_id) values($userid, $activityid)") or die(mysql_error());
 	}
 	/*function getUserName($userid){
 		$query = "select first_name, last_name from users where users_id = ".$userid;
@@ -313,7 +290,6 @@ include("upload_file.php");
 			$query = "UPDATE users SET DOB = '".$DOB."' WHERE USER_ID = '".getUserID()."'";
 			$update = mysql_query($query) or die(mysql_error());
 		}
-		//echo $query;		
 		$update = mysql_query($query) or die(mysql_error());
 	}
 	function myDateParser($dateToParse){
