@@ -58,13 +58,13 @@
 			<table id="incoming" class="requests regular_table">
 			<thead>
 				<tr>
-					<th>User</th>
-					<th>Activity</th>
-					<th>Location</th>
-					<th>ConnAction Posted Date</th>
-					<th>ConnAction Date</th>
-					<th>Request Date</th>
-					<th>Message</th>
+					<th id="reqHeader">User</th>
+					<th id="reqHeader">Activity</th>
+					<th id="reqHeader">Location</th>
+					<th id="reqHeader">ConnAction Posted Date</th>
+					<th id="reqHeader">ConnAction Date</th>
+					<th id="reqHeader">Request Date</th>
+					<th id="reqHeader">Message</th>
 				</tr>
 			</thead>
 			<tbody>

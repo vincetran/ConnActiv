@@ -155,7 +155,7 @@
 					?>					
 						<div class="post"> <!-- begin post -->
 							<div class="post-author">
-								<img src="<? echo getUserPic($userID); ?>" height="120" width="120" /><br/>
+								<img src="<? echo getUserPic($userID); ?>" height="120"/><br/>
 								<? echo getUserName($userID) ?>
 							</div>
 							<div class="post-body"> <!-- begin post body -->
