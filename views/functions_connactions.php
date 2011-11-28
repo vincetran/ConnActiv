@@ -110,6 +110,7 @@
 			//$resourceID = getResourceIDs("connactions", "network_id", $n_aID);
 			$getsubscract = "select distinct ua.activity_id from user_activities ua, user_networks usn, unique_networks un where ua.user_id = ".getUserID()." and usn.user_id = ".getUserID()." and un.network_id = ".$n_aID." and usn.unique_network_id = un.unique_network_id";
 			$string = "";
+
 			$stuff = mysql_query($getsubscract);		
 			while($info = mysql_fetch_array($stuff)){
 				$string = $string."'".$info[0]."',";
@@ -117,7 +118,9 @@
 			$string = substr($string, 0, strlen($string)-1);
 
 			$getun = "select unique_network_id from unique_networks where network_id = ".$n_aID." and activity_id in(".$string.")";
+
 			$string1 ="";
+
 			$stuff = mysql_query($getun);		
 			while($info = mysql_fetch_array($stuff)){
 				$string1 = $string1."'".$info[0]."',";
