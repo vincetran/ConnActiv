@@ -3,6 +3,7 @@
 @white: #fff;
 @green: #5CBD00;
 @darkgreen: #004a1e;
+@width: 70%;
 
 .clickable {
 	cursor:pointer;
@@ -133,7 +134,17 @@ div.main {
 
 div.page {
 	float:left;
-	width:70%;
+	width: @width;
+}
+
+.error {
+    font: normal 10px arial;
+    padding: 3px;
+	margin: 3px 3px 3px 210px;
+    background-color: #ffc;
+    border: 1px solid #c00;
+	height: 14px;
+	width: 69%;
 }
 
 div#credentials, div#new_user {
@@ -188,6 +199,12 @@ table th {
 	vertical-align: baseline;
 	padding-top: 5px;
 	padding-bottom: 5px;
+}
+
+#reqHeader{
+	padding-right:20px;
+	text-align:center;
+	vertical-align:middle;
 }
 
 #postConnaction {
