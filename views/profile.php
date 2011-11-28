@@ -11,7 +11,7 @@
 		}
 		else{
 			
-			var_dump($_FILES);
+			
 			//Cookie matches, show what they want.";
 			
 			//if (name is clicked)
@@ -23,8 +23,12 @@
 				
 			if (isset($_POST['saveInfo'])){
 				saveInfo();}
-			if(isset($_POST['userfile'])){
-				upload_file($_FILES);
+			//upload the file and set the users profile pic.			
+			if(isset($_FILES)){
+				upload_file($_FILES, getUserID());
+				$query = "update users set profile_pic = 'profile_pics/".getUserID()."' where user_id = ".getUserID();
+				mysql_query($query);
+				unset($_FILES);
 			}
 			?>
 			
