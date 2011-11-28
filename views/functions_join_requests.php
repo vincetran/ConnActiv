@@ -9,7 +9,7 @@ function joinRequest(){
 	
 	$query = sprintf("INSERT INTO connaction_requests (from_user, to_user, connaction_ID, message) values(%s,%s,%s,'%s')", $from_user, $to_user, $connactionID, $message);
 	$insert = mysql_query($query) or die(mysql_error());
-	//echo $query;
+	echo "<div class='notice'>ConnAction request sent!</div>";
 	
 }
 function getApproval($connactionID, $from_user){
