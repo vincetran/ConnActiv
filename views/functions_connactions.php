@@ -41,7 +41,7 @@
 	/*** Add other details for the user here */ 
 		$review = getAllReviews($userID);
 		if(sizeof($review) > 0){		
-			$details .= "<br/><table>";
+			$details .= "<br/><table class='alternating regular_table'>";
 			$details .= "<br/><tr><td>From</td><td>Connaction Info</td><td>Positive/Negative</td><td>Review</td></tr>";		
 			foreach($review as $rev){
 				if($rev['IS_POSITIVE'] == 1){$posNeg = "<td class='thumbs_up clickable'><img class='thumbs' src='../public/images/thumbs_up.png' height='60'/></td>";}

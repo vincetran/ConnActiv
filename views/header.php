@@ -42,6 +42,9 @@
 		
 		 $(".fancybox").fancybox();
 	});
+	
+	
+	
 </script>
 
 </head>
