@@ -42,10 +42,11 @@
 		$review = getAllReviews($userID);
 		if(sizeof($review) > 0){		
 			$details .= "<br/><table class='alternating regular_table'>";
-			$details .= "<br/><tr><td>From</td><td>Connaction Info</td><td>Positive/Negative</td><td>Review</td></tr>";		
+			$details .= "<br/><thead><th>From</th><th>Connaction</th><th>Rating</th><th>Review</th></tr></thead>";
+			$details .= "<tbody>";
 			foreach($review as $rev){
-				if($rev['IS_POSITIVE'] == 1){$posNeg = "<td class='thumbs_up clickable'><img class='thumbs' src='../public/images/thumbs_up.png' height='60'/></td>";}
-				else{$posNeg = "<td class='thumbs_down clickable'><img class='thumbs' src='../public/images/thumbs_down.png' height='60'/></td>";}
+				if($rev['IS_POSITIVE'] == 1){$posNeg = "<td><img src='../public/images/thumbs_up.png' height='30'/></td>";}
+				else{$posNeg = "<td><img  src='../public/images/thumbs_down.png' height='30'/></td>";}
 
 				if($rev['IS_ANONYMOUS'] == 1){$from = "Anonymous";}
 				else{$from = getUserName($rev['FROM_USER']);}
@@ -55,7 +56,7 @@
 			
 				$details .= "<br/><tr><td>".$from."</td><td>$connactInfo</td>".$posNeg."<td>".$rev['REVIEW']."</td></tr>";
 			} //end foreach
-			$details .= "</table>";
+			$details .= "</tbody></table>";
 		} //end has reviews	
 			if(isFriend($userID)){		
 				$details .= "<br/>Send Message<td><form action = ".$_SERVER['PHP_SELF']." method = 'post'><input = 'textbox' placeholder = 'Subject' name = 'reply[]'><input = 'textarea' placeholder = 'Reply Here' name = 'reply[] /'><input type = 'submit' name = 'reply[]' value = 'Reply'/><input type = 'hidden' name = 'reply[]' value = '".$userID."'/></form>";
