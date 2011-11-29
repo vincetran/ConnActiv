@@ -29,8 +29,17 @@
 		});
 
 		$('div.post-author').click(function() {
-		auth = $(this).text().trim();
-		alert("STUB: Going to profile of " +auth.toUpperCase());
+		author_display = $(this).children('.hidden').val();
+
+		$.fancybox(author_display,
+		{
+      'autoDimensions'	: false,
+			'width'         	: 350,
+			'height'        	: 'auto',
+			'transitionIn'		: 'none',
+			'transitionOut'		: 'none'
+		});
+
 		});
 
 		$('.top_links').removeClass('active');
@@ -49,7 +58,8 @@
 	});
 	</script>
 	
-		<div class="page">		
+		<div class="page">
+		
 			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
 			<div id="postConnaction">
 				<div id="postHeader">
@@ -164,8 +174,40 @@
 					?>					
 						<div class="post"> <!-- begin post -->
 							<div class="post-author">
-								<img src="<? echo getUserPic($userID); ?>" height="120"/><br/>
-								<? echo getUserName($userID) ?>
+							<!-- Grabbing all the information we want to associate with the user, 
+							to be able to click the user's profile and see this in fancybox. 
+							
+							DAVE TODO: Put age/gender/location/about in here for display.
+							
+							Also, I'm thinking we'll also somehow need to incorporate the
+							reviews themselves, rather than just the count. Thoughts? If you check
+							out fancybox gallery effect (Google), maybe something like that? Where
+							right/left arrows would take you to different segments of the profile 
+							you're viewing? Not sure. 
+							
+							Also, maybe you want to move this into one of the functions_ files? So that
+							you can call move this all into one function and then call it (something
+							like getProfileOf($userID) ) and just have it return a string that you put in $details. 
+							I think that would help keep the clutter down on this page and centralize the data.
+							-Kim -->
+							
+							<? 
+								 $src = getUserPic($userID);
+								 $uname = getUserName($userID);
+								 $reviewsPos = getReviewCountForUser('positive', $userID);
+								 $reviewsNeg = getReviewCountForUser('negative', $userID);
+								 
+								 $details = "<div class='view_profile'>"; // must be the first item appended to $details
+								 
+								 $details .= "<img src=".$src." /><h2>$uname</h2>";
+								 $details .= "<br/>Positive reviews: $reviewsPos";
+								 $details .= "<br/>Negative reviews: $reviewsNeg";
+								 
+								 $details .= "</div>"; // must be the final item appended to $details
+							?>
+								<input type="hidden" class="hidden" value="<? echo $details; ?>" />
+								<img src="<? echo $src ?>" height="120"/><br/>
+								<? echo $uname ?>
 							</div>
 							<div class="post-body"> <!-- begin post body -->
 								<p class="quote"><? echo $message; ?></p>
