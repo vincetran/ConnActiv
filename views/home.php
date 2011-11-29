@@ -33,8 +33,8 @@
 
 		$.fancybox(author_display,
 		{
-      'autoDimensions'	: false,
-			'width'         	: 350,
+      'autoDimensions'	: true,
+			'width'         	: 450,
 			'height'        	: 'auto',
 			'transitionIn'		: 'none',
 			'transitionOut'		: 'none'
