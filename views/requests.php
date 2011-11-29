@@ -9,6 +9,22 @@
 		
 		mysql_query($query) or die(mysql_error());
 	}
+	else if (isset($_POST['accept'])) {
+		if ($_POST['requestID']) {
+			$request = $_POST['requestID'];
+			foreach($request as $req) { 
+				acceptRequest($req);
+			} // end foreach
+		} //end if ($_POST[subscribeTo])
+	}
+	else if (isset($_POST['deny'])) {
+		if ($_POST['requestID']) {
+			$request = $_POST['requestID'];
+			foreach($request as $req) {
+				denyRequest($req);
+			} // end foreach
+		} //end if ($_POST[requestID])
+	}
 			?>
 			
 <script type="text/javascript">
@@ -55,10 +71,11 @@
 
 		<h2>Incoming Requests</h2>
 		<h3>People asking to join you</h3>
-			
+			<form id="unsubNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 			<table id="incoming" class="requests regular_table">
 			<thead class="reqHeader">
 				<tr>
+					<th>Status</th>
 					<th>User</th>
 					<th>Activity</th>
 					<th>Location</th>
@@ -79,9 +96,26 @@
 							$connactionID = $incoming[2];
 							$message = $incoming[3];
 							$approved = $incoming[4];
-							$date = date_parse($incoming[5]); ?>
-				
+							$date = date_parse($incoming[5]); 
+							$requestID = $fromUser." ".$connactionID;
+				?>
+							
 							<tr> 
+								<td>
+									<?php 
+										echo "<input type='checkbox' value='".$requestID."' name='requestID[]' /> <br/>";
+									
+										if($approved == -1){
+											echo "Pending";
+										}
+										else if($approved == 1){
+											echo "Approved";
+										}
+										else{
+											echo "Denied";
+										}
+									?>
+								</td>
 								<td><?php echo getUserName($fromUser); ?></td>
 								<td><?php echo getConnactionActivity($connactionID); ?></td>
 								<td><?php echo getConnactionNetwork($connactionID); ?></td>
@@ -96,6 +130,10 @@
 			</tbody>
 			
 			</table>
+			<div class="below_table">
+				<input style="float:right; margin-left:10px; margin-right:20px" type="submit" name="deny" value="Deny Request(s)"/>
+				<input style="float:right;" type="submit" name="accept" value="Accept Request(s)"/>
+			</div>
 			
 			<br/><br/>
 			
@@ -105,6 +143,7 @@
 			<table id="pending" class="requests regular_table">
 			<thead class="reqHeader">
 				<tr>
+					<th>Status</th>
 					<th>User</th>
 					<th>Activity</th>
 					<th>Location</th>
@@ -128,6 +167,19 @@
 							$date = date_parse($incoming[5]); ?>
 				
 							<tr> <!-- TODO: make these editable and auto-populating -->
+								<td>
+									<?php
+										if($approved == -1){
+											echo "Pending";
+										}
+										else if($approved == 1){
+											echo "Approved";
+										}
+										else{
+											echo "Denied";
+										}
+									?>
+								</td>
 								<td><?php echo getUserName($toUser); ?></td>
 								<td><?php echo getConnactionActivity($connactionID); ?></td>
 								<td><?php echo getConnactionNetwork($connactionID); ?></td>

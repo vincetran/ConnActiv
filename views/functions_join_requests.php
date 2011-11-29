@@ -50,5 +50,21 @@ function getPendingRequests($userID){
 	}
 	return $pendingRequests;
 }
+function acceptRequest($reqID){
+	$fromUser = strtok($reqID, " ");
+	$connactionID = strtok(" ");
+	
+	//echo "Accept: ID: ".$fromUser." ConID: ".$connactionID;
+	$query = sprintf("UPDATE connaction_requests SET APPROVED = 1 WHERE FROM_USER = '%s' AND CONNACTION_ID = '%s'",$fromUser, $connactionID);
+	$update = mysql_query($query) or die(mysql_error());
+}
+function denyRequest($reqID){
+	$fromUser = strtok($reqID, " ");
+	$connactionID = strtok(" ");
+	
+	//echo "Accept: ID: ".$fromUser." ConID: ".$connactionID;
+	$query = sprintf("UPDATE connaction_requests SET APPROVED = 2 WHERE FROM_USER = '%s' AND CONNACTION_ID = '%s'",$fromUser, $connactionID);
+	$update = mysql_query($query) or die(mysql_error());
+}
 
 ?>

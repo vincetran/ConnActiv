@@ -187,7 +187,7 @@
 													echo "<span class='request_pending'>Request pending!</span>";
 												}
 												else if(getApproval($connactionID, getUserID()) == 2){
-													echo getApproval($connactionID, getUserID());
+													//echo getApproval($connactionID, getUserID());
 													echo "<span class='request_denied'>Request denied.</span>";
 												}
 												else if(getApproval($connactionID, getUserID()) == 1){
