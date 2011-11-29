@@ -40,6 +40,9 @@
 				} // end foreach
 			} //end if ($_POST[defavorite])
 		}
+		else if (isset($_POST['saveInfo'])){
+				saveInfo();
+		}
 		
 			?>
 	<script type="text/javascript">
@@ -160,7 +163,7 @@
 			
 			<br/><br/>
 			<h2>Your skill level preferences</h2>
-			
+			<form id="subscribeNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 			<table class="settings regular_table">
 			<thead>
 				<tr>
@@ -173,6 +176,7 @@
 			<tbody>
 				<?
 				$levels = getUserActivityLevels();
+				$index =0;
 				if ($levels) {
 					foreach($levels as $level){
 						echo "<tr>";
@@ -193,12 +197,13 @@
 									<span class=\"clickable joinExpander\">$level[0]</span>";
 						}	
 							echo	"<div class=\"expand\" style=\"display:none\">
-											<select name=\"seek\">
-												<option value=\"-1\">Level:</option>
-												<option value=\"0\">0</option>
-												<option value=\"1\">1</option>
-											</select>
-											<input class=\"button\" type=\"submit\" name=\"saveSeek\" value=\"Save\"/>
+											<select name=\"seekLvl$index\">
+												<option value=\"-1\">Level:</option>";
+												for($i = 1; $i <= 10; $i++){
+													echo "<option value=\"$i\">$i</option>";
+												}
+									echo	"</select>
+											<input class=\"button\" type=\"submit\" name=\"saveInfo\" value=\"Save\"/>
 										</div>
 								</td>";
 						if($level[2] == NULL){
@@ -210,12 +215,13 @@
 									<span class=\"clickable joinExpander\">$level[2] - </span>";
 						}
 							echo "<div class=\"expand\" style=\"display:none\">
-										<select name=\"low\">
-											<option value=\"-1\">Level:</option>
-											<option value=\"0\">0</option>
-											<option value=\"1\">1</option>
-										</select>
-										<input class=\"button\" type=\"submit\" name=\"saveLow\" value=\"Save\"/>
+										<select name=\"lowLvl$index\">
+												<option value=\"-1\">Level:</option>";
+												for($i = 1; $i <= 10; $i++){
+													echo "<option value=\"$i\">$i</option>";
+												}
+									echo	"</select>
+										<input class=\"button\" type=\"submit\" name=\"saveInfo\" value=\"Save\"/>
 									</div>";
 						if($level[3] == NULL){
 							echo "	<span class=\"clickable joinExpander\">Click to Set</span>";
@@ -224,12 +230,13 @@
 							echo "	<span class=\"clickable joinExpander\">$level[3]</span>";
 						}
 							echo " <div class=\"expand\" style=\"display:none\">
-										<select name=\"high\">
-											<option value=\"-1\">Level:</option>
-											<option value=\"0\">0</option>
-											<option value=\"1\">1</option>
-										</select>
-										<input class=\"button\" type=\"submit\" name=\"saveHigh\" value=\"Save\"/>
+										<select name=\"highLvl$index\">
+												<option value=\"-1\">Level:</option>";
+												for($i = 1; $i <= 10; $i++){
+													echo "<option value=\"$i\">$i</option>";
+												}
+									echo	"</select>
+										<input class=\"button\" type=\"submit\" name=\"saveInfo\" value=\"Save\"/>
 									</div>
 								</td>";
 						if($level[4] == NULL){
@@ -241,15 +248,17 @@
 									<span class=\"clickable joinExpander\">$level[4]</span>";
 						}
 							echo "<div class=\"expand\" style=\"display:none\">
-											<select name=\"own\">
-												<option value=\"-1\">Level:</option>
-												<option value=\"0\">0</option>
-												<option value=\"1\">1</option>
-											</select>
-											<input class=\"button\" type=\"submit\" name=\"saveOwn\" value=\"Save\"/>
+											<select name=\"ownLvl$index\">
+												<option value=\"-1\">Level:</option>";
+												for($i = 1; $i <= 10; $i++){
+													echo "<option value=\"$i\">$i</option>";
+												}
+									echo	"</select>
+											<input class=\"button\" type=\"submit\" name=\"saveInfo\" value=\"Save\"/>
 										</div>
 								</td>";
 					echo "</tr>";
+					$index++;
 					}//end foreach
 					} else {
 					echo "<tr><td colspan='4'>You're missing some skill levels. Subscribe to networks to get started.</td></tr>";
@@ -260,7 +269,7 @@
 			
 			
 			</table>
-			
+			</form>
 			<br/><br/>
 			<h2>Your favorites</h2>
 			
