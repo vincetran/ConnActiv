@@ -49,7 +49,7 @@ body {
 	padding-top: 40px;
 } 
 
-input[type="password"], input[type="search"], input[type="text"], input[type="textbox"], input[type="textarea"]   {
+input[type="password"], input[type="search"], input[type="text"], input[type="textbox"], input[type="textarea"], textarea   {
 	border: 1px #c7c7c7 solid;
 	color: #333;
 	cursor: pointer;
@@ -103,7 +103,8 @@ header {
 	padding: 10px 10px 0px 10px;
 	width: 100%;
 	position: fixed;
-	background: @darkgreen;
+	background: #ddd;
+	border-bottom: 3px solid @dark;
 	color: @white;
 	z-index:99;
 	height: 30px;
@@ -166,6 +167,13 @@ div#credentials, div#new_user {
 	margin: 0px auto;
 	width: 400px;
 }
+
+div#credentials {
+
+	margin: 0px auto;
+	width: 210px;
+}
+
 
 /* WELCOME.PHP ROLLOVER EFFECTS */
 
@@ -301,4 +309,25 @@ span.below_table {
 	padding: 5px 0px 5px 0px;
 	clear:both; 
 	text-align:left;
+}
+
+
+.green {
+	color: @dark;
+}
+
+.green:hover {
+	text-decoration:underline;
+}
+
+.green.active {
+	color: @green;
+	text-decoration:underline;
+}
+
+div.requestViewer {
+	width: 100%;
+	padding: 15px 10px;
+	text-align: center;
+	margin-bottom: 20px;
 }
