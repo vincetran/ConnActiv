@@ -170,13 +170,20 @@
 							<div class="post-body"> <!-- begin post body -->
 								<p class="quote"><? echo $message; ?></p>
 								<? //echo date_format($startTime, 'l, F jS, Y h:i a'); 
-									echo $startTime." To ".$endTime?>
+									echo $startTime." - ".$endTime?>
 							<div class="post-levels">
 							<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
-									I am a level <?php echo getActivityLevel($userID,$activityID, 3); ?>.
-									I prefer level <?php echo getActivityLevel($userID,$activityID, 2); ?>.
-									I accept levels <?php echo getActivityLevel($userID,$activityID, 0); ?>-
-									<? echo getActivityLevel($userID,$activityID, 1); ?>.
+							<?
+							$self = getActivityLevel($userID,$activityID, 3);
+							$prefer = getActivityLevel($userID,$activityID, 2);
+							$accept_low = getActivityLevel($userID,$activityID, 0);
+							$accept_high = getActivityLevel($userID,$activityID, 1);
+							
+							if ($self) echo "Level $self. ";
+							if ($prefer) echo "Seeking level $prefer. ";
+							if ($accept_low && $accept_high) echo "Cool with levels $accept_low - $accept_high.";
+							?>
+																
 								<br/>
 								Open to joiners&nbsp;&raquo;
 										<?php 
@@ -259,13 +266,19 @@
 							<div class="post-body"> <!-- begin post body -->
 								<p class="quote"><? echo $message; ?></p>
 								<? //echo date_format($startTime, 'l, F jS, Y h:i a'); 
-									echo $startTime." To ".$endTime?>
+									echo $startTime." - ".$endTime?>
 							<div class="post-levels">
 							<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
-									I am a level <?php echo getActivityLevel($userID,$activityID, 3); ?>.
-									I prefer level <?php echo getActivityLevel($userID,$activityID, 2); ?>.
-									I accept levels <?php echo getActivityLevel($userID,$activityID, 0); ?>-
-									<? echo getActivityLevel($userID,$activityID, 1); ?>.
+									<?
+							$self = getActivityLevel($userID,$activityID, 3);
+							$prefer = getActivityLevel($userID,$activityID, 2);
+							$accept_low = getActivityLevel($userID,$activityID, 0);
+							$accept_high = getActivityLevel($userID,$activityID, 1);
+							
+							if ($self) echo "Level $self. ";
+							if ($prefer) echo "Seeking level $prefer. ";
+							if ($accept_low && $accept_high) echo "Cool with levels $accept_low - $accept_high.";
+							?>
 								<br/>
 								Open to joiners&nbsp;&raquo;
 										<?php 
