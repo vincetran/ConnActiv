@@ -1,4 +1,5 @@
-@lightgrey: #ddd;
+@lightgrey: #efefef;
+@darkergrey: #ddd;
 @dark: #555;
 @white: #fff;
 @green: #5CBD00;
@@ -103,7 +104,7 @@ header {
 	padding: 10px 10px 0px 10px;
 	width: 100%;
 	position: fixed;
-	background: #ddd;
+	background: @darkergrey;
 	border-bottom: 3px solid @dark;
 	color: @white;
 	z-index:99;
@@ -255,11 +256,16 @@ table#settings {
 	width: 330px;
 }
 
-.settings th {
+.alternating th, .settings th {
 	width: 130px;
-	border: thin solid @lightgrey;
-	background: @green;
-	color: @white;
+	border: thin solid @darkergrey;
+	background: @white;
+	color: @green;
+}
+
+.regular_table {
+	border: thin solid @darkergrey;
+	padding: 10px 10px 10px 10px;
 }
 
 .alternating tr:nth-child(even), .settings tr:nth-child(even), .requests tr:nth-child(even) {
@@ -272,7 +278,7 @@ table#settings {
 
 div#ui-datepicker-div {
 	background: #fff;
-	border: thin solid @lightgrey;
+	border: thin solid @darkergrey;
 	padding: 3px 6px 3px 6px;
 	text-align:center;
 	.rounded;

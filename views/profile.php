@@ -126,9 +126,6 @@
 						</form>
 					</td>
 				</tr>
-				<tr>
-					<td colspan="2">
-				</tr>
 			</table>
 				<br/>
 				<h2>Received Messages</h2>
