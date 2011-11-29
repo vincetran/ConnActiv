@@ -2,12 +2,25 @@
 
 <script type="text/javascript">
 
-$('.thumbs_up').click(function() {
-		window.location.href = '/views/profile.php';
-	});	
+	$('.thumbs_up').click(function() {
+			window.location.href = '/views/profile.php';
+		});	
+		
+	$('.thumbs_down').click(function() {
+			window.location.href = '/views/profile.php';
+		});
 	
-$('.thumbs_down').click(function() {
-		window.location.href = '/views/profile.php';
+	$('.fav').click(function(e) {
+		//alert(this.id); //li = id corresponding to stream_ id
+		e.preventDefault();
+		el = $(this).attr('id').split('_').pop();
+		
+		//Not working due to reload - window.location.href = '/views/home.php';
+		
+		$('.stream').hide();
+		$('.link_stream').removeClass('tab_active');
+		$('#'+el).addClass('tab_active');
+		$('#stream_' +el).show();
 	});
 	
 </script>
@@ -35,10 +48,10 @@ $('.thumbs_down').click(function() {
 		
 		<div>
 		<?
-			$favs = getFavorites();
+			$favs = getFavoritesWithIDs();
 			if ($favs):
 				foreach ($favs as $fav):
-					echo "$fav <br/>";
+					echo "<a href='#' id='goto_".$fav[0]."' class='fav'>".$fav[1]. ", " .$fav[2]. " - ".$fav[3]."</a><br/>";
 				endforeach;
 			else:
 				echo "None yet!";

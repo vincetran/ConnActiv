@@ -142,7 +142,6 @@
 						foreach ($names as $network): 
 						
 						$displayName = "".$network[1].", ".$network[2]." - ".$network[3]."";
-						//".$network[1].", ".$network[2]."</td><td>".$network[3]."
 						
 						?>
 							<li id="<? echo $network[0]; ?>" class="link_stream"><a href="#"><? echo $displayName; ?></a></li>
