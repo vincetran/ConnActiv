@@ -15,7 +15,8 @@
 	$(document).ready(function(){
 		$('#restOfBoxes').hide();
 		
-		$('#link_feeds_all').addClass('tab_active');
+		$('#all').addClass('tab_active');
+		$('#stream_all').show();
 		
 		$('.link_stream').click(function(){
 			var id=$(this).attr('id');
@@ -124,26 +125,111 @@
 					
 				<div class="main feeds-container">
 					<ul class="feeds">
-						<li id="link_feeds_all" class="link_stream"><a href="#">All</a></li>
+						<li id="all" class="link_stream"><a href="#">All</a></li>
 						
+				<?  $names = getUserUniqueNetworks();
+						foreach ($names as $network): 
 						
-
-
-
-						<?
-						$networkNames = getNetworkNames();
-						foreach ($networkNames as $network): ?>
-							<li id="<? echo $network; ?>" class="link_stream"><a href="#"><? echo $network; ?></a></li>
+						$displayName = "".$network[1].", ".$network[2]." - ".$network[3]."";
+						//".$network[1].", ".$network[2]."</td><td>".$network[3]."
+						
+						?>
+							<li id="<? echo $network[0]; ?>" class="link_stream"><a href="#"><? echo $displayName; ?></a></li>
 							<? endforeach; ?>
 					</ul>
+					
+					<div class="stream" id="stream_all">
+					
+				<? $allConnactions = getAllConnactions();
+				
+				if ($allConnactions) {
+					
+					foreach($allConnactions as $post){
+						$connactionID = $post[0];
+						$postTime = $post[1];
+						$userID = $post[2];
+						$location = $post[3];
+						$startTime = $post[4];
+						$message = $post[5];
+						$endTime = $post[6];
+						$unique_network_ID = $post[7];
+						$isPrivate = $post[8];
+						$act = mysql_query("select activity_id from unique_networks where unique_network_id = ".$unique_network_ID);
+						$net = mysql_query("select network_id from unique_networks where unique_network_id = ".$unique_network_ID);
+						$net1 = mysql_fetch_array($net);
+						$act1 = mysql_fetch_array($act);
+						$networkID = $net1[0];
+						$activityID = $act1[0];
+					?>					
+						<div class="post"> <!-- begin post -->
+							<div class="post-author">
+								<img src="<? echo getUserPic($userID); ?>" height="120"/><br/>
+								<? echo getUserName($userID) ?>
+							</div>
+							<div class="post-body"> <!-- begin post body -->
+								<p class="quote"><? echo $message; ?></p>
+								<? //echo date_format($startTime, 'l, F jS, Y h:i a'); 
+									echo $startTime." To ".$endTime?>
+							<div class="post-levels">
+							<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
+									I am a level <?php echo getActivityLevel($userID,$activityID, 3); ?>.
+									I prefer level <?php echo getActivityLevel($userID,$activityID, 2); ?>.
+									I accept levels <?php echo getActivityLevel($userID,$activityID, 0); ?>-
+									<? echo getActivityLevel($userID,$activityID, 1); ?>.
+								<br/>
+								Open to joiners&nbsp;&raquo;
+										<?php 
+											if($userID != getUserID()){ 
+												if(getApproval($connactionID, getUserID()) == -1){
+													echo "<span class='request_pending'>Request pending!</span>";
+												}
+												else if(getApproval($connactionID, getUserID()) == 2){
+													//echo getApproval($connactionID, getUserID());
+													echo "<span class='request_denied'>Request denied.</span>";
+												}
+												else if(getApproval($connactionID, getUserID()) == 1){
+													echo "<span class='request_accepted'>Request accepted!</span>";
+												}
+												//else if(check cur date and end date){
+												//	$echo "ConnAction Is Over!";
+												//}
+												else{?>
+													<span class="clickable joinExpander">Ask to join</span>
+													
+													<div class="expand" style="display:none">
+														<input type="hidden" name="connactionID" value="<?= $connactionID?>"/>
+														<input type="hidden" name="postingUserID" value="<?= $userID?>"/>
+														<textarea name="message" maxlength="255" style="width:80%;" class="small" placeholder="Hi! I was hoping to join your activity."></textarea>
+														<input type="submit" class="join" name="joinRequest" value="Send"/>
+													</div>
+											<?php } ?>
+										<?php } ?>
+									</form>					
+							</div><!-- begin tags -->
+							<br/>
+									Tags:
+									<ul class="tags">
+										<li><?php echo getActivity($activityID); ?></li>
+										<li><?php echo getNetworkName($networkID); ?></li>
+									</ul><!-- end tags -->
+							<br/>
+
+							</div><!-- end post-body -->
+						</div><!-- end post -->
+		<?		}		//end foreach($post) ?>
+	<?  } else echo "<br/>No connactions yet!<br/><br/>";
+				
+				?> 
+				</div> <!-- end allConnactions -->
 
 
-				 <? $networkNames = getNetworkNames();
-					foreach ($networkNames as $network) { ?> 
+				 <? $names = getUserUniqueNetworks();
+					foreach ($names as $network) { 
+					?> 
 					
-					<div class="stream" id="stream_<? echo $network; ?>"> 
+					<div class="stream" id="stream_<? echo $network[0]; ?>"> 
 					
-				<? $connactions = getConnactions(getNetworkID($network), 1);
+				<? $connactions = getConnactionsByUnique($network[0]);
 					
 					if ($connactions) {
 					
