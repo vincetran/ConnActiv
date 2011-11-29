@@ -283,6 +283,18 @@ include("upload_file.php");
 		}
 		return $incMessages;
 	}
+
+	function getSentMessages($userid){
+		$incMessages = array();		
+		$query = "select * from messages where from_user = ".$userid;
+		
+		$result = mysql_query($query);
+		while($info = mysql_fetch_array($result)){
+			$incMessages[] = $info;
+		}
+		return $incMessages;
+	}
+	
 	function saveInfo(){
 		//This function sends the my info to the database
 		if(isset($_POST['gender'])){

@@ -129,6 +129,7 @@
 				</tr>
 			</table>
 			<table class="alternating regular_table" id="myInfo">
+				Received Messages				
 				<tr><td>FROM:</td><td>TO:</td><td>Subject:</td><td>Message:</td><td>Date:</td><td>Reply</td></tr>
 				<?php
 					$incMessages = getIncMessages(getUserID());
@@ -140,6 +141,24 @@
 						echo "<td>".$message['BODY']."</td>";
 						echo "<td>".$message['DATE']."</td>";
 						echo "<td><form action = ".$_SERVER['PHP_SELF']." method = 'post'><input = 'textbox' placeholder = 'Subject' name = 'reply[]'><input = 'textarea' placeholder = 'Reply Here' name = 'reply[]'><input type = 'submit' name = 'reply[]' value = 'Reply'/><input type = 'hidden' name = 'reply[]' value = '".$message['FROM_USER']."'/></form></td>";
+						echo "</tr>";
+					}
+					
+				
+				?>
+			</table>
+			<table class="alternating regular_table" id="myInfo">
+				Sent Messages
+				<tr><td>TO:</td><td>Subject:</td><td>Message:</td><td>Date:</td></tr>
+				<?php
+					$incMessages = getSentMessages(getUserID());
+					
+					foreach($incMessages as $message){
+						echo "<tr>";
+						echo "<td>".getUserName($message['TO_USER'])."</td>";
+						echo "<td>".$message['SUBJECT']."</td>";
+						echo "<td>".$message['BODY']."</td>";
+						echo "<td>".$message['DATE']."</td>";
 						echo "</tr>";
 					}
 					
