@@ -30,30 +30,30 @@
 <script type="text/javascript">
 	$(document).ready(function() {
     $('#incoming').dataTable( {
-        "aaSorting": [[ 2, "desc" ]],
+        "aaSorting": [[ 5, "desc" ]],
         "bPaginate": false,
 				"bLengthChange": false,
-				"bFilter": false,
+				"bFilter": true,
 				"bSort": true,
 				"bInfo": false,
 				"bAutoWidth": false
    	 });
    	 
    	 $('#pending').dataTable( {
-        "aaSorting": [[ 2, "desc" ]],
+        "aaSorting": [[ 5, "desc" ]],
         "bPaginate": false,
 				"bLengthChange": false,
-				"bFilter": false,
+				"bFilter": true,
 				"bSort": true,
 				"bInfo": false,
 				"bAutoWidth": false
    	 });
    	 
    	 $('#past').dataTable( {
-        "aaSorting": [[ 2, "desc" ]],
+        "aaSorting": [[ 5, "desc" ]],
         "bPaginate": false,
 				"bLengthChange": false,
-				"bFilter": false,
+				"bFilter": true,
 				"bSort": true,
 				"bInfo": false,
 				"bAutoWidth": false
@@ -78,9 +78,9 @@
 					<th>Status</th>
 					<th>User</th>
 					<th>Network</th>
-					<th>Posted On</th>
+					<th>Posted</th>
 					<th>ConnAction Date</th>
-					<th>Requested On</th>
+					<th>Requested</th>
 					<th>Message</th>
 				</tr>
 			</thead>
@@ -144,9 +144,9 @@
 					<th>Status</th>
 					<th>User</th>
 					<th>Network</th>
-					<th>Posted On</th>
+					<th>Posted</th>
 					<th>ConnAction Date</th>
-					<th>Requested On</th>
+					<th>Requested</th>
 					<th>Message</th>
 				</tr>
 			</thead>
