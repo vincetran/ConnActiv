@@ -18,7 +18,8 @@
 		$('#all').addClass('tab_active');
 		$('#stream_all').show();
 		
-		$('.link_stream').click(function(){
+		$('.link_stream').click(function(e){
+			e.preventDefault();
 			var id=$(this).attr('id');
 			var el=$('#'+id);
 			$('.stream').hide();
