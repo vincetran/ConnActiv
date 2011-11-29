@@ -87,13 +87,13 @@ function totalReviews($which) {
 	$id = getUserID();
 	
 	if ($which == 'positive') {
-		$query = "SELECT COUNT(user_id) FROM reviews WHERE reviews.user_id = ".$id." AND reviews.is_positive";
+		$query = "SELECT * FROM reviews WHERE user_id = '".$id."' AND is_positive = '1'";
 	} else {
-		$query = "SELECT COUNT(user_id) FROM reviews WHERE reviews.user_id = ".$id." AND !reviews.is_positive";
+		$query = "SELECT * FROM reviews WHERE user_id = '".$id."' AND is_positive = '0'";
 	}
 	
 	$result = mysql_query($query) or die(mysql_error());
-	return mysql_num_rows($result) -1;
+	return mysql_num_rows($result);
 }
 
 
