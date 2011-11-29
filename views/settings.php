@@ -72,6 +72,28 @@
 						"bAutoWidth": false,
 					  "aoColumns": [ null, null, { "bSortable": false }, { "bSortable": false }	]
 					 });
+					 
+					$('#defavTable').dataTable( {
+					"aaSorting": [[ 0, "asc" ]],
+					"bPaginate": false,
+					"bLengthChange": false,
+					"bFilter": true,
+					"bSort": true,
+					"bInfo": false,
+					"bAutoWidth": false,
+					"aoColumns": [ null, { "bSortable": false }]
+				 });
+				 
+				 $('#skillsTable').dataTable( {
+					"aaSorting": [[ 0, "asc" ]],
+					"bPaginate": false,
+					"bLengthChange": false,
+					"bFilter": true,
+					"bSort": true,
+					"bInfo": false,
+					"bAutoWidth": false
+				 });
+				 
 				 
 				 $('#expandNetworks').click(function(){
 					$('#allNetworks').toggle();   		  		 	   		 
@@ -164,7 +186,7 @@
 			<br/><br/>
 			<h2>Your skill level preferences</h2>
 			<form id="subscribeNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
-			<table class="settings regular_table">
+			<table id="skillsTable" class="alternating regular_table">
 			<thead>
 				<tr>
 					<th>Activity</th>
@@ -274,24 +296,26 @@
 			<h2>Your favorites</h2>
 			
 			<form id="deFavForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
-			<table class="settings regular_table">
-			
-			<tr>
-				<th>Activity</th>
-				<th>Unfavorite</th>
-			</tr>
-			<? $favs = getFavorites(); 
-				if (!$favs) 
-					echo "<tr><td colspan='2'>Favorite networks to bookmark them in your sidebar.</td></tr>";
-				else
-				foreach($favs as $fav):
-			?>
+			<table id="defavTable" class="alternating regular_table">
+				<thead>
 					<tr>
-						<td><? echo $fav ?></td>
-						<td><input type='checkbox' value='<? echo $fav ?>' name='defavorite[]' /></td>
+						<th>Activity</th>
+						<th>Unfavorite</th>
 					</tr>
-				<? endforeach; ?>
-			
+				</thead>
+				<tbody>
+					<? $favs = getFavorites(); 
+						if (!$favs) 
+							echo "<tr><td colspan='2'>Favorite networks to bookmark them in your sidebar.</td></tr>";
+						else
+						foreach($favs as $fav):
+					?>
+							<tr>
+								<td><? echo $fav ?></td>
+								<td><input type='checkbox' value='<? echo $fav ?>' name='defavorite[]' /></td>
+							</tr>
+						<? endforeach; ?>
+				</tbody>
 			</table>
 			<div class="below_table">
 				<input style="float:right;margin-right: 100px;" type="submit" name="doDefavorite" value="Remove"/>
