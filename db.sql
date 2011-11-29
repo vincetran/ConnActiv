@@ -21,7 +21,9 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-
+drop database xgamings_connactiv;
+create database xgamings_connactiv;
+use xgamings_connactiv;
 --
 -- Table structure for table `activities`
 --
@@ -199,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `TO_USER` int(11) NOT NULL,
   `SUBJECT` varchar(100) DEFAULT NULL,
   `BODY` varchar(4000) DEFAULT NULL,
-  `DATE` date NOT NULL DEFAULT '0000-00-00',
+  `DATE` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`FROM_USER`,`TO_USER`,`DATE`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 

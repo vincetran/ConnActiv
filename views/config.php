@@ -272,6 +272,29 @@ include("upload_file.php");
 		else
 			return "Click to specify";	//No DOB set
 	}
+
+	function getIncMessages($userid){
+		$incMessages = array();		
+		$query = "select * from messages where to_user = ".$userid;
+		
+		$result = mysql_query($query);
+		while($info = mysql_fetch_array($result)){
+			$incMessages[] = $info;
+		}
+		return $incMessages;
+	}
+
+	function getSentMessages($userid){
+		$incMessages = array();		
+		$query = "select * from messages where from_user = ".$userid;
+		
+		$result = mysql_query($query);
+		while($info = mysql_fetch_array($result)){
+			$incMessages[] = $info;
+		}
+		return $incMessages;
+	}
+	
 	function saveInfo(){
 		//This function sends the my info to the database
 		if(isset($_POST['gender'])){
