@@ -108,7 +108,7 @@
 		}
 		else if($option == 1){
 			//$resourceID = getResourceIDs("connactions", "network_id", $n_aID);
-			$getsubscract = "select distinct ua.activity_id from user_activities ua, user_networks usn, unique_networks un where ua.user_id = ".getUserID()." and usn.user_id = ".getUserID()." and un.network_id = ".$n_aID." and usn.unique_network_id = un.unique_network_id";
+			$getsubscract = "select distinct un.activity_id from user_networks usn, unique_networks un where usn.user_id = ".getUserID()." and un.network_id = ".$n_aID." and usn.unique_network_id = un.unique_network_id";
 			$string = "";
 
 			$stuff = mysql_query($getsubscract);		

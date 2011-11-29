@@ -30,6 +30,11 @@
 				mysql_query($query);
 				unset($_FILES);
 			}
+			if(isset($_POST['reply'])){
+				$query = "insert into messages values (".getUserID().", ".$_POST['reply'][3].", '".$_POST['reply'][0]."', '".$_POST['reply'][1]."', now())";
+				echo $query;
+				mysql_query($query);
+			}
 			?>
 			
 			<script type="text/javascript">
@@ -123,7 +128,24 @@
 					<td colspan="2">
 				</tr>
 			</table>
-			
+			<table class="alternating regular_table" id="myInfo">
+				<tr><td>FROM:</td><td>TO:</td><td>Subject:</td><td>Message:</td><td>Date:</td><td>Reply</td></tr>
+				<?php
+					$incMessages = getIncMessages(getUserID());
+					
+					foreach($incMessages as $message){
+						echo "<tr><td>".getUserName($message['FROM_USER'])."</td>";
+						echo "<td>".getUserName($message['TO_USER'])."</td>";
+						echo "<td>".$message['SUBJECT']."</td>";
+						echo "<td>".$message['BODY']."</td>";
+						echo "<td>".$message['DATE']."</td>";
+						echo "<td><form action = ".$_SERVER['PHP_SELF']." method = 'post'><input = 'textbox' placeholder = 'Subject' name = 'reply[]'><input = 'textarea' placeholder = 'Reply Here' name = 'reply[]'><input type = 'submit' name = 'reply[]' value = 'Reply'/><input type = 'hidden' name = 'reply[]' value = '".$message['FROM_USER']."'/></form></td>";
+						echo "</tr>";
+					}
+					
+				
+				?>
+			</table>
 			</div>
 			<?php
 		}
