@@ -62,12 +62,34 @@
    	 
 		$('.top_links').removeClass('active');
 		$('#requests').addClass('active');
-   	 
+   
+   	$('#view_friendReqs').hide();
+   	
+   	$('#connactions').click(function() {
+   		$(this).addClass('active');
+   		$('#friendReqs').removeClass('active');
+   		$('#view_friendReqs').hide();
+   		$('#view_connactions').fadeIn();
+   	});
+   	
+   	$('#friendReqs').click(function() {
+   		$(this).addClass('active');
+   		$('#connactions').removeClass('active');
+   		$('#view_connactions').hide();
+   		$('#view_friendReqs').fadeIn();
+   	});
    	 
 		});		
 </script>			
 			
 	<div class="page">
+	
+	<div class="requestViewer">
+		<span class="clickable active green" id="connactions">Connaction Requests</span>&nbsp;|&nbsp;
+		<span class="clickable green" id="friendReqs">Friends Requests</span>	
+	</div>
+	
+	<div class="requestType" id="view_connactions">
 
 		<h2>Incoming Connaction Requests</h2>
 		<h3>People asking to join you</h3>
@@ -236,16 +258,15 @@
 					echo "<td>".getName($attendee[0])."     "."<input id = 'review' type = 'submit' name = 'review[]' value = 'Review this connaction' action = 'post' action = 'review.php'/></td>";
 										
 				}*/
-				echo "</tr>";
-
-								
-			echo "</tbody>";
+				echo "</tr></tbody>";
 			}
 			?>
 			
 			</table>
 			
-			<br/><br/>
+			</div> <!-- end view_connactions div -->
+			
+			<div class="requestType" id="view_friendReqs">
 			
 
 			<h2>Incoming Friend Requests</h2>
@@ -283,6 +304,8 @@
 			</tbody>
 			
 			</table>
+			
+			</div> <!-- end friendReqs div -->
 
 
 		</div> <!-- end page -->
