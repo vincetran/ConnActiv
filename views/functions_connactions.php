@@ -6,6 +6,37 @@
 *
 */
 
+	function getProfile($userID) {
+	
+		/* Grabbing all the information we want to associate with the user, 
+		to be able to click the user's profile and see this in fancybox. 
+		Renders in home.php when a user profile is clicked.
+		
+		DAVE TODO: Put age/gender/location/about/etc in here for display.
+		
+		-Kim */
+		
+	//First, get all the data we want to display as user's profile.
+		 $src = getUserPic($userID);
+		 $uname = getUserName($userID);
+		 $reviewsPos = getReviewCountForUser('positive', $userID);
+		 $reviewsNeg = getReviewCountForUser('negative', $userID);
+		
+	//Then append it all as raw markup for display. 
+		 $details = "<div class='view_profile'>"; // must be the first item appended to $details
+
+		 $details .= "<img src=".$src." /><h2>$uname</h2>";
+		 $details .= "<br/>Positive reviews: $reviewsPos";
+		 $details .= "<br/>Negative reviews: $reviewsNeg";
+	/*** Add other details for the user here */
+		 
+		 $details .= "</div>"; // must be the final item appended to $details
+
+		 return $details;
+	}
+
+
+
 	function postConnaction(){
 	
 		//This function will post the connaction to the database!
