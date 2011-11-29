@@ -69,7 +69,7 @@
 			
 	<div class="page">
 
-		<h2>Incoming Requests</h2>
+		<h2>Incoming Connaction Requests</h2>
 		<h3>People asking to join you</h3>
 			<form id="unsubNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 			<table id="incoming" class="requests regular_table">
@@ -137,7 +137,7 @@
 			
 			<br/><br/>
 			
-		<h2>Pending Requests</h2>
+		<h2>Pending Connaction Requests</h2>
 		<h3>Activities you've asked to join</h3>
 			
 			<table id="pending" class="requests regular_table">
@@ -256,6 +256,42 @@
 			
 			<br/><br/>
 			
+
+			<h2>Incoming Friend Requests</h2>
+		<h3>People asking to be your friend</h3>
+			<form id="unsubNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
+			<table id="incoming" class="requests regular_table">
+			<thead class="reqHeader">
+				<tr>
+					<th>Status</th>
+					<th>User</th>
+					<th>Message</th>
+				</tr>
+			</thead>
+			<tbody>
+				incbound friend requests go here
+			</tbody>
+			
+			</table>
+
+			<h2>Pending Friend Requests</h2>
+		<h3>People  have asked to be your friend</h3>
+			<form id="unsubNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
+			<table id="incoming" class="requests regular_table">
+			<thead class="reqHeader">
+				<tr>
+					<th>Status</th>
+					<th>User</th>
+					<th>Message</th>
+				</tr>
+			</thead>
+			<tbody>
+				outbound friend requests go here
+			</tbody>
+			
+			</table>
+
+
 		</div> <!-- end page -->
 			
 			<?

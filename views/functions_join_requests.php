@@ -6,6 +6,20 @@ function joinRequest(){
 	$to_user = $_POST['postingUserID'];
 	$connactionID = $_POST['connactionID'];
 	$message = $_POST['message'];
+	$releaseEmail = $_POST['releaseEmail'];
+	$releasePhone = $_POST['releasePhone'];
+	
+	$user = getDatabaseInfo("users", "user_id", getUserID());
+	if($releaseEmail == "on"){
+		$body .= "Email: ".$user['EMAIL']."\n";
+	}
+	if($releasePhone == "on"){
+		$body .= "Phone: ".$user['PHONE']."\n";
+	}
+
+	$query = "insert into messages values (".getUserID().", ".$to_user.", 'Contact information for ".getName()."', '".$body."', now())";
+				
+	mysql_query($query);
 	
 	$query = sprintf("INSERT INTO connaction_requests (from_user, to_user, connaction_ID, message) values(%s,%s,%s,'%s')", $from_user, $to_user, $connactionID, $message);
 	$insert = mysql_query($query) or die(mysql_error());

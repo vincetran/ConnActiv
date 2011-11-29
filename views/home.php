@@ -15,7 +15,7 @@
 		}
 		if(isset($_POST['reply'])){
 				$query = "insert into messages values (".getUserID().", ".$_POST['reply'][3].", '".$_POST['reply'][0]."', '".$_POST['reply'][1]."', now())";
-				echo $query;
+				
 				mysql_query($query);
 				
 			}
@@ -237,7 +237,9 @@
 													<div class="expand" style="display:none">
 														<input type="hidden" name="connactionID" value="<?= $connactionID?>"/>
 														<input type="hidden" name="postingUserID" value="<?= $userID?>"/>
-														<textarea name="message" maxlength="255" style="width:80%;" class="small" placeholder="Hi! I was hoping to join your activity."></textarea>
+														<textarea name="message" maxlength="255" style="width:80%;" class="small" placeholder="Hi! I was hoping to join your activity."></textarea><br/>
+														<input type="checkbox" name="releaseEmail"/>Release Email to user<br/>
+														<input type="checkbox" name="releasePhone"/>Release Phone Number to User		
 														<input type="submit" class="join" name="joinRequest" value="Send"/>
 													</div>
 											<?php } ?>
