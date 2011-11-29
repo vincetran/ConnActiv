@@ -98,11 +98,11 @@ $(function() {
 			<form id="signinForm" action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
 			<table>
 				<tr>
-					<th id="formHeader"><label>Email:</label></th>
+					<th class="formHeader"><label>Email:</label></th>
 					<td><input id="username"  type="text" name="username" maxlength="25" class="validate[required,custom[email]]"/><br/><br/></td>
 				</tr>
 				<tr>
-					<th id="formHeader">Password:</th>
+					<th class="formHeader">Password:</th>
 					<td><input id="password" type="password" name="pass" maxlength="100" class="validate[required]"/></td>
 				</tr>
 				<tr><td colspan="2">&nbsp;</td></tr>
@@ -118,47 +118,47 @@ $(function() {
 			<form id="registerForm" action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
 			<table>
 				<tr>
-					<th id="formHeader">Email*:</th>
+					<th class="formHeader">Email*:</th>
 					<td><input id="username"  type="text" name="username" maxlength="25" class="validate[required,custom[email]]"/><br/></td>
 				</tr>
 				<tr>
-					<th id="formHeader">First name*:</th>
+					<th class="formHeader">First name*:</th>
 					<td><input id="firstName"  type="text" name="firstName" maxlength="20" class="validate[required]"/><br/></td>
 				</tr>
 				<tr>
-					<th id="formHeader">Last name*:</th>
+					<th class="formHeader">Last name*:</th>
 					<td><input id="lastName" type="text" name="lastName" maxlength="20" class="validate[required]"/></td>
 				</tr>
 				<tr>
-					<th id="formHeader">Street:</th>
+					<th class="formHeader">Street:</th>
 					<td><input id="street"  type="text" name="street" maxlength="25" /><br/></td>
 				</tr>
 				<tr>
-					<th id="formHeader">City:</th>
+					<th class="formHeader">City:</th>
 					<td><input id="city" type="text" name="city" maxlength="25" /></td>
 				</tr>
 				<tr>
-					<th id="formHeader">State:</th>
+					<th class="formHeader">State:</th>
 					<td><input id="state"  type="text" name="state" maxlength="2"/><br/></td>
 				</tr>
 				<tr>
-					<th id="formHeader">Zip:</th>
+					<th class="formHeader">Zip:</th>
 					<td><input id="zip" type="text" name="zip" maxlength="5" /></td>
 				</tr>
 				<tr>
-					<th id="formHeader">Phone:</th>
+					<th class="formHeader">Phone:</th>
 					<td><input id="phone"  type="text" name="phone" maxlength="25"/><br/></td>
 				</tr>
 				<tr>
-					<th id="formHeader">Interests:</th>
+					<th class="formHeader">Interests:</th>
 					<td><input id="interests" type="text" name="interests" maxlength="4000" /></td>
 				</tr>
 				<tr>
-					<th id="formHeader">Password*:</th>
+					<th class="formHeader">Password*:</th>
 					<td><input id="password" type="password" name="password" maxlength="100" class="validate[required]" minlength="6"/><br/></td>
 				</tr>
 				<tr>
-					<th id="formHeader">Confirm Password*:</th>
+					<th class="formHeader">Confirm Password*:</th>
 					<td><input id="confirm" type="password" name="confirm" maxlength="100" class="validate[required]" equalTo="#password"/></td>
 				</tr>
 				<tr>
