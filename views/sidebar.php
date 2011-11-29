@@ -3,11 +3,11 @@
 <script type="text/javascript">
 
 $('.thumbs_up').click(function() {
-		alert("STUB: Going to the user's recommendations (positive).");
+		window.location.href = '/views/profile.php';
 	});	
 	
 $('.thumbs_down').click(function() {
-		alert("STUB: Going to the user's recommendations (negative).");
+		window.location.href = '/views/profile.php';
 	});
 	
 </script>
