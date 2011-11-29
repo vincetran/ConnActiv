@@ -56,6 +56,10 @@
 	<div id="user_menu" class="signout_opt" style="display:inline; padding: 2px 2px; width: 60px; text-align: left; color: #fff;">
 		<a href="logout.php" id="logout">Sign out</a>
 	</div>
+	
+	<span style=" position: absolute; left: 150px">
+		<img height="40" style="margin-top: -10px;" src="../public/images/logo.png"/>
+	</span>
 
 			<span id="top-nav">
 				<ul id="nav">
