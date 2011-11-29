@@ -71,7 +71,12 @@
 				else{$from = getUserName($rev['FROM_USER']);}
 			
 				$connactInfo = getConnactionActivity($rev['CONNACTION_ID']);
-				$connactInfo .=" at ".getConnactionLocation($rev['CONNACTION_ID'])." on ".getConnactionDate($rev['CONNACTION_ID'], "START");
+				
+				$loc = getConnactionLocation($rev['CONNACTION_ID']);
+				$date = getConnactionDate($rev['CONNACTION_ID'], "START");
+				$connactInfo = '';
+				if ($loc) $connactInfo .= $loc;
+				if ($date) $connactInfo .= " on $date";
 			
 				$details .= "<tr><td>".$from."</td><td>$connactInfo</td>".$posNeg."<td>".$rev['REVIEW']."</td></tr>";
 			} //end foreach
