@@ -21,15 +21,51 @@
 		 $uname = getUserName($userID);
 		 $reviewsPos = getReviewCountForUser('positive', $userID);
 		 $reviewsNeg = getReviewCountForUser('negative', $userID);
-		
+		 $user = getDatabaseInfo("users", "user_id", $userID);
+		 $city = $user['CITY'];
+		 $state = $user['STATE'];
+		 $about = $user['INTERESTS'];
+		 $DOB = $user['DOB'];
+		 $gender = $user['GENDER'];
 	//Then append it all as raw markup for display. 
 		 $details = "<div class='view_profile'>"; // must be the first item appended to $details
 
 		 $details .= "<img src=".$src." /><h2>$uname</h2>";
+		 if($about != ''){$details .= "<br/>About: ".$about." ";}
+		 $details .= "<br/>City: ".$city;
+		 $details .= "<br/>State: ".$state;
+		 if($DOB != ''){$details .= "<br/>Birthday: ".$DOB;}
+		 if($gender != ''){$details .= "<br/>Gender: ".$gender;}
 		 $details .= "<br/>Positive reviews: $reviewsPos";
 		 $details .= "<br/>Negative reviews: $reviewsNeg";
-	/*** Add other details for the user here */
-		 
+	/*** Add other details for the user here */ 
+		$review = getAllReviews($userID);
+		if(sizeof($review) > 0){		
+			$details .= "<br/><table>";
+			$details .= "<br/><tr><td>From</td><td>Connaction Info</td><td>Positive/Negative</td><td>Review</td></tr>";		
+			foreach($review as $rev){
+				if($rev['IS_POSITIVE'] == 1){$posNeg = "<td class='thumbs_up clickable'><img class='thumbs' src='../public/images/thumbs_up.png' height='60'/></td>";}
+				else{$posNeg = "<td class='thumbs_down clickable'><img class='thumbs' src='../public/images/thumbs_down.png' height='60'/></td>";}
+
+				if($rev['IS_ANONYMOUS'] == 1){$from = "Anonymous";}
+				else{$from = getUserName($rev['FROM_USER']);}
+			
+				$connactInfo = getConnactionActivity($rev['CONNACTION_ID']);
+				$connactInfo .=" at ".getConnactionLocation($rev['CONNACTION_ID'])." on ".getConnactionDate($rev['CONNACTION_ID'], "START");
+			
+				$details .= "<br/><tr><td>".$from."</td><td>$connactInfo</td>".$posNeg."<td>".$rev['REVIEW']."</td></tr>";
+			} //end foreach
+			$details .= "</table>";
+		} //end has reviews	
+			if(isFriend($userID)){		
+				$details .= "<br/>Send Message<td><form action = ".$_SERVER['PHP_SELF']." method = 'post'><input = 'textbox' placeholder = 'Subject' name = 'reply[]'><input = 'textarea' placeholder = 'Reply Here' name = 'reply[] /'><input type = 'submit' name = 'reply[]' value = 'Reply'/><input type = 'hidden' name = 'reply[]' value = '".$userID."'/></form>";
+			}
+			elseif(requestIsActive($userID)){$details .= "<br/>Friend Request Pending";}
+			elseif($userID != getUserID()){
+				$details .= "<br/>Request to be Friends<td><form action = ".$_SERVER['PHP_SELF']." method = 'post'><input = 'textarea' placeholder = 'Insert a message to this person' name = 'friend[]' /><input type = 'submit' name = 'friend[]' value = 'Submit'/><input type = 'hidden' name = 'friend[]' value = '".$userID."'/></form>";
+			}
+			else{$details .= "<br/>";}
+		
 		 $details .= "</div>"; // must be the final item appended to $details
 
 		 return $details;
@@ -209,6 +245,13 @@
 		$dateParsed = date_parse($date);
 		$newDate = $dateParsed["month"].'/'.$dateParsed["day"].'/'.$dateParsed["year"];
 		return $newDate;
+	}
+	function getConnactionLocation($connactionID){
+		//This function will return the Location of connaction
+		
+		$connaction = getDatabaseInfo("connactions", "connaction_id", $connactionID);
+		$location = $connaction['LOCATION'];	
+		return $location;
 	}
 	function printArray($array){
 		//This function echos the passed in array

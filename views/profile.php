@@ -34,7 +34,9 @@
 				$query = "insert into messages values (".getUserID().", ".$_POST['reply'][3].", '".$_POST['reply'][0]."', '".$_POST['reply'][1]."', now())";
 				echo $query;
 				mysql_query($query);
+				
 			}
+			
 			?>
 			
 			<script type="text/javascript">

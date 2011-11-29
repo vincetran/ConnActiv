@@ -117,6 +117,22 @@ function getReviews($which) {
 	return $reviews;
 }
 
+function getAllReviews($userid){
+	$reviews = array();
+	
+
+		$query = "SELECT * FROM reviews WHERE user_id = ".$userid;
+
+	
+	$result = mysql_query($query) or die(mysql_error());
+	while($row = mysql_fetch_array($result)){
+		$reviews[] = $row;
+	}
+	
+	return $reviews;
+
+}
+
 function getReviewCountForUser($which, $id) {
 	$reviews = array();
 	

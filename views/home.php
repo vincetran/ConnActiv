@@ -8,6 +8,18 @@
 		} else if (isset($_POST['joinRequest'])) { 
 			joinRequest();
 		}
+
+		if(isset($_POST['friend'])){
+			$query = "insert into friend_requests values (".getUserID().", ".$_POST['friend'][2].", '".$_POST['friend'][0]."', 1)";
+			mysql_query($query) or die(mysql_error());
+		}
+		if(isset($_POST['reply'])){
+				$query = "insert into messages values (".getUserID().", ".$_POST['reply'][3].", '".$_POST['reply'][0]."', '".$_POST['reply'][1]."', now())";
+				echo $query;
+				mysql_query($query);
+				
+			}
+			
 		
 	?>
 	<script type="text/javascript">
