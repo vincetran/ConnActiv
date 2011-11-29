@@ -77,7 +77,10 @@
 				 $('#expandAddNewNetwork').click(function() {
 					$('#hiddenNewNetwork').toggle();   		 
 				 });
-					 
+				
+				$('.joinExpander').click(function(){
+					$(this).siblings('.expand').toggle();
+				});
    		});
    		
    		</script>
@@ -180,11 +183,72 @@
 							($level[2] && $level[3])? echo "<td>$level[2] - $level[3]</td>" : echo "<td>Not set.</td>";
 							$level[4]? echo "<td>$level[4]</td>" : echo "<td>Not set.</td>";
 						*/
-						
 						echo "<td>$level[0]</td>";
-						echo "<td>$level[1]</td>";
-						echo "<td>$level[2] - $level[3]</td>";
-						echo "<td>$level[4]</td>";
+						if($level[1] == NULL){
+							echo "<td>
+									<span class=\"clickable joinExpander\">Click to Set</span>";
+						}
+						else{
+							echo "<td>
+									<span class=\"clickable joinExpander\">$level[0]</span>";
+						}	
+							echo	"<div class=\"expand\" style=\"display:none\">
+											<select name=\"seek\">
+												<option value=\"-1\">Level:</option>
+												<option value=\"0\">0</option>
+												<option value=\"1\">1</option>
+											</select>
+											<input class=\"button\" type=\"submit\" name=\"saveSeek\" value=\"Save\"/>
+										</div>
+								</td>";
+						if($level[2] == NULL){
+							echo "<td>
+									<span class=\"clickable joinExpander\">Click to Set - </span>";
+						}
+						else{
+							echo "<td>
+									<span class=\"clickable joinExpander\">$level[2] - </span>";
+						}
+							echo "<div class=\"expand\" style=\"display:none\">
+										<select name=\"low\">
+											<option value=\"-1\">Level:</option>
+											<option value=\"0\">0</option>
+											<option value=\"1\">1</option>
+										</select>
+										<input class=\"button\" type=\"submit\" name=\"saveLow\" value=\"Save\"/>
+									</div>";
+						if($level[3] == NULL){
+							echo "	<span class=\"clickable joinExpander\">Click to Set</span>";
+						}
+						else{
+							echo "	<span class=\"clickable joinExpander\">$level[3]</span>";
+						}
+							echo " <div class=\"expand\" style=\"display:none\">
+										<select name=\"high\">
+											<option value=\"-1\">Level:</option>
+											<option value=\"0\">0</option>
+											<option value=\"1\">1</option>
+										</select>
+										<input class=\"button\" type=\"submit\" name=\"saveHigh\" value=\"Save\"/>
+									</div>
+								</td>";
+						if($level[4] == NULL){
+							echo "<td>
+									<span class=\"clickable joinExpander\">Click to Set</span>";
+						}
+						else{
+							echo "<td>
+									<span class=\"clickable joinExpander\">$level[4]</span>";
+						}
+							echo "<div class=\"expand\" style=\"display:none\">
+											<select name=\"own\">
+												<option value=\"-1\">Level:</option>
+												<option value=\"0\">0</option>
+												<option value=\"1\">1</option>
+											</select>
+											<input class=\"button\" type=\"submit\" name=\"saveOwn\" value=\"Save\"/>
+										</div>
+								</td>";
 					echo "</tr>";
 					}//end foreach
 					} else {

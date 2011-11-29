@@ -70,7 +70,9 @@
 	}
 
 
-	function getAllConnactions($userid){
+	function getAllConnactions(){
+		$userid = getUserID();
+	
 		$query = "select unique_network_id from user_networks where user_id = ".$userid;
 		$result = mysql_query($query);
 		while($info = mysql_fetch_array($result)){
@@ -88,6 +90,17 @@
 		$result = mysql_query($query);
 		if(mysql_num_rows($result) == 0){return false;}
 		else{return true;}
+	}
+	
+	function getConnactionsByUnique($unique_id) {
+		$userid = getUserID();
+		$connactions = array();
+	
+		$query = mysql_query("select * from connactions where unique_network_id = ".$unique_id);
+		while($row = mysql_fetch_array($query)){
+			$connactions[] = $row;
+		}
+	return $connactions;
 	}
 	
 	function getConnactions($n_aID, $option){

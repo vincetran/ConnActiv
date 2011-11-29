@@ -12,7 +12,9 @@
 <link type="text/css" rel="stylesheet/less" href="../styles/sidebar.less"/>
 <link type="text/css" rel="stylesheet" href="../styles/demo_table.css"/>
 <link type="text/css" rel="stylesheet" href="../styles/validationEngine.jquery.css" />
+<link type="text/css" rel="stylesheet" href="../styles/jquery.fancybox-1.3.4.css" />
 
+<script type="text/javascript" src="../js/jquery.fancybox-1.3.4.pack.js"></script>
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/less.min.js"></script>
 <script type="text/javascript" src="../js/jquery.jeditable.mini.js"></script>
