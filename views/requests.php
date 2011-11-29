@@ -103,9 +103,9 @@
 							<tr> 
 								<td>
 									<?php 
-										echo "<input type='checkbox' value='".$requestID."' name='requestID[]' /> <br/>";
-									
+										//echo "<input type='checkbox' value='".$requestID."' name='requestID[]' /> <br/>"; //Add this line for changing status requests
 										if($approved == -1){
+											echo "<input type='checkbox' value='".$requestID."' name='requestID[]' /> <br/>"; //Remove this line for changing status requests
 											echo "Pending";
 										}
 										else if($approved == 1){
