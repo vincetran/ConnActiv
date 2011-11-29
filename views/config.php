@@ -302,6 +302,38 @@ include("upload_file.php");
 			$query = "UPDATE users SET GENDER = '".$gender."' WHERE USER_ID = '".getUserID()."'";
 			$update = mysql_query($query) or die(mysql_error());
 		}
+		for($i = 0; $i < count(getUserActivityLevels()); $i++){
+			if((isset($_POST['seekLvl'.$i])) && ($_POST['seekLvl'.$i] != -1)){
+				$type = "PREFERRED";
+				echo "TODO: Update ".$type;
+				$level = $_POST['seekLvl'.$i];
+				echo $level;
+			}
+			if((isset($_POST['lowLvl'.$i])) && ($_POST['lowLvl'.$i] != -1)){
+				$type = "LOW";
+				echo "TODO: Update ".$type;
+				$level = $_POST['lowLvl'.$i];
+				echo $level;
+			}
+			if((isset($_POST['highLvl'.$i])) && ($_POST['highLvl'.$i] != -1)){
+				$type = "HIGH";
+				echo "TODO: Update ".$type;
+				$level = $_POST['highLvl'.$i];
+				echo $level;
+			}
+			if((isset($_POST['ownLvl'.$i])) && ($_POST['ownLvl'.$i] != -1)){
+				$type = "OWN";
+				echo "TODO: Update ".$type;
+				$level = $_POST['ownLvl'.$i];
+				echo $level;
+			}
+		}
+		
+			/*TODO for me (ROB):
+				NEED TO ALSO get activities IDs will to strtok like I did for requests. Going to class for now
+				$query = "UPDATE user_activities SET THE_LEVEL = '".$level."' WHERE USER_ID = '".getUserID()."'" //Activity ID stuff;
+				$update = mysql_query($query) or die(mysql_error());*/
+			
 		/*if(isset($_POST['about_me'])){
 			$interests = $_POST['about_me']; 
 			$query = "UPDATE users SET INTERESTS = '".$interests."' WHERE USER_ID = '".getUserID()."'";
@@ -313,7 +345,7 @@ include("upload_file.php");
 			$query = "UPDATE users SET DOB = '".$DOB."' WHERE USER_ID = '".getUserID()."'";
 			$update = mysql_query($query) or die(mysql_error());
 		}
-		$update = mysql_query($query) or die(mysql_error());
+		//$update = mysql_query($query) or die(mysql_error());
 	}
 	function myDateParser($dateToParse){
 		//This function takes a string date in the format of mm/dd/yyyy
