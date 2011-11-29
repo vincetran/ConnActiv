@@ -180,11 +180,30 @@
 							($level[2] && $level[3])? echo "<td>$level[2] - $level[3]</td>" : echo "<td>Not set.</td>";
 							$level[4]? echo "<td>$level[4]</td>" : echo "<td>Not set.</td>";
 						*/
-						
-						echo "<td>$level[0]</td>";
-						echo "<td>$level[1]</td>";
-						echo "<td>$level[2] - $level[3]</td>";
-						echo "<td>$level[4]</td>";
+						for($i = 0; $i < 5; $i++){
+							if($i == 2){
+								if($level[$i] == NULL){
+									echo "<td>Click to Set - ";
+								}
+								else{
+									echo "<td>$level[$i] - ";
+								}
+								if($level[$i+1] == NULL){
+									echo "Click to Set</td>";
+									$i++;
+								}
+								else{
+									echo "$level[3]</td>";
+									$i++;
+								}	
+							}
+							else if($level[$i] == NULL){
+								echo "<td>Click to Set</td>";
+							}
+							else{
+								echo "<td>$level[$i]</td>";
+							}
+						}
 					echo "</tr>";
 					}//end foreach
 					} else {

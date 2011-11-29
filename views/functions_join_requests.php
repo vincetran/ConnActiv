@@ -57,6 +57,11 @@ function acceptRequest($reqID){
 	//echo "Accept: ID: ".$fromUser." ConID: ".$connactionID;
 	$query = sprintf("UPDATE connaction_requests SET APPROVED = 1 WHERE FROM_USER = '%s' AND CONNACTION_ID = '%s'",$fromUser, $connactionID);
 	$update = mysql_query($query) or die(mysql_error());
+	
+	$query = sprintf("INSERT INTO connaction_attending(USER_ID, CONNACTION_ID) values('%s', '%s')", $fromUser, $connactionID);
+	$update = mysql_query($query) or die(mysql_error());
+	
+	
 }
 function denyRequest($reqID){
 	$fromUser = strtok($reqID, " ");
@@ -65,6 +70,11 @@ function denyRequest($reqID){
 	//echo "Accept: ID: ".$fromUser." ConID: ".$connactionID;
 	$query = sprintf("UPDATE connaction_requests SET APPROVED = 2 WHERE FROM_USER = '%s' AND CONNACTION_ID = '%s'",$fromUser, $connactionID);
 	$update = mysql_query($query) or die(mysql_error());
+	
+	//TODO
+	//If we allow the user to change the status of a request we must then remove the user
+	//from the connaction_attending table.
+	
 }
 
 ?>
