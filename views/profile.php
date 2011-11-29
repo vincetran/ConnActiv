@@ -158,7 +158,7 @@
 							echo "</tr>";
 						}
 					
-					} else echo "<tr><td colspan='5'>No incoming messages.</tr>";
+					} else echo "<tr><td colspan='5'>None yet.</tr>";
 				?>
 				</tbody>
 			</table>
@@ -189,7 +189,7 @@
 						echo "</tr>";
 					}
 					
-					} else echo "<tr><td colspan='5'>No sent messages.</tr>";
+					} else echo "<tr><td colspan='5'>None yet.</tr>";
 				?>
 				</tbody>
 			</table>
