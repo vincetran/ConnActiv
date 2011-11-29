@@ -43,7 +43,7 @@
 		$(function() {
 		
 			$(".editable_textarea").editable("http://localhost/ConnActiv/views/save.php", { 
-				indicator : "<img src='http://localhost/ConnActiv/ConnActiv/public/images/indicator.gif'>",
+				indicator : "<img src='../public/images/indicator.gif'>",
 				type   : 'textarea',
 				select : true,
 				submit : 'Save',
@@ -147,14 +147,18 @@
 				<?php
 					$incMessages = getIncMessages(getUserID());
 					
-					foreach($incMessages as $message){
-						echo "<tr><td>".getUserName($message['FROM_USER'])."</td>";
-						echo "<td>".$message['SUBJECT']."</td>";
-						echo "<td>".$message['BODY']."</td>";
-						echo "<td>".$message['DATE']."</td>";
-						echo "<td><form action = ".$_SERVER['PHP_SELF']." method = 'post'><input = 'textbox' placeholder = 'Subject' name = 'reply[]'><input = 'textarea' placeholder = 'Reply Here' name = 'reply[]'><input type = 'submit' name = 'reply[]' value = 'Reply'/><input type = 'hidden' name = 'reply[]' value = '".$message['FROM_USER']."'/></form></td>";
-						echo "</tr>";
-					}
+					if ($incMessages) {
+					
+						foreach($incMessages as $message){
+							echo "<tr><td>".getUserName($message['FROM_USER'])."</td>";
+							echo "<td>".$message['SUBJECT']."</td>";
+							echo "<td>".$message['BODY']."</td>";
+							echo "<td>".$message['DATE']."</td>";
+							echo "<td><form action = ".$_SERVER['PHP_SELF']." method = 'post'><input = 'textbox' placeholder = 'Subject' name = 'reply[]'><input = 'textarea' placeholder = 'Reply Here' name = 'reply[]'><input type = 'submit' name = 'reply[]' value = 'Reply'/><input type = 'hidden' name = 'reply[]' value = '".$message['FROM_USER']."'/></form></td>";
+							echo "</tr>";
+						}
+					
+					} else echo "<tr><td colspan='5'>No incoming messages.</tr>";
 				?>
 				</tbody>
 			</table>
@@ -172,9 +176,11 @@
 				</thead>
 				<tbody>
 				<?php
-					$incMessages = getSentMessages(getUserID());
+					$sentMessages = getSentMessages(getUserID());
 					
-					foreach($incMessages as $message){
+					if ($sentMessages) {
+					
+					foreach($sentMessages as $message){
 						echo "<tr>";
 						echo "<td>".getUserName($message['TO_USER'])."</td>";
 						echo "<td>".$message['SUBJECT']."</td>";
@@ -182,6 +188,8 @@
 						echo "<td>".$message['DATE']."</td>";
 						echo "</tr>";
 					}
+					
+					} else echo "<tr><td colspan='5'>No sent messages.</tr>";
 				?>
 				</tbody>
 			</table>
