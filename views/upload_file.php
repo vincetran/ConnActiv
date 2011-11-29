@@ -23,7 +23,7 @@
  
    // Upload the file to your specified path.
    if(move_uploaded_file($file['userfile']['tmp_name'],$upload_path . $userid))
-         echo '<div class = "error">Your profile picture was uploaded</div>'; // It worked.
+         echo '<div class = "notice">Your profile picture was uploaded</div>'; // It worked.
       else
          echo '<div class = "error">There was an error during the file upload.  Please try again.</div>'; // It failed :(.
  	}

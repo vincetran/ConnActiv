@@ -77,11 +77,10 @@
 				<tr>
 					<th>Status</th>
 					<th>User</th>
-					<th>Activity</th>
-					<th>Location</th>
-					<th>ConnAction Post Date</th>
+					<th>Network</th>
+					<th>Posted On</th>
 					<th>ConnAction Date</th>
-					<th>Request Date</th>
+					<th>Requested On</th>
 					<th>Message</th>
 				</tr>
 			</thead>
@@ -117,8 +116,7 @@
 									?>
 								</td>
 								<td><?php echo getUserName($fromUser); ?></td>
-								<td><?php echo getConnactionActivity($connactionID); ?></td>
-								<td><?php echo getConnactionNetwork($connactionID); ?></td>
+								<td><?php echo getConnactionUniqueNetwork($connactionID); ?></td>
 								<td><?php echo getConnactionDate($connactionID, "POST"); ?></td>
 								<td><?php echo getConnactionDate($connactionID, "START"); ?></td>
 								<td><?php echo $date["month"].'/'.$date["day"].'/'.$date["year"]; ?></td>
@@ -145,11 +143,10 @@
 				<tr>
 					<th>Status</th>
 					<th>User</th>
-					<th>Activity</th>
-					<th>Location</th>
-					<th>ConnAction Post Date</th>
+					<th>Network</th>
+					<th>Posted On</th>
 					<th>ConnAction Date</th>
-					<th>Request Date</th>
+					<th>Requested On</th>
 					<th>Message</th>
 				</tr>
 			</thead>
@@ -166,7 +163,7 @@
 							$approved = $incoming[4];
 							$date = date_parse($incoming[5]); ?>
 				
-							<tr> <!-- TODO: make these editable and auto-populating -->
+							<tr>
 								<td>
 									<?php
 										if($approved == -1){
@@ -181,8 +178,7 @@
 									?>
 								</td>
 								<td><?php echo getUserName($toUser); ?></td>
-								<td><?php echo getConnactionActivity($connactionID); ?></td>
-								<td><?php echo getConnactionNetwork($connactionID); ?></td>
+								<td><?php echo getConnactionUniqueNetwork($connactionID); ?></td>
 								<td><?php echo getConnactionDate($connactionID, "POST"); ?></td>
 								<td><?php echo getConnactionDate($connactionID, "START"); ?></td>
 								<td><?php echo $date["month"].'/'.$date["day"].'/'.$date["year"]; ?></td>
@@ -215,13 +211,8 @@
 		<?php
 			$past = getPastConnactions(getUserID());
 			
-			
 			foreach($past as $pc){
-			echo "<tbody>";
-											
-						
-				echo "<tr>";
-
+			echo "<tbody><tr>";
 
 					echo "<td>".getUserName($pc[1])."</td>";
 					echo "<td>".getConnactionActivity($pc[0])."</td>";
@@ -269,10 +260,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				incbound friend requests go here
+				<!--inbound friend requests go here-->
 			</tbody>
 			
 			</table>
+			
+			<br/><br/>
 
 			<h2>Pending Friend Requests</h2>
 		<h3>People  have asked to be your friend</h3>
@@ -286,7 +279,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				outbound friend requests go here
+				<!-- outbound friend requests go here -->
 			</tbody>
 			
 			</table>

@@ -233,10 +233,21 @@
 		$networkID = getDatabaseInfo("connactions", "connaction_id", $connactionID);
 		$net = getDatabaseInfo("unique_networks", "unique_network_id", $networkID['UNIQUE_NETWORK_ID']);
 		$network = getDatabaseInfo("networks", "network_id", $net['NETWORK_ID']);	
-		$networkName = $network['AREA'];
+		$networkName = $network['AREA'] .", ". $network['STATE'];
 		
 		return $networkName;
 	}
+	
+	function getConnactionUniqueNetwork($connID){
+	// return as a string the unique network as "<area>, <state> - <activity>"	
+		$act = getConnactionActivity($connID);
+		$net = getConnactionNetwork($connID);
+		
+		$whole = $net ." - " . $act;
+		return $whole;
+	
+	}
+	
 	function getConnactionDate($connactionID, $argument){
 		//This function will return the date of connaction
 		//Argument should be POST, START or END
