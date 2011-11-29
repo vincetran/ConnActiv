@@ -40,24 +40,7 @@
 		 $details .= "<br/>Negative reviews: $reviewsNeg";
 	/*** Add other details for the user here */ 
 		$review = getAllReviews($userID);
-		if(sizeof($review) > 0){		
-			$details .= "<br/><table class='alternating regular_table'>";
-			$details .= "<br/><thead><th>From</th><th>Connaction</th><th>Rating</th><th>Review</th></tr></thead>";
-			$details .= "<tbody>";
-			foreach($review as $rev){
-				if($rev['IS_POSITIVE'] == 1){$posNeg = "<td><img src='../public/images/thumbs_up.png' height='30'/></td>";}
-				else{$posNeg = "<td><img  src='../public/images/thumbs_down.png' height='30'/></td>";}
-
-				if($rev['IS_ANONYMOUS'] == 1){$from = "Anonymous";}
-				else{$from = getUserName($rev['FROM_USER']);}
-			
-				$connactInfo = getConnactionActivity($rev['CONNACTION_ID']);
-				$connactInfo .=" at ".getConnactionLocation($rev['CONNACTION_ID'])." on ".getConnactionDate($rev['CONNACTION_ID'], "START");
-			
-				$details .= "<br/><tr><td>".$from."</td><td>$connactInfo</td>".$posNeg."<td>".$rev['REVIEW']."</td></tr>";
-			} //end foreach
-			$details .= "</tbody></table>";
-		} //end has reviews	
+		$details .= getFormattedReviews($review);
 			if(isFriend($userID)){		
 				$details .= "<br/>Send Message<td><form action = ".$_SERVER['PHP_SELF']." method = 'post'><input = 'textbox' placeholder = 'Subject' name = 'reply[]'><input = 'textarea' placeholder = 'Reply Here' name = 'reply[] /'><input type = 'submit' name = 'reply[]' value = 'Reply'/><input type = 'hidden' name = 'reply[]' value = '".$userID."'/></form>";
 			}
@@ -70,6 +53,33 @@
 		 $details .= "</div>"; // must be the final item appended to $details
 
 		 return $details;
+	}
+	
+	function getFormattedReviews($review) {
+	
+		$details = "";
+	
+		if(sizeof($review) > 0){		
+			$details .= "<table class='alternating regular_table'>";
+			$details .= "<thead><th>From</th><th>Connaction</th><th>Rating</th><th>Review</th></tr></thead>";
+			$details .= "<tbody>";
+			foreach($review as $rev){
+				if($rev['IS_POSITIVE'] == 1){$posNeg = "<td><img src='../public/images/thumbs_up.png' height='30'/></td>";}
+				else{$posNeg = "<td><img  src='../public/images/thumbs_down.png' height='30'/></td>";}
+
+				if($rev['IS_ANONYMOUS'] == 1){$from = "Anonymous";}
+				else{$from = getUserName($rev['FROM_USER']);}
+			
+				$connactInfo = getConnactionActivity($rev['CONNACTION_ID']);
+				$connactInfo .=" at ".getConnactionLocation($rev['CONNACTION_ID'])." on ".getConnactionDate($rev['CONNACTION_ID'], "START");
+			
+				$details .= "<tr><td>".$from."</td><td>$connactInfo</td>".$posNeg."<td>".$rev['REVIEW']."</td></tr>";
+			} //end foreach
+			$details .= "</tbody></table>";
+		} //end has reviews	
+		
+		return $details;
+	
 	}
 
 

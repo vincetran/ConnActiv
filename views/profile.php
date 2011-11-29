@@ -190,6 +190,13 @@
 				?>
 				</tbody>
 			</table>
+			
+			<br/><h2>Reviews of You</h2>
+			<?
+			$review = getAllReviews($userID);
+			echo getFormattedReviews($review);
+			?>
+			
 			</div>
 			<?php
 		}
