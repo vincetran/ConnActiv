@@ -84,7 +84,7 @@
 			
 	<div class="page">
 	
-	<div class="requestViewer">
+	<div class="pageViewer">
 		<span class="clickable active green" id="connactions">Connaction Requests</span>&nbsp;|&nbsp;
 		<span class="clickable green" id="friendReqs">Friend Requests</span>	
 	</div>

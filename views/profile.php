@@ -69,16 +69,39 @@
 			
 			$('.top_links').removeClass('active');
 			$('#profile').addClass('active');
-		});
 		
-		$(document).ready(function(){
 			$('#DOB').datepicker({ showButtonPanel: true, selectOtherMonths: true, changeMonth: true, changeYear: true, minDate: new Date(0) });
+			
+			$('.section').hide();
+			$('#view_profile').show();
+			$('#profile').addClass('active');
+			
+			$('.pageViewer span').click(function() {
+				$el = $(this).attr('id');
+				$sect = $("#view_" + $el);
+				$('.green').removeClass('active');
+				$(this).addClass('active');
+				$('.section').hide();
+				$sect.fadeIn();
+				
+			});
+			
+			
 		});
 			</script>
 			
 			
 			<div class="page">
-			<h2>Profile</h2>
+			
+				<div class="pageViewer">
+					<span class="clickable active green" id="profile">Your info</span>&nbsp;|&nbsp;
+					<span class="clickable green" id="messages">Messages</span>&nbsp;|&nbsp;
+					<span class="clickable green" id="reviews">Reviews</span>
+				</div>
+			
+			<div class="section" id="view_profile">
+			
+			<h2>Profile Info</h2>
 			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
 			<table class="alternating regular_table" id="myInfo">
 				<tr>
@@ -127,7 +150,11 @@
 					</td>
 				</tr>
 			</table>
-				<br/>
+				
+			</div> <!-- end view_profile div -->
+			<div class="section" id="view_messages">
+				
+			
 				<h2>Received Messages</h2>
 				
 			<table class="alternating regular_table">
@@ -191,13 +218,18 @@
 				</tbody>
 			</table>
 			
-			<br/><h2>Reviews of You</h2>
+			</div><!-- end view_messages div -->
+			<div class="section" id="view_reviews">
+			
+			<h2>Reviews of You</h2>
 			<?
 			$review = getAllReviews($userID);
 			echo getFormattedReviews($review);
 			?>
 			
-			</div>
+			</div><!-- end view_reviews div -->
+			
+			</div> <!-- end page -->
 			<?php
 		}
 	}
