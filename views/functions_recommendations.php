@@ -1,5 +1,7 @@
-<? /*-----------------------------------
-* Functions for FAVORITES and REVIEWS
+<? 
+/*
+*
+*** FAVORITES
 *
 ** array(string) getFavorites()
 ** array(int) getFavoriteIDs()
@@ -7,8 +9,11 @@
 ** int getUniqueNetworkIdByFav($fav_as_string)
 ** void defavoriteNetwork($unique_id)
 ** 
+*** REVIEWS
+**
 ** int totalReviews($which)
 ** array getReviews($which)
+*
 * -----------------------------------*/
 
 /*

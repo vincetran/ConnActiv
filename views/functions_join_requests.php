@@ -1,5 +1,30 @@
 <?
 
+/* 
+*
+*** MESSAGES
+*
+* void message()
+* void eventMessage($from, $event_id) 
+* 
+*** JOIN REQUESTS
+*
+* void joinRequest()
+* int getApproval($connactionID, $from_user)
+* array getIncRequests($userID)
+* array getPendingRequests($userID)
+*
+*** FRIEND REQUESTS
+*
+* array getIncFriendRequests($userID)
+* array getPendingFriendRequests($userID)
+* bool isFriend($userID)
+* bool requestIsActive($userid)
+* void acceptRequest($reqID)
+* void denyRequest($reqID)
+** -----------------------------------*/
+
+
 /* MESSAGES */
 
 	function message() {
@@ -48,7 +73,7 @@ function joinRequest(){
 function getApproval($connactionID, $from_user){
 	/*This checks the approval of a connaction
 	* -1 means pending
-	* 0 means the join request is not sent yet, Sorry that is what the database returns when it doesn't exist
+	* 0 means the join request is not sent yet
 	* 1 means approved
 	* 2 means denied
 	*/
@@ -63,6 +88,7 @@ function getApproval($connactionID, $from_user){
 	//echo $status;
 	return $status;
 }
+
 function getIncRequests($userID){
 	//This function returns an array of incoming requests
 	$incRequests = array();
