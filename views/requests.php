@@ -33,7 +33,7 @@
 			} // end foreach
 		} //end if ($_POST[requestID])
 		if($_POST['friendReq']){
-			mysql_query("update friend_requests set is_active = 0 where from_user = ".$otheruser." and to_user = ".getUserID());
+			mysql_query("update friend_requests set is_active = 0 where from_user = ".getUserID()." and to_user = ".$otheruser));
 		}
 	}
 	
