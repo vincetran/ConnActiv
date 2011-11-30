@@ -6,15 +6,12 @@
 *
 */
 
+
 	function getProfile($userID) {
 	
 		/* Grabbing all the information we want to associate with the user, 
 		to be able to click the user's profile and see this in fancybox. 
-		Renders in home.php when a user profile is clicked.
-		
-		DAVE TODO: Put age/gender/location/about/etc in here for display.
-		
-		-Kim */
+		Renders in home.php when a user profile is clicked. */
 		
 	//First, get all the data we want to display as user's profile.
 		 $src = getUserPic($userID);
@@ -86,6 +83,36 @@
 		return $details;
 	
 	}
+	
+	function postEvent() {
+	// Events(event_id, user_id, activity_id, network_id, message, start, end, location, recurrence, approved //
+	
+		$user = getUserID();
+		$start = myDateParser($_POST['eventStartDate']);
+		$end = myDateParser($_POST['eventEndDate']);
+		$today = date("Y-m-d");
+		$startTime = $start." ".$_POST['eventStartHour'].":".$_POST['eventStartMin'].":00";
+		$endTime = $end." ".$_POST['eventEndHour'].":".$_POST['eventEndMin'].":00";
+		$act_id = $_POST['eventActivity'];
+		$net_id = $_POST['eventNetwork'];
+		$loc = $_POST['eventLoc'];
+		$msg = $_POST['eventMsg'];
+		
+		if (!$user || !$startTime || !$endTime || $act_id<0 || $net_id<0 || !$loc || !$msg) {
+			echo "<div class='error'>Please fill in all event information.</div>";
+		} else {
+			$query = sprintf("INSERT INTO events(USER_ID, ACTIVITY_ID, NETWORK_ID, START, END, MESSAGE, LOCATION, RECURRENCE, APPROVED)
+				VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', 0, 0)", $user, $act_id, $net_id, $startTime, $endTime, $loc, $msg); //waiting for admin approval
+			
+			$insert = mysql_query($query) or die(mysql_error());
+			$new_event = mysql_insert_id();
+			
+			eventMessage($user, $new_event); //alert admin		
+			
+			echo "<div class='notice'>Event request sent! We'll keep you informed of its approval.</div>";
+		}
+		
+	}
 
 
 
@@ -155,6 +182,7 @@
 
 	function getAllConnactions(){
 		$userid = getUserID();
+		$connactions = "";
 	
 		$query = "select unique_network_id from user_networks where user_id = ".$userid;
 		$result = mysql_query($query);
@@ -369,7 +397,6 @@
 			return -1;
 		}
 	}
-
 
 
 ?>

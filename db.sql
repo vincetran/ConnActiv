@@ -133,10 +133,11 @@ CREATE TABLE IF NOT EXISTS `events` (
   `ACTIVITY_ID` int(11) NOT NULL,
   `NETWORK_ID` int(11) NOT NULL,
   `MESSAGE` varchar(4000) NOT NULL,
-  `START_DATE` date DEFAULT NULL,
-  `END_DATE` date DEFAULT NULL,
+  `START` datetime DEFAULT NULL,
+  `END` datetime DEFAULT NULL,
   `LOCATION` varchar(20) DEFAULT NULL,
   `RECURRENCE` int(11) DEFAULT NULL,
+  `APPROVED` int(1) DEFAULT 0,
   PRIMARY KEY (`EVENT_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -311,7 +312,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`USER_ID`, `PASSWORD`, `FIRST_NAME`, `LAST_NAME`, `STREET`, `CITY`, `STATE`, `ZIP`, `PHONE`, `INTERESTS`, `PROFILE_PIC`, `email`, `DOB`, `GENDER`) VALUES
 (11, '8f53e82e508c96115551317048cba97e', 'Rob', 'Filippi', '', 'Pittsburgh', 'PA', 15232, '', 'Hello my name is Rob', '../public/images/avatar.png', 'flippi273@gmail.com', '1989-11-28', 'M'),
 (12, '8f53e82e508c96115551317048cba97e', 'Amy', 'Reehl', '', 'Pittsburgh', 'PA', 15232, '', '', '../public/images/avatar.png', 'amy4reehl@gmail.com', NULL, NULL),
-(1, '8f53e82e508c96115551317048cba97e', 'ConnActiv', 'Admin', '', '', '', null, '', '', '../public/images/avatar.png', '', NULL, NULL);
+(1, '9ae984b8b7e71ee69caf0a7b82b31b1e', 'ConnActiv', 'Admin', '', '', '', null, '', '', '../public/images/avatar.png', 'admin@connactiv.com', NULL, NULL);
 
 -- --------------------------------------------------------
 
