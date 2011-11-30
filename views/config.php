@@ -327,9 +327,22 @@ include("upload_file.php");
 	
 	function saveInfo(){
 		//This function sends the my info to the database
+		if(isset($_POST['about_me'])){
+			echo "about me";
+			$interests = $_POST['about_me']; 
+			$query = "UPDATE users SET INTERESTS = '".$interests."' WHERE USER_ID = '".getUserID()."'";
+			$update = mysql_query($query) or die(mysql_error());
+
+		}
 		if(isset($_POST['gender'])){
+			echo "gender";
 			$gender = $_POST['gender'];
 			$query = "UPDATE users SET GENDER = '".$gender."' WHERE USER_ID = '".getUserID()."'";
+			$update = mysql_query($query) or die(mysql_error());
+		}
+		if (isset($_POST['DOB'])){
+			$DOB = myDateParser($_POST['DOB']);
+			$query = "UPDATE users SET DOB = '".$DOB."' WHERE USER_ID = '".getUserID()."'";
 			$update = mysql_query($query) or die(mysql_error());
 		}
 		
@@ -337,12 +350,14 @@ include("upload_file.php");
 			$city = $_POST['city'];
 			$query = "UPDATE users SET CITY = '".$city."' WHERE USER_ID = '".getUserID()."'";
 			$update = mysql_query($query) or die(mysql_error());
+
 		}
 		
 		if (isset($_POST['state'])) {
 			$st = $_POST['state'];
 			$query = "UPDATE users SET STATE = '".$st."' WHERE USER_ID = '".getUserID()."'";
 			$update = mysql_query($query) or die(mysql_error());
+
 		}
 		
 		for($i = 0; $i < count(getUserActivityLevels()); $i++){
@@ -389,20 +404,6 @@ include("upload_file.php");
 				$update = mysql_query($query) or die(mysql_error());
 			}
 		}
-			
-		if(isset($_POST['about_me'])){
-			$interests = $_POST['about_me']; 
-			$query = "UPDATE users SET INTERESTS = '".$interests."' WHERE USER_ID = '".getUserID()."'";
-			$update = mysql_query($query) or die(mysql_error());
-			
-		}
-		
-		if (isset($_POST['DOB'])){
-			$DOB = myDateParser($_POST['DOB']);
-			$query = "UPDATE users SET DOB = '".$DOB."' WHERE USER_ID = '".getUserID()."'";
-			$update = mysql_query($query) or die(mysql_error());
-		}
-		//$update = mysql_query($query) or die(mysql_error());
 	}
 	function myDateParser($dateToParse){
 		//This function takes a string date in the format of mm/dd/yyyy
@@ -420,6 +421,25 @@ include("upload_file.php");
 			else{
 				return "Error";
 			}
+	}
+	function datePassed($checkDate){
+		//This function checks the inputed date with the current date
+		//if the checkDate has passed it will return true if the check
+		//date is in the future it return false
+		$newDate = date_parse($checkDate);
+		$today = getDate();
+		if($today["year"] > $newDate["year"]){
+			return true;
+		}
+		else if($today["mon"] > $newDate["month"] && $today["year"] >= $newDate["year"]){
+			return true;
+		}
+		else if($today["mday"] > $newDate["day"] && $today["mon"] >= $newDate["month"] && $today["year"] >= $newDate["year"]){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 	function getActivity($activityID){
 		//This function returns the name of the inputed activity ID

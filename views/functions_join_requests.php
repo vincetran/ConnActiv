@@ -49,8 +49,18 @@ function joinRequest(){
 	$to_user = $_POST['postingUserID'];
 	$connactionID = $_POST['connactionID'];
 	$message = $_POST['message'];
-	$releaseEmail = $_POST['releaseEmail'];
-	$releasePhone = $_POST['releasePhone'];
+	if(isset($_POST['releaseEmail'])){
+		$releaseEmail = $_POST['releaseEmail'];
+	}
+	else{
+		$releaseEmail = "off";
+	}
+	if(isset($_POST['releasePhone'])){
+		$releasePhone = $_POST['releasePhone'];
+	}
+	else{
+		$releasePhone = "off";
+	}
 	$body = '';
 	
 	$user = getDatabaseInfo("users", "user_id", getUserID());
@@ -109,6 +119,16 @@ function getPendingRequests($userID){
 	}
 	return $pendingRequests;
 }
+function getHiddenRequestsForFrom($userID){
+	//This function returns an array of Hidden request where user_id is the from user
+	$hiddenRequests = array();
+	$result = mysql_query("SELECT * FROM connaction_requests WHERE from_user = '$userID' AND hidden_for_from = 1")or die(mysql_error()); //returns true if you do not assign
+
+	while($info = mysql_fetch_array($result)){
+		$hiddenRequests[] = $info;
+	}
+	return $hiddenRequests;
+}
 function getIncFriendRequests($userID){
 	//This function returns an array of incoming requests
 	$incRequests = array();
@@ -144,6 +164,7 @@ function requestIsActive($userid){
 }
 
 function acceptRequest($reqID){
+
 	$fromUser = strtok($reqID, " ");
 	$connactionID = strtok(" ");
 	
@@ -167,6 +188,40 @@ function denyRequest($reqID){
 	//TODO
 	//If we allow the user to change the status of a request we must then remove the user
 	//from the connaction_attending table.
+	
+}
+function hideRequestForFrom($reqID){
+	//This function will hide a connaction request for the user who sent the request
+	$fromUser = strtok($reqID, " ");
+	$connactionID = strtok(" ");
+	
+	//echo "Accept: ID: ".$fromUser." ConID: ".$connactionID;
+	$query = sprintf("UPDATE connaction_requests SET HIDDEN_FOR_FROM = 1 WHERE FROM_USER = '%s' AND CONNACTION_ID = '%s'",$fromUser, $connactionID);
+	$update = mysql_query($query) or die(mysql_error());
+	
+}
+function unhideRequestForFrom(){
+	//This function will hide a connaction request for the user who sent the request
+	$fromUser = getUserID();
+	//$connactionID = strtok(" ");
+	
+	$hiddenRequests = getHiddenRequestsForFrom($fromUser);
+	if ($hiddenRequests) {
+					
+		foreach($hiddenRequests as $incoming){
+			$connactionID = $incoming[2];
+			$query = sprintf("UPDATE connaction_requests SET HIDDEN_FOR_FROM = 0 WHERE FROM_USER = '%s' AND CONNACTION_ID = '%s'",$fromUser, $connactionID);
+			$update = mysql_query($query) or die(mysql_error());
+		}
+	}
+}
+function deleteRequest($reqID){
+	$fromUser = strtok($reqID, " ");
+	$connactionID = strtok(" ");
+	
+	//echo "Accept: ID: ".$fromUser." ConID: ".$connactionID;
+	$query = sprintf("DELETE FROM connaction_requests WHERE FROM_USER = '%s' AND CONNACTION_ID = '%s'",$fromUser, $connactionID);
+	$update = mysql_query($query) or die(mysql_error());
 	
 }
 

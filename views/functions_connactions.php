@@ -395,6 +395,15 @@
 		$newDate = $dateParsed["month"].'/'.$dateParsed["day"].'/'.$dateParsed["year"];
 		return $newDate;
 	}
+	function getConnactionDateTime($connactionID, $argument){
+		//This function will return the date of connaction
+		//Argument should be POST, START or END
+		$dateID = getDatabaseInfo("connactions", "connaction_id", $connactionID);	
+		$date = $dateID[$argument.'_TIME'];
+		$dateParsed = date_parse($date);
+		$newDate = $dateParsed["month"].'/'.$dateParsed["day"].'/'.$dateParsed["year"]." ".$dateParsed["hour"].":".$dateParsed["minute"];
+		return $newDate;
+	}
 	function getConnactionLocation($connactionID){
 		//This function will return the Location of connaction
 		

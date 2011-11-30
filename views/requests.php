@@ -16,7 +16,7 @@
 				acceptRequest($req);
 			} // end foreach
 		} //end if ($_POST[subscribeTo])
-		if($_POST['friendReq']){
+		if(isset($_POST['friendReq'])){
 			$otheruser = substr($_POST['friendReq'][0], 0, strpos($_POST['friendReq'][0], " "));
 			mysql_query("insert into friends values (".getUserID().", ".$otheruser.")");
 			mysql_query("insert into friends values (".$otheruser.", ".getUserID().")");
@@ -33,10 +33,24 @@
 				denyRequest($req);
 			} // end foreach
 		} //end if ($_POST[requestID])
-		if($_POST['friendReq']){
+		if(isset($_POST['friendReq'])){
 			mysql_query("update friend_requests set is_active = 0 where from_user = ".getUserID()." and to_user = ".$otheruser);			
 			echo "<div class='notice'>Friend request denied.</div>";
 		}
+
+	}
+	else if (isset($_POST['hide'])) {
+		if (count($_POST['requestID'])>0) {
+			$request = $_POST['requestID'];
+			foreach($request as $req) {
+				hideRequestForFrom($req);
+			} // end foreach
+		} //end if ($_POST[requestID])
+	}
+	else if (isset($_POST['unhide'])) {
+		unhideRequestForFrom();
+	}
+
 	} else if (isset($_POST['eventDeny'])) {
 		if (count($_POST['eventReq'])>0) {
 			$request = $_POST['eventReq'];
@@ -55,6 +69,7 @@
 	
 	
 	
+
 	
 			?>
 			
@@ -238,35 +253,47 @@
 							$connactionID = $incoming[2];
 							$message = $incoming[3];
 							$approved = $incoming[4];
-							$date = date_parse($incoming[5]); ?>
-				
-							<tr>
-								<td>
-									<?php
-										if($approved == -1){
-											echo "Pending";
-										}
-										else if($approved == 1){
-											echo "Approved";
-										}
-										else{
-											echo "Denied";
-										}
-									?>
-								</td>
-								<td><?php echo getUserName($toUser); ?></td>
-								<td><?php echo getConnactionUniqueNetwork($connactionID); ?></td>
-								<td><?php echo getConnactionDate($connactionID, "POST"); ?></td>
-								<td><?php echo getConnactionDate($connactionID, "START"); ?></td>
-								<td><?php echo $date["month"].'/'.$date["day"].'/'.$date["year"]; ?></td>
-								<td><?php echo $message; ?></td>
-							</tr>
+							$date = date_parse($incoming[5]); 
+							$hidden = $incoming[6];
+							$requestID = $fromUser." ".$connactionID;
+							
+							if($hidden == 0){?>
+							
+							
+								<tr>
+									<td>
+										<?php
+											if($approved == -1){
+												echo "Pending";
+											}
+											else if($approved == 1){
+												echo "<input type='checkbox' value='".$requestID."' name='requestID[]' /> <br/>";
+												echo "Approved";
+											}
+											else{
+												echo "<input type='checkbox' value='".$requestID."' name='requestID[]' /> <br/>";
+												echo "Denied";
+											}
+										?>
+									</td>
+									<td><?php echo getUserName($toUser); ?></td>
+									<td><?php echo getConnactionUniqueNetwork($connactionID); ?></td>
+									<td><?php echo getConnactionDate($connactionID, "POST"); ?></td>
+									<td><?php echo getConnactionDate($connactionID, "START"); ?></td>
+									<td><?php echo $date["month"].'/'.$date["day"].'/'.$date["year"]; ?></td>
+									<td><?php echo $message; ?></td>
+								</tr>
 						<?php } 
+						}
 					}
 				?>
 			</tbody>
-			
 			</table>
+			<div class="below_table">
+				<span style="clear:both;" class="below_table">Request are deleted the day after the ConnAction.</span>
+				<input style="float:right; margin-left:5px; margin-right:20px" type="submit" name="hide" value="Hide Request(s)"/>
+				<input style="float:right;" type="submit" name="unhide" value="Unhide Request(s)"/>
+			</div>
 			
 			<br/><br/>
 			
@@ -471,6 +498,6 @@
 		</div> <!-- end page -->
 			
 			<?
-		}
+		
  		include('footer.php');
 ?>

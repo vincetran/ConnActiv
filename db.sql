@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 29, 2011 at 03:45 AM
+-- Generation Time: Nov 30, 2011 at 09:58 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -21,9 +21,7 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-drop database xgamings_connactiv;
-create database xgamings_connactiv;
-use xgamings_connactiv;
+
 --
 -- Table structure for table `activities`
 --
@@ -75,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `connactions` (
   `UNIQUE_NETWORK_ID` int(11) NOT NULL,
   `IS_PRIVATE` int(11) DEFAULT '0',
   PRIMARY KEY (`CONNACTION_ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `connactions`
@@ -83,7 +81,8 @@ CREATE TABLE IF NOT EXISTS `connactions` (
 
 INSERT INTO `connactions` (`CONNACTION_ID`, `POST_TIME`, `USER_ID`, `LOCATION`, `START_TIME`, `MESSAGE`, `END_TIME`, `UNIQUE_NETWORK_ID`, `IS_PRIVATE`) VALUES
 (13, '2011-11-28', 11, 'Cathedral lawn', '2011-11-30 12:00:00', 'Getting cold, bring a hat!', '2011-11-30 13:00:00', 3, 0),
-(14, '2011-11-29', 11, 'Forbes and Sennot', '2011-12-01 07:00:00', 'Let us all go run!', '2011-12-01 09:00:00', 3, 0);
+(14, '2011-11-29', 11, 'Forbes and Sennot', '2011-12-01 07:00:00', 'Let us all go run!', '2011-12-01 09:00:00', 3, 0),
+(15, '2011-11-30', 11, 'Cathedral', '2011-11-28 10:00:00', 'Testing a past Connaction', '2011-11-28 11:00:00', 3, 0);
 
 -- --------------------------------------------------------
 
@@ -110,6 +109,8 @@ CREATE TABLE IF NOT EXISTS `connaction_requests` (
   `MESSAGE` varchar(4000) DEFAULT NULL,
   `APPROVED` int(11) DEFAULT '-1',
   `DATE` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `HIDDEN_FOR_FROM` int(1) NOT NULL DEFAULT '0',
+  `HIDDEN_FOR_TO` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`FROM_USER`,`CONNACTION_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -117,9 +118,9 @@ CREATE TABLE IF NOT EXISTS `connaction_requests` (
 -- Dumping data for table `connaction_requests`
 --
 
-INSERT INTO `connaction_requests` (`FROM_USER`, `TO_USER`, `CONNACTION_ID`, `MESSAGE`, `APPROVED`, `DATE`) VALUES
-(12, 11, 13, 'Hey can I join?!', 2, '2011-11-29 01:42:27'),
-(12, 11, 14, 'I would like to come!', 1, '2011-11-29 01:49:02');
+INSERT INTO `connaction_requests` (`FROM_USER`, `TO_USER`, `CONNACTION_ID`, `MESSAGE`, `APPROVED`, `DATE`, `HIDDEN_FOR_FROM`, `HIDDEN_FOR_TO`) VALUES
+(12, 11, 14, 'I would like to come!', 1, '2011-11-29 01:49:02', 0, 0),
+(12, 11, 13, 'Hi can I join!', 2, '2011-11-30 20:21:54', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -202,9 +203,24 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `TO_USER` int(11) NOT NULL,
   `SUBJECT` varchar(100) DEFAULT NULL,
   `BODY` varchar(4000) DEFAULT NULL,
-  `DATE` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `DATE` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`FROM_USER`,`TO_USER`,`DATE`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`FROM_USER`, `TO_USER`, `SUBJECT`, `BODY`, `DATE`) VALUES
+(12, 11, 'Contact information for Amy Reehl', 'Email: amy4reehl@gmail.com\nPhone: \n', '2011-11-30 14:12:23'),
+(12, 11, 'Contact information for Amy Reehl', 'Email: amy4reehl@gmail.com\nPhone: \n', '2011-11-30 14:16:44'),
+(12, 11, 'Contact information for Amy Reehl', '', '2011-11-30 15:14:36'),
+(12, 11, 'Contact information for Amy Reehl', '', '2011-11-30 15:17:03'),
+(12, 11, 'Contact information for Amy Reehl', '', '2011-11-30 15:17:07'),
+(12, 11, 'Contact information for Amy Reehl', '', '2011-11-30 15:17:58'),
+(12, 11, 'Contact information for Amy Reehl', '', '2011-11-30 15:20:23'),
+(12, 11, 'Contact information for Amy Reehl', '', '2011-11-30 15:20:42'),
+(12, 11, 'Contact information for Amy Reehl', '', '2011-11-30 15:21:54');
 
 -- --------------------------------------------------------
 
@@ -309,10 +325,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`USER_ID`, `PASSWORD`, `FIRST_NAME`, `LAST_NAME`, `STREET`, `CITY`, `STATE`, `ZIP`, `PHONE`, `INTERESTS`, `PROFILE_PIC`, `email`, `DOB`, `GENDER`) VALUES
+INSERT INTO `users` (`USER_ID`, `PASSWORD`, `FIRST_NAME`, `LAST_NAME`, `STREET`, `CITY`, `STATE`, `ZIP`, `PHONE`, `INTERESTS`, `PROFILE_PIC`, `EMAIL`, `DOB`, `GENDER`) VALUES
 (11, '8f53e82e508c96115551317048cba97e', 'Rob', 'Filippi', '', 'Pittsburgh', 'PA', 15232, '', 'Hello my name is Rob', '../public/images/avatar.png', 'flippi273@gmail.com', '1989-11-28', 'M'),
-(12, '8f53e82e508c96115551317048cba97e', 'Amy', 'Reehl', '', 'Pittsburgh', 'PA', 15232, '', '', '../public/images/avatar.png', 'amy4reehl@gmail.com', NULL, NULL),
-(1, '9ae984b8b7e71ee69caf0a7b82b31b1e', 'ConnActiv', 'Admin', '', '', '', null, '', '', '../public/images/avatar.png', 'admin@connactiv.com', NULL, NULL);
+(12, '8f53e82e508c96115551317048cba97e', 'Amy', 'Reehl', '', 'Pittsburgh', 'PA', 15232, '', '', '../public/images/avatar.png', 'amy4reehl@gmail.com', '1992-06-28', 'F'),
+(1, '9ae984b8b7e71ee69caf0a7b82b31b1e', 'ConnActiv', 'Admin', '', '', '', NULL, '', '', '../public/images/avatar.png', 'admin@connactiv.com', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -335,8 +351,8 @@ CREATE TABLE IF NOT EXISTS `user_activities` (
 --
 
 INSERT INTO `user_activities` (`USER_ID`, `ACTIVITY_ID`, `LOW_LEVEL`, `HIGH_LEVEL`, `PREFERRED`, `OWN_LEVEL`) VALUES
-(11, 3, NULL, NULL, NULL, NULL),
-(11, 1, NULL, NULL, NULL, NULL),
+(11, 3, 6, 9, 8, 8),
+(11, 1, 2, 6, 4, 5),
 (12, 3, NULL, NULL, NULL, NULL),
 (12, 1, NULL, NULL, NULL, NULL);
 

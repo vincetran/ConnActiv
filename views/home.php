@@ -16,7 +16,6 @@
 				message();	
 		}
 			
-		
 	?>
 	<script type="text/javascript">
 	
@@ -250,9 +249,11 @@
 						$postTime = $post[1];
 						$userID = $post[2];
 						$location = $post[3];
-						$startTime = $post[4];
+						//$startTime = $post[4];
+						$startTime = getConnactionDateTime($connactionID, "START");
 						$message = $post[5];
-						$endTime = $post[6];
+						//$endTime = $post[6];
+						$endTime = getConnactionDateTime($connactionID, "END");
 						$unique_network_ID = $post[7];
 						$isPrivate = $post[8];
 						$act = mysql_query("select activity_id from unique_networks where unique_network_id = ".$unique_network_ID);
@@ -279,7 +280,8 @@
 							<div class="post-body"> <!-- begin post body -->
 								<p class="quote"><? echo $message; ?></p>
 								<? //echo date_format($startTime, 'l, F jS, Y h:i a'); 
-									echo $startTime." - ".$endTime?>
+									echo $startTime." - ".$endTime?></br>
+									<p><?php echo "Meet at: ".$location;?></p>
 							<div class="post-levels">
 							<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 							<?
@@ -296,8 +298,11 @@
 								<br/>
 								Open to joiners&nbsp;&raquo;
 										<?php 
-											if($userID != getUserID()){ 
-												if(getApproval($connactionID, getUserID()) == -1){
+											if($userID != getUserID()){// && !datePassed($post[6])){ 
+												if(datePassed($post[6])){
+													echo "<span class='request_denied'>ConnAction ended.</span>";
+												}
+												else if(getApproval($connactionID, getUserID()) == -1){
 													echo "<span class='request_pending'>Request pending!</span>";
 												}
 												else if(getApproval($connactionID, getUserID()) == 2){
