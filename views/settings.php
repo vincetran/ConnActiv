@@ -127,8 +127,7 @@
 				<tbody>
 			<?
 				$networks = getUserUniqueNetworks();
-				$favs = getFavoriteIDs();
-				if ($networks) {				
+				$favs = getFavoriteIDs();	
 					foreach($networks as $network) {
 						echo "<tr>";
 							echo "<td>".$network[1].", ".$network[2]."</td><td>".$network[3]."</td>";
@@ -137,7 +136,6 @@
 							echo sprintf("<td><input type='checkbox' %s value='%s' name='favorite[]' /></td>", $checked, $network[0]);
 						echo "</tr>";
 					} //end foreach
-			} else echo "<tr><td colspan='4'>You aren't subscribed to any networks yet!<br/>Click below to get started.</td></tr>";
 			?>
 			</tbody>
 			</table>
@@ -199,7 +197,6 @@
 				<?
 				$levels = getUserActivityLevels();
 				$index =0;
-				if ($levels) {
 					foreach($levels as $level){
 						echo "<tr>";
 						/* Null values come up as 0. TODO.
@@ -282,9 +279,6 @@
 					echo "</tr>";
 					$index++;
 					}//end foreach
-					} else {
-					echo "<tr><td colspan='4'>You're missing some skill levels. Subscribe to networks to get started.</td></tr>";
-				}//endif
 				
 				?>
 			</tbody>
