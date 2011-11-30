@@ -65,9 +65,11 @@ $(function() {
 				"bAutoWidth": true,
 				"aoColumns": [ null, null, { "bSortable": false }]
 				});
+				
+	$('#subscribeTable_wrapper').hide();
 	
 	$('#expand').click(function() {
-		$('#subscribeTable').toggle();
+		$('#subscribeTable_wrapper').toggle();
 	});
 	
 	$('#expand a').click(function(e) {
@@ -172,7 +174,7 @@ $(function() {
 				</table>
 				
 				<br>
-				<table style="margin-bottom:10px; display:none;" class="small requests regular_table" id="subscribeTable">
+				<table style="margin-bottom:10px;" class="small requests regular_table" id="subscribeTable">
 						<thead>
 							<tr>
 								<th>Area</th>

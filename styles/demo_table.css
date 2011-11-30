@@ -37,6 +37,10 @@
 	width: 560px;
 }
 
+#subscribeTable_wrapper {
+	width: 400px;
+}
+	
 .dataTables_wrapper table.small {
 	width: 400px;
 }
@@ -75,7 +79,8 @@
 .dataTables_paginate {
 	width: 44px;
 	* width: 50px;
-	float: right;
+	float: left;
+	margin-left: 3px;
 	text-align: right;
 }
 
