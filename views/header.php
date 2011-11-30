@@ -43,8 +43,9 @@
 		 $(".fancybox").fancybox();
 	});
 	
-	
-	
+	$('#x').click(function(){
+			$('#user_menu').toggle();
+	});
 </script>
 
 </head>
@@ -57,7 +58,7 @@
 	<a id="user_login" href="#"><? echo getName(); ?>&nbsp;&raquo;</a>
 	
 	<div id="user_menu" class="signout_opt" style="display:inline; padding: 2px 2px; width: 60px; text-align: left; color: #fff;">
-		<a href="logout.php" id="logout">Sign out</a>
+			<div style="display:inline;"><a href="logout.php" id="logout">Sign out</a><div id="x"></div></div> 
 	</div>
 	
 	<span style=" position: absolute; left: 150px">
