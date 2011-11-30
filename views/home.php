@@ -56,6 +56,10 @@
 		$('.joinExpander').click(function(){
 			$(this).siblings('.expand').toggle();
 		});
+		
+		$('.expander').click(function(){
+			$(this).siblings('.expand').toggle();
+		});
 
 		$('#messageBox').click(function(){
 			$('#restOfBoxes').slideDown();
@@ -71,6 +75,18 @@
 		$('#eventStartDate').datepicker({ showButtonPanel: true, selectOtherMonths: true, changeMonth: true, changeYear: true, minDate: new Date(0) });
 		$('#eventEndDate').datepicker({ showButtonPanel: true, selectOtherMonths: true, changeMonth: true, changeYear: true, minDate: new Date(0) });
 
+
+		$('#opts input').click(function() { //work in progress - Kim
+			el = $(this);
+			id = el.attr('id');
+			corresponding = $('.' +id);
+			if (el.is(':checked')) {
+				corresponding.show();
+			} else {
+				corresponding.hide();
+			}			
+		});
+		
 		
 	});
 	</script>
@@ -163,8 +179,17 @@
 			
 			</div>
 				
-				<br/><br/>
-				<h2>Stream</h2>				
+				<br><br>
+				<h2>Stream</h2>	
+				
+				<div style="margin: 5px 0px; text-align:left" class="displayOpts"><span class="expander clickExpand">Customize your stream display&nbsp;&raquo;</span><br/>
+					<div id="opts" class="expand" style="display:none">
+						<input type="checkbox" name="display" checked id="displayAll"/>&nbsp;<label>All tab</label><br/>
+						<input type="checkbox" name="display" checked id="displayEvents"/>&nbsp;<label>Events tab</label><br/>
+						<input type="checkbox" name="display" id="displayNetworks"/>&nbsp;<label>Tab for each network</label><br/>
+						<input type="checkbox" name="display" checked id="displayUnique"/>&nbsp;<label>Tab for each network-activity</label>
+					</div>
+				</div>
 					
 				<div class="main feeds-container">
 					<ul class="feeds">
@@ -181,13 +206,13 @@
 						$networkIDs[] = $network[0];
 						
 						?>
-							<li id="<? echo $network[0]; ?>" class="link_stream"><a href="#"><? echo $displayName; ?></a></li>
+							<li id="<? echo $network[0]; ?>" class="link_stream displayUnique"><a href="#"><? echo $displayName; ?></a></li>
 							<? endforeach; ?>
-						<li id="events" class="link_stream"><a href="#">Events</a></li>
-						<li id="all" class="link_stream"><a href="#">All</a></li>
+						<li id="events" class="link_stream displayEvents"><a href="#">Events</a></li>
+						<li id="all" class="link_stream displayAll"><a href="#">All</a></li>
 					</ul>
 					
-					<div class="stream" id="stream_events">
+					<div class="stream displayEvents" id="stream_events">
 						<?
 							for($i=0; $i<count($networkIDs); $i++) {
 								
@@ -214,7 +239,7 @@
 						?>
 					</div>
 					
-					<div class="stream" id="stream_all">
+					<div class="stream displayAll" id="stream_all">
 					
 				<? $allConnactions = getAllConnactions();
 				
