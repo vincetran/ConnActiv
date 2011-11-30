@@ -103,7 +103,7 @@
 					$('#hiddenNewNetwork').toggle();   		 
 				 });
 				
-				$('.joinExpander').click(function(){
+				$('.editExpander').click(function(){
 					$(this).siblings('.expand').toggle();
 				});
    		});
@@ -209,11 +209,11 @@
 						echo "<td>$level[0]</td>";
 						if($level[1] == NULL){
 							echo "<td>
-									<span class=\"clickable joinExpander\">Click to Set</span>";
+									<span class=\"clickable editExpander\"><span class='editIcon'></span></span>";
 						}
 						else{
 							echo "<td>
-									<span class=\"clickable joinExpander\">$level[1]</span>";
+									<span class=\"clickable editExpander\">$level[1]<span class='editIcon'></span></span>";
 						}	
 							echo	"<div class=\"expand\" style=\"display:none\">
 											<select name=\"seekLvl$index\">
@@ -228,11 +228,11 @@
 								</td>";
 						if($level[2] == NULL){
 							echo "<td>
-									<span class=\"clickable joinExpander\">Click to Set - </span>";
+									<span class=\"clickable editExpander\"><span class='editIcon'></span></span>";
 						}
 						else{
 							echo "<td>
-									<span class=\"clickable joinExpander\">$level[2] - </span>";
+									<span class=\"clickable editExpander\">$level[2]<span class='editIcon'></span> - </span>";
 						}
 							echo "<div class=\"expand\" style=\"display:none\">
 										<select name=\"lowLvl$index\">
@@ -244,10 +244,10 @@
 										<input class=\"button\" type=\"submit\" name=\"saveInfo\" value=\"Save\"/>
 									</div>";
 						if($level[3] == NULL){
-							echo "	<span class=\"clickable joinExpander\">Click to Set</span>";
+							echo "	<span class=\"clickable editExpander\"><span class='editIcon'></span></span>";
 						}
 						else{
-							echo "	<span class=\"clickable joinExpander\">$level[3]</span>";
+							echo "	<span class=\"clickable editExpander\">$level[3]<span class='editIcon'></span></span>";
 						}
 							echo " <div class=\"expand\" style=\"display:none\">
 										<select name=\"highLvl$index\">
@@ -261,11 +261,11 @@
 								</td>";
 						if($level[4] == NULL){
 							echo "<td>
-									<span class=\"clickable joinExpander\">Click to Set</span>";
+									<span class=\"clickable editExpander\"><span class='editIcon'></span></span>";
 						}
 						else{
 							echo "<td>
-									<span class=\"clickable joinExpander\">$level[4]</span>";
+									<span class=\"clickable editExpander\">$level[4]<span class='editIcon'></span></span>";
 						}
 							echo "<div class=\"expand\" style=\"display:none\">
 											<select name=\"ownLvl$index\">
