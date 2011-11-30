@@ -60,7 +60,7 @@
 		<a href="logout.php" id="logout">Sign out</a>
 	</div>
 	
-	<span style=" position: absolute; left: 150px">
+	<span style=" position: absolute; left: 220px">
 		<img height="40" style="margin-top: -10px;" src="../public/images/logo.png"/>
 	</span>
 
