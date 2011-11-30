@@ -299,7 +299,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `PHONE` char(12) DEFAULT NULL,
   `INTERESTS` varchar(4000) DEFAULT NULL,
   `PROFILE_PIC` varchar(45) NOT NULL DEFAULT '../public/images/avatar.png',
-  `email` varchar(25) DEFAULT NULL,
+  `EMAIL` varchar(25) DEFAULT NULL,
   `DOB` date DEFAULT NULL,
   `GENDER` char(1) DEFAULT NULL,
   PRIMARY KEY (`USER_ID`)

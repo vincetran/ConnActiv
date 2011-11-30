@@ -26,6 +26,7 @@ function joinRequest(){
 	$message = $_POST['message'];
 	$releaseEmail = $_POST['releaseEmail'];
 	$releasePhone = $_POST['releasePhone'];
+	$body = '';
 	
 	$user = getDatabaseInfo("users", "user_id", getUserID());
 	if($releaseEmail == "on"){
