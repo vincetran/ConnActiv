@@ -1,4 +1,21 @@
-<?
+<? 
+
+/* string getProfile($userID)
+*  string getFormattedReviews($review)
+*  void postEvent()
+*  void postConnaction()
+*  array getPastConnactions($userid)
+*  array getAllConnactions()
+*  array reviewedByUser($connactionid, $userid)
+*  array getConnactionsByUnique($unique_id)
+*  array getConnactions($n_aID, $option)
+*  activity name as string getConnactionActivity($connactionID)
+*  network as string getConnactionNetwork($connactionID)
+*  unique network name as string getConnactionUniqueNetwork($connID)
+*  date getConnactionDate($connactionID, $argument)
+*
+
+*/
 
 /*
 *
@@ -38,12 +55,12 @@
 	/*** Add other details for the user here */ 
 		$review = getAllReviews($userID);
 		$details .= getFormattedReviews($review);
-			if(isFriend($userID)){		
-				$details .= "<br/>Send Message<td><form action = ".$_SERVER['PHP_SELF']." method = 'post'><input = 'textbox' placeholder = 'Subject' name = 'reply[]'><input = 'textarea' placeholder = 'Send Message' name = 'reply[] /'><input type = 'submit' name = 'reply[]' value = 'Reply'/><input type = 'hidden' name = 'reply[]' value = '".$userID."'/></form>";
-			}
+			if(isFriend($userID)){
+				$details .= "<br/>Send Message<td><form action = ".$_SERVER['PHP_SELF']." method = 'post'><input type = 'text' placeholder = 'Subject' name = 'reply[]'><input type= 'text' placeholder = 'Reply Here' name = 'reply[] /'><input type = 'submit' name = 'reply[]' value = 'Reply'/><input type = 'hidden' name = 'reply[]' value = '".$userID."'/></form>";
+}
 			elseif(requestIsActive($userID)){$details .= "<br/>Friend Request Pending";}
 			elseif($userID != getUserID()){
-				$details .= "<br/>Request to be Friends<td><form action = ".$_SERVER['PHP_SELF']." method = 'post'><input = 'textarea' placeholder = 'Insert a message to this person' name = 'friend[]' /><input type = 'submit' name = 'friend[]' value = 'Submit'/><input type = 'hidden' name = 'friend[]' value = '".$userID."'/></form>";
+				$details .= "<br/>Request to be Friends<td><form action = ".$_SERVER['PHP_SELF']." method = 'post'><input type= 'text' placeholder = 'Insert a message to this person' name = 'friend[]' /><input type = 'submit' name = 'friend[]' value = 'Submit'/><input type = 'hidden' name = 'friend[]' value = '".$userID."'/></form>";
 			}
 			else{$details .= "<br/>";}
 		
