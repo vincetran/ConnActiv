@@ -64,6 +64,26 @@ function getPendingRequests($userID){
 	}
 	return $pendingRequests;
 }
+function getIncFriendRequests($userID){
+	//This function returns an array of incoming requests
+	$incRequests = array();
+	$result = mysql_query("SELECT * FROM friend_requests WHERE to_user = ".$userID." and is_active = 1")or die(mysql_error()); //returns true if you do not assign
+
+	while($info = mysql_fetch_array($result)){
+		$incRequests[] = $info;
+	}
+	return $incRequests;
+}
+function getPendingFriendRequests($userID){
+	//This function returns an array of incoming requests
+	$incRequests = array();
+	$result = mysql_query("SELECT * FROM friend_requests WHERE from_user = ".$userID." and is_active = 1")or die(mysql_error()); //returns true if you do not assign
+
+	while($info = mysql_fetch_array($result)){
+		$incRequests[] = $info;
+	}
+	return $incRequests;
+}
 
 function isFriend($userID){
 	$query = "select * from friends where user_id = ".getUserID()." and friend_id = ".$userID;
@@ -85,7 +105,7 @@ function acceptRequest($reqID){
 	//echo "Accept: ID: ".$fromUser." ConID: ".$connactionID;
 	$query = sprintf("UPDATE connaction_requests SET APPROVED = 1 WHERE FROM_USER = '%s' AND CONNACTION_ID = '%s'",$fromUser, $connactionID);
 	$update = mysql_query($query) or die(mysql_error());
-	
+	mysql_query("insert into messages values(1, ".$fromUser.", 'Connaction Request', '".getUserName(getUserID())."' has accepted your request to join ', now())");
 	$query = sprintf("INSERT INTO connaction_attending(USER_ID, CONNACTION_ID) values('%s', '%s')", $fromUser, $connactionID);
 	$update = mysql_query($query) or die(mysql_error());
 	

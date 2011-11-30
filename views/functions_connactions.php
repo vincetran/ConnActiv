@@ -42,7 +42,7 @@
 		$review = getAllReviews($userID);
 		$details .= getFormattedReviews($review);
 			if(isFriend($userID)){		
-				$details .= "<br/>Send Message<td><form action = ".$_SERVER['PHP_SELF']." method = 'post'><input = 'textbox' placeholder = 'Subject' name = 'reply[]'><input = 'textarea' placeholder = 'Reply Here' name = 'reply[] /'><input type = 'submit' name = 'reply[]' value = 'Reply'/><input type = 'hidden' name = 'reply[]' value = '".$userID."'/></form>";
+				$details .= "<br/>Send Message<td><form action = ".$_SERVER['PHP_SELF']." method = 'post'><input = 'textbox' placeholder = 'Subject' name = 'reply[]'><input = 'textarea' placeholder = 'Send Message' name = 'reply[] /'><input type = 'submit' name = 'reply[]' value = 'Reply'/><input type = 'hidden' name = 'reply[]' value = '".$userID."'/></form>";
 			}
 			elseif(requestIsActive($userID)){$details .= "<br/>Friend Request Pending";}
 			elseif($userID != getUserID()){
