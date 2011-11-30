@@ -319,6 +319,15 @@ include("upload_file.php");
 			$gender = $_POST['gender'];
 			$query = "UPDATE users SET GENDER = '".$gender."' WHERE USER_ID = '".getUserID()."'";
 			$update = mysql_query($query) or die(mysql_error());
+			
+			return $update;
+		}
+		if (isset($_POST['DOB'])){
+			$DOB = myDateParser($_POST['DOB']);
+			$query = "UPDATE users SET DOB = '".$DOB."' WHERE USER_ID = '".getUserID()."'";
+			$update = mysql_query($query) or die(mysql_error());
+			
+			return $update;
 		}
 		for($i = 0; $i < count(getUserActivityLevels()); $i++){
 			if((isset($_POST['seekLvl'.$i])) && ($_POST['seekLvl'.$i] != -1)){
@@ -364,21 +373,6 @@ include("upload_file.php");
 				$update = mysql_query($query) or die(mysql_error());
 			}
 		}
-			
-			
-			
-		/*if(isset($_POST['about_me'])){
-			$interests = $_POST['about_me']; 
-			$query = "UPDATE users SET INTERESTS = '".$interests."' WHERE USER_ID = '".getUserID()."'";
-			$update = mysql_query($query) or die(mysql_error());
-			
-		}*/
-		if (isset($_POST['DOB'])){
-			$DOB = myDateParser($_POST['DOB']);
-			$query = "UPDATE users SET DOB = '".$DOB."' WHERE USER_ID = '".getUserID()."'";
-			$update = mysql_query($query) or die(mysql_error());
-		}
-		//$update = mysql_query($query) or die(mysql_error());
 	}
 	function myDateParser($dateToParse){
 		//This function takes a string date in the format of mm/dd/yyyy
@@ -396,6 +390,25 @@ include("upload_file.php");
 			else{
 				return "Error";
 			}
+	}
+	function datePassed($checkDate){
+		//This function checks the inputed date with the current date
+		//if the checkDate has passed it will return true if the check
+		//date is in the future it return false
+		$newDate = date_parse($checkDate);
+		$today = getDate();
+		if($today["year"] > $newDate["year"]){
+			return true;
+		}
+		else if($today["mon"] > $newDate["month"] && $today["year"] >= $newDate["year"]){
+			return true;
+		}
+		else if($today["mday"] > $newDate["day"] && $today["mon"] >= $newDate["month"] && $today["year"] >= $newDate["year"]){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 	function getActivity($activityID){
 		//This function returns the name of the inputed activity ID
