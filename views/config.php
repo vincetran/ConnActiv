@@ -36,6 +36,16 @@ include("upload_file.php");
  			}
 		//}
 	}
+	
+	
+	function isAdmin(){
+	
+		$id = getUserID();
+		return $id == 1; // admin is user 1
+		
+	}
+	
+	
 	function login(){
 		//This function logs in the user when they press the login button
 		// makes sure they filled it in

@@ -92,6 +92,13 @@
    		$('#view_connactions').hide();
    		$('#view_friendReqs').fadeIn();
    	});
+   	
+   	$('#eventReqs').click(function() {
+   		$(this).addClass('active');
+   		$('.pageViewer span').removeClass('active');
+   		$('.requestType').hide();
+   		$('#view_eventReqs').fadeIn();
+   	});
    	 
 		});		
 </script>			
@@ -100,7 +107,12 @@
 	
 	<div class="pageViewer">
 		<span class="clickable active green" id="connactions">Connaction Requests</span>&nbsp;|&nbsp;
-		<span class="clickable green" id="friendReqs">Friend Requests</span>	
+		<span class="clickable green" id="friendReqs">Friend Requests</span>
+		
+		<? if (isAdmin()) {
+			echo "&nbsp;|&nbsp";
+			echo "<span class='clickable green' id='eventReqs'>Event Requests (admin only)</span>";
+		} ?>
 	</div>
 	
 	<div class="requestType" id="view_connactions">
@@ -368,6 +380,19 @@
 			</table>
 			
 			</div> <!-- end friendReqs div -->
+			
+			<? if (isAdmin()) { ?>
+			<div id="view_eventReqs" class="requestType"> <!-- begin eventReqs div, only for admin -->
+			
+			
+			Events to go here (KIM TODO) for approval by admin. Only the administrator will see this page.
+			
+			
+			
+			</div> <!-- end event Reqs -->
+			
+			<? } // end if isAdmin ?>
+			
 
 
 		</div> <!-- end page -->
