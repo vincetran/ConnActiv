@@ -144,6 +144,10 @@ div.main {
 	padding: 5px 10px 5px 10px;
 }
 
+.tags li {
+  padding: 2px 3px;
+}
+
 div.page {
 	float:left;
 	width: @width;
@@ -151,7 +155,7 @@ div.page {
 
 .error {
 	text-align:center;
-	padding: 3px;
+	padding: 5px;
 	margin: 3px 3px 15px 210px;
 	background-color: #ffc;
 	border: 1px solid #c00;
@@ -161,8 +165,8 @@ div.page {
 
 .notice{
 	text-align: center;
-	background-color: #E2E4FF;
-	border: 1px solid #c7c7c7;
+	background-color: ghostWhite;
+	border: 1px solid @lightgrey;
 	padding: 5px;
 	margin: 3px 3px 15px 210px;
 	width: 69%;
@@ -409,4 +413,8 @@ div.pageViewer {
 	 margin: 0 .166em;
 	background-position: 3px -700px;
 	.clickable;
+}
+
+.editIcon:hover {
+	background-position: -22px -700px;
 }
