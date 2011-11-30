@@ -168,7 +168,6 @@
 					
 				<div class="main feeds-container">
 					<ul class="feeds">
-						<li id="all" class="link_stream"><a href="#">All</a></li>
 						
 				<?  $names = getUserUniqueNetworks();
 						foreach ($names as $network): 
@@ -178,7 +177,13 @@
 						?>
 							<li id="<? echo $network[0]; ?>" class="link_stream"><a href="#"><? echo $displayName; ?></a></li>
 							<? endforeach; ?>
+						<li id="events" class="link_stream"><a href="#">Events</a></li>
+						<li id="all" class="link_stream"><a href="#">All</a></li>
 					</ul>
+					
+					<div class="stream" id="stream_events">
+						<p><br/>No data yet.<br/></p>
+					</div>
 					
 					<div class="stream" id="stream_all">
 					

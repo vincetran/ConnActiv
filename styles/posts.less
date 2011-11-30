@@ -14,9 +14,9 @@
 	cursor:pointer;
 }
 
-.rounded {
-	border-radius: 10px;
-	-moz-border-radius: 10px;
+.rounded(@radius:10px){
+	border-radius: @radius;
+	-moz-border-radius: @radius;
 }
 
 div.post {
@@ -59,12 +59,11 @@ div.post-body {
 }
 
 p.quote {
-	background: #fff;
-	text-align: center;
+	text-align: left;
 	padding: 5px 7px 5px 7px;
 	.rounded;
 	.handwriting;
-	border: 1px solid @light;
+	line-height:.8em;
 }
 
 .post-body p {
@@ -104,10 +103,15 @@ ul.feeds {
 ul.feeds li {
 	background: @light;
 	border: thin solid @light;
+	.rounded(4px);
 }
 
 ul.feeds li.tab_active {
 	background: #fff;
+}
+
+ul.feeds li a:hover {
+	color: @dark;
 }
 
 div.stream {
