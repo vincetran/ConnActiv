@@ -150,7 +150,7 @@ $(function() {
 					<td><input id="phone"  type="text" name="phone" maxlength="25"/><br/></td>
 				</tr>
 				<tr>
-					<th class="formHeader">Interests:</th>
+					<th class="formHeader">A little about yourself:</th>
 					<td><input id="interests" type="text" name="interests" maxlength="4000" /></td>
 				</tr>
 				<tr>
