@@ -40,11 +40,11 @@
 			$('#user_menu').toggle();
 		});
 		
-		 $(".fancybox").fancybox();
-	});
-	
-	$('#x').click(function(){
+		$(".fancybox").fancybox();
+
+		$('#x').click(function(){
 			$('#user_menu').toggle();
+		});
 	});
 </script>
 
