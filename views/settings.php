@@ -304,10 +304,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<? $favs = getFavorites(); 
-						if (!$favs) 
-							echo "<tr><td colspan='2'>Favorite networks to bookmark them in your sidebar.</td></tr>";
-						else
+					<? $favs = getFavorites();
 						foreach($favs as $fav):
 					?>
 							<tr>
