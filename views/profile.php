@@ -118,10 +118,17 @@
 				<tr>
 					<td>Gender</td>
 					<td>
-						<span class="clickable expander"><? echo getUserGender($userID) ?><span class='editIcon'></span></span>
+					<? $sex = getUserGender($userID); 
+						$maleStatus = ''; $femaleStatus = '';
+						
+						$sex == 'Male' ? $maleStatus = 'checked' : '';
+						$sex == 'Female' ? $femaleStatus = 'checked ' :'';
+					
+					?>
+						<span class="clickable expander"><? echo $sex ?><span class='editIcon'></span></span>
 						<div class="expand" style="display:none">
-							<input type="radio" name="gender" value="M"/>Male
-							<input type="radio" name="gender" value="F"/>Female
+							<input type="radio" name="gender" <? echo $maleStatus ?> value="M"/>Male
+							<input type="radio" name="gender" <? echo $femaleStatus ?> value="F"/>Female
 							<input class="button" type="submit" name="saveInfo" value="Save"/>
 						</div>
 					</td>

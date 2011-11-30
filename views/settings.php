@@ -199,13 +199,6 @@
 				$index =0;
 					foreach($levels as $level){
 						echo "<tr>";
-						/* Null values come up as 0. TODO.
-						*
-							$level[0]? echo "<td>$level[0]</td>" : echo "<td>Not set.</td>";
-							$level[1]? echo "<td>$level[1]</td>" : echo "<td>Not set.</td>";
-							($level[2] && $level[3])? echo "<td>$level[2] - $level[3]</td>" : echo "<td>Not set.</td>";
-							$level[4]? echo "<td>$level[4]</td>" : echo "<td>Not set.</td>";
-						*/
 						echo "<td>$level[0]</td>";
 						if($level[1] == NULL){
 							echo "<td>
