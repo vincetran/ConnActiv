@@ -313,34 +313,49 @@ include("upload_file.php");
 		for($i = 0; $i < count(getUserActivityLevels()); $i++){
 			if((isset($_POST['seekLvl'.$i])) && ($_POST['seekLvl'.$i] != -1)){
 				$type = "PREFERRED";
-				echo "TODO: Update ".$type;
-				$level = $_POST['seekLvl'.$i];
-				echo $level;
+				//echo "TODO: Update ".$type;
+				$seekID = $_POST['seekLvl'.$i];
+				$level = strtok($seekID, " ");
+				$activity = strtok(" ");
+				$activityID = getActivityID($activity);
+				
+				$query = sprintf("UPDATE user_activities SET %s = '%s' WHERE USER_ID = '%s' AND ACTIVITY_ID = '%s'",$type, $level, getUserID(), $activityID);
+				$update = mysql_query($query) or die(mysql_error());
+				
 			}
 			if((isset($_POST['lowLvl'.$i])) && ($_POST['lowLvl'.$i] != -1)){
-				$type = "LOW";
-				echo "TODO: Update ".$type;
-				$level = $_POST['lowLvl'.$i];
-				echo $level;
+				$type = "LOW_LEVEL";
+				$seekID = $_POST['lowLvl'.$i];
+				$level = strtok($seekID, " ");
+				$activity = strtok(" ");
+				$activityID = getActivityID($activity);
+				
+				$query = sprintf("UPDATE user_activities SET %s = '%s' WHERE USER_ID = '%s' AND ACTIVITY_ID = '%s'",$type, $level, getUserID(), $activityID);
+				$update = mysql_query($query) or die(mysql_error());
 			}
-			if((isset($_POST['highLvl'.$i])) && ($_POST['highLvl'.$i] != -1)){
-				$type = "HIGH";
-				echo "TODO: Update ".$type;
-				$level = $_POST['highLvl'.$i];
-				echo $level;
+			else if((isset($_POST['highLvl'.$i])) && ($_POST['highLvl'.$i] != -1)){
+				$type = "HIGH_LEVEL";
+				$seekID = $_POST['highLvl'.$i];
+				$level = strtok($seekID, " ");
+				$activity = strtok(" ");
+				$activityID = getActivityID($activity);
+				
+				$query = sprintf("UPDATE user_activities SET %s = '%s' WHERE USER_ID = '%s' AND ACTIVITY_ID = '%s'",$type, $level, getUserID(), $activityID);
+				$update = mysql_query($query) or die(mysql_error());
 			}
-			if((isset($_POST['ownLvl'.$i])) && ($_POST['ownLvl'.$i] != -1)){
-				$type = "OWN";
-				echo "TODO: Update ".$type;
-				$level = $_POST['ownLvl'.$i];
-				echo $level;
+			else if((isset($_POST['ownLvl'.$i])) && ($_POST['ownLvl'.$i] != -1)){
+				$type = "OWN_LEVEL";
+				$seekID = $_POST['ownLvl'.$i];
+				$level = strtok($seekID, " ");
+				$activity = strtok(" ");
+				$activityID = getActivityID($activity);
+				
+				$query = sprintf("UPDATE user_activities SET %s = '%s' WHERE USER_ID = '%s' AND ACTIVITY_ID = '%s'",$type, $level, getUserID(), $activityID);
+				$update = mysql_query($query) or die(mysql_error());
 			}
 		}
-		
-			/*TODO for me (ROB):
-				NEED TO ALSO get activities IDs will to strtok like I did for requests. Going to class for now
-				$query = "UPDATE user_activities SET THE_LEVEL = '".$level."' WHERE USER_ID = '".getUserID()."'" //Activity ID stuff;
-				$update = mysql_query($query) or die(mysql_error());*/
+			
+			
 			
 		/*if(isset($_POST['about_me'])){
 			$interests = $_POST['about_me']; 

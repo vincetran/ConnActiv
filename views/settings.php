@@ -213,13 +213,14 @@
 						}
 						else{
 							echo "<td>
-									<span class=\"clickable joinExpander\">$level[0]</span>";
+									<span class=\"clickable joinExpander\">$level[1]</span>";
 						}	
 							echo	"<div class=\"expand\" style=\"display:none\">
 											<select name=\"seekLvl$index\">
 												<option value=\"-1\">Level:</option>";
 												for($i = 1; $i <= 10; $i++){
-													echo "<option value=\"$i\">$i</option>";
+													// i = Row number
+													echo "<option value=\"$i $level[0]\">$i</option>";
 												}
 									echo	"</select>
 											<input class=\"button\" type=\"submit\" name=\"saveInfo\" value=\"Save\"/>
@@ -237,7 +238,7 @@
 										<select name=\"lowLvl$index\">
 												<option value=\"-1\">Level:</option>";
 												for($i = 1; $i <= 10; $i++){
-													echo "<option value=\"$i\">$i</option>";
+													echo "<option value=\"$i $level[0]\">$i</option>";
 												}
 									echo	"</select>
 										<input class=\"button\" type=\"submit\" name=\"saveInfo\" value=\"Save\"/>
@@ -252,7 +253,7 @@
 										<select name=\"highLvl$index\">
 												<option value=\"-1\">Level:</option>";
 												for($i = 1; $i <= 10; $i++){
-													echo "<option value=\"$i\">$i</option>";
+													echo "<option value=\"$i $level[0]\">$i</option>";
 												}
 									echo	"</select>
 										<input class=\"button\" type=\"submit\" name=\"saveInfo\" value=\"Save\"/>
@@ -270,7 +271,7 @@
 											<select name=\"ownLvl$index\">
 												<option value=\"-1\">Level:</option>";
 												for($i = 1; $i <= 10; $i++){
-													echo "<option value=\"$i\">$i</option>";
+													echo "<option value=\"$i $level[0]\">$i</option>";
 												}
 									echo	"</select>
 											<input class=\"button\" type=\"submit\" name=\"saveInfo\" value=\"Save\"/>

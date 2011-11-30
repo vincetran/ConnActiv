@@ -329,7 +329,7 @@
 			<br/><br/>
 
 			<h2>Pending Friend Requests</h2>
-		<h3>People  have asked to be your friend</h3>
+		<h3>People you have asked to be your friend</h3>
 			
 			<table id="incomingFR" class="requests regular_table">
 			<thead class="reqHeader">
