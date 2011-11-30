@@ -182,6 +182,7 @@
 
 	function getAllConnactions(){
 		$userid = getUserID();
+		$connactions = "";
 	
 		$query = "select unique_network_id from user_networks where user_id = ".$userid;
 		$result = mysql_query($query);
