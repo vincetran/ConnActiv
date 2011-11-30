@@ -290,6 +290,18 @@ include("upload_file.php");
 		else
 			return "Click to specify";	//No DOB set
 	}
+	
+	function getUserState($userID) {
+		$info = getDatabaseInfo("users", "user_id", $userID);
+		$state = $info['STATE'];
+		return $state;
+	}
+	
+	function getUserCity($userID) {
+		$info = getDatabaseInfo("users", "user_id", $userID);
+		$city = $info['CITY'];
+		return $city;
+	}
 
 	function getIncMessages($userid){
 		$incMessages = array();		
@@ -320,6 +332,19 @@ include("upload_file.php");
 			$query = "UPDATE users SET GENDER = '".$gender."' WHERE USER_ID = '".getUserID()."'";
 			$update = mysql_query($query) or die(mysql_error());
 		}
+		
+		if (isset($_POST['city'])) {
+			$city = $_POST['city'];
+			$query = "UPDATE users SET CITY = '".$city."' WHERE USER_ID = '".getUserID()."'";
+			$update = mysql_query($query) or die(mysql_error());
+		}
+		
+		if (isset($_POST['state'])) {
+			$st = $_POST['state'];
+			$query = "UPDATE users SET STATE = '".$st."' WHERE USER_ID = '".getUserID()."'";
+			$update = mysql_query($query) or die(mysql_error());
+		}
+		
 		for($i = 0; $i < count(getUserActivityLevels()); $i++){
 			if((isset($_POST['seekLvl'.$i])) && ($_POST['seekLvl'.$i] != -1)){
 				$type = "PREFERRED";
@@ -365,14 +390,13 @@ include("upload_file.php");
 			}
 		}
 			
-			
-			
-		/*if(isset($_POST['about_me'])){
+		if(isset($_POST['about_me'])){
 			$interests = $_POST['about_me']; 
 			$query = "UPDATE users SET INTERESTS = '".$interests."' WHERE USER_ID = '".getUserID()."'";
 			$update = mysql_query($query) or die(mysql_error());
 			
-		}*/
+		}
+		
 		if (isset($_POST['DOB'])){
 			$DOB = myDateParser($_POST['DOB']);
 			$query = "UPDATE users SET DOB = '".$DOB."' WHERE USER_ID = '".getUserID()."'";
@@ -559,6 +583,7 @@ include("upload_file.php");
 		}
 		return $userActivities;
 	}
+		
 	
 	function getStateDropdown() {
 	
@@ -620,6 +645,8 @@ include("upload_file.php");
 	return $states;
 
 	}
+	
+	
 	
 	function getStateDropdownLong() {
 	//Don't edit this! Call wherever we need a state dropdown.

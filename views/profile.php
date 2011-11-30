@@ -102,19 +102,23 @@
 			<div class="section" id="view_profile">
 			
 			<h2>Profile Info</h2>
-			<h3>Click on a section to edit</h3>
 			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
 			<table class="alternating regular_table" id="myInfo">
 				<tr>
 					<td>About</td>
-					<td width="300" >
-						<div style="width:400px; height:100px; white-space: normal; padding-bottom:30px; padding-right:20px;" class="editable_textarea" id="about_me"><?php echo getAboutMe($userID);?></div>
+					<td> 
+						<? $about = getAboutMe($userID); ?>
+						<span class="clickable expander"><? echo $about ?><span class='editIcon'></span></span>
+						<div class="expand" style="display:none">
+							<input type="text" name="about_me" value="<? echo $about ?>"/>
+							<input class="button" type="submit" name="saveInfo" value="Save"/>
+						</div>
 					</td>
 				</tr>
 				<tr>
 					<td>Gender</td>
 					<td>
-						<span class="clickable expander"><?php echo getUserGender($userID);?></span>
+						<span class="clickable expander"><? echo getUserGender($userID) ?><span class='editIcon'></span></span>
 						<div class="expand" style="display:none">
 							<input type="radio" name="gender" value="M"/>Male
 							<input type="radio" name="gender" value="F"/>Female
@@ -123,13 +127,32 @@
 					</td>
 				</tr>
 				<tr>
-					<td>Location</td>
-					<td><?php echo getUserLocation($userID);?></td>
+					<td>City</td>
+					<td>
+					<? $city = getUserCity($userID); ?>
+					<span class="clickable expander"><? echo $city ?><span class='editIcon'></span></span>
+					<div class="expand" style="display:none">
+							<input type="text" name="city" value="<? echo $city ?>"/>
+							<input class="button" type="submit" name="saveInfo" value="Save"/>
+						</div>					
+					</td>
+				</tr>
+				<tr>
+					<td>State</td>
+					<td>
+					<? $st = getUserState($userID); ?>
+					<span class="clickable expander"><? echo $st ?><span class='editIcon'></span></span>
+					<div class="expand" style="display:none">
+							<? echo getStateDropdown(); ?>
+							<input class="button" type="submit" name="saveInfo" value="Save"/>
+						</div>					
+					</td>
 				</tr>
 				<tr>
 					<td>Age</td>
 					<td>
-						<span class="clickable expander"><?php echo getAge($userID);?></span>
+						<? $age = getAge($userID); ?>
+						<span class="clickable expander"><? echo $age ?><span class='editIcon'></span></span>
 						<div class="expand" style="display:none">
 							<input type="text" name="DOB" id="DOB" placeholder="Date of birth?"/>
 							<input class="button" type="submit" name="saveInfo" value="Save"/>
