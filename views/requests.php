@@ -80,22 +80,22 @@
    	$('#view_friendReqs').hide();
    	
    	$('#connactions').click(function() {
+   		$('.pageViewer span').removeClass('active');
    		$(this).addClass('active');
-   		$('#friendReqs').removeClass('active');
-   		$('#view_friendReqs').hide();
+   		$('.requestType').hide();
    		$('#view_connactions').fadeIn();
    	});
    	
    	$('#friendReqs').click(function() {
+   	  $('.pageViewer span').removeClass('active');
    		$(this).addClass('active');
-   		$('#connactions').removeClass('active');
-   		$('#view_connactions').hide();
+   		$('.requestType').hide();
    		$('#view_friendReqs').fadeIn();
    	});
    	
    	$('#eventReqs').click(function() {
+   	  $('.pageViewer span').removeClass('active');
    		$(this).addClass('active');
-   		$('.pageViewer span').removeClass('active');
    		$('.requestType').hide();
    		$('#view_eventReqs').fadeIn();
    	});
@@ -111,7 +111,7 @@
 		
 		<? if (isAdmin()) {
 			echo "&nbsp;|&nbsp";
-			echo "<span class='clickable green' id='eventReqs'>Event Requests (admin only)</span>";
+			echo "<span class='clickable green' id='eventReqs'>Event Requests</span>";
 		} ?>
 	</div>
 	
@@ -387,7 +387,35 @@
 			
 			Events to go here (KIM TODO) for approval by admin. Only the administrator will see this page.
 			
+			<h2>Events Awaiting Approval</h2>
 			
+			<table class="alternating regular_table" id="waitingEvents">
+				<thead>
+					<th>Requesting User</th>
+					<th>Date Requested</th>
+					<th>Event Details</th>
+					<th>Approve?</th>
+				</thead>
+				<tobdy>
+			
+			<? $waitingEvents = getAllWaitingEvents();
+			
+				foreach($waitingEvents as $event) {
+					echo "<tr>";
+						echo "<td>".getUserName($event[1])."</td>";
+						echo "<td>$event[10]</td>";
+						echo "<td>$event[4]</td>";
+						echo "<td>checkbox</td>";				
+					echo "</tr>";
+				
+				}
+			
+			
+			
+			?>
+			
+				</tbody>
+			</table>
 			
 			</div> <!-- end event Reqs -->
 			
