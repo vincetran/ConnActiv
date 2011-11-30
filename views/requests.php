@@ -23,17 +23,19 @@
 			mysql_query("update friend_requests set is_active = 0 where from_user = ".$otheruser." and to_user = ".getUserID());
 			$query = "insert into messages values(1, ".$otheruser.", 'Friend Request', '".getUserName(getUserID())." has accepted your friend request', now())";
 			mysql_query($query);
+			echo "<div class='notice'>Friend accepted!</div>";
 		}
 	}
 	else if (isset($_POST['deny'])) {
-		if ($_POST['requestID']) {
+		if (count($_POST['requestID'])>0) {
 			$request = $_POST['requestID'];
 			foreach($request as $req) {
 				denyRequest($req);
 			} // end foreach
 		} //end if ($_POST[requestID])
 		if($_POST['friendReq']){
-			mysql_query("update friend_requests set is_active = 0 where from_user = ".getUserID()." and to_user = ".$otheruser);
+			mysql_query("update friend_requests set is_active = 0 where from_user = ".getUserID()." and to_user = ".$otheruser);			
+			echo "<div class='notice'>Friend request denied.</div>";
 		}
 	}
 	

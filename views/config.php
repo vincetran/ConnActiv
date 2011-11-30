@@ -107,13 +107,21 @@ include("upload_file.php");
 					}	
 				} //end if $city and $state
 				
-				//subscribe the user to all of the user-selected unique networks	
-				if ($_POST['activity']) {
+				//subscribe the user to all of the user-selected unique networks
+				if (isset($_POST['activity'])) {
 					$acts = $_POST['activity'];				
 						foreach($acts as $act) {
 								forceSubscribe($userid2, $act); //where $userid2 is the user id
 							}//end foreach($act)
 					} //end if ($_POST['activity'])
+					
+				//or if the user is creating his own unique network
+				if ($_POST['area'] && $_POST['state'] && $_POST['newActivity']) {
+					$area = $_POST['area'];
+					$state = $_POST['state'];
+					$activity = $_POST['newActivity'];
+					forceCreateAndSubscribeNetwork($userid2, $area, $state, $activity);
+				}
 					
 				// Now, create the cookie
 				$_POST['username'] = stripslashes($_POST['username']); 

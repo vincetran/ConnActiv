@@ -151,6 +151,7 @@
 			VALUES ('".$today."', '".getUserID()."', '".$_POST['location']."', '".$startTime."', '".$_POST['message']."', '".$endTime."', '".$unID."', '".$_POST['private']."')";
 					
 		$insert = mysql_query($query) or die(mysql_error());
+		echo "<div class='notice'>ConnAction posted!</div>";
 
 	}
 	

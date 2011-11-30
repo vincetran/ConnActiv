@@ -198,6 +198,12 @@ function getUserUniqueNetworks() {
 		subscribeNetwork($id);
 	}
 	
+	function forceCreateAndSubscribeNetwork($user, $area, $state, $activity) {
+	//the user is registering. use the user id passed in.
+		$id = createUniqueNetwork($area, $state, $activity);
+		forceSubscribe($user, $id);
+	}
+	
 	function addActivity($name) {
 		$query = "INSERT INTO activities(ACTIVITY_ID, ACTIVITY_NAME) VALUES('', '".$name."')";
 		$insert = mysql_query($query) or die(mysql_error());

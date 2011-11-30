@@ -84,7 +84,7 @@ $(function() {
 
 	<div id="content">
 	
-	<img src="public/images/logo.png"/><br/>
+	<a href="<?php echo $_SERVER['PHP_SELF']?>"><img src="public/images/logo.png"/></a><br/>
 	
 	<div id="rollover_imgs">
 		<div id="login" class="rollover clickable active"></div>
@@ -162,7 +162,7 @@ $(function() {
 					<td><input id="confirm" type="password" name="confirm" maxlength="100" class="validate[required]" equalTo="#password"/></td>
 				</tr>
 				<tr>
-					<td id="expand" colspan="2">
+					<td id="expand" colspan="2"><br/>
 					Select networks to view and make posts about the activities that interest you. <a href="#">Start browsing&nbsp;&raquo;</a></td>
 				</tr>
 				</table>
@@ -184,7 +184,13 @@ $(function() {
 									}
 							?>
 							</tbody>
-						</table><!-- Kim TODO add network capability -->
+						</table>
+				Or <span class="realgreen">add your own&nbsp;&raquo;</span><br/><br/>
+					<div id="registrationUnique">
+						<span>Area: <input class="medium_input" type="text" name="area" value="" placeholder="ex: Pittsburgh"/></span><br/><br/>
+						<span>State:  <input class="xsmall_input" type="text" name="state" maxlength="2" value="" placeholder="PA"/></span><br/><br/>
+						<span>Activity: <input class="large_input" type="text" name="newActivity" value="" placeholder="ex: being awesome"/></span><br/><br/>
+					</div>
 					
 					<input type="submit" id="do_register" name="register" value="Get ConnActed!"/>
 					
