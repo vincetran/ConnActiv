@@ -74,6 +74,10 @@ $(function() {
 		e.preventDefault();
 	});
 	
+	$('#addNewExpand').click(function() {
+		$('#registrationUnique').toggle();
+	});
+	
 	});
 </script>
 
@@ -163,7 +167,7 @@ $(function() {
 				</tr>
 				<tr>
 					<td id="expand" colspan="2"><br/>
-					Select networks to view and make posts about the activities that interest you. <a href="#">Start browsing&nbsp;&raquo;</a></td>
+					Select networks to view and make posts<br/> about the activities that interest you.<br/><a href="#">Start browsing&nbsp;&raquo;</a></td>
 				</tr>
 				</table>
 				
@@ -185,8 +189,8 @@ $(function() {
 							?>
 							</tbody>
 						</table>
-				Or <span class="realgreen">add your own&nbsp;&raquo;</span><br/><br/>
-					<div id="registrationUnique">
+				Or <span id="addNewExpand" class="clickable realgreen">add your own&nbsp;&raquo;</span><br/><br/>
+					<div id="registrationUnique" style="display:none">
 						<span>Area: <input class="medium_input" type="text" name="area" value="" placeholder="ex: Pittsburgh"/></span><br/><br/>
 						<span>State:  <input class="xsmall_input" type="text" name="state" maxlength="2" value="" placeholder="PA"/></span><br/><br/>
 						<span>Activity: <input class="large_input" type="text" name="newActivity" value="" placeholder="ex: being awesome"/></span><br/><br/>
