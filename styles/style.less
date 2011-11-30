@@ -2,7 +2,7 @@
 @darkergrey: #ddd;
 @dark: #555;
 @white: #fff;
-@green: #2384de;
+@blue: #2384de;
 @darkgreen: #2384de;
 @width: 70%;
 
@@ -15,10 +15,14 @@
 	-moz-border-radius: @radius;
 }
 
-.shadow {
-	-moz-box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
-	-webkit-box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
-	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+.text-shadow {
+	text-shadow: 0px 1px 0px #efefef;
+}
+
+.shadow(@depth:4px) {
+	-moz-box-shadow: 0 @depth @depth rgba(0, 0, 0, 0.4);
+	-webkit-box-shadow: 0 @depth @depth rgba(0, 0, 0, 0.4);
+	box-shadow: 0 @depth @depth rgba(0, 0, 0, 0.4);
 }
 
 ul {
@@ -59,24 +63,24 @@ input[type="password"], input[type="search"], input[type="text"], input[type="te
 
 a, .clickExpand {
 	text-decoration:none;
-	color: @green;
+	color: @blue;
 	.clickable;
 }
 
 a:hover {
-	color: @green;
+	color: @blue;
 	text-decoration: underline;
 }
 
 a:visited {
-	color: @green;
+	color: @blue;
 }
 
 h1, h2, h3, h4 {
 	margin: 0 0 0 0;
 	padding: 4px 4px 4px 4px;
 	color: #555;	
-	text-shadow: 0px 1px 0px #efefef;
+	.text-shadow;
 }
 
 ul#nav {
@@ -109,9 +113,7 @@ header {
 	color: @white;
 	z-index:99;
 	height: 30px;
-	-moz-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
-	-webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
-	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+	.shadow;
 }
 
 #content {
@@ -139,8 +141,8 @@ div.main {
 
 .main li, .tags li {
 	display:inline;
-	border: 1px solid @green;
-	color: @green;
+	border: 1px solid @blue;
+	color: @blue;
 	padding: 5px 10px 5px 10px;
 }
 
@@ -248,7 +250,7 @@ table td {
 }
 
 table th {
-	color: @green;
+	color: @blue;
 	vertical-align: baseline;
 	padding-top: 5px;
 	padding-bottom: 5px;
@@ -310,6 +312,27 @@ table#settings {
 .regular_table {
 	border: thin solid @darkergrey;
 	padding: 10px 10px 10px 10px;
+}
+
+.simple_table {
+	padding: 10px 10px 10px 10px;
+	margin-top: 10px;
+
+	tr {
+		border-bottom: thin solid @darkergrey;
+		padding: 4px 0px;
+		}
+		
+	th {
+		padding-left: 20px;
+		padding-right: 10px;
+		text-align:right;
+	}
+	
+	td {
+		padding-left: 10px;
+		text-align:left;
+	}
 }
 
 .alternating tr:nth-child(even), .settings tr:nth-child(even), .requests tr:nth-child(even) {
@@ -379,7 +402,7 @@ span.below_table {
 
 
 .green {
-	color: @green;
+	color: @blue;
 	text-decoration: underline;
 }
 

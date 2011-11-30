@@ -62,45 +62,44 @@
 	$(document).ready(function() {
     $('#incoming').dataTable( {
         "aaSorting": [[ 5, "desc" ]],
-        "bPaginate": false,
+        "bPaginate": true,
 				"bLengthChange": false,
 				"bFilter": true,
 				"bSort": true,
-				"bInfo": false,
+				"bInfo": true,
 				"bAutoWidth": false
    	 });
    	 
    	 $('#pending').dataTable( {
         "aaSorting": [[ 5, "desc" ]],
-        "bPaginate": false,
+        "bPaginate": true,
 				"bLengthChange": false,
 				"bFilter": true,
 				"bSort": true,
-				"bInfo": false,
+				"bInfo": true,
 				"bAutoWidth": false
    	 });
    	 
    	 $('#past').dataTable( {
         "aaSorting": [[ 5, "desc" ]],
-        "bPaginate": false,
+        "bPaginate": true,
 				"bLengthChange": false,
 				"bFilter": true,
 				"bSort": true,
-				"bInfo": false,
+				"bInfo": true,
 				"bAutoWidth": false
    	 });
    	 
    	 $('#waitingEvents').dataTable( {
         "aaSorting": [[ 1, "desc" ]],
-        "bPaginate": false,
+        "bPaginate": true,
 				"bLengthChange": false,
 				"bFilter": true,
 				"bSort": true,
-				"bInfo": false,
+				"bInfo": true,
 				"bAutoWidth": false,
 				"aoColumns": [ null, null, null, { "bSortable": false }]
-   	 });
-   	 
+   	 });   	 
    	 
 		$('.top_links').removeClass('active');
 		$('#requests').addClass('active');

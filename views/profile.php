@@ -86,6 +86,27 @@
 				
 			});
 			
+			$('#receivedMessages').dataTable( {
+        "aaSorting": [[ 3, "desc" ]],
+        "bPaginate": true,
+				"bLengthChange": false,
+				"bFilter": true,
+				"bSort": true,
+				"bInfo": true,
+				"bAutoWidth": false,
+				"aoColumns": [ null, null, null, null, { "bSortable": false }]
+   	 });
+   	 
+			$('#sentMessages').dataTable( {
+        "aaSorting": [[ 3, "desc" ]],
+        "bPaginate": true,
+				"bLengthChange": false,
+				"bFilter": true,
+				"bSort": true,
+				"bInfo": true,
+				"bAutoWidth": false
+   	 });
+			
 			
 		});
 			</script>
@@ -102,10 +123,13 @@
 			<div class="section" id="view_profile">
 			
 			<h2>Profile Info</h2>
+			
+			<div class="greyBorder">
+			
 			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
-			<table class="alternating regular_table" id="myInfo">
+			<table class="simple_table" id="myInfo">
 				<tr>
-					<td>About</td>
+					<th>About</th>
 					<td> 
 						<? $about = getAboutMe($userID); ?>
 						<span class="clickable expander"><? echo $about ?><span class='editIcon'></span></span>
@@ -116,13 +140,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td>Gender</td>
+					<th>Gender</th>
 					<td>
 					<? $sex = getUserGender($userID); 
 						$maleStatus = ''; $femaleStatus = '';
 						
 						$sex == 'Male' ? $maleStatus = 'checked' : '';
-						$sex == 'Female' ? $femaleStatus = 'checked ' :'';
+						$sex == 'Female' ? $femaleStatus = 'checked ' :''; //Determine which radio button to activate by default
 					
 					?>
 						<span class="clickable expander"><? echo $sex ?><span class='editIcon'></span></span>
@@ -134,7 +158,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>City</td>
+					<th>City</th>
 					<td>
 					<? $city = getUserCity($userID); ?>
 					<span class="clickable expander"><? echo $city ?><span class='editIcon'></span></span>
@@ -145,7 +169,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>State</td>
+					<th>State</th>
 					<td>
 					<? $st = getUserState($userID); ?>
 					<span class="clickable expander"><? echo $st ?><span class='editIcon'></span></span>
@@ -156,7 +180,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>Age</td>
+					<th>Age</th>
 					<td>
 						<? $age = getAge($userID); ?>
 						<span class="clickable expander"><? echo $age ?><span class='editIcon'></span></span>
@@ -168,6 +192,8 @@
 				</tr>
 				</form>
 			</table>
+			
+			</div>
 			
 			<br/><br/>
 				<h2>Profile Photo</h2>
@@ -185,7 +211,7 @@
 			
 				<h2>Received Messages</h2>
 				
-			<table class="alternating regular_table">
+			<table id="receivedMessages" class="alternating regular_table">
 				<thead>
 					<tr>
 						<th>From</th>
@@ -199,8 +225,6 @@
 				<?php
 					$incMessages = getIncMessages(getUserID());
 					
-					if ($incMessages) {
-					
 						foreach($incMessages as $message){
 							echo "<tr><td>".getUserName($message['FROM_USER'])."</td>";
 							echo "<td>".$message['SUBJECT']."</td>";
@@ -209,15 +233,13 @@
 							echo "<td><form action = ".$_SERVER['PHP_SELF']." method = 'post'><input = 'textbox' placeholder = 'Subject' name = 'reply[]'><input = 'textarea' placeholder = 'Reply Here' name = 'reply[]'><input type = 'submit' name = 'reply[]' value = 'Reply'/><input type = 'hidden' name = 'reply[]' value = '".$message['FROM_USER']."'/></form></td>";
 							echo "</tr>";
 						}
-					
-					} else echo "<tr><td colspan='5'>None yet.</tr>";
 				?>
 				</tbody>
 			</table>
 				<br/>
 				<h2>Sent Messages</h2>
 				
-			<table class="alternating regular_table">
+			<table id="sentMessages" class="alternating regular_table">
 				<thead>
 				<tr>
 					<th>To</th>
