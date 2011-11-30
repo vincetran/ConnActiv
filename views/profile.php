@@ -63,7 +63,7 @@
 			});
 
 			
-			$('.joinExpander').click(function(){
+			$('.expander').click(function(){
 			$(this).siblings('.expand').toggle();
 			});
 			
@@ -102,18 +102,19 @@
 			<div class="section" id="view_profile">
 			
 			<h2>Profile Info</h2>
+			<h3>Click on a section to edit</h3>
 			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
 			<table class="alternating regular_table" id="myInfo">
 				<tr>
-					<td>About Me:</td>
+					<td>About</td>
 					<td width="300" >
 						<div style="width:400px; height:100px; white-space: normal; padding-bottom:30px; padding-right:20px;" class="editable_textarea" id="about_me"><?php echo getAboutMe($userID);?></div>
 					</td>
 				</tr>
 				<tr>
-					<td>Gender:</td>
+					<td>Gender</td>
 					<td>
-						<span class="clickable joinExpander"><?php echo getUserGender($userID);?></span>
+						<span class="clickable expander"><?php echo getUserGender($userID);?></span>
 						<div class="expand" style="display:none">
 							<input type="radio" name="gender" value="M"/>Male
 							<input type="radio" name="gender" value="F"/>Female
@@ -122,34 +123,31 @@
 					</td>
 				</tr>
 				<tr>
-					<td>Location:</td>
+					<td>Location</td>
 					<td><?php echo getUserLocation($userID);?></td>
 				</tr>
 				<tr>
-					<td>Age:</td>
+					<td>Age</td>
 					<td>
-						<span class="clickable joinExpander"><?php echo getAge($userID);?></span>
+						<span class="clickable expander"><?php echo getAge($userID);?></span>
 						<div class="expand" style="display:none">
-							Birthday:<input type="text" name="DOB" id="DOB" placeholder="Click here to select."/>
+							<input type="text" name="DOB" id="DOB" placeholder="Date of birth?"/>
 							<input class="button" type="submit" name="saveInfo" value="Save"/>
 						</div>
 					</td>
 				</tr>
 				</form>
-				<tr>
-					<td>Profile Picture:</td>
-					<td>
-						
-						<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
- 							  <p>
-    							  <label for="file">Select a file:</label> <input type="file" name="userfile" id="file"> <br />
-							<input type = 'hidden' name = 'fileupload' />
-    						  <button>Upload File</button>
-						   <p>
-						</form>
-					</td>
-				</tr>
 			</table>
+			
+			<br/><br/>
+				<h2>Profile Photo</h2>
+						
+				<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
+						<p>
+							<label for="file">Select a file:</label> <input type="file" name="userfile" id="file"> <br />
+							<input type = 'hidden' name = 'fileupload' /></p>
+							<button>Upload File</button>
+				</form>
 				
 			</div> <!-- end view_profile div -->
 			<div class="section" id="view_messages">

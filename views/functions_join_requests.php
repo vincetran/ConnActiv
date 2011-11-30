@@ -1,5 +1,23 @@
 <?
 
+/* MESSAGES */
+
+	function message() {
+		$query = "INSERT INTO messages VALUES(".getUserID().", ".$_POST['reply'][3].", '".$_POST['reply'][0]."', '".$_POST['reply'][1]."', now())";	
+		mysql_query($query);	
+	}
+	
+	function eventMessage($from, $event_id) { // goes to connactiv admin, always user_id 1
+	//messages(from_user, to_user, subject, body, date)
+		$subj = "New Event";
+		$body = "Event ID $event_id is awaiting approval.";
+		$query = sprintf("INSERT INTO messages VALUES('%s', '1', '%s', '%s', now())", $from, $subj, $body);
+		
+		mysql_query($query) or die(mysql_error());
+	}
+	
+ /* JOIN REQUESTS */
+
 function joinRequest(){
 	//This insert a join request into the datbase
 	$from_user = getUserID();
