@@ -173,7 +173,7 @@
 				<div id="hiddenNewNetwork" style="display:none">
 					<form id="createNetworkForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 						Area: <input class="medium_input" type="text" name="area" value="" placeholder="ex: Pittsburgh"/>
-						State:  <input class="small_input" type="text" name="state" maxlength="2" value="" placeholder="PA"/>
+						State:  <? echo getStateDropdown() ?>
 						Activity: <input class="medium_input"type="text" name="activity" value="" placeholder="ex: being awesome"/>
 						<input type="submit" name="doAddNetwork" value="Add"/>	
 					</form>

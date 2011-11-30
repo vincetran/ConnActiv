@@ -145,7 +145,7 @@ $(function() {
 				</tr>
 				<tr>
 					<th class="formHeader">State:</th>
-					<td><input id="state"  type="text" name="state" maxlength="2"/><br/></td>
+					<td><? echo getStateDropdownLong() ?><br/></td>
 				</tr>
 				<tr>
 					<th class="formHeader">Zip:</th>
@@ -194,7 +194,7 @@ $(function() {
 				Or <span id="addNewExpand" class="clickable realgreen">add your own&nbsp;&raquo;</span><br/><br/>
 					<div id="registrationUnique" style="display:none">
 						<span>Area: <input class="medium_input" type="text" name="area" value="" placeholder="ex: Pittsburgh"/></span><br/><br/>
-						<span>State:  <input class="xsmall_input" type="text" name="state" maxlength="2" value="" placeholder="PA"/></span><br/><br/>
+						<span>State:  <? echo getStateDropdown() ?></span><br/><br/>
 						<span>Activity: <input class="large_input" type="text" name="newActivity" value="" placeholder="ex: being awesome"/></span><br/><br/>
 					</div>
 					
