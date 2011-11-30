@@ -1,10 +1,21 @@
 <? 
 
-/* string getProfile($userID)
+/* 
+*
+*** VIEWING PROFILE
+*
+*  string getProfile($userID)
 *  string getFormattedReviews($review)
 * 
+*
+*** EVENTS
+*
 *  void postEvent()
-*	 getEventsForUniqueNetwork($unique_id)
+*	 array getEventsForUniqueNetwork($unique_id)
+* 
+*
+*** CONNACTIONS
+*
 *  void postConnaction()
 *  array getPastConnactions($userid)
 *  array getAllConnactions()
@@ -12,12 +23,14 @@
 *  array getConnactionsByUnique($unique_id)
 *  array getConnactions($n_aID, $option)
 *  activity name as string getConnactionActivity($connactionID)
-*  network as string getConnactionNetwork($connactionID)
-*  unique network name as string getConnactionUniqueNetwork($connID)
-*  date getConnactionDate($connactionID, $argument)
+*  string getConnactionNetwork($connactionID)
+*  string getConnactionUniqueNetwork($connID)
+*  string getConnactionDate($connactionID, $argument)
+*  string getConnactionLocation($connactionID)
 *
+** -----------------------------------*/
 
-*/
+
 
 /*
 *
@@ -131,6 +144,21 @@
 			echo "<div class='notice'>Event request sent! We'll keep you informed of its approval.</div>";
 		}
 		
+	}
+	
+	
+	function getAllWaitingEvents() {
+	//for display in admin requests for approval
+	
+		$events = array();
+		$query = "SELECT * FROM events WHERE approved='0'";
+		
+		$result = mysql_query($query) or die(mysql_error());
+		
+		while($row = mysql_fetch_array($result)){
+				$events[] = $row;
+			}
+		return $events;
 	}
 	
 	function getEventsForUniqueNetwork($unique_id) {

@@ -80,17 +80,24 @@
    	$('#view_friendReqs').hide();
    	
    	$('#connactions').click(function() {
+   		$('.pageViewer span').removeClass('active');
    		$(this).addClass('active');
-   		$('#friendReqs').removeClass('active');
-   		$('#view_friendReqs').hide();
+   		$('.requestType').hide();
    		$('#view_connactions').fadeIn();
    	});
    	
    	$('#friendReqs').click(function() {
+   	  $('.pageViewer span').removeClass('active');
    		$(this).addClass('active');
-   		$('#connactions').removeClass('active');
-   		$('#view_connactions').hide();
+   		$('.requestType').hide();
    		$('#view_friendReqs').fadeIn();
+   	});
+   	
+   	$('#eventReqs').click(function() {
+   	  $('.pageViewer span').removeClass('active');
+   		$(this).addClass('active');
+   		$('.requestType').hide();
+   		$('#view_eventReqs').fadeIn();
    	});
    	 
 		});		
@@ -100,7 +107,12 @@
 	
 	<div class="pageViewer">
 		<span class="clickable active green" id="connactions">Connaction Requests</span>&nbsp;|&nbsp;
-		<span class="clickable green" id="friendReqs">Friend Requests</span>	
+		<span class="clickable green" id="friendReqs">Friend Requests</span>
+		
+		<? if (isAdmin()) {
+			echo "&nbsp;|&nbsp";
+			echo "<span class='clickable green' id='eventReqs'>Event Requests</span>";
+		} ?>
 	</div>
 	
 	<div class="requestType" id="view_connactions">
@@ -368,6 +380,47 @@
 			</table>
 			
 			</div> <!-- end friendReqs div -->
+			
+			<? if (isAdmin()) { ?>
+			<div id="view_eventReqs" class="requestType"> <!-- begin eventReqs div, only for admin -->
+			
+			
+			Events to go here (KIM TODO) for approval by admin. Only the administrator will see this page.
+			
+			<h2>Events Awaiting Approval</h2>
+			
+			<table class="alternating regular_table" id="waitingEvents">
+				<thead>
+					<th>Requesting User</th>
+					<th>Date Requested</th>
+					<th>Event Details</th>
+					<th>Approve?</th>
+				</thead>
+				<tobdy>
+			
+			<? $waitingEvents = getAllWaitingEvents();
+			
+				foreach($waitingEvents as $event) {
+					echo "<tr>";
+						echo "<td>".getUserName($event[1])."</td>";
+						echo "<td>$event[10]</td>";
+						echo "<td>$event[4]</td>";
+						echo "<td>checkbox</td>";				
+					echo "</tr>";
+				
+				}
+			
+			
+			
+			?>
+			
+				</tbody>
+			</table>
+			
+			</div> <!-- end event Reqs -->
+			
+			<? } // end if isAdmin ?>
+			
 
 
 		</div> <!-- end page -->
