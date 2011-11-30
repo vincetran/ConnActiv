@@ -16,6 +16,14 @@
 				acceptRequest($req);
 			} // end foreach
 		} //end if ($_POST[subscribeTo])
+		if($_POST['friendReq']){
+			$otheruser = substr($_POST['friendReq'][0], 0, strpos($_POST['friendReq'][0], " "));
+			mysql_query("insert into friends values (".getUserID().", ".$otheruser.")");
+			mysql_query("insert into friends values (".$otheruser.", ".getUserID().")");
+			mysql_query("update friend_requests set is_active = 0 where from_user = ".$otheruser." and to_user = ".getUserID());
+			$query = "insert into messages values(1, ".$otheruser.", 'Friend Request', '".getUserName(getUserID())." has accepted your friend request', now())";
+			mysql_query($query);
+		}
 	}
 	else if (isset($_POST['deny'])) {
 		if ($_POST['requestID']) {
@@ -24,7 +32,11 @@
 				denyRequest($req);
 			} // end foreach
 		} //end if ($_POST[requestID])
+		if($_POST['friendReq']){
+			mysql_query("update friend_requests set is_active = 0 where from_user = ".$otheruser." and to_user = ".getUserID());
+		}
 	}
+	
 			?>
 			
 <script type="text/javascript">
@@ -271,8 +283,8 @@
 
 			<h2>Incoming Friend Requests</h2>
 		<h3>People asking to be your friend</h3>
-			<form id="unsubNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
-			<table id="incoming" class="requests regular_table">
+			<form id="incFriendReqForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
+			<table id="incomingFR" class="requests regular_table">
 			<thead class="reqHeader">
 				<tr>
 					<th>Status</th>
@@ -281,17 +293,43 @@
 				</tr>
 			</thead>
 			<tbody>
-				<!--inbound friend requests go here-->
+				<?php
+					$incFriendRequests = getIncFriendRequests(getUserID());
+					if ($incFriendRequests) {
+					
+						foreach($incFriendRequests as $incoming){
+							if($incoming['IS_ACTIVE'] == 1){							
+							$fromUser = $incoming['FROM_USER'];
+							$toUser = $incoming['TO_USER'];
+							$message = $incoming['MESSAGE'];
+							$is_active = $incoming['IS_ACTIVE'];
+							$friendRequest = $fromUser." ".$toUser;
+				?>
+							
+							<tr> 
+								<td><input type = "checkbox" name = "friendReq[]" value = "<?php echo $friendRequest;?>" /></td>
+								<td><?php echo getUserName($fromUser); ?></td>
+								<td><?php echo $incoming[2]; ?></td>
+								
+							</tr>
+						<?php }
+						} 
+					}
+				?>
 			</tbody>
 			
 			</table>
-			
+			<div class="below_table">
+				<input style="float:right; margin-left:10px; margin-right:20px" type="submit" name="deny" value="Deny Request(s)"/>
+				<input style="float:right;" type="submit" name="accept" value="Accept Request(s)"/>
+			</div>
+			</form>
 			<br/><br/>
 
 			<h2>Pending Friend Requests</h2>
 		<h3>People  have asked to be your friend</h3>
-			<form id="unsubNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
-			<table id="incoming" class="requests regular_table">
+			
+			<table id="incomingFR" class="requests regular_table">
 			<thead class="reqHeader">
 				<tr>
 					<th>Status</th>
@@ -300,7 +338,29 @@
 				</tr>
 			</thead>
 			<tbody>
-				<!-- outbound friend requests go here -->
+				<?php
+					$pendingFriendRequests = getPendingFriendRequests(getUserID());
+					if ($pendingFriendRequests) {
+					
+						foreach($pendingFriendRequests as $pending){
+							if($pending['IS_ACTIVE'] == 1){							
+							$fromUser = $pending['FROM_USER'];
+							$toUser = $pending['TO_USER'];
+							$message = $pending['MESSAGE'];
+							$is_active = $pending['IS_ACTIVE'];
+							$friendRequest = $fromUser." ".$toUser;
+				?>
+							
+							<tr> 
+								<td>Pending</td>
+								<td><?php echo getUserName($fromUser); ?></td>
+								<td><?php echo $pending['MESSAGE']; ?></td>
+								
+							</tr>
+						<?php }
+						} 
+					}
+				?>
 			</tbody>
 			
 			</table>
