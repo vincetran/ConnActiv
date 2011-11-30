@@ -37,7 +37,7 @@
 			mysql_query("update friend_requests set is_active = 0 where from_user = ".getUserID()." and to_user = ".$otheruser);			
 			echo "<div class='notice'>Friend request denied.</div>";
 		}
-<<<<<<< HEAD
+
 	}
 	else if (isset($_POST['hide'])) {
 		if (count($_POST['requestID'])>0) {
@@ -50,7 +50,7 @@
 	else if (isset($_POST['unhide'])) {
 		unhideRequestForFrom();
 	}
-=======
+
 	} else if (isset($_POST['eventDeny'])) {
 		if (count($_POST['eventReq'])>0) {
 			$request = $_POST['eventReq'];
@@ -69,7 +69,7 @@
 	
 	
 	
->>>>>>> d8c8795870a48f9096476ac2d3b24c800cf0c38c
+
 	
 			?>
 			
@@ -499,6 +499,6 @@
 		</div> <!-- end page -->
 			
 			<?
-		}
+		
  		include('footer.php');
 ?>
