@@ -583,6 +583,7 @@ include("upload_file.php");
 		}
 		return $userActivities;
 	}
+	
 		
 	
 	function getStateDropdown() {

@@ -6,6 +6,23 @@
 *
 */
 
+
+function prettifyName($unique_id) {
+
+	$query = "SELECT unique_networks.unique_network_id, networks.area AS area, networks.state AS state, activities.activity_name AS act"
+	." FROM unique_networks, activities, networks"
+	." WHERE unique_networks.network_id = networks.network_id"
+	." AND unique_networks.activity_id = activities.activity_id"
+	." AND unique_networks.unique_network_id = ".$unique_id;
+	
+	$result = mysql_query($query) or die(mysql_error());
+
+	$name = mysql_fetch_array($result);
+	$displayName = $name['area'] . ", " .$name['state']. " - " .$name['act'];
+	return $displayName;
+}
+
+
 function getAllNetworkNames() {
 	
 	$networks = array();
@@ -71,7 +88,6 @@ function unsubscribeNetworks($unique_id) {
 }
 
 function getActivityNameFromUnique($unique_id){
-//TODO (Kim) - does this actually work?
 	$query = "SELECT activities.activity_name FROM unique_networks, activities"
 	." WHERE unique_networks.activity_id = activities.activity_id AND unique_networks.unique_network_id = $unique_id";
 	$result = mysql_query($query) or die(mysql_error());
@@ -141,6 +157,16 @@ function getUserUniqueNetworks() {
 	}
 	return $n;
 }
+
+	function getUniqueID($act, $net) {
+		$query = "SELECT unique_network_id FROM unique_networks"
+		." WHERE activity_id = '".$act."' AND network_id = '".$net."'";
+		
+	$result = mysql_query($query) or die(mysql_error());
+	$id = mysql_fetch_array($result);
+	return $id[0];
+		
+	}
 
 /*
 *

@@ -12,7 +12,11 @@
 *
 *  void postEvent()
 *	 array getEventsForUniqueNetwork($unique_id)
-* 
+*  array getAllWaitingEvents()
+*  array getEventsForUniqueNetwork($unique_id)
+*	 void approveEvent($event_id)
+*  void denyEvent($event_id)
+*
 *
 *** CONNACTIONS
 *
@@ -116,6 +120,12 @@
 	
 	}
 	
+/** 
+* EVENTS
+*
+*
+*/
+	
 	function postEvent() {
 	// Events(event_id, user_id, activity_id, network_id, message, start, end, location, recurrence, approved //
 	
@@ -148,10 +158,10 @@
 	
 	
 	function getAllWaitingEvents() {
-	//for display in admin requests for approval
+	// For display in admin requests for approval. Events awaiting approval have approved=-1 by default.
 	
 		$events = array();
-		$query = "SELECT * FROM events WHERE approved='0'";
+		$query = "SELECT * FROM events WHERE approved='-1'";
 		
 		$result = mysql_query($query) or die(mysql_error());
 		
@@ -162,7 +172,8 @@
 	}
 	
 	function getEventsForUniqueNetwork($unique_id) {
-		// Events(event_id, user_id, activity_id, network_id, message, start, end, location, recurrence, approved //
+		// Events(event_id, user_id, activity_id, network_id, message, start, end, location, recurrence, approved).
+		// Events that have been approved have approved=1.
 	
 		$events = array();
 		
@@ -178,6 +189,23 @@
 		return $events;
 		
 		}
+		
+	function approveEvent($e_id) {
+	//$e_id is event id
+		$query = "UPDATE events SET approved = '1' WHERE event_id = " .$e_id;
+		mysql_query($query) or die(mysql_error());
+	}
+	
+	function denyEvent($e_id) {
+	//$e_id is event id
+		$query = "UPDATE events SET approved = '0' WHERE event_id = " .$e_id;
+		mysql_query($query) or die(mysql_error());
+	}
+		
+/*
+*
+*
+** end EVENTS */
 
 
 

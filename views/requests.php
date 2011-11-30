@@ -37,7 +37,24 @@
 			mysql_query("update friend_requests set is_active = 0 where from_user = ".getUserID()." and to_user = ".$otheruser);			
 			echo "<div class='notice'>Friend request denied.</div>";
 		}
-	}
+	} else if (isset($_POST['eventDeny'])) {
+		if (count($_POST['eventReq'])>0) {
+			$request = $_POST['eventReq'];
+			foreach($request as $req) {
+				denyEvent($req);
+			} // end foreach
+		} //end if (count)
+	} else if (isset($_POST['eventApprove'])) {
+		if (count($_POST['eventReq'])>0) {
+			$request = $_POST['eventReq'];
+			foreach($request as $req) {
+				approveEvent($req);
+			} // end foreach
+		} // end if (count)
+	} //end if ($_POST[eventApprove])
+	
+	
+	
 	
 			?>
 			
@@ -71,13 +88,26 @@
 				"bSort": true,
 				"bInfo": false,
 				"bAutoWidth": false
-   	 });  
+   	 });
+   	 
+   	 $('#waitingEvents').dataTable( {
+        "aaSorting": [[ 1, "desc" ]],
+        "bPaginate": false,
+				"bLengthChange": false,
+				"bFilter": true,
+				"bSort": true,
+				"bInfo": false,
+				"bAutoWidth": false,
+				"aoColumns": [ null, null, null, { "bSortable": false }]
+   	 });
    	 
    	 
 		$('.top_links').removeClass('active');
 		$('#requests').addClass('active');
    
    	$('#view_friendReqs').hide();
+   	$('.requestType').hide();
+   	$('#view_connactions').show();
    	
    	$('#connactions').click(function() {
    		$('.pageViewer span').removeClass('active');
@@ -385,37 +415,53 @@
 			<div id="view_eventReqs" class="requestType"> <!-- begin eventReqs div, only for admin -->
 			
 			
-			Events to go here (KIM TODO) for approval by admin. Only the administrator will see this page.
+			Only the administrator will see this page.<br/>
+			(Not an admin? Kindly <a href="mailto:connactiv@googlegroups.com?subject=Oops!&body=I'm not an admin, but I'm seeing admin stuff on your site and wanted to let you know">email us</a>
+			&nbsp;to let us know there's a problem.)<br/><br/>
 			
 			<h2>Events Awaiting Approval</h2>
 			
+			<form id="eventReqForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 			<table class="alternating regular_table" id="waitingEvents">
 				<thead>
 					<th>Requesting User</th>
 					<th>Date Requested</th>
 					<th>Event Details</th>
-					<th>Approve?</th>
+					<th>&nbsp;</th>
 				</thead>
 				<tobdy>
 			
 			<? $waitingEvents = getAllWaitingEvents();
 			
 				foreach($waitingEvents as $event) {
+					$eventID = $event[0];
+					$user = getUserName($event[1]);
+					$actID = $event[2]; $netID = $event[3]; 
+					$uniqueID = getUniqueID($actID, $netID); 
+					$str = prettifyName($uniqueID);
+					$msg = $event[4];
+					$start = $event[5]; $end = $event[6];
+					$loc = $event[7];
+					$requested = $event[10];
+				
 					echo "<tr>";
-						echo "<td>".getUserName($event[1])."</td>";
-						echo "<td>$event[10]</td>";
-						echo "<td>$event[4]</td>";
-						echo "<td>checkbox</td>";				
+						echo "<td>$user</td>";
+						echo "<td>$requested</td>";
+						echo "<td><p><strong>Location: </strong>$loc</p><p><strong>Details: </strong>$msg</p></td>";
+						echo "<td><input type = 'checkbox' name = 'eventReq[]' value = '".$eventID."' /></td>";	
 					echo "</tr>";
 				
-				}
-			
-			
-			
+				}			
 			?>
-			
+					
 				</tbody>
 			</table>
+			<div class="below_table">
+				<input style="float:right; margin-left:10px; margin-right:20px" type="submit" name="eventDeny" value="Deny Request(s)"/>
+				<input style="float:right;" type="submit" name="eventApprove" value="Accept Request(s)"/>
+			</div>
+			
+			</form>
 			
 			</div> <!-- end event Reqs -->
 			
