@@ -53,11 +53,11 @@
 						
 				 $('#addNetwork').dataTable( {
 					"aaSorting": [[ 0, "asc" ]],
-					"bPaginate": false,
+					"bPaginate": true,
 					"bLengthChange": false,
 					"bFilter": true,
 					"bSort": true,
-					"bInfo": false,
+					"bInfo": true,
 					"bAutoWidth": false,
 					"aoColumns": [ null, null, { "bSortable": false }]
 				 });
@@ -167,13 +167,13 @@
 						</tbody>
 					</table>
 					<span class="clickable below_table">Can't find your network?&nbsp;<span class="clickExpand" id="expandAddNewNetwork">Add a new one&nbsp;&raquo;</span></span>
-					<input style="float:right; margin-right:30px;" class="below_table" type="submit" name="doSubscribe" value="Subscribe"/>
+					<input style="float:right; margin-right:30px;margin-top:-1.2em;" class="below_table" type="submit" name="doSubscribe" value="Subscribe"/>
 				</form>
 				
 				<div id="hiddenNewNetwork" style="display:none">
 					<form id="createNetworkForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 						Area: <input class="medium_input" type="text" name="area" value="" placeholder="ex: Pittsburgh"/>
-						State:  <input class="small_input" type="text" name="state" maxlength="2" value="" placeholder="PA"/>
+						State:  <? echo getStateDropdown() ?>
 						Activity: <input class="medium_input"type="text" name="activity" value="" placeholder="ex: being awesome"/>
 						<input type="submit" name="doAddNetwork" value="Add"/>	
 					</form>

@@ -123,7 +123,7 @@
 			</div>
 			</form>
 			
-			<span id="eventExpander">Or would you rather <span class="clickExpand">create an event? &raquo;</span></span>
+			<span id="eventExpander">Or <span class="clickExpand">create an event &raquo;</span></span>
 			
 			<div class="greyBorder" style="display:none" id="createEvent">
 			
