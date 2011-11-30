@@ -2,7 +2,9 @@
 
 /* string getProfile($userID)
 *  string getFormattedReviews($review)
+* 
 *  void postEvent()
+*	 getEventsForUniqueNetwork($unique_id)
 *  void postConnaction()
 *  array getPastConnactions($userid)
 *  array getAllConnactions()
@@ -130,6 +132,24 @@
 		}
 		
 	}
+	
+	function getEventsForUniqueNetwork($unique_id) {
+		// Events(event_id, user_id, activity_id, network_id, message, start, end, location, recurrence, approved //
+	
+		$events = array();
+		
+		$act_id = getActivityIDFromUnique($unique_id);
+		$net_id = getNetworkIDFromUnique($unique_id);
+		$query = "SELECT * FROM events WHERE approved='1' AND activity_id = '".$act_id."' AND network_id = '".$net_id."'";
+		
+		$result = mysql_query($query) or die(mysql_error());
+		
+		while($row = mysql_fetch_array($result)){
+				$events[] = $row;
+			}
+		return $events;
+		
+		}
 
 
 

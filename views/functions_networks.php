@@ -93,6 +93,21 @@ function forceGetActivityID($user_id, $unique_id) {
 	return $id[0];
 }
 
+function getNetworkIDFromUnique($unique_id){
+
+	$user_id = getUserID();
+
+	$query = "SELECT networks.network_id FROM unique_networks, networks, user_networks"
+	." WHERE unique_networks.network_id = networks.network_id"
+	." AND unique_networks.unique_network_id = $unique_id"
+	." AND unique_networks.unique_network_id = user_networks.unique_network_id "
+	." AND user_networks.user_id = $user_id";
+	
+	$result = mysql_query($query) or die(mysql_error());
+	$id = mysql_fetch_array($result);
+	return $id[0];
+}
+
 function getActivityIDFromUnique($unique_id){
 
 	$user_id = getUserID();

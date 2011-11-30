@@ -169,10 +169,16 @@
 				<div class="main feeds-container">
 					<ul class="feeds">
 						
-				<?  $names = getUserUniqueNetworks();
-						foreach ($names as $network): 
+				<?  $networkNames = array();
+						$networkIDs = array();
+				
+						$names = getUserUniqueNetworks();
+					foreach ($names as $network): 
 						
 						$displayName = "".$network[1].", ".$network[2]." - ".$network[3]."";
+						
+						$networkNames[] = $displayName;
+						$networkIDs[] = $network[0];
 						
 						?>
 							<li id="<? echo $network[0]; ?>" class="link_stream"><a href="#"><? echo $displayName; ?></a></li>
@@ -182,7 +188,28 @@
 					</ul>
 					
 					<div class="stream" id="stream_events">
-						<p><br/>No data yet.<br/></p>
+						<?
+							for($i=0; $i<count($networkIDs); $i++) {
+								
+								$name = $networkNames[$i]; 
+								$n_id = $networkIDs[$i];
+								
+								$networkEvents= getEventsForUniqueNetwork($n_id);
+								
+								if (count($networkEvents)>0) {
+									echo "<h2>$name</h2>";
+									foreach($networkEvents as $e) {
+										echo "$e[5] until $e[6]<br>";
+										echo "Location: $e[7]<br>";
+										echo "Event details: $e[4]<br>";
+									}
+									echo "<br><br>";
+								
+								}
+							
+								
+							}
+						?>
 					</div>
 					
 					<div class="stream" id="stream_all">
