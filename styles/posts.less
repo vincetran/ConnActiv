@@ -19,6 +19,12 @@
 	-moz-border-radius: @radius;
 }
 
+.shadow {
+	-moz-box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+	-webkit-box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+}
+
 div.post {
 	clear: both;
 	margin: 10px 10px 10px 10px;
@@ -110,6 +116,9 @@ ul.feeds li {
 
 ul.feeds li.tab_active {
 	background: #fff;
+	position: relative;
+	z-index: 4000000;
+	.shadow;
 }
 
 ul.feeds li a:hover {

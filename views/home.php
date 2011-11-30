@@ -130,7 +130,7 @@
 				<form id="createEventForm" action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
 				
 				<span class="realgreen">Submit your event details.</span><br/>
-				Once we verify that it is a legitimate event, we'll post it on your behalf.<br/><br/>
+				Once we approve your event, we'll post it on your behalf.<br/><br/>
 				
 				Description: <textarea class="small" id="eventMsg" placeholder="Tell us a little about your event." name="eventMsg" maxlength="4000"></textarea><br/><br/>
 				Location: <textarea class="small" id="eventLoc" placeholder="Where?" name="eventLoc" maxlength="255"></textarea><br/><br/>
