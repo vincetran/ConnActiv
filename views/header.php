@@ -45,6 +45,13 @@
 		$('#x').click(function(){
 			$('#user_menu').toggle();
 		});
+		
+		$('.checkAll').click(function() {
+			className = $(this).attr('id');
+			$('input.'+className).attr('checked', 'true');
+		});
+		
+		
 	});
 </script>
 
