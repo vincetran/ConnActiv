@@ -275,7 +275,7 @@
 
 	function getPastConnactions($userid){
 		$pastcon = array();		
-		$query = "select c.connaction_id, c.user_id, un.activity_id, c.start_time, c.message from connactions c, connaction_attending ca, unique_networks un where ca.user_id = ".$userid." and c.end_time < sysdate() and c.connaction_id = ca.connaction_id and un.unique_network_id = c.unique_network_id" ;
+		$query = "select c.connaction_id, c.user_id, un.activity_id, c.start_time, c.message from connactions c, connaction_attending ca, unique_networks un where ca.user_id = ".$userid." and c.end_time < now() and c.connaction_id = ca.connaction_id and un.unique_network_id = c.unique_network_id" ;
 		$past = mysql_query($query) or die(mysql_error());
 		while($info = mysql_fetch_array($past)){
 			$pastcon[] = $info;
