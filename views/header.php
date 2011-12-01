@@ -57,6 +57,17 @@
 			$(".notice").slideUp();
 			$(".error").slideUp();
 		}
+		
+		$('#selfReviews').dataTable({
+        "aaSorting": [[ 0, "desc" ]],
+        "bPaginate": true,
+				"bLengthChange": false,
+				"bFilter": true,
+				"bSort": true,
+				"bInfo": true,
+				"bAutoWidth": true,
+				"aoColumns": [ null, null, null, { "bSortable": false }, null]
+   	 });
 
 	});
 </script>

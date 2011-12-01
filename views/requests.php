@@ -136,9 +136,7 @@
 				"bInfo": true,
 				"bAutoWidth": false
    	 }); 
-   	 
-   	 
-   	 
+   	    	 
    	 $('#waitingEvents').dataTable( {
         "aaSorting": [[ 1, "desc" ]],
         "bPaginate": true,
