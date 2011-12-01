@@ -55,8 +55,7 @@
 			$('.top_links').removeClass('active');
 			$('#profile').addClass('active');
 		
-			$('#DOB').datepicker({ 
-				showButtonPanel: true, 
+			$('#DOB').datepicker({  
 				selectOtherMonths: true, 
 				changeMonth: true, 
 				changeYear: true, 
@@ -229,7 +228,8 @@
 							echo "<td>".$message['SUBJECT']."</td>";
 							echo "<td>".$message['BODY']."</td>";
 							echo "<td>".$message['DATE']."</td>";
-							echo "<td><form action = ".$_SERVER['PHP_SELF']." method = 'post'><input = 'textbox' placeholder = 'Subject' name = 'reply[]'><input = 'textarea' placeholder = 'Reply Here' name = 'reply[]'><input type = 'submit' name = 'reply[]' value = 'Reply'/><input type = 'hidden' name = 'reply[]' value = '".$message['FROM_USER']."'/></form></td>";
+							echo "<td><form action = ".$_SERVER['PHP_SELF']." method = 'post'><input type= 'text' class='x_small_input' maxlength='255' placeholder = 'Subject' name = 'reply[]'><input type= 'text' maxlength = '4000' placeholder = 'Reply Here' name = 'reply[]'>";
+							echo "<br/><input type = 'submit' name = 'reply[]' value = 'Reply'/><input type = 'hidden' name = 'reply[]' value = '".$message['FROM_USER']."'/></form></td>";
 							echo "</tr>";
 						}
 				?>

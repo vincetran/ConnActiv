@@ -3,11 +3,11 @@
 <script type="text/javascript">
 
 	$('.thumbs_up').click(function() {
-			window.location.href = 'st/views/profile.php';
+			window.location.href = 'profile.php';
 		});	
 		
 	$('.thumbs_down').click(function() {
-			window.location.href = 'st/views/profile.php';
+			window.location.href = 'profile.php';
 		});
 	
 	$('.fav').click(function(e) {
