@@ -215,8 +215,13 @@
 
 
 	function postConnaction(){
+	//This function will post the connaction to the database!
 	
-		//This function will post the connaction to the database!
+	if ( (!(isset($_POST['startDate']))) || (!isset($_POST['endDate'])) || (!isset($_POST['activity'])) 
+		|| ($_POST['network'] == -1) || ($_POST['location'] == -1) ) {
+		echo "<div class='error'>Please fill in all ConnAction data.</div>";
+	} else {
+	
 		$start = myDateParser($_POST['startDate']);
 		$end = myDateParser($_POST['endDate']);
 		$today = date("Y-m-d");
@@ -233,8 +238,9 @@
 					
 		$insert = mysql_query($query) or die(mysql_error());
 		echo "<div class='notice'>ConnAction posted!</div>";
-
 	}
+
+}
 	
 	/*		///This function was replaced by the getConnactions functions
 	function getConnactionUsers($n_aID, $option){

@@ -75,10 +75,10 @@
 		$('#eventEndDate').datepicker({ showButtonPanel: true, selectOtherMonths: true, changeMonth: true, changeYear: true, minDate: new Date(0) });
 
 
-		$('#opts input').click(function() { //work in progress - Kim
+		$('#opts input').click(function() {
 			el = $(this);
 			id = el.attr('id');
-			corresponding = $('.' +id);
+			corresponding = $('li.' +id);
 			if (el.is(':checked')) {
 				corresponding.show();
 			} else {
@@ -180,17 +180,18 @@
 				
 				<br><br>
 				<h2>Stream</h2>	
-				<!--
-				<div style="margin: 5px 0px; text-align:left" class="displayOpts"><span class="expander clickExpand">Customize your stream display&nbsp;&raquo;</span><br/>
+				<!-- 
+				<div style="margin: 5px 0px; text-align:left; width:200px; float:right" class="displayOpts"><span class="expander clickExpand">Customize your stream display&nbsp;&raquo;</span><br/>
 					<div id="opts" class="expand" style="display:none">
-						<input type="checkbox" name="display" checked id="displayAll"/>&nbsp;<label>All tab</label><br/>
-						<input type="checkbox" name="display" checked id="displayEvents"/>&nbsp;<label>Events tab</label><br/>
-						<input type="checkbox" name="display" id="displayNetworks"/>&nbsp;<label>Tab for each network</label><br/>
-						<input type="checkbox" name="display" checked id="displayUnique"/>&nbsp;<label>Tab for each network-activity</label>
+					<table>
+						<tr><td><input type="checkbox" name="display" checked id="displayAll"/>&nbsp;</td><td><label>All stream</label></td></tr>
+						<tr><td><input type="checkbox" name="display" checked id="displayEvents"/>&nbsp;</td><td><label>Events stream</label></td></tr>
+						<tr><td><input type="checkbox" name="display" id="displayNetworks"/>&nbsp;</td><td><label>Stream for each network</label></td></tr>
+						<tr><td><input type="checkbox" name="display" checked id="displayUnique"/>&nbsp;</td><td><label>Stream for each network-activity</label></td></tr>
+					</table>
 					</div>
 				</div>
-				Kim to finish -->
-					
+					Kim TODO -->
 				<div class="main feeds-container">
 					<ul class="feeds">
 						
@@ -232,6 +233,8 @@
 									}
 									echo "<br><br>";
 								
+								} else {
+									echo "<p>No events have been posted to your networks yet.</p>";
 								}
 							
 								
