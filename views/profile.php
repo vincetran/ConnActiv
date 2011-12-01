@@ -55,7 +55,14 @@
 			$('.top_links').removeClass('active');
 			$('#profile').addClass('active');
 		
-			$('#DOB').datepicker({ showButtonPanel: true, selectOtherMonths: true, changeMonth: true, changeYear: true, minDate: new Date(0) });
+			$('#DOB').datepicker({ 
+				showButtonPanel: true, 
+				selectOtherMonths: true, 
+				changeMonth: true, 
+				changeYear: true, 
+				maxDate: 0,
+				yearRange: "-100:+0"
+			});
 			
 			$('.section').hide();
 			$('#view_profile').show();
@@ -72,27 +79,33 @@
 			});
 			
 			$('#receivedMessages').dataTable( {
-        "aaSorting": [[ 3, "desc" ]],
-        "bPaginate": true,
+				"aaSorting": [[ 3, "desc" ]],
+				"bPaginate": true,
 				"bLengthChange": false,
 				"bFilter": true,
 				"bSort": true,
 				"bInfo": true,
 				"bAutoWidth": false,
 				"aoColumns": [ null, null, null, null, { "bSortable": false }]
-   	 });
+			});
    	 
 			$('#sentMessages').dataTable( {
-        "aaSorting": [[ 3, "desc" ]],
-        "bPaginate": true,
+				"aaSorting": [[ 3, "desc" ]],
+				"bPaginate": true,
 				"bLengthChange": false,
 				"bFilter": true,
 				"bSort": true,
 				"bInfo": true,
 				"bAutoWidth": false
-   	 });
+			});
 			
-			
+			setTimeout(fade_out, 4000);
+
+			function fade_out() {
+				$(".notice").slideUp();
+				$(".error").slideUp();
+			}
+
 		});
 			</script>
 			
@@ -170,7 +183,7 @@
 						<? $age = getAge($userID); ?>
 						<span class="clickable expander"><? echo $age ?><span class='editIcon'></span></span>
 						<div class="expand" style="display:none">
-							<input type="text" name="DOB" id="DOB" placeholder="Date of birth?"/>
+							<input type="text" name="DOB" id="DOB" placeholder=" Date of birth"/>
 							<input class="button" type="submit" name="saveInfo" value="Save"/>
 						</div>
 					</td>
@@ -186,7 +199,7 @@
 				<div class="greyBorder">
 				<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
 						<p>
-							<label for="file">Select a file:</label> <input type="file" name="userfile" id="file"> <br />
+							<label for="file">Select a file:</label>  <input type="file" name="userfile" id="file"> <br /><br />
 							<input type = 'hidden' name = 'fileupload' /></p>
 							<button>Upload File</button>
 				</form>

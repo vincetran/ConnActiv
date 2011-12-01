@@ -148,7 +148,7 @@
 			<? } ?>
 		</form>
 			
-			<span style="clear:both;margin-top:-1.5em;" class="clickable below_table">Want more updates? <span id="expandNetworks" class="clickExpand">Subscribe to a new network&nbsp;&raquo;</span></span>
+			<span style="clear:both;<? if ($networks) echo 'margin-top:-1.5em' ?>" class="clickable below_table">Want more updates? <span id="expandNetworks" class="clickExpand">Subscribe to a new network&nbsp;&raquo;</span></span>
 			<br/>
 			<div class="doExpand" id="allNetworks" style="display:none"><br/>
 			<form id="subscribeNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
@@ -177,14 +177,14 @@
 					<form id="createNetworkForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 						Area: <input class="medium_input" type="text" name="area" value="" placeholder="ex: Pittsburgh"/>
 						State:  <? echo getStateDropdown() ?>
-						Activity: <input class="medium_input"type="text" name="activity" value="" placeholder="ex: being awesome"/>
+						Activity: <input class="large_input"type="text" name="activity" value="" placeholder="ex: being awesome"/>
 						<input type="submit" name="doAddNetwork" value="Add"/>	
 					</form>
 				</div>
 			
 			</div><!-- end #allNetworks -->
 			
-			<br/><br/>
+			<br><br><br>
 			<h2>Your skill level preferences</h2>
 			<form id="subscribeNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 			<table id="skillsTable" class="alternating regular_table">
@@ -213,7 +213,7 @@
 						}	
 							echo	"<div class=\"expand\" style=\"display:none\">
 											<select name=\"seekLvl$index\">
-												<option value=\"-1\">Level:</option>";
+												<option value=\"-1\">Level</option>";
 												for($i = 1; $i <= 10; $i++){
 													// i = Row number
 													echo "<option value=\"$i $level[0]\">$i</option>";
@@ -232,7 +232,7 @@
 						}
 							echo "<div class=\"expand\" style=\"display:none\">
 										<select name=\"lowLvl$index\">
-												<option value=\"-1\">Level:</option>";
+												<option value=\"-1\">Level</option>";
 												for($i = 1; $i <= 10; $i++){
 													echo "<option value=\"$i $level[0]\">$i</option>";
 												}
@@ -247,7 +247,7 @@
 						}
 							echo " <div class=\"expand\" style=\"display:none\">
 										<select name=\"highLvl$index\">
-												<option value=\"-1\">Level:</option>";
+												<option value=\"-1\">Level</option>";
 												for($i = 1; $i <= 10; $i++){
 													echo "<option value=\"$i $level[0]\">$i</option>";
 												}
@@ -265,7 +265,7 @@
 						}
 							echo "<div class=\"expand\" style=\"display:none\">
 											<select name=\"ownLvl$index\">
-												<option value=\"-1\">Level:</option>";
+												<option value=\"-1\">Level</option>";
 												for($i = 1; $i <= 10; $i++){
 													echo "<option value=\"$i $level[0]\">$i</option>";
 												}

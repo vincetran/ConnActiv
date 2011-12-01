@@ -45,6 +45,14 @@
 		$('#x').click(function(){
 			$('#user_menu').toggle();
 		});
+		
+		setTimeout(fade_out, 3500);
+
+		function fade_out() {
+			$(".notice").slideUp();
+			$(".error").slideUp();
+		}
+
 	});
 </script>
 
