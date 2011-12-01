@@ -46,12 +46,36 @@
 			$('#user_menu').toggle();
 		});
 		
+		$('.checkAll').click(function() {
+			className = $(this).attr('id');
+			$('input.'+className).attr('checked', 'true');
+		});
+		
+		$('.uncheckAll').click(function() {
+			className = $(this).attr('id').split('_').pop();
+			els = $('input.'+className);
+			els.each(function() {
+				$(this).is(':disabled') ? '' : $(this).removeAttr('checked');
+			});
+		});
+
 		setTimeout(fade_out, 3500);
 
 		function fade_out() {
 			$(".notice").slideUp();
 			$(".error").slideUp();
 		}
+		
+		$('#selfReviews').dataTable({
+        "aaSorting": [[ 0, "desc" ]],
+        "bPaginate": true,
+				"bLengthChange": false,
+				"bFilter": true,
+				"bSort": true,
+				"bInfo": true,
+				"bAutoWidth": true,
+				"aoColumns": [ null, null, null, { "bSortable": false }, null]
+   	 });
 
 	});
 </script>

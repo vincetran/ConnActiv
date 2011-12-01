@@ -2,7 +2,7 @@
 	function upload_file($file, $userid){   
 	// Configuration - Your Options
       $allowed_filetypes = array('.jpg','.gif','.bmp','.png'); // These will be the types of file that will pass the validation.
-      $max_filesize = 1524288; // Maximum filesize in BYTES (currently 0.5MB).
+      $max_filesize = 2024288; // Maximum filesize in BYTES (currently 0.5MB).
       $upload_path = './profile_pics/'; // The place the files will be uploaded to (currently a 'files' directory).
  	
    $filename = $file['userfile']['name']; // Get the name of the file (including file extension).

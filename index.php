@@ -57,11 +57,11 @@ $(function() {
 	
 	$('#subscribeTable').dataTable({
         "aaSorting": [[ 0, "desc" ]],
-        "bPaginate": false,
+        "bPaginate": true,
 				"bLengthChange": false,
 				"bFilter": false,
 				"bSort": true,
-				"bInfo": false,
+				"bInfo": true,
 				"bAutoWidth": true,
 				"aoColumns": [ null, null, { "bSortable": false }]
 				});
@@ -79,6 +79,19 @@ $(function() {
 	$('#addNewExpand').click(function() {
 		$('#registrationUnique').toggle();
 	});
+	
+	$('.checkAll').click(function() {
+			className = $(this).attr('id');
+			$('input.'+className).attr('checked', 'true');
+		});
+		
+		$('.uncheckAll').click(function() {
+			className = $(this).attr('id').split('_').pop();
+			els = $('input.'+className);
+			els.each(function() {
+				$(this).is(':disabled') ? '' : $(this).removeAttr('checked');
+			});
+		});
 	
 	});
 </script>
@@ -153,7 +166,7 @@ $(function() {
 				</tr>
 				<tr>
 					<th class="formHeader">Phone:</th>
-					<td><input id="phone"  type="text" name="phone" maxlength="25" class"validate[custom[phone]]"/><br/></td>
+					<td><input id="phone"  type="text" name="phone" maxlength="25" class="validate[custom[phone]]"/><br/></td>
 				</tr>
 				<tr>
 					<th class="formHeader">A little about yourself:</th>
@@ -179,19 +192,19 @@ $(function() {
 							<tr>
 								<th>Area</th>
 								<th>Activity</th>
-								<th>Subscribe</th>
+								<th>Subscribe<span id="registerSubscribe" class="checkAll"></span><span id="_registerSubscribe" class="uncheckAll"></span></th>
 							</tr>
 						</thead>
 						<tbody>
 							
 							<? $unique = getAllUniqueNetworks(); //row(unique_network_id, area, state, activity_name).
 									foreach($unique as $un) {
-										echo "<tr><td>". $un[1] .", ". $un[2] ."</td><td>". $un[3] ."</td><td><input type='checkbox' value='".$un[0]."' name='activity[]' /></td></tr>";
+										echo "<tr><td>". $un[1] .", ". $un[2] ."</td><td>". $un[3] ."</td><td><input class='registerSubscribe' type='checkbox' value='".$un[0]."' name='activity[]' /></td></tr>";
 									}
 							?>
 							</tbody>
 						</table>
-				Or <span id="addNewExpand" class="clickable realgreen">add your own&nbsp;&raquo;</span><br/><br/>
+				<div><br><br>Or <span id="addNewExpand" style="clear:both" class="clickable realgreen">add your own&nbsp;&raquo;</span></div><br/><br/>
 					<div id="registrationUnique" style="display:none">
 						<span>Area: <input class="medium_input" type="text" name="area" value="" placeholder="ex: Pittsburgh"/></span><br/><br/>
 						<span>State:  <? echo getStateDropdown() ?></span><br/><br/>

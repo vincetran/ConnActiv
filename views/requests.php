@@ -5,9 +5,10 @@
 	//var_dump($_POST);					//Check for Dave
 	if(isset($_POST['subReview'])){
 		if($_POST['review'][4] == 'on'){$anonymous = 1;} else{$anonymous = 0;}
-		$query = "insert into reviews values(".$_POST['review'][2].", ".getUserID().", ".$anonymous.", ".$_POST['review'][1].", ".$_POST['review'][3].", sysdate(), '".$_POST['review'][0]."')";
+		$query = "insert into reviews values(".$_POST['review'][2].", ".getUserID().", ".$anonymous.", ".$_POST['review'][1].", ".$_POST['review'][3].", now(), ".$_POST['review'][0].")";
 		
 		mysql_query($query) or die(mysql_error());
+		unset($_POST['review']);
 	}
 	else if (isset($_POST['accept'])) {
 		if (isset($_POST['requestID'])) {
@@ -161,9 +162,7 @@
 				"bInfo": true,
 				"bAutoWidth": false
    	 }); 
-   	 
-   	 
-   	 
+   	    	 
    	 $('#waitingEvents').dataTable( {
         "aaSorting": [[ 1, "desc" ]],
         "bPaginate": true,
@@ -284,7 +283,7 @@
 			
 			<? if ($incRequests) { ?>
 			<div class="below_table">
-				<span style="clear:both;" class="below_table">Request are deleted the day after the ConnAction. Only non pending requests can be hidden.</span><br/><br/>
+				<span style="clear:both;" class="below_table"></span>
 				<input style="float:right; margin-left:5px; margin-right:20px" type="submit" name="hideInc" value="Hide Request(s)"/>
 				<input style="float:right; margin-left:5px;" type="submit" name="unhideInc" value="Unhide Request(s)"/>
 				<input style="float:left; margin-left:5px; margin-left:20px" type="submit" name="accept" value="Accept Request(s)"/>

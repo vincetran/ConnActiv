@@ -98,17 +98,21 @@
 		$details = "";
 	
 		if(sizeof($review) > 0){		
-			$details .= "<table class='alternating regular_table'>";
-			$details .= "<thead><th>From</th><th>Connaction</th><th>Rating</th><th>Review</th></tr></thead>";
+			$details .= "<table id='selfReviews' class='alternating regular_table'>";
+			$details .= "<thead><th>Reviewed</th><th>From</th><th>Connaction</th><th>Rating</th><th>Review</th></tr></thead>";
 			$details .= "<tbody>";
 			foreach($review as $rev){
-				if($rev['IS_POSITIVE'] == 1){$posNeg = "<td><img src='../public/images/thumbs_up.png' height='30'/></td>";}
-				else{$posNeg = "<td><img  src='../public/images/thumbs_down.png' height='30'/></td>";}
+				if($rev['IS_POSITIVE'] == 1){$posNeg = "<img src='../public/images/thumbs_up.png' height='30'/>";}
+				else{$posNeg = "<img  src='../public/images/thumbs_down.png' height='30'/>";}
 
 				if($rev['IS_ANONYMOUS'] == 1){$from = "Anonymous";}
 				else{$from = getUserName($rev['FROM_USER']);}
 			
 				$connactInfo = getConnactionActivity($rev['CONNACTION_ID']);
+				//getunique network id from connaction id
+				$unique = getUniqueFromConnaction($rev['CONNACTION_ID']);
+				$name = prettifyName($unique);
+				$date = $rev['REVIEW_DATE'];
 				
 				$loc = getConnactionLocation($rev['CONNACTION_ID']);
 				$date = getConnactionDate($rev['CONNACTION_ID'], "START");
@@ -116,7 +120,11 @@
 				if ($loc) $connactInfo .= $loc;
 				if ($date) $connactInfo .= " on $date";
 			
-				$details .= "<tr><td>".$from."</td><td>$connactInfo</td>".$posNeg."<td>".$rev['REVIEW']."</td></tr>";
+				$details .= "<tr><td>$date</td>";
+				$details .= "<td>$from</td>";
+				$details .= "<td>$name<br/>$connactInfo</td>";
+				$details .= "<td>$posNeg</td>";
+				$details .= "<td>".$rev['REVIEW']."</td></tr>";
 			} //end foreach
 			$details .= "</tbody></table>";
 		} //end has reviews	
@@ -124,6 +132,17 @@
 		return $details;
 	
 	}
+	
+	function getUniqueFromConnaction($id) {
+		$events = array();
+		$query = "SELECT unique_networks.unique_network_id FROM unique_networks, connactions"
+		." WHERE connactions.connaction_id = unique_networks.unique_network_id";
+		
+		$result = mysql_query($query) or die(mysql_error());	
+		$row = mysql_fetch_array($result);
+		return $row[0];	
+	}
+
 	
 /** 
 * EVENTS
@@ -275,7 +294,7 @@
 
 	function getPastConnactions($userid){
 		$pastcon = array();		
-		$query = "select c.connaction_id, c.user_id, un.activity_id, c.start_time, c.message from connactions c, connaction_attending ca, unique_networks un where ca.user_id = ".$userid." and c.end_time < sysdate() and c.connaction_id = ca.connaction_id and un.unique_network_id = c.unique_network_id" ;
+		$query = "select c.connaction_id, c.user_id, un.activity_id, c.start_time, c.message from connactions c, connaction_attending ca, unique_networks un where ca.user_id = ".$userid." and c.end_time < now() and c.connaction_id = ca.connaction_id and un.unique_network_id = c.unique_network_id" ;
 		$past = mysql_query($query) or die(mysql_error());
 		while($info = mysql_fetch_array($past)){
 			$pastcon[] = $info;
