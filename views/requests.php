@@ -386,12 +386,12 @@
 					echo "<td>".$pc[4]."</td>";
 				if(ReviewedByUser($pc[0],getUserID()) == false){					
 					echo "<td><form id='reviewform' action='".$_SERVER['PHP_SELF']."' method='post'>";
-					echo "<input id = 'review' type = 'textbox' name = 'review[]' placeholder='Review this ConnAction	'/><br/>";					
+					echo "<input id = 'review' type = 'textbox' name = 'review[]' placeholder='Review this ConnAction'/><br/>";					
 					echo "<input type = 'hidden' name = 'review[]' value = $pc[0] />";
 					echo "<input type = 'hidden' name = 'review[]' value = $pc[1] />";
-					echo "<input id = 'review' name = 'review[]' type = 'radio' value = 1 />Thumbs Up<input name = 'review[]' type = 'radio' value = 0 />Thumbs Down<br/>";
-					echo "<input id = 'review' name = 'review[]' type = 'checkbox'/>Anonymous";		
-					echo "<input id = 'review' name = 'subReview' type = 'submit' value = 'Submit Review'/>";
+					echo "<input class = 'review' name = 'review[]' type = 'radio' value = 1 />Thumbs Up<input name = 'review[]' type = 'radio' value = 0 />Thumbs Down<br/>";
+					echo "<input class = 'review' name = 'review[]' type = 'checkbox'/>Anonymous";		
+					echo "<input class = 'review' name = 'subReview' type = 'submit' value = 'Submit Review'/>";
 					
 					echo "</form></td>";
 				}

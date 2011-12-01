@@ -41,8 +41,6 @@
 		$.fancybox(author_display,
 		{
 			'autoDimensions': true,
-			'width': 'auto',
-			'height': 'auto',
 			'transitionIn': 'none',
 			'transitionOut': 'none'
 		});
