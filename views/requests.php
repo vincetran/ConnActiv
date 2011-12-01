@@ -3,19 +3,32 @@
 
 	if(cookieExists() && validCookie()) {
 	//var_dump($_POST);					//Check for Dave
-	if(isset($_POST['review'])){
+	if(isset($_POST['subReview'])){
 		if($_POST['review'][4] == 'on'){$anonymous = 1;} else{$anonymous = 0;}
 		$query = "insert into reviews values(".$_POST['review'][2].", ".getUserID().", ".$anonymous.", ".$_POST['review'][1].", ".$_POST['review'][3].", sysdate(), '".$_POST['review'][0]."')";
 		
 		mysql_query($query) or die(mysql_error());
 	}
 	else if (isset($_POST['accept'])) {
-		if ($_POST['requestID']) {
+		if (isset($_POST['requestID'])) {
 			$request = $_POST['requestID'];
 			foreach($request as $req) { 
 				acceptRequest($req);
 			} // end foreach
-		} //end if ($_POST[subscribeTo])
+		} //end if ($_POST[accept])
+	}
+	else if (isset($_POST['acceptFriend'])) {
+		echo "here1";
+		if (isset($_POST['friendReq'])) {
+			echo "here2";
+			$friends = $_POST['friendReq'];
+			foreach($friends as $friend) { 
+				acceptFriendRequest($friend);
+				echo "<div class='notice'>Friend accepted!</div>";
+			} // end foreach
+		} //end if ($_POST[accept])
+	}
+		/*
 		if(isset($_POST['friendReq'])){
 			$otheruser = substr($_POST['friendReq'][0], 0, strpos($_POST['friendReq'][0], " "));
 			mysql_query("insert into friends values (".getUserID().", ".$otheruser.")");
@@ -25,22 +38,34 @@
 			mysql_query($query);
 			echo "<div class='notice'>Friend accepted!</div>";
 		}
-	}
+	}*/
 	else if (isset($_POST['deny'])) {
-		if (count($_POST['requestID'])>0) {
+		if (isset($_POST['requestID'])) {
 			$request = $_POST['requestID'];
 			foreach($request as $req) {
 				denyRequest($req);
 			} // end foreach
-		} //end if ($_POST[requestID])
-		if(isset($_POST['friendReq'])){
+		} //end if ($_POST[deny])
+	}
+	else if (isset($_POST['denyFriend'])) {
+		echo "here11";
+		if (isset($_POST['friendReq'])) {
+			echo "here22";
+			$friends = $_POST['friendReq'];
+			foreach($friends as $friend) {
+				denyFriendRequest($friend);
+				echo "<div class='notice'>Friend request denied.</div>";
+			} // end foreach
+		} //end if ($_POST[deny])
+	}
+		/*if(isset($_POST['friendReq'])){
 			mysql_query("update friend_requests set is_active = 0 where from_user = ".getUserID()." and to_user = ".$otheruser);			
 			echo "<div class='notice'>Friend request denied.</div>";
 		}
 
-	}
+	}*/
 	else if (isset($_POST['hideInc'])) {
-		if (count($_POST['requestID'])>0) {
+		if (isset($_POST['requestID'])) {
 			$request = $_POST['requestID'];
 			foreach($request as $req) {
 				hideRequestForTo($req);
@@ -51,7 +76,7 @@
 		unhideRequestForTo();
 	}
 	else if (isset($_POST['hide'])) {
-		if (count($_POST['requestIDPen'])>0) {
+		if (isset($_POST['requestIDPen'])) {
 			$request = $_POST['requestIDPen'];
 			foreach($request as $req) {
 				hideRequestForFrom($req);
@@ -63,14 +88,14 @@
 	}
 
 	} else if (isset($_POST['eventDeny'])) {
-		if (count($_POST['eventReq'])>0) {
+		if (isset($_POST['eventReq'])) {
 			$request = $_POST['eventReq'];
 			foreach($request as $req) {
 				denyEvent($req);
 			} // end foreach
 		} //end if (count)
 	} else if (isset($_POST['eventApprove'])) {
-		if (count($_POST['eventReq'])>0) {
+		if (isset($_POST['eventReq'])) {
 			$request = $_POST['eventReq'];
 			foreach($request as $req) {
 				approveEvent($req);
@@ -367,7 +392,7 @@
 					echo "<input type = 'hidden' name = 'review[]' value = $pc[1] />";
 					echo "<input id = 'review' name = 'review[]' type = 'radio' value = 1 />Thumbs Up<input name = 'review[]' type = 'radio' value = 0 />Thumbs Down<br/>";
 					echo "<input id = 'review' name = 'review[]' type = 'checkbox'/>Anonymous";		
-					echo "<input id = 'review' name = 'review[]' type = 'submit' value = 'Submit Review'/>";
+					echo "<input id = 'review' name = 'subReview' type = 'submit' value = 'Submit Review'/>";
 					
 					echo "</form></td>";
 				}
@@ -396,7 +421,7 @@
 			<thead class="reqHeader">
 				<tr>
 					<th>Status</th>
-					<th>User</th>
+					<th>From User</th>
 					<th>Message</th>
 				</tr>
 			</thead>
@@ -406,21 +431,31 @@
 					if ($incFriendRequests) {
 					
 						foreach($incFriendRequests as $incoming){
-							if($incoming['IS_ACTIVE'] == 1){							
+							if($incoming['IS_ACTIVE'] == -1){
 							$fromUser = $incoming['FROM_USER'];
 							$toUser = $incoming['TO_USER'];
 							$message = $incoming['MESSAGE'];
 							$is_active = $incoming['IS_ACTIVE'];
-							$friendRequest = $fromUser." ".$toUser;
+							$friendID = $fromUser." ".$toUser;
 				?>
 							
 							<tr> 
-								<td><input type = "checkbox" name = "friendReq[]" value = "<?php echo $friendRequest;?>" /></td>
+								<td>
+									<?php 
+										if($is_active == -1){
+											echo "<input type='checkbox' value='".$friendID."' name='friendReq[]' /> <br/>"; 
+											echo "Pending";
+										}
+									?>
+								</td>
 								<td><?php echo getUserName($fromUser); ?></td>
-								<td><?php echo $incoming[2]; ?></td>
-								
+								<td><?php echo $message; ?></td>
 							</tr>
-						<?php }
+							
+							
+							
+						<?php
+							}
 						} 
 					}
 				?>
@@ -428,8 +463,8 @@
 			
 			</table>
 			<div class="below_table">
-				<input style="float:right; margin-left:10px; margin-right:20px" type="submit" name="deny" value="Deny Request(s)"/>
-				<input style="float:right;" type="submit" name="accept" value="Accept Request(s)"/>
+				<input style="float:right; margin-left:10px; margin-right:20px" type="submit" name="denyFriend" value="Deny Request(s)"/>
+				<input style="float:right;" type="submit" name="acceptFriend" value="Accept Request(s)"/>
 			</div>
 			</form>
 			<br/><br/><br/>
@@ -441,7 +476,7 @@
 			<thead class="reqHeader">
 				<tr>
 					<th>Status</th>
-					<th>User</th>
+					<th>To User</th>
 					<th>Message</th>
 				</tr>
 			</thead>
@@ -449,9 +484,8 @@
 				<?php
 					$pendingFriendRequests = getPendingFriendRequests(getUserID());
 					if ($pendingFriendRequests) {
-					
 						foreach($pendingFriendRequests as $pending){
-							if($pending['IS_ACTIVE'] == 1){							
+							if($pending['IS_ACTIVE'] == -1){							
 							$fromUser = $pending['FROM_USER'];
 							$toUser = $pending['TO_USER'];
 							$message = $pending['MESSAGE'];
@@ -461,7 +495,7 @@
 							
 							<tr> 
 								<td>Pending</td>
-								<td><?php echo getUserName($fromUser); ?></td>
+								<td><?php echo getUserName($toUser); ?></td>
 								<td><?php echo $pending['MESSAGE']; ?></td>
 								
 							</tr>

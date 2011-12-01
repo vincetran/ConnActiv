@@ -10,7 +10,7 @@
 		} else if (isset($_POST['postEvent'])) {
 			postEvent();
 		} else if(isset($_POST['friend'])){
-			$query = "insert into friend_requests values (".getUserID().", ".$_POST['friend'][2].", '".$_POST['friend'][0]."', 1)";
+			$query = "insert into friend_requests values (".getUserID().", ".$_POST['friend'][2].", '".$_POST['friend'][0]."', -1)";
 			mysql_query($query) or die(mysql_error());
 		}	else if(isset($_POST['reply'])){
 				message();	

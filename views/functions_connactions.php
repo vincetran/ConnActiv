@@ -84,7 +84,7 @@
 }
 			elseif(requestIsActive($userID)){$details .= "<br/>Friend Request Pending";}
 			elseif($userID != getUserID()){
-				$details .= "<br/>Request to be Friends<td><form action = ".$_SERVER['PHP_SELF']." method = 'post'><input type= 'text' placeholder = 'Insert a message to this person' name = 'friend[]' /><input type = 'submit' name = 'friend[]' value = 'Submit'/><input type = 'hidden' name = 'friend[]' value = '".$userID."'/></form>";
+				$details .= "<br/>Request to be Friends<td><form action = ".$_SERVER['PHP_SELF']." method = 'post'><input type= 'text' placeholder = 'Write a message' name = 'friend[]' /><input type = 'submit' name = 'friend[]' value = 'Submit'/><input type = 'hidden' name = 'friend[]' value = '".$userID."'/></form>";
 			}
 			else{$details .= "<br/>";}
 		

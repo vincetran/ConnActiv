@@ -6,21 +6,21 @@
 	{
 		
 		if (isset($_POST['doSubscribe'])) {
-			if ($_POST['subscribeTo']) {
+			if (isset($_POST['subscribeTo'])) {
 				$newSubscriptions = $_POST['subscribeTo'];
 				foreach($newSubscriptions as $s) { //$ is passed in as unique_network_id
 					subscribeNetwork($s);
 				} // end foreach
 			} //end if ($_POST[subscribeTo])
 		} else if (isset($_POST['doUnsubscribe'])) {
-			if ($_POST['unsubscribeTo']) {
+			if (isset($_POST['unsubscribeTo'])) {
 				$unsubscrips = $_POST['unsubscribeTo'];
 				foreach($unsubscrips as $u) {
 					unsubscribeNetworks($u);
 				} // end foreach
 			} //end if ($_POST[unsubscribeTo])
 		} else if (isset($_POST['doFavorite'])) {
-			if ($_POST['favorite']) {
+			if (isset($_POST['favorite'])) {
 				$favs = $_POST['favorite'];
 				foreach($favs as $f) {
 					favoriteNetwork($f);
@@ -32,7 +32,7 @@
 				$activity = $_POST['activity'];
 				createAndSubscribeNetwork($area, $state, $activity);
 		} else if (isset($_POST['doDefavorite'])) {
-			if ($_POST['defavorite']) {
+			if (isset($_POST['defavorite'])) {
 				$defavs = $_POST['defavorite'];
 				foreach($defavs as $d) {
 					$defav_id = getUniqueNetworkIdByFav($d);

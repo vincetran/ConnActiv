@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 30, 2011 at 09:58 PM
+-- Generation Time: Dec 01, 2011 at 07:53 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `activities` (
   `ACTIVITY_ID` int(11) NOT NULL AUTO_INCREMENT,
   `ACTIVITY_NAME` varchar(20) NOT NULL,
   PRIMARY KEY (`ACTIVITY_ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `activities`
@@ -69,7 +69,6 @@ CREATE TABLE IF NOT EXISTS `comments` (
   PRIMARY KEY (`COMMENT_ID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
-
 -- --------------------------------------------------------
 
 --
@@ -87,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `connactions` (
   `UNIQUE_NETWORK_ID` int(11) NOT NULL,
   `IS_PRIVATE` int(11) DEFAULT '0',
   PRIMARY KEY (`CONNACTION_ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
 
 --
 -- Dumping data for table `connactions`
@@ -98,7 +97,7 @@ INSERT INTO `connactions` (`CONNACTION_ID`, `POST_TIME`, `USER_ID`, `LOCATION`, 
 (14, '2011-11-29', 12, 'Forbes and Sennot', '2011-12-01 07:00:00', 'Let us all go run!', '2011-12-01 09:00:00', 3, 0),
 (15, '2011-11-30', 13, 'Cathedral', '2011-11-28 10:00:00', 'Testing a past Connaction', '2011-11-28 11:00:00', 3, 0),
 (16, '2011-11-30', 11, 'here', '2011-11-28 10:00:00', 'Testing a past Connaction', '2011-11-28 11:00:00', 3, 0),
-(17, '2011-11-30', 12, 'This is a very long location string so that we can see what it looks like when someone decides to give very specific directions that are probably not even that useful because they are probably a woman who was a horrible sense of direction and chooses horrible places to meet for connactions.  whew!', '2011-11-28 10:00:00', 'Testing a long location', '2011-11-28 11:00:00', 4, 0),
+(17, '2011-11-30', 12, 'This is a very long location string so that we can see what it looks like when someone decides to give very specific directions that are probably not even that useful because they are probably a woman who was a horrible sense of direction and chooses horr', '2011-11-28 10:00:00', 'Testing a long location', '2011-11-28 11:00:00', 4, 0),
 (18, '2011-11-30', 13, 'Cathedral', '2011-11-28 10:00:00', 'This is testing a very long message which I dont really feel like typing out but i will try to bullshit for a little and then i will just start typing random letters GO! adsglkasjdghlaskdjghalsdkjaghlsdkjgahsldgkjadshlvkcjndsflvknjadsvdkljvnlasdkjvnasldkjgadshlgkjashdlgk', '2011-11-28 11:00:00', 5, 0),
 (19, '2011-11-30', 11, 'Cathedral', '2011-11-28 10:00:00', 'Testing a private Connaction', '2011-11-28 11:00:00', 3, 1),
 (20, '2011-11-30', 12, 'Cathedral', '2011-11-28 10:00:00', 'Testing a Connaction', '2011-11-28 11:00:00', 3, 0),
@@ -131,20 +130,25 @@ CREATE TABLE IF NOT EXISTS `connaction_attending` (
   PRIMARY KEY (`CONNACTION_ID`,`USER_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-insert into `connaction_attending` values(11,13),
-(12,14),
-(13,15),
-(14,16),
-(15,17),
-(16,18),
-(17,19),
-(18,20),
-(17,21),
-(16,22),
-(15,23),
-(14,24),
-(16,25),
-(17,26);
+--
+-- Dumping data for table `connaction_attending`
+--
+
+INSERT INTO `connaction_attending` (`USER_ID`, `CONNACTION_ID`) VALUES
+(11, 13),
+(12, 14),
+(13, 15),
+(14, 16),
+(15, 17),
+(16, 18),
+(17, 19),
+(18, 20),
+(17, 21),
+(16, 22),
+(15, 23),
+(14, 24),
+(16, 25),
+(17, 26);
 
 -- --------------------------------------------------------
 
@@ -173,11 +177,10 @@ INSERT INTO `connaction_requests` (`FROM_USER`, `TO_USER`, `CONNACTION_ID`, `MES
 (13, 14, 15, 'Hi can I join!', 2, '2011-11-30 20:21:54', 0, 0),
 (14, 11, 16, 'Hi can I join!', 2, '2011-11-30 20:21:54', 0, 0),
 (15, 13, 32, 'Hi can I join!', 2, '2011-11-30 20:21:54', 1, 0),
-(16, 11, 14, 'Hi can I join!', 2, '2011-11-30 20:21:54', 0, 1),
+(16, 11, 14, 'Hi can I join!', 2, '2011-11-30 20:21:54', 0, 0),
 (13, 14, 20, 'Hi can I join!', 2, '2011-11-30 20:21:54', 1, 1),
 (14, 15, 19, 'Hi can I join!', 2, '2011-11-30 20:21:54', 0, 0),
 (15, 14, 24, 'Hi can I join!', 2, '2011-11-30 20:21:54', 0, 0);
-
 
 -- --------------------------------------------------------
 
@@ -195,17 +198,23 @@ CREATE TABLE IF NOT EXISTS `events` (
   `END` datetime DEFAULT NULL,
   `LOCATION` varchar(20) DEFAULT NULL,
   `RECURRENCE` int(11) DEFAULT NULL,
-  `APPROVED` int(1) DEFAULT -1,
+  `APPROVED` int(1) DEFAULT '-1',
   PRIMARY KEY (`EVENT_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
-insert into `events` values (1, 12, 1, 1, 'we are having an event', '2011-21-01 20:21:54', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0),
-(2, 14, 2, 1, 'we are having another event', '2011-21-01 20:21:54', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0),
-(3, 15, 3, 2, 'we are having big event, we show you good time', '2011-21-01 20:21:54', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0),
-(4, 13, 4, 1, 'event for cancer', '2011-21-01 20:21:54', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0),
-(5, 18, 5, 2, 'event for aids', '2011-21-01 20:21:54', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0),
-(6, 17, 6, 1, 'event for canine retardation', '2011-21-01 20:21:54', '2011-12-02 20:21:54', 'in lawrenceville', 0, 0),
-(7, 11, 12, 1, 'we are having an event', '2011-21-01 20:21:54', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0);
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`EVENT_ID`, `USER_ID`, `ACTIVITY_ID`, `NETWORK_ID`, `MESSAGE`, `START`, `END`, `LOCATION`, `RECURRENCE`, `APPROVED`) VALUES
+(1, 12, 1, 1, 'we are having an event', '0000-00-00 00:00:00', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0),
+(2, 14, 2, 1, 'we are having another event', '0000-00-00 00:00:00', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0),
+(3, 15, 3, 2, 'we are having big event, we show you good time', '0000-00-00 00:00:00', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0),
+(4, 13, 4, 1, 'event for cancer', '0000-00-00 00:00:00', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0),
+(5, 18, 5, 2, 'event for aids', '0000-00-00 00:00:00', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0),
+(6, 17, 6, 1, 'event for canine retardation', '0000-00-00 00:00:00', '2011-12-02 20:21:54', 'in lawrenceville', 0, 0),
+(7, 11, 12, 1, 'we are having an event', '0000-00-00 00:00:00', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -230,12 +239,18 @@ CREATE TABLE IF NOT EXISTS `favorites` (
   PRIMARY KEY (`USER_ID`,`UNIQUE_NETWORK_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-insert into `favorites` values (11, 7),
-(12,8),
-(13,9),
-(14,10),
-(15,11),
-(12, 16);
+--
+-- Dumping data for table `favorites`
+--
+
+INSERT INTO `favorites` (`USER_ID`, `UNIQUE_NETWORK_ID`) VALUES
+(11, 7),
+(12, 8),
+(12, 16),
+(13, 9),
+(14, 10),
+(15, 11);
+
 -- --------------------------------------------------------
 
 --
@@ -243,18 +258,11 @@ insert into `favorites` values (11, 7),
 --
 
 CREATE TABLE IF NOT EXISTS `friends` (
-  `USER_ID` int(11) NOT NULL,
-  `FRIEND_ID` int(11) NOT NULL,
-  PRIMARY KEY (`USER_ID`,`FRIEND_ID`)
+  `USER1` int(11) NOT NULL,
+  `USER2` int(11) NOT NULL,
+  PRIMARY KEY (`USER1`,`USER2`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-insert into `friends` values (13, 14), (14,13),
-(14,15),
-(15,14),
-(13,15),
-(15,13),
-(15,16),
-(16,15);
 -- --------------------------------------------------------
 
 --
@@ -265,9 +273,18 @@ CREATE TABLE IF NOT EXISTS `friend_requests` (
   `FROM_USER` int(11) NOT NULL,
   `TO_USER` int(11) NOT NULL,
   `MESSAGE` varchar(4000) DEFAULT NULL,
-  `IS_ACTIVE` int(11) DEFAULT '1',
+  `IS_ACTIVE` int(11) DEFAULT '-1',
   PRIMARY KEY (`FROM_USER`,`TO_USER`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `friend_requests`
+--
+
+INSERT INTO `friend_requests` (`FROM_USER`, `TO_USER`, `MESSAGE`, `IS_ACTIVE`) VALUES
+(11, 12, 'Lets be friends!', -1),
+(11, 13, 'FRIENDS!', -1),
+(13, 12, 'friends we are', -1);
 
 -- --------------------------------------------------------
 
@@ -310,7 +327,7 @@ CREATE TABLE IF NOT EXISTS `networks` (
   `AREA` varchar(25) NOT NULL,
   `STATE` varchar(2) NOT NULL,
   PRIMARY KEY (`NETWORK_ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `networks`
@@ -353,13 +370,19 @@ CREATE TABLE IF NOT EXISTS `reviews` (
   PRIMARY KEY (`FROM_USER`,`CONNACTION_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-insert into reviews values(11, 12, 0, 13, 0, '2011-11-30 15:17:07', 'This is a test review'),
-(12, 13, 1, 13, 1, '2011-11-30 15:17:07', 'This is a test review'),
-(11, 12, 0, 14, 0, '2011-11-30 15:17:07', 'This is a test review'),
-(14, 12, 0, 16, 1, '2011-11-30 15:17:07', 'This is a test review'),
-(14, 13, 0, 20, 0, '2011-11-30 15:17:07', 'This is a test review'),
-(11, 13, 0, 21, 0, '2011-11-30 15:17:07', 'This is a test review'),
-(13, 12, 0, 15, 0, '2011-11-30 15:17:07', 'This is a test review');
+--
+-- Dumping data for table `reviews`
+--
+
+INSERT INTO `reviews` (`USER_ID`, `FROM_USER`, `IS_ANONYMOUS`, `CONNACTION_ID`, `IS_POSITIVE`, `REVIEW_DATE`, `REVIEW`) VALUES
+(11, 12, 0, 13, 0, '2011-11-30', 'This is a test review'),
+(12, 13, 1, 13, 1, '2011-11-30', 'This is a test review'),
+(11, 12, 0, 14, 0, '2011-11-30', 'This is a test review'),
+(14, 12, 0, 16, 1, '2011-11-30', 'This is a test review'),
+(14, 13, 0, 20, 0, '2011-11-30', 'This is a test review'),
+(11, 13, 0, 21, 0, '2011-11-30', 'This is a test review'),
+(13, 12, 0, 15, 0, '2011-11-30', 'This is a test review');
+
 -- --------------------------------------------------------
 
 --
@@ -371,7 +394,7 @@ CREATE TABLE IF NOT EXISTS `unique_networks` (
   `NETWORK_ID` int(11) DEFAULT NULL,
   `ACTIVITY_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`UNIQUE_NETWORK_ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `unique_networks`
@@ -384,20 +407,21 @@ INSERT INTO `unique_networks` (`UNIQUE_NETWORK_ID`, `NETWORK_ID`, `ACTIVITY_ID`)
 (4, 2, 1),
 (5, 2, 2),
 (6, 2, 3),
-(7,1,1),
-(8,1,2),
-(9,1,3),
-(10,1,4),
-(11,1,6),
-(12,1,8),
-(13,1,12),
-(14,2,2),
-(15,2,3),
-(16,2,4),
-(17,3,2),
-(18,3,3),
-(19,4,4),
-(20,5,8);
+(7, 1, 1),
+(8, 1, 2),
+(9, 1, 3),
+(10, 1, 4),
+(11, 1, 6),
+(12, 1, 8),
+(13, 1, 12),
+(14, 2, 2),
+(15, 2, 3),
+(16, 2, 4),
+(17, 3, 2),
+(18, 3, 3),
+(19, 4, 4),
+(20, 5, 8);
+
 -- --------------------------------------------------------
 
 --
@@ -420,7 +444,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `DOB` date DEFAULT NULL,
   `GENDER` char(1) DEFAULT NULL,
   PRIMARY KEY (`USER_ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `users`
@@ -433,20 +457,19 @@ INSERT INTO `users` (`USER_ID`, `PASSWORD`, `FIRST_NAME`, `LAST_NAME`, `STREET`,
 (13, '9ae984b8b7e71ee69caf0a7b82b31b1e', 'User', 'Test', '', '', '', NULL, '', '', '../public/images/avatar.png', 'admin@connactiv.com', NULL, NULL),
 (14, '9ae984b8b7e71ee69caf0a7b82b31b1e', 'Fake', 'Mister', '', '', '', NULL, '', '', '../public/images/avatar.png', 'admin@connactiv.com', NULL, NULL);
 
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `user_activities`
 --
 
-CREATE TABLE IF NOT EXISTS `user_activities`(
+CREATE TABLE IF NOT EXISTS `user_activities` (
   `USER_ID` int(11) NOT NULL,
   `ACTIVITY_ID` int(11) NOT NULL,
-  `LOW_LEVEL` int(11) NULL,
-  `HIGH_LEVEL` int(11) NULL,
-  `PREFERRED` int(11) NULL,
-  `OWN_LEVEL` int(11) NULL,
+  `LOW_LEVEL` int(11) DEFAULT NULL,
+  `HIGH_LEVEL` int(11) DEFAULT NULL,
+  `PREFERRED` int(11) DEFAULT NULL,
+  `OWN_LEVEL` int(11) DEFAULT NULL,
   PRIMARY KEY (`USER_ID`,`ACTIVITY_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -454,8 +477,8 @@ CREATE TABLE IF NOT EXISTS `user_activities`(
 -- Dumping data for table `user_activities`
 --
 
-INSERT INTO `user_activities` (`USER_ID`, `ACTIVITY_ID`, `LOW_LEVEL`, `HIGH_LEVEL`, `PREFERRED`, `OWN_LEVEL`) 
-VALUES(11, 3, 6, 9, 8, 8),
+INSERT INTO `user_activities` (`USER_ID`, `ACTIVITY_ID`, `LOW_LEVEL`, `HIGH_LEVEL`, `PREFERRED`, `OWN_LEVEL`) VALUES
+(11, 3, 6, 9, 8, 8),
 (11, 1, 2, 6, 4, 5),
 (11, 4, NULL, NULL, NULL, NULL),
 (11, 5, NULL, NULL, NULL, NULL),
@@ -484,17 +507,17 @@ CREATE TABLE IF NOT EXISTS `user_networks` (
 
 INSERT INTO `user_networks` (`USER_ID`, `UNIQUE_NETWORK_ID`) VALUES
 (11, 1),
+(11, 2),
 (11, 3),
+(11, 4),
 (11, 6),
 (12, 1),
 (12, 3),
 (13, 2),
-(13, 4),
 (13, 3),
+(13, 4),
 (14, 1),
-(14, 5),
-(11, 2),
-(11, 4);
+(14, 5);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
