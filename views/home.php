@@ -85,8 +85,7 @@
 				corresponding.hide();
 			}			
 		});
-		
-		
+
 	});
 	</script>
 	

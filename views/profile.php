@@ -87,27 +87,33 @@
 			});
 			
 			$('#receivedMessages').dataTable( {
-        "aaSorting": [[ 3, "desc" ]],
-        "bPaginate": true,
+				"aaSorting": [[ 3, "desc" ]],
+				"bPaginate": true,
 				"bLengthChange": false,
 				"bFilter": true,
 				"bSort": true,
 				"bInfo": true,
 				"bAutoWidth": false,
 				"aoColumns": [ null, null, null, null, { "bSortable": false }]
-   	 });
+			});
    	 
 			$('#sentMessages').dataTable( {
-        "aaSorting": [[ 3, "desc" ]],
-        "bPaginate": true,
+				"aaSorting": [[ 3, "desc" ]],
+				"bPaginate": true,
 				"bLengthChange": false,
 				"bFilter": true,
 				"bSort": true,
 				"bInfo": true,
 				"bAutoWidth": false
-   	 });
+			});
 			
-			
+			setTimeout(fade_out, 4000);
+
+			function fade_out() {
+				$(".notice").slideUp();
+				$(".error").slideUp();
+			}
+
 		});
 			</script>
 			
