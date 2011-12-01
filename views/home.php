@@ -132,13 +132,46 @@
 					<div id="restOfBoxes">
 						Location: <textarea class="small" id="location" placeholder=" Where?" name="location" maxlength="255"></textarea><br/><br/>
 						Starting: <input class="small_input" type="text" name="startDate" id="startDate"/> <select name="startHour">
-							<option value="-1">Hour</option><? for($i = 1; $i < 24; $i++) echo "<option value=\"",$i,"\">", $i, "</option>";	?>
-							</select> : <select name="startMin"><option value="-1">Min</option><? for($i = 0; $i < 60; $i++) echo "<option value=\"",$i,"\">", $i, "</option>";	?></select><br/><br/>
+							<option value="-1">Hour</option>
+								<? for($i = 0; $i < 24; $i++)
+									if( $i < 10){
+										echo "<option value=\"0",$i,"\">", "0".$i, "</option>";
+									}
+									else{
+										echo "<option value=\"",$i,"\">", $i, "</option>";
+									}
+								?>
+							</select> : <select name="startMin"><option value="-1">Min</option>
+								<? for($i = 0; $i < 60; $i++)
+									if( $i < 10){
+										echo "<option value=\"0",$i,"\">", "0".$i, "</option>";
+									}
+									else{
+										echo "<option value=\"",$i,"\">", $i, "</option>";
+									}
+								?>
+							</select><br/><br/>
 						Ending: <input type="text" class="small_input" name="endDate" id="endDate" /> <select name="endHour">
 							<option value="-1">Hour</option>
-							<? for($i = 1; $i < 24; $i++) echo "<option value=\"",$i,"\">", $i, "</option>"; ?>
+							<? for($i = 0; $i < 24; $i++)
+									if( $i < 10){
+										echo "<option value=\"0",$i,"\">", "0".$i, "</option>";
+									}
+									else{
+										echo "<option value=\"",$i,"\">", $i, "</option>";
+									}
+								?>
 							</select> : <select name="endMin">
-							<option value="-1">Min</option><? for($i = 0; $i < 60; $i++) echo "<option value=\"",$i,"\">", $i, "</option>"; ?></select><br><br>
+							<option value="-1">Min</option>
+								<? for($i = 0; $i < 60; $i++)
+									if( $i < 10){
+										echo "<option value=\"0",$i,"\">", "0".$i, "</option>";
+									}
+									else{
+										echo "<option value=\"",$i,"\">", $i, "</option>";
+									}
+								?>
+							</select><br><br>
 						<select name="network">
 						<option value="-1">Network</option>
 							<?
