@@ -3,9 +3,10 @@
 
 	if(cookieExists() && validCookie()) {
 	//var_dump($_POST);					//Check for Dave
-	if(isset($_POST['subReview'])){
+if(isset($_POST['subReview'])){
+		
 		if($_POST['review'][4] == 'on'){$anonymous = 1;} else{$anonymous = 0;}
-		$query = "insert into reviews values(".$_POST['review'][2].", ".getUserID().", ".$anonymous.", ".$_POST['review'][1].", ".$_POST['review'][3].", now(), ".$_POST['review'][0].")";
+		$query = "insert into reviews values(".mysql_real_escape_string($_POST['review'][2]).", ".getUserID().", ".$anonymous.", ".mysql_real_excape_string($_POST['review'][1]).", ".mysql_real_excape_string($_POST['review'][3]).", now(), '".mysql_real_excape_string($_POST['review'][0])."')";
 		
 		mysql_query($query) or die(mysql_error());
 		unset($_POST['review']);

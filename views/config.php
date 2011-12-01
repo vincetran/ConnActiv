@@ -103,7 +103,7 @@ include("upload_file.php");
 				//security
 							
 				//insert information into users tables.
-				$query = "Insert into users(email,first_Name, last_Name, Street, city, state, zip, phone, interests, profile_pic, password) values('".$_POST['username']."','".$_POST['firstName']."','".$_POST['lastName']."','".$_POST['street']."','".$_POST['city']."','".$_POST['state']."','".$_POST['zip']."','".$_POST['phone']."','".$_POST['interests']."','../public/images/avatar.png','".md5($_POST['password'])."')";
+				$query = "Insert into users(email,first_Name, last_Name, Street, city, state, zip, phone, interests, profile_pic, password) values('".mysql_real_escape_string($_POST['username'])."','".mysql_real_escape_string($_POST['firstName'])."','".mysql_real_escape_string($_POST['lastName'])."','".mysql_real_escape_string($_POST['street'])."','".mysql_real_escape_string($_POST['city'])."','".mysql_real_escape_string($_POST['state'])."','".mysql_real_escape_string($_POST['zip'])."','".mysql_real_escape_string($_POST['phone'])."','".mysql_real_escape_string($_POST['interests'])."','../public/images/avatar.png','".md5($_POST['password'])."')";
 				$insert = mysql_query($query) or die(mysql_error());
 				$id = mysql_query("select max(user_id) from users");
 				$id1 = mysql_fetch_array($id);
@@ -154,7 +154,7 @@ include("upload_file.php");
 
 
 	function addUserActivity($userid, $activityid){
-		$insert = mysql_query("INSERT IGNORE INTO user_activities(user_id, activity_id) values($userid, $activityid)") or die(mysql_error());
+		$insert = mysql_query("INSERT IGNORE INTO user_activities(user_id, activity_id) values(".$userid.", ".$activityid.")") or die(mysql_error());
 	}
 	/*function getUserName($userid){
 		$query = "select first_name, last_name from users where users_id = ".$userid;
@@ -175,7 +175,6 @@ include("upload_file.php");
 	}
 
 	function isAttending($connactionid, $userid){
-		$query = "select * from connaction_attending where user_id = ".$userid." and connaction_id = ".$connactionid;
 		$isattending = mysql_query($query) or die(mysql_error());
 		if(mysql_num_rows($isattending) == 0){return false;}
 		else if(mysql_num_rows($isattending) == 1){return true;}	
@@ -332,7 +331,7 @@ include("upload_file.php");
 		//This function sends the my info to the database
 		if(isset($_POST['about_me'])){
 			$interests = $_POST['about_me']; 
-			$query = "UPDATE users SET INTERESTS = '".$interests."' WHERE USER_ID = '".getUserID()."'";
+			$query = "UPDATE users SET INTERESTS = '".mysql_real_escape_string($interests)."' WHERE USER_ID = '".getUserID()."'";
 			$update = mysql_query($query) or die(mysql_error());
 
 		}
@@ -343,20 +342,20 @@ include("upload_file.php");
 		}
 		if (isset($_POST['DOB'])){
 			$DOB = myDateParser($_POST['DOB']);
-			$query = "UPDATE users SET DOB = '".$DOB."' WHERE USER_ID = '".getUserID()."'";
+			$query = "UPDATE users SET DOB = '".mysql_real_escape_string($DOB)."' WHERE USER_ID = '".getUserID()."'";
 			$update = mysql_query($query) or die(mysql_error());
 		}
 		
 		if (isset($_POST['city'])) {
 			$city = $_POST['city'];
-			$query = "UPDATE users SET CITY = '".$city."' WHERE USER_ID = '".getUserID()."'";
+			$query = "UPDATE users SET CITY = '".mysql_real_escape_string($city)."' WHERE USER_ID = '".getUserID()."'";
 			$update = mysql_query($query) or die(mysql_error());
 
 		}
 		
 		if (isset($_POST['state'])) {
 			$st = $_POST['state'];
-			$query = "UPDATE users SET STATE = '".$st."' WHERE USER_ID = '".getUserID()."'";
+			$query = "UPDATE users SET STATE = '".mysql_real_escape_string($st)."' WHERE USER_ID = '".getUserID()."'";
 			$update = mysql_query($query) or die(mysql_error());
 
 		}
