@@ -13,12 +13,17 @@ function prettifyName($unique_id) {
 	." FROM unique_networks, activities, networks"
 	." WHERE unique_networks.network_id = networks.network_id"
 	." AND unique_networks.activity_id = activities.activity_id"
-	." AND unique_networks.unique_network_id = ".$unique_id;
+	." AND unique_networks.unique_network_id = '".$unique_id."'";
 	
 	$result = mysql_query($query) or die(mysql_error());
 
 	$name = mysql_fetch_array($result);
-	$displayName = $name['area'] . ", " .$name['state']. " - " .$name['act'];
+	
+	$displayName = "Unspecified";
+	
+	if ($name['area'] && $name['state'] && $name['act'])
+		$displayName = $name['area'] . ", " .$name['state']. " - " .$name['act'];
+	
 	return $displayName;
 }
 

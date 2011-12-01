@@ -286,16 +286,14 @@
 								$networkEvents= getEventsForUniqueNetwork($n_id);
 								
 								if (count($networkEvents)>0) {
-									echo "<div class='post'>";
-									echo "<h2>$name</h2>";
 									foreach($networkEvents as $e) {
+										echo "<div class='post'>";
+										echo "<h3>Event: $name</h3>";
 										echo "$e[5] until $e[6]<br>";
 										echo "Location: $e[7]<br>";
 										echo "Event details: $e[4]<br>";
 										echo "</div>";
 									}
-									echo "<br><br>";
-								
 								} else {
 									echo "<div class='post'>No events for network $name.</div>";
 								}

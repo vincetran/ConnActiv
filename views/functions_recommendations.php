@@ -140,11 +140,8 @@ function getReviews($which) {
 
 function getAllReviews($userid){
 	$reviews = array();
-	
+	$query = sprintf("SELECT * FROM reviews WHERE user_id = '%s'", $userid);
 
-		$query = "SELECT * FROM reviews WHERE user_id = ".$userid;
-
-	
 	$result = mysql_query($query) or die(mysql_error());
 	while($row = mysql_fetch_array($result)){
 		$reviews[] = $row;

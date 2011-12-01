@@ -235,7 +235,8 @@
 				?>
 				</tbody>
 			</table>
-				<br/><br/>
+			
+				<br/><br/><br><br>
 				<h2>Sent Messages</h2>
 				
 			<table id="sentMessages" class="alternating regular_table">
@@ -269,7 +270,9 @@
 			<h2>Reviews of You</h2>
 			<?
 			$review = getAllReviews($userID);
-			echo getFormattedReviews($review);
+			$reviews =  getFormattedReviews($review);
+			if (!$reviews) echo "<p style='color:#2384DE;'><br><br>You haven't been reviewed yet!</p>Since only users with whom you've completed connactions can review you,<br>check back once you've done a few more activities.";
+			else echo $reviews;
 			?>
 			
 			</div><!-- end view_reviews div -->

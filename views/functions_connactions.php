@@ -109,6 +109,7 @@
 				else{$from = getUserName($rev['FROM_USER']);}
 			
 				$connactInfo = getConnactionActivity($rev['CONNACTION_ID']);
+				
 				//getunique network id from connaction id
 				$unique = getUniqueFromConnaction($rev['CONNACTION_ID']);
 				$name = prettifyName($unique);
@@ -215,14 +216,16 @@
 		
 	function approveEvent($e_id) {
 	//$e_id is event id
-		$query = "UPDATE events SET approved = '1' WHERE event_id = " .$e_id;
+		$query = "UPDATE events SET approved = '1' WHERE event_id = '" .$e_id."'";
 		mysql_query($query) or die(mysql_error());
+		echo "<div class='notice'>Event(s) approved.</div>";
 	}
 	
 	function denyEvent($e_id) {
 	//$e_id is event id
-		$query = "UPDATE events SET approved = '0' WHERE event_id = " .$e_id;
+		$query = "UPDATE events SET approved = '0' WHERE event_id = '" .$e_id."'";
 		mysql_query($query) or die(mysql_error());
+		echo "<div class='notice'>Event(s) denied.</div>";
 	}
 		
 /*

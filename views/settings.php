@@ -77,7 +77,7 @@
 					"aaSorting": [[ 0, "asc" ]],
 					"bPaginate": false,
 					"bLengthChange": false,
-					"bFilter": true,
+					"bFilter": false,
 					"bSort": true,
 					"bInfo": false,
 					"bAutoWidth": false,
@@ -88,7 +88,7 @@
 					"aaSorting": [[ 0, "asc" ]],
 					"bPaginate": false,
 					"bLengthChange": false,
-					"bFilter": true,
+					"bFilter": false,
 					"bSort": true,
 					"bInfo": false,
 					"bAutoWidth": false

@@ -35,7 +35,7 @@
 	function eventMessage($from, $event_id) { // goes to connactiv admin, always user_id 1
 	//messages(from_user, to_user, subject, body, date)
 		$subj = "New Event";
-		$body = "Event ID $event_id is awaiting approval.";
+		$body = "Event $event_id is awaiting approval.";
 		$query = sprintf("INSERT INTO messages VALUES('%s', '1', '%s', '%s', now())", $from, $subj, $body);
 		
 		mysql_query($query) or die(mysql_error());

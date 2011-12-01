@@ -87,12 +87,15 @@ if(isset($_POST['subReview'])){
 		unhideRequestForFrom();
 	}
 
-	} else if (isset($_POST['eventDeny'])) {
+	} 
+	
+	if (isset($_POST['eventDeny'])) {
 		if (isset($_POST['eventReq'])) {
 			$request = $_POST['eventReq'];
 			foreach($request as $req) {
 				denyEvent($req);
 			} // end foreach
+			unset($_POST['eventDeny']);
 		} //end if (count)
 	} else if (isset($_POST['eventApprove'])) {
 		if (isset($_POST['eventReq'])) {
@@ -100,6 +103,7 @@ if(isset($_POST['subReview'])){
 			foreach($request as $req) {
 				approveEvent($req);
 			} // end foreach
+			unset($_POST['eventApprove']);
 		} // end if (count)
 	} //end if ($_POST[eventApprove])
 	
@@ -295,9 +299,10 @@ if(isset($_POST['subReview'])){
 				<input style="float:left; margin-left:5px;" type="submit" name="deny" value="Deny Request(s)"/>
 			</div>
 			</form>
-			<br/><br/><br/>
+			<br/><br/>
 			<? } ?>
 			
+		<br/><br/><br>
 		<h2>Pending Connaction Requests</h2>
 		<h3>Activities you've asked to join</h3>
 			
@@ -368,7 +373,7 @@ if(isset($_POST['subReview'])){
 			<br/><br/><br/>
 			<? } ?>
 			
-			<br><br>
+			<br><br><br><br>
 		<h2>Attended Connactions</h2>
 			
 		<table id="past" class="requests regular_table">
@@ -479,7 +484,8 @@ if(isset($_POST['subReview'])){
 				<input style="float:right;" type="submit" name="acceptFriend" value="Accept Request(s)"/>
 			</div>
 			</form>
-			<br><br>
+			
+			<br><br><br><br>
 
 			<h2>Pending Friend Requests</h2>
 			<h3>People you have asked to be your friend</h3>
@@ -537,7 +543,7 @@ if(isset($_POST['subReview'])){
 					<th>Requesting User</th>
 					<th>Date Requested</th>
 					<th>Event Details</th>
-					<th>&nbsp;</th>
+					<th><span id="approve" class="checkAll"></span><span id="_approve" class="uncheckAll"></th>
 				</thead>
 				<tobdy>
 			
@@ -558,7 +564,7 @@ if(isset($_POST['subReview'])){
 						echo "<td>$user</td>";
 						echo "<td>$requested</td>";
 						echo "<td><p><strong>Location: </strong>$loc</p><p><strong>Details: </strong>$msg</p></td>";
-						echo "<td><input type = 'checkbox' name = 'eventReq[]' value = '".$eventID."' /></td>";	
+						echo "<td><input class='approve' type = 'checkbox' name = 'eventReq[]' value = '".$eventID."' /></td>";	
 					echo "</tr>";
 				
 				}			
