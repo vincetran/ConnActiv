@@ -4,10 +4,12 @@
 	if(cookieExists() && validCookie()) {
 	//var_dump($_POST);					//Check for Dave
 	if(isset($_POST['review'])){
+		var_dump($_POST);
 		if($_POST['review'][4] == 'on'){$anonymous = 1;} else{$anonymous = 0;}
-		$query = "insert into reviews values(".$_POST['review'][2].", ".getUserID().", ".$anonymous.", ".$_POST['review'][1].", ".$_POST['review'][3].", sysdate(), '".$_POST['review'][0]."')";
+		$query = "insert into reviews values(".$_POST['review'][2].", ".getUserID().", ".$anonymous.", ".$_POST['review'][1].", ".$_POST['review'][3].", now(), ".$_POST['review'][0].")";
 		
 		mysql_query($query) or die(mysql_error());
+		unset($_POST['review']);
 	}
 	else if (isset($_POST['accept'])) {
 		if ($_POST['requestID']) {
