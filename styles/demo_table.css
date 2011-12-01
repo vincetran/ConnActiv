@@ -42,7 +42,8 @@
 }
 	
 .dataTables_wrapper table.small {
-	width: 400px;
+	width: 500px;
+	margin-left: -40px;
 }
 
 .dataTables_processing {

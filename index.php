@@ -81,9 +81,17 @@ $(function() {
 	});
 	
 	$('.checkAll').click(function() {
-		className = $(this).attr('id');
-		$('input.'+className).attr('checked', 'true');
-	});
+			className = $(this).attr('id');
+			$('input.'+className).attr('checked', 'true');
+		});
+		
+		$('.uncheckAll').click(function() {
+			className = $(this).attr('id').split('_').pop();
+			els = $('input.'+className);
+			els.each(function() {
+				$(this).is(':disabled') ? '' : $(this).removeAttr('checked');
+			});
+		});
 	
 	});
 </script>
@@ -184,7 +192,7 @@ $(function() {
 							<tr>
 								<th>Area</th>
 								<th>Activity</th>
-								<th>Subscribe<span id="registerSubscribe" class="checkAll"></span></th>
+								<th>Subscribe<span id="registerSubscribe" class="checkAll"></span><span id="_registerSubscribe" class="uncheckAll"></span></th>
 							</tr>
 						</thead>
 						<tbody>

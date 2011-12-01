@@ -50,6 +50,14 @@
 			className = $(this).attr('id');
 			$('input.'+className).attr('checked', 'true');
 		});
+		
+		$('.uncheckAll').click(function() {
+			className = $(this).attr('id').split('_').pop();
+			els = $('input.'+className);
+			els.each(function() {
+				$(this).is(':disabled') ? '' : $(this).removeAttr('checked');
+			});
+		});
 
 		setTimeout(fade_out, 3500);
 
