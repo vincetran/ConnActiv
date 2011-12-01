@@ -120,8 +120,8 @@
 				<tr>
 					<th>Area</th>
 					<th>Activity</th>
-					<th>Unsubscribe</th>
-					<th>Favorite</th>
+					<th>Unsubscribe<span id="unsubscribe" class="checkAll"></span><span id="_unsubscribe" class="uncheckAll"></th>
+					<th>Favorite<span id="favorite" class="checkAll"></span><span id="_favorite" class="uncheckAll"></th>
 				</tr>
 				</thead>
 				<tbody>
@@ -131,9 +131,9 @@
 					foreach($networks as $network) {
 						echo "<tr>";
 							echo "<td>".$network[1].", ".$network[2]."</td><td>".$network[3]."</td>";
-							echo "<td><input type='checkbox' value='".$network[0]."' name='unsubscribeTo[]' /></td>";
+							echo "<td><input type='checkbox' class='unsubscribe' value='".$network[0]."' name='unsubscribeTo[]' /></td>";
 							in_array($network[0], $favs)? $checked="checked disabled" : $checked = "";  // if in $favs, checkbox "favorite" is checked
-							echo sprintf("<td><input type='checkbox' %s value='%s' name='favorite[]' /></td>", $checked, $network[0]);
+							echo sprintf("<td><input class='favorite' type='checkbox' %s value='%s' name='favorite[]' /></td>", $checked, $network[0]);
 						echo "</tr>";
 					} //end foreach
 			?>
@@ -157,7 +157,7 @@
 						<tr>
 							<th>Area</th>
 							<th>Activity</th>
-							<th>Subscribe<span id="subscribe" class="checkAll"></span></th>
+							<th>Subscribe<span id="subscribe" class="checkAll"></span><span id="_subscribe" class="uncheckAll"></span></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -291,7 +291,7 @@
 				<thead>
 					<tr>
 						<th>Activity</th>
-						<th>Unfavorite</th>
+						<th>Unfavorite<span id="unfavorite" class="checkAll"></span><span id="_unfavorite" class="uncheckAll"></span></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -300,7 +300,7 @@
 					?>
 							<tr>
 								<td><? echo $fav ?></td>
-								<td><input type='checkbox' value='<? echo $fav ?>' name='defavorite[]' /></td>
+								<td><input type='checkbox' class='unfavorite' value='<? echo $fav ?>' name='defavorite[]' /></td>
 							</tr>
 						<? endforeach; ?>
 				</tbody>
@@ -308,7 +308,7 @@
 			
 			<? if ($favs) { ?>
 			<div class="below_table">
-				<input style="float:right;margin-right: 100px;" type="submit" name="doDefavorite" value="Remove"/>
+				<input style="float:right;margin-right:70px;" type="submit" name="doDefavorite" value="Remove"/>
 			</div>
 			<? } ?>
 			</form>

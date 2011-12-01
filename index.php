@@ -57,11 +57,11 @@ $(function() {
 	
 	$('#subscribeTable').dataTable({
         "aaSorting": [[ 0, "desc" ]],
-        "bPaginate": false,
+        "bPaginate": true,
 				"bLengthChange": false,
 				"bFilter": false,
 				"bSort": true,
-				"bInfo": false,
+				"bInfo": true,
 				"bAutoWidth": true,
 				"aoColumns": [ null, null, { "bSortable": false }]
 				});
@@ -81,9 +81,17 @@ $(function() {
 	});
 	
 	$('.checkAll').click(function() {
-		className = $(this).attr('id');
-		$('input.'+className).attr('checked', 'true');
-	});
+			className = $(this).attr('id');
+			$('input.'+className).attr('checked', 'true');
+		});
+		
+		$('.uncheckAll').click(function() {
+			className = $(this).attr('id').split('_').pop();
+			els = $('input.'+className);
+			els.each(function() {
+				$(this).is(':disabled') ? '' : $(this).removeAttr('checked');
+			});
+		});
 	
 	});
 </script>
@@ -158,7 +166,7 @@ $(function() {
 				</tr>
 				<tr>
 					<th class="formHeader">Phone:</th>
-					<td><input id="phone"  type="text" name="phone" maxlength="25" class"validate[custom[phone]]"/><br/></td>
+					<td><input id="phone"  type="text" name="phone" maxlength="25" class="validate[custom[phone]]"/><br/></td>
 				</tr>
 				<tr>
 					<th class="formHeader">A little about yourself:</th>
@@ -184,7 +192,7 @@ $(function() {
 							<tr>
 								<th>Area</th>
 								<th>Activity</th>
-								<th>Subscribe<span id="registerSubscribe" class="checkAll"></span></th>
+								<th>Subscribe<span id="registerSubscribe" class="checkAll"></span><span id="_registerSubscribe" class="uncheckAll"></span></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -196,7 +204,7 @@ $(function() {
 							?>
 							</tbody>
 						</table>
-				Or <span id="addNewExpand" class="clickable realgreen">add your own&nbsp;&raquo;</span><br/><br/>
+				<div><br><br>Or <span id="addNewExpand" style="clear:both" class="clickable realgreen">add your own&nbsp;&raquo;</span></div><br/><br/>
 					<div id="registrationUnique" style="display:none">
 						<span>Area: <input class="medium_input" type="text" name="area" value="" placeholder="ex: Pittsburgh"/></span><br/><br/>
 						<span>State:  <? echo getStateDropdown() ?></span><br/><br/>

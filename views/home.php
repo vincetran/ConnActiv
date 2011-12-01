@@ -161,7 +161,7 @@
 							<option value="0">No</option>
 							<option value="1">Yes</option>
 						</select>
-						<input class="button" type="submit" name="postConnaction" value="Post this connaction!"/>
+						<input class="button" type="submit" name="postConnaction" value="Submit"/>
 					</div>
 				</div>
 			</div>
@@ -184,7 +184,7 @@
 					<? for($i = 1; $i < 24; $i++) echo "<option value=\"",$i,"\">", $i, "</option>"; ?></select> : <select name="eventEndMin">
 					<option value="-1">Min</option><? for($i = 0; $i < 60; $i++) echo "<option value=\"",$i,"\">", $i, "</option>"; ?></select><br><br>	
 					<select name="eventNetwork">
-						<option value="-1">Network:</option>
+						<option value="-1">Network</option>
 							<?
 								$networks = getNetworkNames();
 								for($i = 0; $i < count($networks); $i++){
@@ -193,7 +193,7 @@
 							?>
 						</select>
 						<select name="eventActivity">
-							<option value="-1">Activity:</option>
+							<option value="-1">Activity</option>
 							<?
 								$activities = getUserActivities();
 								for($i = 0; $i < count($activities); $i++){
@@ -263,7 +263,7 @@
 									echo "<br><br>";
 								
 								} else {
-									echo "<p>No events have been posted to your networks yet.</p>";
+									echo "<div class='post'>No events for network $name.</div>";
 								}
 							
 								

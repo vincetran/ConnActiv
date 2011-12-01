@@ -50,7 +50,6 @@ body {
 	text-align:left;
 	padding:0px;
 	overflow:hidden;
-	position: absolute;
 	padding-top: 40px;
 } 
 
@@ -58,7 +57,9 @@ input[type="password"], input[type="search"], input[type="text"], input[type="te
 	border: 1px #c7c7c7 solid;
 	color: #333;
 	cursor: pointer;
+	padding: 0.1em 0.4em 0.1em 0.4em;
 	.rounded;
+	cursor: text;
 }
 
 a, .clickExpand {
@@ -285,7 +286,6 @@ thead.reqHeader th{
 
 #postBoxes{
 	padding: 10px 0px 10px 50px;
-	text-align: left;
 }
 
 #restOfBoxes{
@@ -447,10 +447,6 @@ div.pageViewer {
 	background-position: -22px -700px;
 }
 
-#checkAllContainer {
-	width: 100px;
-}
-
 .checkAll {
 	background: transparent url("../public/images/icons_module.png") no-repeat 0 0;
 	display: inline-block;
@@ -460,5 +456,17 @@ div.pageViewer {
 	overflow: hidden;
 	 margin: 0 .166em;
 	background-position: 3px -1090px;
+	.clickable;
+}
+
+.uncheckAll {
+	background: transparent url("../public/images/icons_module.png") no-repeat 0 0;
+	display: inline-block;
+	height: 16px;
+	vertical-align: text-top;
+	 width: 16px;
+	overflow: hidden;
+	 margin: 0 .166em;
+	background-position: -22px -1090px;
 	.clickable;
 }
