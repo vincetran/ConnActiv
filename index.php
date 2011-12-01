@@ -80,6 +80,11 @@ $(function() {
 		$('#registrationUnique').toggle();
 	});
 	
+	$('.checkAll').click(function() {
+		className = $(this).attr('id');
+		$('input.'+className).attr('checked', 'true');
+	});
+	
 	});
 </script>
 
@@ -179,14 +184,14 @@ $(function() {
 							<tr>
 								<th>Area</th>
 								<th>Activity</th>
-								<th>Subscribe</th>
+								<th>Subscribe<span id="registerSubscribe" class="checkAll"></span></th>
 							</tr>
 						</thead>
 						<tbody>
 							
 							<? $unique = getAllUniqueNetworks(); //row(unique_network_id, area, state, activity_name).
 									foreach($unique as $un) {
-										echo "<tr><td>". $un[1] .", ". $un[2] ."</td><td>". $un[3] ."</td><td><input type='checkbox' value='".$un[0]."' name='activity[]' /></td></tr>";
+										echo "<tr><td>". $un[1] .", ". $un[2] ."</td><td>". $un[3] ."</td><td><input class='registerSubscribe' type='checkbox' value='".$un[0]."' name='activity[]' /></td></tr>";
 									}
 							?>
 							</tbody>

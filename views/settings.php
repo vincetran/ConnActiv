@@ -157,20 +157,20 @@
 						<tr>
 							<th>Area</th>
 							<th>Activity</th>
-							<th>Subscribe</th>
+							<th>Subscribe<span id="subscribe" class="checkAll"></span></th>
 						</tr>
 					</thead>
 					<tbody>
 						
 						<? $unique = getAllUniqueNetworks(); //row(unique_network_id, area, state, activity_name).
 								foreach($unique as $un) {
-									echo "<tr><td>". $un[1] .", ". $un[2] ."</td><td>". $un[3] ."</td><td><input type='checkbox' value='".$un[0]."' name='subscribeTo[]' /></td></tr>";
+									echo "<tr><td>". $un[1] .", ". $un[2] ."</td><td>". $un[3] ."</td><td><input class='subscribe' type='checkbox' value='".$un[0]."' name='subscribeTo[]' /></td></tr>";
 								}
 						?>
 						</tbody>
 					</table>
 					<span class="clickable below_table">Can't find your network?&nbsp;<span class="clickExpand" id="expandAddNewNetwork">Add a new one&nbsp;&raquo;</span></span>
-					<input style="float:right; margin-right:30px;margin-top:-1.2em;" class="below_table" type="submit" name="doSubscribe" value="Subscribe"/>
+					<input style="float:right; margin-right:15px;margin-top:-1.2em;" class="below_table" type="submit" name="doSubscribe" value="Subscribe"/>
 				</form>
 				
 				<div id="hiddenNewNetwork" style="display:none">

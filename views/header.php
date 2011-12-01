@@ -46,6 +46,11 @@
 			$('#user_menu').toggle();
 		});
 		
+		$('.checkAll').click(function() {
+			className = $(this).attr('id');
+			$('input.'+className).attr('checked', 'true');
+		});
+
 		setTimeout(fade_out, 3500);
 
 		function fade_out() {
