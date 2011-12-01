@@ -202,7 +202,6 @@
 			<tbody>
 				<?php
 					$incRequests = getIncRequests(getUserID());
-					if ($incRequests) {
 					
 						foreach($incRequests as $incoming){
 							$fromUser = $incoming[0];
@@ -238,16 +237,17 @@
 								<td><?php echo $message; ?></td>
 							</tr>
 						<?php } 
-					}
 				?>
 			</tbody>
 			
 			</table>
+			
+			<? if ($incRequests) { ?>
 			<div class="below_table">
 				<input style="float:right; margin-left:10px; margin-right:20px" type="submit" name="deny" value="Deny Request(s)"/>
 				<input style="float:right;" type="submit" name="accept" value="Accept Request(s)"/>
 			</div>
-			
+			<? } ?>
 			<br/><br/>
 			
 		<h2>Pending Connaction Requests</h2>
@@ -268,7 +268,6 @@
 			<tbody>
 				<?php
 					$pendingRequests = getPendingRequests(getUserID());
-					if ($pendingRequests) {
 					
 						foreach($pendingRequests as $incoming){
 							$fromUser = $incoming[0];
@@ -308,23 +307,22 @@
 								</tr>
 						<?php } 
 						}
-					}
 				?>
 			</tbody>
 			</table>
+			
+			<? if ($pendingRequests) { ?>
 			<div class="below_table">
 				<span style="clear:both;" class="below_table">Request are deleted the day after the ConnAction.</span>
 				<input style="float:right; margin-left:5px; margin-right:20px" type="submit" name="hide" value="Hide Request(s)"/>
 				<input style="float:right;" type="submit" name="unhide" value="Unhide Request(s)"/>
 			</div>
-			
+			<? } ?>
 			<br/><br/>
 			
 		<h2>Attended Connactions</h2>
 			
 		<table id="past" class="requests regular_table">
-			
-
 			
 			<thead class="reqHeader">
 				<tr>
