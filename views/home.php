@@ -133,7 +133,7 @@
 						Location: <textarea class="small" id="location" placeholder=" Where?" name="location" maxlength="255"></textarea><br/><br/>
 						Starting: <input class="small_input" type="text" name="startDate" id="startDate"/> <select name="startHour">
 							<option value="-1">Hour</option>
-								<? for($i = 0; $i < 24; $i++)
+								<? for($i = 1; $i < 24; $i++)
 									if( $i < 10){
 										echo "<option value=\"0",$i,"\">", "0".$i, "</option>";
 									}
@@ -153,7 +153,7 @@
 							</select><br/><br/>
 						Ending: <input type="text" class="small_input" name="endDate" id="endDate" /> <select name="endHour">
 							<option value="-1">Hour</option>
-							<? for($i = 0; $i < 24; $i++)
+							<? for($i = 1; $i < 24; $i++)
 									if( $i < 10){
 										echo "<option value=\"0",$i,"\">", "0".$i, "</option>";
 									}
