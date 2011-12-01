@@ -36,8 +36,11 @@ include("upload_file.php");
  			}
 		//}
 	}
-	
-	
+	function isValid(){
+		if(!(cookieExists() && validCookie())){
+			header("Location: ../index.php");
+		}
+	}
 	function isAdmin(){
 	
 		$id = getUserID();

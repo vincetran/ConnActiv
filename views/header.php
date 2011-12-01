@@ -80,3 +80,4 @@
 	</div><!-- end #side -->
 	
 	<div id="content">
+	<?php isValid() ?>
