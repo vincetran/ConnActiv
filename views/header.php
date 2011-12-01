@@ -94,7 +94,7 @@
 	</div>
 	
 	<span style=" position: absolute; left: 220px">
-		<img height="40" style="margin-top: -10px;" src="../public/images/logo.png"/>
+		<a href="home.php"><img height="40" style="margin-top: -10px;" src="../public/images/logo.png"/></a>
 	</span>
 
 			<span id="top-nav">
