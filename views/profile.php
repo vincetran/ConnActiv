@@ -24,7 +24,7 @@
 			
 			?>
 			
-			<script type="text/javascript">
+	<script type="text/javascript">
 		$(function() {
 		
 			$(".editable_textarea").editable("http://localhost/ConnActiv/views/save.php", { 
