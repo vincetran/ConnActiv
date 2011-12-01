@@ -6,7 +6,7 @@
 if(isset($_POST['subReview'])){
 		
 		if($_POST['review'][4] == 'on'){$anonymous = 1;} else{$anonymous = 0;}
-		$query = "insert into reviews values(".mysql_real_escape_string($_POST['review'][2]).", ".getUserID().", ".$anonymous.", ".mysql_real_excape_string($_POST['review'][1]).", ".mysql_real_excape_string($_POST['review'][3]).", now(), '".mysql_real_excape_string($_POST['review'][0])."')";
+		$query = "insert into reviews values(".mysql_real_escape_string($_POST['review'][2]).", ".getUserID().", ".$anonymous.", ".mysql_real_escape_string($_POST['review'][1]).", ".mysql_real_escape_string($_POST['review'][3]).", now(), '".mysql_real_escape_string($_POST['review'][0])."')";
 		
 		mysql_query($query) or die(mysql_error());
 		unset($_POST['review']);
@@ -136,7 +136,8 @@ if(isset($_POST['subReview'])){
 				"bFilter": true,
 				"bSort": true,
 				"bInfo": true,
-				"bAutoWidth": false
+				"bAutoWidth": false,
+				"aoColumns": [ null, null, null, null, { "bSortable": false }]
    	 });
    	 
    	 
@@ -197,6 +198,11 @@ if(isset($_POST['subReview'])){
    		$(this).addClass('active');
    		$('.requestType').hide();
    		$('#view_eventReqs').fadeIn();
+   	});
+   	
+   	$('.expander').click(function() {
+   		$(this).siblings('.expandable').show();
+   		$(this).hide();
    	});
    	 
 		});		
@@ -359,6 +365,8 @@ if(isset($_POST['subReview'])){
 			</div>
 			<br/><br/><br/>
 			<? } ?>
+			
+			<br><br>
 		<h2>Attended Connactions</h2>
 			
 		<table id="past" class="requests regular_table">
@@ -382,8 +390,12 @@ if(isset($_POST['subReview'])){
 					echo "<td>".getConnactionActivity($pc[0])."</td>";
 					echo "<td>".$pc[3]."</td>";
 					echo "<td>".$pc[4]."</td>";
-				if(ReviewedByUser($pc[0],getUserID()) == false){					
-					echo "<td><form id='reviewform' action='".$_SERVER['PHP_SELF']."' method='post'>";
+				if(ReviewedByUser($pc[0],getUserID()) == false){
+					echo "<td><span class='clickExpand expander'>Review&nbsp;&raquo;</span>";
+					
+					echo "<div class='expandable' style='display:none'>";
+				
+					echo "<form id='reviewform' action='".$_SERVER['PHP_SELF']."' method='post'>";
 					echo "<input id = 'review' type = 'textbox' name = 'review[]' placeholder='Review this ConnAction'/><br/>";					
 					echo "<input type = 'hidden' name = 'review[]' value = $pc[0] />";
 					echo "<input type = 'hidden' name = 'review[]' value = $pc[1] />";
@@ -391,7 +403,8 @@ if(isset($_POST['subReview'])){
 					echo "<input class = 'review' name = 'review[]' type = 'checkbox'/>Anonymous";		
 					echo "<input class = 'review' name = 'subReview' type = 'submit' value = 'Submit Review'/>";
 					
-					echo "</form></td>";
+					echo "</form></div></td>";
+					
 				}
 				else{echo "<td> Review Submitted </td>";}
 				/*$attending = getConnactionAttendees(1, getUserID());
@@ -464,7 +477,7 @@ if(isset($_POST['subReview'])){
 				<input style="float:right;" type="submit" name="acceptFriend" value="Accept Request(s)"/>
 			</div>
 			</form>
-			<br/><br/><br/>
+			<br><br>
 
 			<h2>Pending Friend Requests</h2>
 			<h3>People you have asked to be your friend</h3>
