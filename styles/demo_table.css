@@ -88,8 +88,8 @@
 /* Pagination nested */
 .paginate_disabled_previous, .paginate_enabled_previous, .paginate_disabled_next, .paginate_enabled_next {
 	height: 19px;
-	width: 19px;
-	margin-left: 3px;
+	width: 12px;
+	margin-left: 2px;
 	float: left;
 }
 
