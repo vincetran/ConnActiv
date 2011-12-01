@@ -16,6 +16,7 @@ if(isset($_POST['subReview'])){
 			$request = $_POST['requestID'];
 			foreach($request as $req) { 
 				acceptRequest($req);
+				echo "<div class='notice'>Join request accepted!</div>";
 			} // end foreach
 		} //end if ($_POST[accept])
 	}
@@ -44,6 +45,7 @@ if(isset($_POST['subReview'])){
 			$request = $_POST['requestID'];
 			foreach($request as $req) {
 				denyRequest($req);
+				echo "<div class='notice'>Join request denied.</div>";
 			} // end foreach
 		} //end if ($_POST[deny])
 	}
