@@ -167,7 +167,7 @@ function isFriend($userID){
 	else{return false;}
 }
 function requestIsActive($userid){
-	$query = "select * from friend_requests where (from_user = ".getUserID()." and to_user = ".$userid.") or (from_user = ".$userid." and to_user = ".getUserID().") and is_active = 1";
+	$query = "select * from friend_requests where (from_user = ".getUserID()." and to_user = ".$userid.") or (from_user = ".$userid." and to_user = ".getUserID().") and is_active = -1";
 	$result = mysql_query($query);
 	if(mysql_num_rows($result) != 0){return true;}
 	else{return false;}
