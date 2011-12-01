@@ -158,7 +158,7 @@ $(function() {
 				</tr>
 				<tr>
 					<th class="formHeader">Phone:</th>
-					<td><input id="phone"  type="text" name="phone" maxlength="25"/><br/></td>
+					<td><input id="phone"  type="text" name="phone" maxlength="25" class"validate[custom[phone]]"/><br/></td>
 				</tr>
 				<tr>
 					<th class="formHeader">A little about yourself:</th>

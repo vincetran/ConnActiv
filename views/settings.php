@@ -213,7 +213,7 @@
 						}	
 							echo	"<div class=\"expand\" style=\"display:none\">
 											<select name=\"seekLvl$index\">
-												<option value=\"-1\">Level:</option>";
+												<option value=\"-1\">Level</option>";
 												for($i = 1; $i <= 10; $i++){
 													// i = Row number
 													echo "<option value=\"$i $level[0]\">$i</option>";
@@ -232,7 +232,7 @@
 						}
 							echo "<div class=\"expand\" style=\"display:none\">
 										<select name=\"lowLvl$index\">
-												<option value=\"-1\">Level:</option>";
+												<option value=\"-1\">Level</option>";
 												for($i = 1; $i <= 10; $i++){
 													echo "<option value=\"$i $level[0]\">$i</option>";
 												}
@@ -247,7 +247,7 @@
 						}
 							echo " <div class=\"expand\" style=\"display:none\">
 										<select name=\"highLvl$index\">
-												<option value=\"-1\">Level:</option>";
+												<option value=\"-1\">Level</option>";
 												for($i = 1; $i <= 10; $i++){
 													echo "<option value=\"$i $level[0]\">$i</option>";
 												}
@@ -265,7 +265,7 @@
 						}
 							echo "<div class=\"expand\" style=\"display:none\">
 											<select name=\"ownLvl$index\">
-												<option value=\"-1\">Level:</option>";
+												<option value=\"-1\">Level</option>";
 												for($i = 1; $i <= 10; $i++){
 													echo "<option value=\"$i $level[0]\">$i</option>";
 												}

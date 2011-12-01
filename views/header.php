@@ -50,8 +50,14 @@
 			className = $(this).attr('id');
 			$('input.'+className).attr('checked', 'true');
 		});
-		
-		
+
+		setTimeout(fade_out, 3500);
+
+		function fade_out() {
+			$(".notice").slideUp();
+			$(".error").slideUp();
+		}
+
 	});
 </script>
 
