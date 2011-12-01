@@ -192,7 +192,7 @@ function acceptFriendRequest($reqID){
 	$toUser = strtok(" ");
 	
 	//echo "Accept: ID: ".$fromUser." ConID: ".$connactionID;
-	$query = sprintf("UPDATE friend_requests SET APPROVED = 1 WHERE FROM_USER = '%s' AND TO_USER = '%s'",$fromUser, $toUSER);
+	$query = sprintf("UPDATE friend_requests SET IS_ACTIVE = 1 WHERE FROM_USER = '%s' AND TO_USER = '%s'",$fromUser, $toUSER);
 	$update = mysql_query($query) or die(mysql_error());
 	mysql_query("insert into messages values(1, ".$fromUser.", 'Friend Request', '".getUserName(getUserID())."' has accepted your friend request ', now())");
 	$query = sprintf("INSERT INTO friends(USER1, USER2) values('%s', '%s')", $fromUser, $toUser);
@@ -218,7 +218,7 @@ function denyFriendRequest($reqID){
 	$toUser = strtok(" ");
 	
 	//echo "Accept: ID: ".$fromUser." ConID: ".$connactionID;
-	$query = sprintf("UPDATE friend_requests SET APPROVED = 2 WHERE FROM_USER = '%s' AND TO_USER = '%s'",$fromUser, $toUSER);
+	$query = sprintf("UPDATE friend_requests SET IS_ACTIVE = 2 WHERE FROM_USER = '%s' AND TO_USER = '%s'",$fromUser, $toUSER);
 	$update = mysql_query($query) or die(mysql_error());
 	mysql_query("insert into messages values(1, ".$fromUser.", 'Friend Request', '".getUserName(getUserID())."' has denied your friend request ', now())");
 	
