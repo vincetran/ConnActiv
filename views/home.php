@@ -263,7 +263,7 @@
 									echo "<br><br>";
 								
 								} else {
-									echo "<p>No events have been posted to your networks yet.</p>";
+									echo "<div class='post'>No events for network $name.</div>";
 								}
 							
 								
