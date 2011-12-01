@@ -78,8 +78,8 @@ include("upload_file.php");
 			// if login is ok then we add a cookie 
 			 $_POST['username'] = stripslashes($_POST['username']);
 			 $hour = time() + 100000;
-			setcookie('ID_my_site', $_POST['username'], $hour);
-			setcookie('Key_my_site', $_POST['pass'], $hour);
+			setcookie('ID_my_site', $_POST['username'], $hour, '/');
+			setcookie('Key_my_site', $_POST['pass'], $hour, '/');
 			//then redirect them to the members area 
 			header("Location: views/home.php");
 			} 
@@ -139,8 +139,8 @@ include("upload_file.php");
 				// Now, create the cookie
 				$_POST['username'] = stripslashes($_POST['username']); 
 				$hour = time() + 100000; 
-				setcookie('ID_my_site', $_POST['username'], $hour); 
-				setcookie('Key_my_site', md5($_POST['password']), $hour);
+				setcookie('ID_my_site', $_POST['username'], $hour, '/'); 
+				setcookie('Key_my_site', md5($_POST['password']), $hour, '/');
 				header("Location: views/home.php");
 			}	
 			//if the passwords do not match ask them to enter the information again
