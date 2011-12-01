@@ -2,7 +2,8 @@
 	include("header.php");
 
 	if(cookieExists() && validCookie()) {
-	//var_dump($_POST);					//Check for Dave
+	
+	
 if(isset($_POST['subReview'])){
 		
 		if($_POST['review'][4] == 'on'){$anonymous = 1;} else{$anonymous = 0;}
@@ -11,16 +12,20 @@ if(isset($_POST['subReview'])){
 		mysql_query($query) or die(mysql_error());
 		unset($_POST['review']);
 	}
-	else if (isset($_POST['accept'])) {
+	
+	
+	if (isset($_POST['accept'])) {
 		if (isset($_POST['requestID'])) {
 			$request = $_POST['requestID'];
 			foreach($request as $req) { 
 				acceptRequest($req);
 				echo "<div class='notice'>Join request accepted!</div>";
 			} // end foreach
-		} //end if ($_POST[accept])
+		} unset($_POST['requestID']);
+			unset($_POST['accept']);
 	}
-	else if (isset($_POST['acceptFriend'])) {
+	
+	if (isset($_POST['acceptFriend'])) {
 		if (isset($_POST['friendReq'])) {
 			$friends = $_POST['friendReq'];
 			foreach($friends as $friend) { 
@@ -29,18 +34,8 @@ if(isset($_POST['subReview'])){
 			} // end foreach
 		} //end if ($_POST[accept])
 	}
-		/*
-		if(isset($_POST['friendReq'])){
-			$otheruser = substr($_POST['friendReq'][0], 0, strpos($_POST['friendReq'][0], " "));
-			mysql_query("insert into friends values (".getUserID().", ".$otheruser.")");
-			mysql_query("insert into friends values (".$otheruser.", ".getUserID().")");
-			mysql_query("update friend_requests set is_active = 0 where from_user = ".$otheruser." and to_user = ".getUserID());
-			$query = "insert into messages values(1, ".$otheruser.", 'Friend Request', '".getUserName(getUserID())." has accepted your friend request', now())";
-			mysql_query($query);
-			echo "<div class='notice'>Friend accepted!</div>";
-		}
-	}*/
-	else if (isset($_POST['deny'])) {
+	
+	if (isset($_POST['deny'])) {
 		if (isset($_POST['requestID'])) {
 			$request = $_POST['requestID'];
 			foreach($request as $req) {
@@ -49,7 +44,8 @@ if(isset($_POST['subReview'])){
 			} // end foreach
 		} //end if ($_POST[deny])
 	}
-	else if (isset($_POST['denyFriend'])) {
+	
+	if (isset($_POST['denyFriend'])) {
 		if (isset($_POST['friendReq'])) {
 			$friends = $_POST['friendReq'];
 			foreach($friends as $friend) {
@@ -58,13 +54,8 @@ if(isset($_POST['subReview'])){
 			} // end foreach
 		} //end if ($_POST[deny])
 	}
-		/*if(isset($_POST['friendReq'])){
-			mysql_query("update friend_requests set is_active = 0 where from_user = ".getUserID()." and to_user = ".$otheruser);			
-			echo "<div class='notice'>Friend request denied.</div>";
-		}
-
-	}*/
-	else if (isset($_POST['hideInc'])) {
+	
+	if (isset($_POST['hideInc'])) {
 		if (isset($_POST['hideID'])) {
 			$request = $_POST['hideID'];
 			foreach($request as $req) {
@@ -72,10 +63,12 @@ if(isset($_POST['subReview'])){
 			} // end foreach
 		} //end if ($_POST[requestID])
 	}
-	else if (isset($_POST['unhideInc'])) {
+	
+	if (isset($_POST['unhideInc'])) {
 		unhideRequestForTo();
 	}
-	else if (isset($_POST['hide'])) {
+	
+	if (isset($_POST['hide'])) {
 		if (isset($_POST['requestIDPen'])) {
 			$request = $_POST['requestIDPen'];
 			foreach($request as $req) {
@@ -83,7 +76,8 @@ if(isset($_POST['subReview'])){
 			} // end foreach
 		} //end if ($_POST[requestID])
 	}
-	else if (isset($_POST['unhide'])) {
+	
+	if (isset($_POST['unhide'])) {
 		unhideRequestForFrom();
 	}
 
@@ -97,7 +91,9 @@ if(isset($_POST['subReview'])){
 			} // end foreach
 			unset($_POST['eventDeny']);
 		} //end if (count)
-	} else if (isset($_POST['eventApprove'])) {
+	} 
+	
+	if (isset($_POST['eventApprove'])) {
 		if (isset($_POST['eventReq'])) {
 			$request = $_POST['eventReq'];
 			foreach($request as $req) {
@@ -107,9 +103,6 @@ if(isset($_POST['subReview'])){
 		} // end if (count)
 	} //end if ($_POST[eventApprove])
 	
-	
-	
-
 	
 			?>
 			
