@@ -55,8 +55,7 @@
 			$('.top_links').removeClass('active');
 			$('#profile').addClass('active');
 		
-			$('#DOB').datepicker({ 
-				showButtonPanel: true, 
+			$('#DOB').datepicker({  
 				selectOtherMonths: true, 
 				changeMonth: true, 
 				changeYear: true, 
