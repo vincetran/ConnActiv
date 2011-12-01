@@ -16,7 +16,7 @@
 				unset($_FILES);
 			}
 			if(isset($_POST['reply'])){
-				$query = "insert into messages values (".getUserID().", ".$_POST['reply'][3].", '".$_POST['reply'][0]."', '".$_POST['reply'][1]."', now())";
+				$query = "insert into messages values (".getUserID().", ".mysql_real_escape_string($_POST['reply'][3]).", '".mysql_real_escape_string($_POST['reply'][0])."', '".mysql_real_escape_string($_POST['reply'][1])."', now())";
 				
 				mysql_query($query);
 				

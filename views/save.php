@@ -11,7 +11,7 @@ include("config.php");
 //$interests = $_POST['about_me'];
 $interests =  stripslashes($_POST['value']);
 
-$query = sprintf("UPDATE users SET INTERESTS = '%s' WHERE USER_ID = '%s'",$interests, getUserID());
+$query = sprintf("UPDATE users SET INTERESTS = '%s' WHERE USER_ID = '%s'",mysql_real_excape_string($interests), getUserID());
 
 $update = mysql_query($query) or die(mysql_error());
 
