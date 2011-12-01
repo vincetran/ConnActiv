@@ -57,11 +57,11 @@ $(function() {
 	
 	$('#subscribeTable').dataTable({
         "aaSorting": [[ 0, "desc" ]],
-        "bPaginate": false,
+        "bPaginate": true,
 				"bLengthChange": false,
 				"bFilter": false,
 				"bSort": true,
-				"bInfo": false,
+				"bInfo": true,
 				"bAutoWidth": true,
 				"aoColumns": [ null, null, { "bSortable": false }]
 				});
@@ -196,7 +196,7 @@ $(function() {
 							?>
 							</tbody>
 						</table>
-				Or <span id="addNewExpand" class="clickable realgreen">add your own&nbsp;&raquo;</span><br/><br/>
+				<div><br><br>Or <span id="addNewExpand" style="clear:both" class="clickable realgreen">add your own&nbsp;&raquo;</span></div><br/><br/>
 					<div id="registrationUnique" style="display:none">
 						<span>Area: <input class="medium_input" type="text" name="area" value="" placeholder="ex: Pittsburgh"/></span><br/><br/>
 						<span>State:  <? echo getStateDropdown() ?></span><br/><br/>
