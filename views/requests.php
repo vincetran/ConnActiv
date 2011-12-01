@@ -20,9 +20,7 @@ if(isset($_POST['subReview'])){
 		} //end if ($_POST[accept])
 	}
 	else if (isset($_POST['acceptFriend'])) {
-		echo "here1";
 		if (isset($_POST['friendReq'])) {
-			echo "here2";
 			$friends = $_POST['friendReq'];
 			foreach($friends as $friend) { 
 				acceptFriendRequest($friend);
@@ -50,9 +48,7 @@ if(isset($_POST['subReview'])){
 		} //end if ($_POST[deny])
 	}
 	else if (isset($_POST['denyFriend'])) {
-		echo "here11";
 		if (isset($_POST['friendReq'])) {
-			echo "here22";
 			$friends = $_POST['friendReq'];
 			foreach($friends as $friend) {
 				denyFriendRequest($friend);
@@ -290,6 +286,7 @@ if(isset($_POST['subReview'])){
 				<input style="float:left; margin-left:5px; margin-left:20px" type="submit" name="accept" value="Accept Request(s)"/>
 				<input style="float:left; margin-left:5px;" type="submit" name="deny" value="Deny Request(s)"/>
 			</div>
+			</form>
 			<br/><br/><br/>
 			<? } ?>
 			
