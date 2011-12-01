@@ -70,7 +70,14 @@
 			$('.top_links').removeClass('active');
 			$('#profile').addClass('active');
 		
-			$('#DOB').datepicker({ showButtonPanel: true, selectOtherMonths: true, changeMonth: true, changeYear: true, minDate: new Date(0) });
+			$('#DOB').datepicker({ 
+				showButtonPanel: true, 
+				selectOtherMonths: true, 
+				changeMonth: true, 
+				changeYear: true, 
+				maxDate: 0,
+				yearRange: "-100:+0"
+			});
 			
 			$('.section').hide();
 			$('#view_profile').show();
@@ -191,7 +198,7 @@
 						<? $age = getAge($userID); ?>
 						<span class="clickable expander"><? echo $age ?><span class='editIcon'></span></span>
 						<div class="expand" style="display:none">
-							<input type="text" name="DOB" id="DOB" placeholder="Date of birth?"/>
+							<input type="text" name="DOB" id="DOB" placeholder="Date of birth"/>
 							<input class="button" type="submit" name="saveInfo" value="Save"/>
 						</div>
 					</td>

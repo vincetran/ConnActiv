@@ -40,11 +40,11 @@
 
 		$.fancybox(author_display,
 		{
-      'autoDimensions'	: true,
-      'width'						: 'auto',
-			'height'        	: 'auto',
-			'transitionIn'		: 'none',
-			'transitionOut'		: 'none'
+			'autoDimensions': true,
+			'width': 'auto',
+			'height': 'auto',
+			'transitionIn': 'none',
+			'transitionOut': 'none'
 		});
 
 		});
@@ -68,11 +68,41 @@
 			$('#createEvent').toggle();
 		});
 		
-		$('#startDate').datepicker({ showButtonPanel: true, selectOtherMonths: true, changeMonth: true, changeYear: true, minDate: new Date(0) });
-		$('#endDate').datepicker({ showButtonPanel: true, selectOtherMonths: true, changeMonth: true, changeYear: true, minDate: new Date(0) });
+		$('#startDate').datepicker({ 
+			showOtherMonths:true, 
+			selectOtherMonths: true, 
+			changeMonth: true, 
+			changeYear: true, 
+			minDate: 0,
+			yearRange: "-0:+1"
+		});
 		
-		$('#eventStartDate').datepicker({ showButtonPanel: true, selectOtherMonths: true, changeMonth: true, changeYear: true, minDate: new Date(0) });
-		$('#eventEndDate').datepicker({ showButtonPanel: true, selectOtherMonths: true, changeMonth: true, changeYear: true, minDate: new Date(0) });
+		$('#endDate').datepicker({ 
+			showOtherMonths:true, 
+			selectOtherMonths: true, 
+			changeMonth: true, 
+			changeYear: true, 
+			minDate: 0 ,
+			yearRange: "-0:+1"
+		});
+		
+		$('#eventStartDate').datepicker({ 
+			showOtherMonths:true, 
+			selectOtherMonths: true, 
+			changeMonth: true, 
+			changeYear: true, 
+			minDate: 0,
+			yearRange: "-0:+1" 
+		});
+		
+		$('#eventEndDate').datepicker({ 
+			showOtherMonths:true, 
+			selectOtherMonths: true, 
+			changeMonth: true, 
+			changeYear: true, 
+			minDate: 0,
+			yearRange: "-0:+1" 
+		});
 
 
 		$('#opts input').click(function() {
@@ -101,15 +131,15 @@
 					<div id="restOfBoxes">
 						Location: <textarea class="small" id="location" placeholder="Where?" name="location" maxlength="255"></textarea><br/><br/>
 						Starting: <input class="small_input" type="text" name="startDate" id="startDate"/> <select name="startHour">
-							<option value="-1">Hour:</option><? for($i = 1; $i < 24; $i++) echo "<option value=\"",$i,"\">", $i, "</option>";	?>
-							</select>:<select name="startMin"><option value="-1">Min:</option><? for($i = 0; $i < 60; $i++) echo "<option value=\"",$i,"\">", $i, "</option>";	?></select><br/><br/>
+							<option value="-1">Hour</option><? for($i = 1; $i < 24; $i++) echo "<option value=\"",$i,"\">", $i, "</option>";	?>
+							</select>:<select name="startMin"><option value="-1">Min</option><? for($i = 0; $i < 60; $i++) echo "<option value=\"",$i,"\">", $i, "</option>";	?></select><br/><br/>
 						Ending: <input type="text" class="small_input" name="endDate" id="endDate" /> <select name="endHour">
-							<option value="-1">Hour:</option>
+							<option value="-1">Hour</option>
 							<? for($i = 1; $i < 24; $i++) echo "<option value=\"",$i,"\">", $i, "</option>"; ?>
 							</select>:<select name="endMin">
-							<option value="-1">Min:</option><? for($i = 0; $i < 60; $i++) echo "<option value=\"",$i,"\">", $i, "</option>"; ?></select><br><br>
+							<option value="-1">Min</option><? for($i = 0; $i < 60; $i++) echo "<option value=\"",$i,"\">", $i, "</option>"; ?></select><br><br>
 						<select name="network">
-						<option value="-1">Network:</option>
+						<option value="-1">Network</option>
 							<?
 								$networks = getNetworkNames();
 								for($i = 0; $i < count($networks); $i++){
@@ -118,7 +148,7 @@
 							?>
 						</select>
 						<select name="activity">
-							<option value="-1">Activity:</option>
+							<option value="-1">Activity</option>
 							<?
 								$activities = getUserActivities();
 								for($i = 0; $i < count($activities); $i++){
@@ -127,7 +157,7 @@
 							?>
 						</select>
 						<select name="private">
-							<option value="-1">Private:</option>
+							<option value="-1">Private</option>
 							<option value="0">No</option>
 							<option value="1">Yes</option>
 						</select>
