@@ -167,9 +167,8 @@
 		if (!$user || !$startTime || !$endTime || $act_id<0 || $net_id<0 || !$loc || !$msg) {
 			echo "<div class='error'>Please fill in all event information.</div>";
 		} else {
-			$query = sprintf("INSERT INTO events(USER_ID, ACTIVITY_ID, NETWORK_ID, START, END, MESSAGE, LOCATION, RECURRENCE, APPROVED)
-				VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', 0, 0)", $user, $act_id, $net_id, $startTime, $endTime, $loc, $msg); //waiting for admin approval
-			
+			$query = sprintf("INSERT INTO events(USER_ID, ACTIVITY_ID, NETWORK_ID, START, END, MESSAGE, LOCATION, RECURRENCE, APPROVED, REQUEST_DATE)
+				VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', 0, -1, now())", $user, $act_id, $net_id, $startTime, $endTime, $loc, $msg); //waiting for admin approval
 			$insert = mysql_query($query) or die(mysql_error());
 			$new_event = mysql_insert_id();
 			
