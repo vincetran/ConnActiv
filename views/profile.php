@@ -237,7 +237,7 @@
 				?>
 				</tbody>
 			</table>
-				<br/>
+				<br/><br/>
 				<h2>Sent Messages</h2>
 				
 			<table id="sentMessages" class="alternating regular_table">
@@ -253,8 +253,6 @@
 				<?php
 					$sentMessages = getSentMessages(getUserID());
 					
-					if ($sentMessages) {
-					
 					foreach($sentMessages as $message){
 						echo "<tr>";
 						echo "<td>".getUserName($message['TO_USER'])."</td>";
@@ -263,8 +261,6 @@
 						echo "<td>".$message['DATE']."</td>";
 						echo "</tr>";
 					}
-					
-					} else echo "<tr><td colspan='5'>None yet.</tr>";
 				?>
 				</tbody>
 			</table>
