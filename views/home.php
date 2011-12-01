@@ -429,9 +429,11 @@
 						$postTime = $post[1];
 						$userID = $post[2];
 						$location = $post[3];
-						$startTime = $post[4];
+						//$startTime = $post[4];
+						$startTime = getConnactionDateTime($connactionID, "START");
 						$message = $post[5];
-						$endTime = $post[6];
+						//$endTime = $post[6];
+						$endTime = getConnactionDateTime($connactionID, "END");
 						$unique_network_ID = $post[7];
 						$isPrivate = $post[8];
 						$act = mysql_query("select activity_id from unique_networks where unique_network_id = ".$unique_network_ID);
@@ -474,8 +476,11 @@
 								<br/>
 								Open to joiners&nbsp;&raquo;
 										<?php 
-											if($userID != getUserID()){ 
-												if(getApproval($connactionID, getUserID()) == -1){
+											if($userID != getUserID()){
+												if(datePassed($post[6])){
+													echo "<span class='request_denied'>ConnAction ended.</span>";
+												}
+												else if(getApproval($connactionID, getUserID()) == -1){
 													echo "<span class='request_pending'>Request pending!</span>";
 												}
 												else if(getApproval($connactionID, getUserID()) == 2){

@@ -423,6 +423,7 @@
 		$date = $dateID[$argument.'_TIME'];
 		$dateParsed = date_parse($date);
 		$newDate = $dateParsed["month"].'/'.$dateParsed["day"].'/'.$dateParsed["year"];
+		$finalDate =  date('m/d/Y',strtotime($newDate));
 		return $newDate;
 	}
 	function getConnactionDateTime($connactionID, $argument){
@@ -432,7 +433,8 @@
 		$date = $dateID[$argument.'_TIME'];
 		$dateParsed = date_parse($date);
 		$newDate = $dateParsed["month"].'/'.$dateParsed["day"].'/'.$dateParsed["year"]." ".$dateParsed["hour"].":".$dateParsed["minute"];
-		return $newDate;
+		$finalDate =  date('m/d/Y H:i:s',strtotime($newDate));
+		return $finalDate;
 	}
 	function getConnactionLocation($connactionID){
 		//This function will return the Location of connaction
