@@ -71,7 +71,7 @@ function joinRequest(){
 		$body .= "Phone: ".$user['PHONE']."\n";
 	}
 
-	$query = "insert into messages values (".getUserID().", ".$to_user.", 'Contact information for ".getName()."', '".$body."', now())";
+	$query = "insert into messages values (".getUserID().", ".$to_user.", 'Contact info', '".$body."', now())";
 				
 	mysql_query($query);
 	

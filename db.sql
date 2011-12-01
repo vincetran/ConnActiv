@@ -212,15 +212,15 @@ CREATE TABLE IF NOT EXISTS `messages` (
 --
 
 INSERT INTO `messages` (`FROM_USER`, `TO_USER`, `SUBJECT`, `BODY`, `DATE`) VALUES
-(12, 11, 'Contact information for Amy Reehl', 'Email: amy4reehl@gmail.com\nPhone: \n', '2011-11-30 14:12:23'),
-(12, 11, 'Contact information for Amy Reehl', 'Email: amy4reehl@gmail.com\nPhone: \n', '2011-11-30 14:16:44'),
-(12, 11, 'Contact information for Amy Reehl', '', '2011-11-30 15:14:36'),
-(12, 11, 'Contact information for Amy Reehl', '', '2011-11-30 15:17:03'),
-(12, 11, 'Contact information for Amy Reehl', '', '2011-11-30 15:17:07'),
-(12, 11, 'Contact information for Amy Reehl', '', '2011-11-30 15:17:58'),
-(12, 11, 'Contact information for Amy Reehl', '', '2011-11-30 15:20:23'),
-(12, 11, 'Contact information for Amy Reehl', '', '2011-11-30 15:20:42'),
-(12, 11, 'Contact information for Amy Reehl', '', '2011-11-30 15:21:54');
+(12, 11, 'Contact info', 'Email: amy4reehl@gmail.com\nPhone: \n', '2011-11-30 14:12:23'),
+(12, 11, 'Contact info', 'Email: amy4reehl@gmail.com\nPhone: \n', '2011-11-30 14:16:44'),
+(12, 11, 'Contact info', '', '2011-11-30 15:14:36'),
+(12, 11, 'Contact info', '', '2011-11-30 15:17:03'),
+(12, 11, 'Contact info', '', '2011-11-30 15:17:07'),
+(12, 11, 'Contact info', '', '2011-11-30 15:17:58'),
+(12, 11, 'Contact info', '', '2011-11-30 15:20:23'),
+(12, 11, 'Contact info', '', '2011-11-30 15:20:42'),
+(12, 11, 'Contact info', '', '2011-11-30 15:21:54');
 
 -- --------------------------------------------------------
 

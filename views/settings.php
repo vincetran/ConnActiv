@@ -139,10 +139,13 @@
 			?>
 			</tbody>
 			</table>
+			
+			<? if ($networks) { ?>
 			<div class="below_table">
 				<input style="float:right; margin-left:10px; margin-right:20px" type="submit" name="doFavorite" value="Favorite"/>
 				<input style="float:right;" type="submit" name="doUnsubscribe" value="Unsubscribe"/>
 			</div>
+			<? } ?>
 		</form>
 			
 			<span style="clear:both;margin-top:-1.5em;" class="clickable below_table">Want more updates? <span id="expandNetworks" class="clickExpand">Subscribe to a new network&nbsp;&raquo;</span></span>
@@ -302,9 +305,12 @@
 						<? endforeach; ?>
 				</tbody>
 			</table>
+			
+			<? if ($favs) { ?>
 			<div class="below_table">
 				<input style="float:right;margin-right: 100px;" type="submit" name="doDefavorite" value="Remove"/>
 			</div>
+			<? } ?>
 			</form>
 			
 			</div><!-- /page -->

@@ -197,14 +197,15 @@
 			
 			<br/><br/>
 				<h2>Profile Photo</h2>
-						
+				
+				<div class="greyBorder">
 				<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
 						<p>
 							<label for="file">Select a file:</label> <input type="file" name="userfile" id="file"> <br />
 							<input type = 'hidden' name = 'fileupload' /></p>
 							<button>Upload File</button>
 				</form>
-				
+				</div><!-- end .greyBorder -->
 			</div> <!-- end view_profile div -->
 			<div class="section" id="view_messages">
 				
@@ -236,7 +237,7 @@
 				?>
 				</tbody>
 			</table>
-				<br/>
+				<br/><br/>
 				<h2>Sent Messages</h2>
 				
 			<table id="sentMessages" class="alternating regular_table">
@@ -252,8 +253,6 @@
 				<?php
 					$sentMessages = getSentMessages(getUserID());
 					
-					if ($sentMessages) {
-					
 					foreach($sentMessages as $message){
 						echo "<tr>";
 						echo "<td>".getUserName($message['TO_USER'])."</td>";
@@ -262,8 +261,6 @@
 						echo "<td>".$message['DATE']."</td>";
 						echo "</tr>";
 					}
-					
-					} else echo "<tr><td colspan='5'>None yet.</tr>";
 				?>
 				</tbody>
 			</table>

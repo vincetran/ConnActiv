@@ -328,14 +328,12 @@ include("upload_file.php");
 	function saveInfo(){
 		//This function sends the my info to the database
 		if(isset($_POST['about_me'])){
-			echo "about me";
 			$interests = $_POST['about_me']; 
 			$query = "UPDATE users SET INTERESTS = '".$interests."' WHERE USER_ID = '".getUserID()."'";
 			$update = mysql_query($query) or die(mysql_error());
 
 		}
 		if(isset($_POST['gender'])){
-			echo "gender";
 			$gender = $_POST['gender'];
 			$query = "UPDATE users SET GENDER = '".$gender."' WHERE USER_ID = '".getUserID()."'";
 			$update = mysql_query($query) or die(mysql_error());
@@ -713,7 +711,7 @@ include("upload_file.php");
 		<option value="OH">Ohio</option>
 		<option value="OK">Oklahoma</option>
 		<option value="OR">Oregon</option>
-		<option value="PA">Pennsylvania</option>
+		<option selected="selected" value="PA">Pennsylvania</option>
 		<option value="RI">Rhode Island</option>
 		<option value="SC">South Carolina</option>
 		<option value="SD">South Dakota</option>

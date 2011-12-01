@@ -116,6 +116,29 @@
 				"bAutoWidth": false
    	 });
    	 
+   	 
+   	 $('#incomingFR').dataTable( {
+        "aaSorting": [[ 1, "desc" ]],
+        "bPaginate": true,
+				"bLengthChange": false,
+				"bFilter": true,
+				"bSort": true,
+				"bInfo": true,
+				"bAutoWidth": false
+   	 }); 
+   	 
+   	 $('#pendingFR').dataTable( {
+        "aaSorting": [[ 1, "desc" ]],
+        "bPaginate": true,
+				"bLengthChange": false,
+				"bFilter": true,
+				"bSort": true,
+				"bInfo": true,
+				"bAutoWidth": false
+   	 }); 
+   	 
+   	 
+   	 
    	 $('#waitingEvents').dataTable( {
         "aaSorting": [[ 1, "desc" ]],
         "bPaginate": true,
@@ -190,7 +213,6 @@
 			<tbody>
 				<?php
 					$incRequests = getIncRequests(getUserID());
-					if ($incRequests) {
 					
 						foreach($incRequests as $incoming){
 							$fromUser = $incoming[0];
@@ -230,11 +252,12 @@
 							</tr>
 						<?php } 
 						}
-					}
 				?>
 			</tbody>
 			
 			</table>
+			
+			<? if ($incRequests) { ?>
 			<div class="below_table">
 				<span style="clear:both;" class="below_table">Request are deleted the day after the ConnAction. Only non pending requests can be hidden.</span><br/><br/>
 				<input style="float:right; margin-left:5px; margin-right:20px" type="submit" name="hideInc" value="Hide Request(s)"/>
@@ -242,8 +265,8 @@
 				<input style="float:left; margin-left:5px; margin-left:20px" type="submit" name="accept" value="Accept Request(s)"/>
 				<input style="float:left; margin-left:5px;" type="submit" name="deny" value="Deny Request(s)"/>
 			</div>
-			
 			<br/><br/><br/>
+			<? } ?>
 			
 		<h2>Pending Connaction Requests</h2>
 		<h3>Activities you've asked to join</h3>
@@ -263,7 +286,6 @@
 			<tbody>
 				<?php
 					$pendingRequests = getPendingRequests(getUserID());
-					if ($pendingRequests) {
 					
 						foreach($pendingRequests as $incoming){
 							$fromUser = $incoming[0];
@@ -303,23 +325,21 @@
 								</tr>
 						<?php } 
 						}
-					}
 				?>
 			</tbody>
 			</table>
+			
+			<? if ($pendingRequests) { ?>
 			<div class="below_table">
 				<span style="clear:both;" class="below_table">Request are deleted the day after the ConnAction.</span>
 				<input style="float:right; margin-left:5px; margin-right:20px" type="submit" name="hide" value="Hide Request(s)"/>
 				<input style="float:right;" type="submit" name="unhide" value="Unhide Request(s)"/>
 			</div>
-			
 			<br/><br/><br/>
-			
+			<? } ?>
 		<h2>Attended Connactions</h2>
 			
 		<table id="past" class="requests regular_table">
-			
-
 			
 			<thead class="reqHeader">
 				<tr>
@@ -412,12 +432,12 @@
 				<input style="float:right;" type="submit" name="accept" value="Accept Request(s)"/>
 			</div>
 			</form>
-			<br/><br/>
+			<br/><br/><br/>
 
 			<h2>Pending Friend Requests</h2>
-		<h3>People you have asked to be your friend</h3>
+			<h3>People you have asked to be your friend</h3>
 			
-			<table id="incomingFR" class="requests regular_table">
+			<table id="pendingFR" class="requests regular_table">
 			<thead class="reqHeader">
 				<tr>
 					<th>Status</th>
