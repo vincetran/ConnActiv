@@ -129,6 +129,16 @@ function getHiddenRequestsForFrom($userID){
 	}
 	return $hiddenRequests;
 }
+function getHiddenRequestsForTo($userID){
+	//This function returns an array of Hidden request where user_id is the to user
+	$hiddenRequests = array();
+	$result = mysql_query("SELECT * FROM connaction_requests WHERE to_user = '$userID' AND hidden_for_to = 1")or die(mysql_error()); //returns true if you do not assign
+
+	while($info = mysql_fetch_array($result)){
+		$hiddenRequests[] = $info;
+	}
+	return $hiddenRequests;
+}
 function getIncFriendRequests($userID){
 	//This function returns an array of incoming requests
 	$incRequests = array();
@@ -200,10 +210,20 @@ function hideRequestForFrom($reqID){
 	$update = mysql_query($query) or die(mysql_error());
 	
 }
+function hideRequestForTo($reqID){
+	//This function will hide a connaction request for the user who recieved the request
+	$fromUser = strtok($reqID, " ");
+	$connactionID = strtok(" ");
+	$approved = strTok(" ");
+	
+	if($approved != -1){
+		$query = sprintf("UPDATE connaction_requests SET HIDDEN_FOR_TO = 1 WHERE FROM_USER = '%s' AND CONNACTION_ID = '%s'",$fromUser, $connactionID);
+		$update = mysql_query($query) or die(mysql_error());
+	}	
+}
 function unhideRequestForFrom(){
-	//This function will hide a connaction request for the user who sent the request
+	//This function will unhide a connaction request for the user who sent the request
 	$fromUser = getUserID();
-	//$connactionID = strtok(" ");
 	
 	$hiddenRequests = getHiddenRequestsForFrom($fromUser);
 	if ($hiddenRequests) {
@@ -211,6 +231,19 @@ function unhideRequestForFrom(){
 		foreach($hiddenRequests as $incoming){
 			$connactionID = $incoming[2];
 			$query = sprintf("UPDATE connaction_requests SET HIDDEN_FOR_FROM = 0 WHERE FROM_USER = '%s' AND CONNACTION_ID = '%s'",$fromUser, $connactionID);
+			$update = mysql_query($query) or die(mysql_error());
+		}
+	}
+}
+function unhideRequestForTo(){
+	//This function will unhide a connaction request for the user who recieved the request
+	$toUser = getUserID();
+	$hiddenRequests = getHiddenRequestsForTo($toUser);
+	if ($hiddenRequests) {
+					
+		foreach($hiddenRequests as $incoming){
+			$connactionID = $incoming[2];
+			$query = sprintf("UPDATE connaction_requests SET HIDDEN_FOR_TO = 0 WHERE TO_USER = '%s' AND CONNACTION_ID = '%s'",$toUser, $connactionID);
 			$update = mysql_query($query) or die(mysql_error());
 		}
 	}
