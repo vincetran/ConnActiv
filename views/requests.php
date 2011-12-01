@@ -39,9 +39,20 @@
 		}
 
 	}
-	else if (isset($_POST['hide'])) {
+	else if (isset($_POST['hideInc'])) {
 		if (count($_POST['requestID'])>0) {
 			$request = $_POST['requestID'];
+			foreach($request as $req) {
+				hideRequestForTo($req);
+			} // end foreach
+		} //end if ($_POST[requestID])
+	}
+	else if (isset($_POST['unhideInc'])) {
+		unhideRequestForTo();
+	}
+	else if (isset($_POST['hide'])) {
+		if (count($_POST['requestIDPen'])>0) {
+			$request = $_POST['requestIDPen'];
 			foreach($request as $req) {
 				hideRequestForFrom($req);
 			} // end foreach
@@ -187,9 +198,10 @@
 							$connactionID = $incoming[2];
 							$message = $incoming[3];
 							$approved = $incoming[4];
-							$date = date_parse($incoming[5]); 
-							$requestID = $fromUser." ".$connactionID;
-				?>
+							$date = date_parse($incoming[5]);
+							$hidden = $incoming[7];
+							$requestID = $fromUser." ".$connactionID." ".$approved;
+							if($hidden == 0){?>
 							
 							<tr> 
 								<td>
@@ -200,9 +212,11 @@
 											echo "Pending";
 										}
 										else if($approved == 1){
+											echo "<input type='checkbox' value='".$requestID."' name='requestID[]' /> <br/>";
 											echo "Approved";
 										}
 										else{
+											echo "<input type='checkbox' value='".$requestID."' name='requestID[]' /> <br/>";
 											echo "Denied";
 										}
 									?>
@@ -215,17 +229,21 @@
 								<td><?php echo $message; ?></td>
 							</tr>
 						<?php } 
+						}
 					}
 				?>
 			</tbody>
 			
 			</table>
 			<div class="below_table">
-				<input style="float:right; margin-left:10px; margin-right:20px" type="submit" name="deny" value="Deny Request(s)"/>
-				<input style="float:right;" type="submit" name="accept" value="Accept Request(s)"/>
+				<span style="clear:both;" class="below_table">Request are deleted the day after the ConnAction. Only non pending requests can be hidden.</span><br/><br/>
+				<input style="float:right; margin-left:5px; margin-right:20px" type="submit" name="hideInc" value="Hide Request(s)"/>
+				<input style="float:right; margin-left:5px;" type="submit" name="unhideInc" value="Unhide Request(s)"/>
+				<input style="float:left; margin-left:5px; margin-left:20px" type="submit" name="accept" value="Accept Request(s)"/>
+				<input style="float:left; margin-left:5px;" type="submit" name="deny" value="Deny Request(s)"/>
 			</div>
 			
-			<br/><br/>
+			<br/><br/><br/>
 			
 		<h2>Pending Connaction Requests</h2>
 		<h3>Activities you've asked to join</h3>
@@ -267,11 +285,11 @@
 												echo "Pending";
 											}
 											else if($approved == 1){
-												echo "<input type='checkbox' value='".$requestID."' name='requestID[]' /> <br/>";
+												echo "<input type='checkbox' value='".$requestID."' name='requestIDPen[]' /> <br/>";
 												echo "Approved";
 											}
 											else{
-												echo "<input type='checkbox' value='".$requestID."' name='requestID[]' /> <br/>";
+												echo "<input type='checkbox' value='".$requestID."' name='requestIDPen[]' /> <br/>";
 												echo "Denied";
 											}
 										?>
@@ -295,7 +313,7 @@
 				<input style="float:right;" type="submit" name="unhide" value="Unhide Request(s)"/>
 			</div>
 			
-			<br/><br/>
+			<br/><br/><br/>
 			
 		<h2>Attended Connactions</h2>
 			
