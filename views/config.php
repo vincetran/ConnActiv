@@ -713,7 +713,7 @@ include("upload_file.php");
 		<option value="OH">Ohio</option>
 		<option value="OK">Oklahoma</option>
 		<option value="OR">Oregon</option>
-		<option value="PA">Pennsylvania</option>
+		<option selected="selected" value="PA">Pennsylvania</option>
 		<option value="RI">Rhode Island</option>
 		<option value="SC">South Carolina</option>
 		<option value="SD">South Dakota</option>

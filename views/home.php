@@ -41,7 +41,7 @@
 		$.fancybox(author_display,
 		{
       'autoDimensions'	: true,
-			'width'         	: 450,
+      'width'						: 'auto',
 			'height'        	: 'auto',
 			'transitionIn'		: 'none',
 			'transitionOut'		: 'none'
@@ -180,7 +180,7 @@
 				
 				<br><br>
 				<h2>Stream</h2>	
-				
+				<!--
 				<div style="margin: 5px 0px; text-align:left" class="displayOpts"><span class="expander clickExpand">Customize your stream display&nbsp;&raquo;</span><br/>
 					<div id="opts" class="expand" style="display:none">
 						<input type="checkbox" name="display" checked id="displayAll"/>&nbsp;<label>All tab</label><br/>
@@ -189,6 +189,7 @@
 						<input type="checkbox" name="display" checked id="displayUnique"/>&nbsp;<label>Tab for each network-activity</label>
 					</div>
 				</div>
+				Kim to finish -->
 					
 				<div class="main feeds-container">
 					<ul class="feeds">

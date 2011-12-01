@@ -61,16 +61,21 @@
 		 $DOB = $user['DOB'];
 		 $gender = $user['GENDER'];
 	//Then append it all as raw markup for display. 
-		 $details = "<div class='view_profile'>"; // must be the first item appended to $details
+		 $details = "<div class='view_profile greyBorder'>"; // must be the first item appended to $details
 
 		 $details .= "<img src=".$src." /><h2>$uname</h2>";
-		 if($about != ''){$details .= "<br/>About: ".$about." ";}
-		 $details .= "<br/>City: ".$city;
-		 $details .= "<br/>State: ".$state;
-		 if($DOB != ''){$details .= "<br/>Birthday: ".$DOB;}
-		 if($gender != ''){$details .= "<br/>Gender: ".$gender;}
-		 $details .= "<br/>Positive reviews: $reviewsPos";
-		 $details .= "<br/>Negative reviews: $reviewsNeg";
+		 
+		 $details.= "<table class='simple_table'>";
+		 
+		 if($about != '') $details .= "<tr><th>About</th><td>$about</td></tr>";
+		 if ($city != '') $details .= "<tr><th>City</th><td>$city</td></tr>";
+		 if ($state != '') $details .= "<tr><th>State</th><td>$state</td></tr>";
+		 if($DOB != '') $details .= "<tr><th>Birthday</th><td>$DOB</td></tr>";
+		 if($gender != '') $details .= "<tr><th>Gender</th><td>$gender</td></tr>";
+		 $details .= "<tr><th>Positive reviews</th><td>$reviewsPos</td>";
+		 $details .= "<tr><th>Negative reviews</th><td>$reviewsNeg</td>";
+		 $details .= "</table>";
+		 
 	/*** Add other details for the user here */ 
 		$review = getAllReviews($userID);
 		$details .= getFormattedReviews($review);
@@ -87,7 +92,7 @@
 
 		 return $details;
 	}
-	
+		
 	function getFormattedReviews($review) {
 	
 		$details = "";

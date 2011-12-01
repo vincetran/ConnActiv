@@ -105,6 +105,29 @@
 				"bAutoWidth": false
    	 });
    	 
+   	 
+   	 $('#incomingFR').dataTable( {
+        "aaSorting": [[ 1, "desc" ]],
+        "bPaginate": true,
+				"bLengthChange": false,
+				"bFilter": true,
+				"bSort": true,
+				"bInfo": true,
+				"bAutoWidth": false
+   	 }); 
+   	 
+   	 $('#pendingFR').dataTable( {
+        "aaSorting": [[ 1, "desc" ]],
+        "bPaginate": true,
+				"bLengthChange": false,
+				"bFilter": true,
+				"bSort": true,
+				"bInfo": true,
+				"bAutoWidth": false
+   	 }); 
+   	 
+   	 
+   	 
    	 $('#waitingEvents').dataTable( {
         "aaSorting": [[ 1, "desc" ]],
         "bPaginate": true,
@@ -394,12 +417,12 @@
 				<input style="float:right;" type="submit" name="accept" value="Accept Request(s)"/>
 			</div>
 			</form>
-			<br/><br/>
+			<br/><br/><br/>
 
 			<h2>Pending Friend Requests</h2>
-		<h3>People you have asked to be your friend</h3>
+			<h3>People you have asked to be your friend</h3>
 			
-			<table id="incomingFR" class="requests regular_table">
+			<table id="pendingFR" class="requests regular_table">
 			<thead class="reqHeader">
 				<tr>
 					<th>Status</th>
