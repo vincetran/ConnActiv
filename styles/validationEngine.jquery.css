@@ -21,7 +21,7 @@
 
 .formError .formErrorContent {
 	width: 100%;
-	background: #5CBD00;
+	background: #9F0735;
 	position:relative;
 	z-index:5001;
 	color: #fff;
@@ -39,7 +39,7 @@
 }
 
 .greenPopup .formErrorContent {
-	background: #33be40;
+	background: #9F0735;
 }
 
 .blackPopup .formErrorContent {
@@ -70,7 +70,7 @@
 	-webkit-box-shadow: 0 2px 3px #444;
 	font-size: 0px;
 	height: 1px;
-	background: #5CBD00;
+	background: #9F0735	;
 	margin: 0 auto;
 	line-height: 0;
 	font-size: 0;
@@ -84,7 +84,7 @@
 }
 
 .greenPopup .formErrorArrow div {
-	background: #33be40;
+	background: #9F0735;
 }
 
 .blackPopup .formErrorArrow div {

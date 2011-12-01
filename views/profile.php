@@ -1,19 +1,4 @@
 <? include("header.php");
-
-	//Checks if there is a login cookie
-	if(cookieExists())
-	//if there is a username cookie, we need to check it against our password cookie
-	{ 
-		
-		if (!validCookie()) {
-			//Cookie doesn't match password go to index";
-			header("Location: ../index.html"); 
-		}
-		else{
-			
-			
-			//Cookie matches, show what they want.";
-			
 			//if (name is clicked)
 				//viewing someones profile
 				//$userID = $_POST['userID']
@@ -198,7 +183,7 @@
 						<? $age = getAge($userID); ?>
 						<span class="clickable expander"><? echo $age ?><span class='editIcon'></span></span>
 						<div class="expand" style="display:none">
-							<input type="text" name="DOB" id="DOB" placeholder="Date of birth"/>
+							<input type="text" name="DOB" id="DOB" placeholder=" Date of birth"/>
 							<input class="button" type="submit" name="saveInfo" value="Save"/>
 						</div>
 					</td>
@@ -214,7 +199,7 @@
 				<div class="greyBorder">
 				<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
 						<p>
-							<label for="file">Select a file:</label> <input type="file" name="userfile" id="file"> <br />
+							<label for="file">Select a file:</label>  <input type="file" name="userfile" id="file"> <br /><br />
 							<input type = 'hidden' name = 'fileupload' /></p>
 							<button>Upload File</button>
 				</form>
@@ -291,12 +276,5 @@
 			
 			</div> <!-- end page -->
 			<?php
-		}
-	}
-	else {	 
-		//if they are not logged in";
-		header("Location: ../index.html");
-	}
-	
 	include('footer.php');
 ?>
