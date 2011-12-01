@@ -66,8 +66,8 @@
 
 	}*/
 	else if (isset($_POST['hideInc'])) {
-		if (isset($_POST['requestID'])) {
-			$request = $_POST['requestID'];
+		if (isset($_POST['hideID'])) {
+			$request = $_POST['hideID'];
 			foreach($request as $req) {
 				hideRequestForTo($req);
 			} // end foreach
@@ -258,11 +258,11 @@
 											echo "Pending";
 										}
 										else if($approved == 1){
-											echo "<input type='checkbox' value='".$requestID."' name='requestID[]' /> <br/>";
+											echo "<input type='checkbox' value='".$requestID."' name='hideID[]' /> <br/>";
 											echo "Approved";
 										}
 										else{
-											echo "<input type='checkbox' value='".$requestID."' name='requestID[]' /> <br/>";
+											echo "<input type='checkbox' value='".$requestID."' name='hideID[]' /> <br/>";
 											echo "Denied";
 										}
 									?>
