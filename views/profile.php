@@ -198,7 +198,7 @@
 						<? $age = getAge($userID); ?>
 						<span class="clickable expander"><? echo $age ?><span class='editIcon'></span></span>
 						<div class="expand" style="display:none">
-							<input type="text" name="DOB" id="DOB" placeholder="Date of birth"/>
+							<input type="text" name="DOB" id="DOB" placeholder=" Date of birth"/>
 							<input class="button" type="submit" name="saveInfo" value="Save"/>
 						</div>
 					</td>
@@ -214,7 +214,7 @@
 				<div class="greyBorder">
 				<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
 						<p>
-							<label for="file">Select a file:</label> <input type="file" name="userfile" id="file"> <br />
+							<label for="file">Select a file:</label>  <input type="file" name="userfile" id="file"> <br /><br />
 							<input type = 'hidden' name = 'fileupload' /></p>
 							<button>Upload File</button>
 				</form>

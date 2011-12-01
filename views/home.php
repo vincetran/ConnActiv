@@ -127,16 +127,16 @@
 					<h2>Post a ConnAction</h2>
 				</div>
 				<div id="postBoxes">
-					<div id="messageBox">Message: <textarea id="message" name="message" placeholder="Say what you're up to!" maxlength="4000"></textarea></div>
+					<div id="messageBox">Message: <textarea id="message" name="message" placeholder=" Say what you're up to!" maxlength="4000"></textarea></div>
 					<div id="restOfBoxes">
-						Location: <textarea class="small" id="location" placeholder="Where?" name="location" maxlength="255"></textarea><br/><br/>
+						Location: <textarea class="small" id="location" placeholder=" Where?" name="location" maxlength="255"></textarea><br/><br/>
 						Starting: <input class="small_input" type="text" name="startDate" id="startDate"/> <select name="startHour">
 							<option value="-1">Hour</option><? for($i = 1; $i < 24; $i++) echo "<option value=\"",$i,"\">", $i, "</option>";	?>
-							</select>:<select name="startMin"><option value="-1">Min</option><? for($i = 0; $i < 60; $i++) echo "<option value=\"",$i,"\">", $i, "</option>";	?></select><br/><br/>
+							</select> : <select name="startMin"><option value="-1">Min</option><? for($i = 0; $i < 60; $i++) echo "<option value=\"",$i,"\">", $i, "</option>";	?></select><br/><br/>
 						Ending: <input type="text" class="small_input" name="endDate" id="endDate" /> <select name="endHour">
 							<option value="-1">Hour</option>
 							<? for($i = 1; $i < 24; $i++) echo "<option value=\"",$i,"\">", $i, "</option>"; ?>
-							</select>:<select name="endMin">
+							</select> : <select name="endMin">
 							<option value="-1">Min</option><? for($i = 0; $i < 60; $i++) echo "<option value=\"",$i,"\">", $i, "</option>"; ?></select><br><br>
 						<select name="network">
 						<option value="-1">Network</option>
@@ -176,13 +176,13 @@
 				<span class="realgreen">Submit your event details.</span><br/>
 				Once we approve your event, we'll post it on your behalf.<br/><br/>
 				
-				Description: <textarea class="small" id="eventMsg" placeholder="Tell us a little about your event." name="eventMsg" maxlength="4000"></textarea><br/><br/>
-				Location: <textarea class="small" id="eventLoc" placeholder="Where?" name="eventLoc" maxlength="255"></textarea><br/><br/>
-				Starting: <input type="text" class="small_input" name="eventStartDate" id="eventStartDate"/> <select name="eventStartHour"><option value="-1">Hour:</option><? for($i = 1; $i < 24; $i++) echo "<option value=\"",$i,"\">", $i, "</option>";	?></select>
-					:<select name="eventStartMin"><option value="-1">Min:</option><? for($i = 0; $i < 60; $i++) echo "<option value=\"",$i,"\">", $i, "</option>";	?></select><br/><br/>
-				Ending: <input type="text" class="small_input" name="eventEndDate" id="eventEndDate" /> <select name="eventEndHour"><option value="-1">Hour:</option>
-					<? for($i = 1; $i < 24; $i++) echo "<option value=\"",$i,"\">", $i, "</option>"; ?></select> :<select name="eventEndMin">
-					<option value="-1">Min:</option><? for($i = 0; $i < 60; $i++) echo "<option value=\"",$i,"\">", $i, "</option>"; ?></select><br><br>	
+				Description: <textarea class="small" id="eventMsg" placeholder=" Tell us a little about your event." name="eventMsg" maxlength="4000"></textarea><br/><br/>
+				Location: <textarea class="small" id="eventLoc" placeholder=" Where?" name="eventLoc" maxlength="255"></textarea><br/><br/>
+				Starting: <input type="text" class="small_input" name="eventStartDate" id="eventStartDate"/> <select name="eventStartHour"><option value="-1">Hour</option><? for($i = 1; $i < 24; $i++) echo "<option value=\"",$i,"\">", $i, "</option>";	?></select>
+					: <select name="eventStartMin"><option value="-1">Min</option><? for($i = 0; $i < 60; $i++) echo "<option value=\"",$i,"\">", $i, "</option>";	?></select><br/><br/>
+				Ending: <input type="text" class="small_input" name="eventEndDate" id="eventEndDate" /> <select name="eventEndHour"><option value="-1">Hour</option>
+					<? for($i = 1; $i < 24; $i++) echo "<option value=\"",$i,"\">", $i, "</option>"; ?></select> : <select name="eventEndMin">
+					<option value="-1">Min</option><? for($i = 0; $i < 60; $i++) echo "<option value=\"",$i,"\">", $i, "</option>"; ?></select><br><br>	
 					<select name="eventNetwork">
 						<option value="-1">Network:</option>
 							<?
