@@ -13,6 +13,7 @@
 <link type="text/css" rel="stylesheet" href="../styles/demo_table.css"/>
 <link type="text/css" rel="stylesheet" href="../styles/validationEngine.jquery.css" />
 <link type="text/css" rel="stylesheet" href="../styles/jquery.fancybox-1.3.4.css" />
+<link type="text/css" rel="stylesheet/less" href="../styles/admin.less"/>
 
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/less.min.js"></script>
@@ -99,11 +100,16 @@
 
 			<span id="top-nav">
 				<ul id="nav">
+					
+					<? if (isAdmin()) { ?>
+							<li class="headerlink" id="link_admin"><a class="top_links" id="admin" href="admin.php">Admin</a></li>
+					<? } ?>
+				
 					<li class="headerlink" id="link_home"><a class="top_links" id="home" href="home.php">Home</a></li>
 					<li class="headerlink" id="link_profile"><a class="top_links" id="profile" href="profile.php">Profile</a></li>
 					<li class="headerlink" id="link_requests"><a class="top_links" id="requests" href="requests.php">Requests</a></li>
 					<li class="headerlink" id="link_settings"><a class="top_links" id="settings" href="settings.php">Settings</a></li>
-				</ul>
+					</ul>
 			</span>
 
 	</header>

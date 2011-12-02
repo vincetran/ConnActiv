@@ -3,7 +3,7 @@
 	// Connects to Database
 	//mysql_connect("localhost", "xgamings_connact", "connactive123") or die(mysql_error()); //This is our database credentials
 	mysql_connect("localhost", "root", "") or die(mysql_error()); 	//This is wamp database credentials
-	mysql_select_db("xgamings_connactiv") or die(mysql_error()); 
+	mysql_select_db("test") or die(mysql_error()); 
 
 
 include("functions_connactions.php");
@@ -11,6 +11,7 @@ include("functions_recommendations.php");
 include("functions_networks.php");
 include("functions_join_requests.php");
 include("upload_file.php");
+include("functions_admin.php");
 
 	function cookieExists(){
 		//Check to see if user ID cookie exists

@@ -1,0 +1,45 @@
+@lightgrey: #efefef;
+@darkergrey: #ddd;
+@dark: #555;
+@white: #fff;
+@blue: #2384de;
+
+.clickable {
+	cursor:pointer;
+}
+
+.rounded(@radius:10px){
+	border-radius: @radius;
+	-moz-border-radius: @radius;
+}
+
+.shadow(@depth:4px) {
+	-moz-box-shadow: 0 @depth @depth rgba(0, 0, 0, 0.4);
+	-webkit-box-shadow: 0 @depth @depth rgba(0, 0, 0, 0.4);
+	box-shadow: 0 @depth @depth rgba(0, 0, 0, 0.4);
+}
+
+.blue {
+	color: #2384DE;
+}
+
+.adminAction {
+	text-align: center;
+	background-color: #efefef;
+	border: 1px solid #2384de;
+	padding: 5px;
+	margin: 3px 3px 15px 210px;
+	width: 100%;
+}
+
+.stats {
+	.rounded;
+	.shadow;
+	width: 230px;
+	border: thin solid @darkergrey;
+	position: absolute;
+	right: 60px;
+	top: 100px;
+	background: white;
+	padding: 20px 5px 20px 5px;
+}

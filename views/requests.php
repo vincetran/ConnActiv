@@ -83,27 +83,6 @@ if(isset($_POST['subReview'])){
 
 	} 
 	
-	if (isset($_POST['eventDeny'])) {
-		if (isset($_POST['eventReq'])) {
-			$request = $_POST['eventReq'];
-			foreach($request as $req) {
-				denyEvent($req);
-			} // end foreach
-			unset($_POST['eventDeny']);
-		} //end if (count)
-	} 
-	
-	if (isset($_POST['eventApprove'])) {
-		if (isset($_POST['eventReq'])) {
-			$request = $_POST['eventReq'];
-			foreach($request as $req) {
-				approveEvent($req);
-			} // end foreach
-			unset($_POST['eventApprove']);
-		} // end if (count)
-	} //end if ($_POST[eventApprove])
-	
-	
 			?>
 			
 <script type="text/javascript">
@@ -212,11 +191,6 @@ if(isset($_POST['subReview'])){
 	<div class="pageViewer">
 		<span class="clickable active green" id="connactions">Connaction Requests</span>&nbsp;|&nbsp;
 		<span class="clickable green" id="friendReqs">Friend Requests</span>
-		
-		<? if (isAdmin()) {
-			echo "&nbsp;|&nbsp";
-			echo "<span class='clickable green' id='eventReqs'>Event Requests</span>";
-		} ?>
 	</div>
 	
 	<div class="requestType" id="view_connactions">
@@ -520,63 +494,6 @@ if(isset($_POST['subReview'])){
 			
 			</div> <!-- end friendReqs div -->
 			
-			<? if (isAdmin()) { ?>
-			<div id="view_eventReqs" class="requestType"> <!-- begin eventReqs div, only for admin -->
-			
-			
-			Only the administrator will see this page.<br/>
-			(Not an admin? Kindly <a href="mailto:connactiv@googlegroups.com?subject=Oops!&body=I'm not an admin, but I'm seeing admin stuff on your site and wanted to let you know">email us</a>
-			&nbsp;to let us know there's a problem.)<br/><br/>
-			
-			<h2>Events Awaiting Approval</h2>
-			
-			<form id="eventReqForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
-			<table class="alternating regular_table" id="waitingEvents">
-				<thead>
-					<th>Requesting User</th>
-					<th>Date Requested</th>
-					<th>Event Details</th>
-					<th><span id="approve" class="checkAll"></span><span id="_approve" class="uncheckAll"></th>
-				</thead>
-				<tobdy>
-			
-			<? $waitingEvents = getAllWaitingEvents();
-			
-				foreach($waitingEvents as $event) {
-					$eventID = $event[0];
-					$user = getUserName($event[1]);
-					$actID = $event[2]; $netID = $event[3]; 
-					$uniqueID = getUniqueID($actID, $netID); 
-					$str = prettifyName($uniqueID);
-					$msg = $event[4];
-					$start = $event[5]; $end = $event[6];
-					$loc = $event[7];
-					$requested = $event[10];
-				
-					echo "<tr>";
-						echo "<td>$user</td>";
-						echo "<td>$requested</td>";
-						echo "<td><p><strong>Location: </strong>$loc</p><p><strong>Details: </strong>$msg</p></td>";
-						echo "<td><input class='approve' type = 'checkbox' name = 'eventReq[]' value = '".$eventID."' /></td>";	
-					echo "</tr>";
-				
-				}			
-			?>
-					
-				</tbody>
-			</table>
-			<div class="below_table">
-				<input style="float:right; margin-left:10px; margin-right:20px" type="submit" name="eventDeny" value="Deny Request(s)"/>
-				<input style="float:right;" type="submit" name="eventApprove" value="Accept Request(s)"/>
-			</div>
-			
-			</form>
-			
-			</div> <!-- end event Reqs -->
-			
-			<? } // end if isAdmin ?>
-			
-
 
 		</div> <!-- end page -->
 			
