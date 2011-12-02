@@ -356,8 +356,8 @@
 							$accept_high = getActivityLevel($userID,$activityID, 1);
 							
 							if ($self) echo "Level $self. ";
-							if ($prefer) echo "Seeking level $prefer. ";
-							if ($accept_low && $accept_high) echo "Cool with levels $accept_low - $accept_high.";
+							if ($accept_low && $accept_high) echo "Seeking levels $accept_low - $accept_high.&nbsp";
+							if ($prefer) echo "$prefer preferred. ";
 							?>
 																
 								<br/>
@@ -387,8 +387,8 @@
 														<input type="hidden" name="connactionID" value="<?= $connactionID?>"/>
 														<input type="hidden" name="postingUserID" value="<?= $userID?>"/>
 														<textarea name="message" maxlength="255" style="width:80%;" class="small" placeholder="Hi! I was hoping to join your activity."></textarea><br/>
-														<input type="checkbox" name="releaseEmail"/>Release Email to user<br/>
-														<input type="checkbox" name="releasePhone"/>Release Phone Number to User		
+														<input type="checkbox" name="releaseEmail"/>&nbsp;Release email to user<br/>
+														<input type="checkbox" name="releasePhone"/>&nbsp;Release phone number to user		
 														<input type="submit" class="join" name="joinRequest" value="Send"/>
 													</div>
 											<?php } ?>
@@ -396,7 +396,6 @@
 									</form>					
 							</div><!-- begin tags -->
 							<br/>
-									Tags:
 									<ul class="tags">
 										<li><?php echo getActivity($activityID); ?></li>
 										<li><?php echo getNetworkName($networkID); ?></li>

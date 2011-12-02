@@ -130,7 +130,7 @@ CREATE TABLE `events` (
   `LOCATION` varchar(20) DEFAULT NULL,
   `RECURRENCE` int(11) DEFAULT NULL,
   `APPROVED` int(1) DEFAULT '-1',
-  `REQUESTED` datetime DEFAULT NULL,
+  `REQUEST_DATE` datetime DEFAULT NULL,
   PRIMARY KEY (`EVENT_ID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
@@ -310,9 +310,7 @@ LOCK TABLES `users` WRITE;
 
 INSERT INTO `users` (`USER_ID`, `PASSWORD`, `FIRST_NAME`, `LAST_NAME`, `STREET`, `CITY`, `STATE`, `ZIP`, `PHONE`, `INTERESTS`, `PROFILE_PIC`, `EMAIL`, `DOB`, `GENDER`)
 VALUES
-	(11,'8f53e82e508c96115551317048cba97e','Rob','Filippi','','Pittsburgh','PA',15232,'','Hello my name is Rob','../public/images/avatar.png','flippi273@gmail.com','1989-11-28','M'),
-	(12,'8f53e82e508c96115551317048cba97e','Amy','Reehl','','Pittsburgh','PA',15232,'','Hi, I\'m Amy and I\'m from Pittsburgh!','../public/images/avatar.png','amy4reehl@gmail.com','1992-06-28','F'),
-	(1,'9ae984b8b7e71ee69caf0a7b82b31b1e','','Admin','','','',NULL,'','ConnActiv adminstrator account.','../public/images/avatar.png','admin@connactiv.com',NULL,NULL);
+	(1,'9ae984b8b7e71ee69caf0a7b82b31b1e','','Admin','','','',NULL,'','ConnActiv administrator account','../public/images/avatar.png','admin@connactiv.com',NULL,NULL);
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;

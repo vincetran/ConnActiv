@@ -1,4 +1,4 @@
-<? include('config.php') ?>
+<? include('functions/config.php') ?>
 
 <script type="text/javascript">
 

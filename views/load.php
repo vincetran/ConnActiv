@@ -2,7 +2,7 @@
 //Everything commented out is my attempt to get this to work.
 //The lines that have a // after are lines I added to try to get this to work
 //
-include("config.php");//
+include("functions/config.php");//
 //require_once 'defaults.php';
 $default['paragraph_2'] = 'wow this cannot be right!';//
 

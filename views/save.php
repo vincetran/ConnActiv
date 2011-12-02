@@ -1,7 +1,7 @@
 <?php
 
 //require_once 'config.php';
-include("config.php");
+include("functions/config.php");
 
 
 //$query = sprintf("INSERT INTO config (token, value)

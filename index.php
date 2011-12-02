@@ -1,5 +1,5 @@
 <?
-	include_once('views/config.php'); 
+	include_once('views/functions/config.php'); 
 	if (isset($_POST['login'])) { 
 		//If user pressed login
 		login(); 
@@ -147,10 +147,6 @@ $(function() {
 				<tr>
 					<th class="formHeader">Last name*:</th>
 					<td><input id="lastName" type="text" name="lastName" maxlength="20" class="validate[required]"/></td>
-				</tr>
-				<tr>
-					<th class="formHeader">Street:</th>
-					<td><input id="street"  type="text" name="street" maxlength="25" /><br/></td>
 				</tr>
 				<tr>
 					<th class="formHeader">City:</th>

@@ -1,6 +1,6 @@
 <?php  
 
-include("config.php");
+include("functions/config.php");
 
 
 					$incRequests = getIncRequests(getUserID());

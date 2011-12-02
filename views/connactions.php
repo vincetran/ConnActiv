@@ -18,7 +18,7 @@
 	* 	8 = is_private
 	*/
 	
-	include("config.php"); //This needs to be removed when this page is included in home.php
+	include("functions/config.php"); //This needs to be removed when this page is included in home.php
 	
 	$connactions = getConnactions(getNetworkID("Oakland"), 1); //1 means passing in network id
 																//0 would mean passing in activity id
