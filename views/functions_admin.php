@@ -25,7 +25,7 @@
 
 	function getAllUsers() {
 		$users = array();
-		$query = "SELECT * from users";
+		$query = "SELECT * FROM users";
 		$result = mysql_query($query) or die(mysql_error());
 		
 		while($row = mysql_fetch_array($result)){
@@ -35,7 +35,7 @@
 	}
 	
 	function totalUsers() {
-		$query = "SELECT count(*) FROM USERS";
+		$query = "SELECT count(*) FROM users";
 		$result = mysql_query($query) or die(mysql_error());
 		$row = mysql_fetch_array($result);
 		return $row[0] - 1;
