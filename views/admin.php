@@ -25,7 +25,7 @@
 		} 
 	} else	if (isset($_POST['approveEvent'])) {
 		if (isset($_POST['eventID'])) {
-			$event = $_POST['eventID'];
+			$events = $_POST['eventID'];
 			foreach($events as $event) {
 				approveEvent($event);
 			} // end foreach
