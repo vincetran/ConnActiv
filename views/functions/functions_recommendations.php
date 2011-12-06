@@ -26,9 +26,9 @@ function getFavorites(){
 
 	$id = getUserID();
 	$query = "SELECT networks.area, networks.state, activities.activity_name FROM favorites, networks, activities, unique_networks WHERE user_id = ".$id.""
-					." AND favorites.unique_network_id = unique_networks.unique_network_id"
-					." AND unique_networks.activity_id = activities.activity_id"
-					." AND unique_networks.network_id = networks.network_id";
+	." AND favorites.unique_network_id = unique_networks.unique_network_id"
+	." AND unique_networks.activity_id = activities.activity_id"
+	." AND unique_networks.network_id = networks.network_id";
 	$result = mysql_query($query) or die(mysql_error());
 	$favs = array();
 	while($row = mysql_fetch_array($result)){
@@ -38,13 +38,13 @@ function getFavorites(){
 }
 
 function getFavoritesWithIDs(){
-//unique id = 0, area = 1, state = 2, activity = 3
+	//unique id = 0, area = 1, state = 2, activity = 3
 
 	$id = getUserID();
 	$query = "SELECT unique_networks.unique_network_id, networks.area, networks.state, activities.activity_name FROM favorites, networks, activities, unique_networks WHERE user_id = ".$id.""
-					." AND favorites.unique_network_id = unique_networks.unique_network_id"
-					." AND unique_networks.activity_id = activities.activity_id"
-					." AND unique_networks.network_id = networks.network_id";
+	." AND favorites.unique_network_id = unique_networks.unique_network_id"
+	." AND unique_networks.activity_id = activities.activity_id"
+	." AND unique_networks.network_id = networks.network_id";
 	$result = mysql_query($query) or die(mysql_error());
 	$favs = array();
 	while($row = mysql_fetch_array($result)){
@@ -54,7 +54,7 @@ function getFavoritesWithIDs(){
 }
 
 function getFavoriteIDs(){
-//returns array of unique_network_ids based on $user_id
+	//returns array of unique_network_ids based on $user_id
 	$id = getUserID();
 	$query = "SELECT unique_network_id FROM favorites WHERE user_id = $id";
 	$result = mysql_query($query) or die(mysql_error());
@@ -103,7 +103,7 @@ function defavoriteNetwork($unique_id) {
 */
 
 function totalReviews($which) {
-//$which tells which reviews to return (positive or negative)
+	//$which tells which reviews to return (positive or negative)
 
 	$id = getUserID();
 	
@@ -119,7 +119,7 @@ function totalReviews($which) {
 
 
 function getReviews($which) {
-//$which tells which reviews to return (positive or negative)
+	//$which tells which reviews to return (positive or negative)
 
 	$id = getUserID();
 	$reviews = array();
@@ -154,7 +154,7 @@ function getAllReviews($userid){
 function getReviewCountForUser($which, $id) {
 	$reviews = array();
 	
-if ($which == 'positive') {
+	if ($which == 'positive') {
 		$query = "SELECT * FROM reviews WHERE user_id = '".$id."' AND is_positive = '1'";
 	} else {
 		$query = "SELECT * FROM reviews WHERE user_id = '".$id."' AND is_positive = '0'";

@@ -22,7 +22,7 @@ function prettifyName($unique_id) {
 	$displayName = "Unspecified";
 	
 	if ($name['area'] && $name['state'] && $name['act'])
-		$displayName = $name['area'] . ", " .$name['state']. " - " .$name['act'];
+	$displayName = $name['area'] . ", " .$name['state']. " - " .$name['act'];
 	
 	return $displayName;
 }
@@ -66,7 +66,7 @@ function getAllNetworkIDs() {
 }
 
 function forceSubscribe($id, $unique_id){
-//used in registering, since we can't call getUserID() at registration time (cookies not set)
+	//used in registering, since we can't call getUserID() at registration time (cookies not set)
 	$query = "INSERT INTO user_networks(USER_ID, UNIQUE_NETWORK_ID) VALUES($id, $unique_id)";
 	$result = mysql_query($query) or die(mysql_error());
 	$act_id = forceGetActivityID($id, $unique_id);
@@ -101,7 +101,7 @@ function getActivityNameFromUnique($unique_id){
 }
 
 function forceGetActivityID($user_id, $unique_id) {
-//used during registration since cookies aren't set (can't call getUserID())
+	//used during registration since cookies aren't set (can't call getUserID())
 
 	$query = "SELECT activities.activity_id FROM unique_networks, activities, user_networks"
 	." WHERE unique_networks.activity_id = activities.activity_id"
@@ -145,7 +145,7 @@ function getActivityIDFromUnique($unique_id){
 }
 
 function getUserUniqueNetworks() {
-// returns unique_network_id=row[0], area=row[1], state=row[2], activity_name=row[3]
+	// returns unique_network_id=row[0], area=row[1], state=row[2], activity_name=row[3]
 	$id = getUserID();
 	$query = "SELECT unique_networks.unique_network_id, networks.area, networks.state, activities.activity_name"
 	." FROM user_networks, unique_networks, activities, networks"
@@ -163,15 +163,15 @@ function getUserUniqueNetworks() {
 	return $n;
 }
 
-	function getUniqueID($act, $net) {
-		$query = "SELECT unique_network_id FROM unique_networks"
-		." WHERE activity_id = '".$act."' AND network_id = '".$net."'";
-		
+function getUniqueID($act, $net) {
+	$query = "SELECT unique_network_id FROM unique_networks"
+	." WHERE activity_id = '".$act."' AND network_id = '".$net."'";
+	
 	$result = mysql_query($query) or die(mysql_error());
 	$id = mysql_fetch_array($result);
 	return $id[0];
-		
-	}
+	
+}
 
 /*
 *
@@ -179,7 +179,7 @@ function getUserUniqueNetworks() {
 *
 */
 
-	function getUserActivityLevels(){
+function getUserActivityLevels(){
 	
 	$userID = getUserID();
 	
@@ -192,81 +192,81 @@ function getUserUniqueNetworks() {
 	}
 	return $levels;
 	
-	}
-	
-	function addUserNetwork($userid, $uniqueID){
-		$insert = mysql_query("INSERT INTO user_networks values(".$userid.",".$uniqueID.")") or die(mysql_error());
-		return $insert;
-	}
+}
 
-	function addUniqueNetwork($networkID, $activityID){
-		$insertUN = mysql_query("INSERT INTO unique_networks VALUES('', '".$networkID."', '".$activityID."')") or die(mysql_error());
-		$query = mysql_query("select max(unique_network_id) from unique_networks");
-		$result = mysql_fetch_array($query);
-		return $result[0];
-	}	
+function addUserNetwork($userid, $uniqueID){
+	$insert = mysql_query("INSERT INTO user_networks values(".$userid.",".$uniqueID.")") or die(mysql_error());
+	return $insert;
+}
+
+function addUniqueNetwork($networkID, $activityID){
+	$insertUN = mysql_query("INSERT INTO unique_networks VALUES('', '".$networkID."', '".$activityID."')") or die(mysql_error());
+	$query = mysql_query("select max(unique_network_id) from unique_networks");
+	$result = mysql_fetch_array($query);
+	return $result[0];
+}	
+
+function addNetwork($area, $state){
+	$insert = mysql_query("INSERT INTO networks(AREA, STATE) VALUES('$area', '$state')") or die(mysql_error());
+	$query = mysql_query("select max(network_id) from networks");
+	$result = mysql_fetch_array($query);
+	return $result[0];
+}
+
+function networkExists($area, $state) {
+	$query = "SELECT count(*) FROM networks WHERE area = '".$area."' AND state = '".$state."'";
+	$result = mysql_query($query) or die(mysql_error());
+	if (mysql_num_rows($result) > 1) return true;
+	else return false;
+}
+
+function activityExists($act) {
+	$query = "SELECT count(activity_id) FROM activities WHERE activity_name = '$act'";
+	$result = mysql_query($query) or die(mysql_error());
+	if (mysql_num_rows($result) > 1) return true;
+	else return false;
+}
+
+function createUniqueNetwork($area, $state, $activity) {
+	//first, check if the user's inputted activity is already in the db
+	if (activityExists($activity)) $act_ID = getActivityID($activity);
+	else $act_ID = addActivity($activity);
+	if (networkExists($area, $state)) $net_ID = getNetworkWithStateID($area, $state);
+	else $net_ID = addNetworkWithState($area, $state);
 	
-	function addNetwork($area, $state){
-		$insert = mysql_query("INSERT INTO networks(AREA, STATE) VALUES('$area', '$state')") or die(mysql_error());
-		$query = mysql_query("select max(network_id) from networks");
-		$result = mysql_fetch_array($query);
-		return $result[0];
-	}
-	
-	function networkExists($area, $state) {
-		$query = "SELECT count(*) FROM networks WHERE area = '".$area."' AND state = '".$state."'";
-		$result = mysql_query($query) or die(mysql_error());
-		if (mysql_num_rows($result) > 1) return true;
-		else return false;
-	}
-	
-	function activityExists($act) {
-		$query = "SELECT count(activity_id) FROM activities WHERE activity_name = '$act'";
-		$result = mysql_query($query) or die(mysql_error());
-		if (mysql_num_rows($result) > 1) return true;
-		else return false;
-	}
-	
-	function createUniqueNetwork($area, $state, $activity) {
-		//first, check if the user's inputted activity is already in the db
-		if (activityExists($activity)) $act_ID = getActivityID($activity);
-		else $act_ID = addActivity($activity);
-		if (networkExists($area, $state)) $net_ID = getNetworkWithStateID($area, $state);
-		else $net_ID = addNetworkWithState($area, $state);
-		
-		return addUniqueNetwork($net_ID, $act_ID);		
-	}
-	
-	function createAndSubscribeNetwork($area, $state, $activity) {
+	return addUniqueNetwork($net_ID, $act_ID);		
+}
+
+function createAndSubscribeNetwork($area, $state, $activity) {
 	//based on user-inputted text, create the network he/she is looking for and subscribe.
-		$id = createUniqueNetwork($area, $state, $activity);
-		$user_id = getUserID();
-		subscribeNetwork($id);
-	}
-	
-	function forceCreateAndSubscribeNetwork($user, $area, $state, $activity) {
+	$id = createUniqueNetwork($area, $state, $activity);
+	$user_id = getUserID();
+	subscribeNetwork($id);
+}
+
+function forceCreateAndSubscribeNetwork($user, $area, $state, $activity) {
 	//the user is registering. use the user id passed in.
-		$id = createUniqueNetwork($area, $state, $activity);
-		forceSubscribe($user, $id);
-	}
-	
-	function addActivity($name) {
-		$query = "INSERT INTO activities(ACTIVITY_ID, ACTIVITY_NAME) VALUES('', '".$name."')";
-		$insert = mysql_query($query) or die(mysql_error());
-		return getActivityID($name); // return the ID of our activity
-	}
-	
-	function addNetworkWithState($area, $state) {
-		$query = "INSERT INTO networks VALUES('', '".$area."', '".$state."')";
-		$insert = mysql_query($query) or die(mysql_error());
-		return getNetworkWithStateID($area, $state); // return the ID of our newly-added network
-	}
-	
-	function getNetworkWithStateID($area, $state) {
-		$query = "SELECT network_id FROM networks WHERE area = '".$area."' AND state = '".$state."'";
-		$result = mysql_query($query) or die(mysql_error());
-		$id = mysql_fetch_array($result);
-		return $id[0];
-	}
+	$id = createUniqueNetwork($area, $state, $activity);
+	forceSubscribe($user, $id);
+}
+
+function addActivity($name) {
+	$query = "INSERT INTO activities(ACTIVITY_ID, ACTIVITY_NAME) VALUES('', '".$name."')";
+	$insert = mysql_query($query) or die(mysql_error());
+	return getActivityID($name); // return the ID of our activity
+}
+
+function addNetworkWithState($area, $state) {
+	$query = "INSERT INTO networks VALUES('', '".$area."', '".$state."')";
+	$insert = mysql_query($query) or die(mysql_error());
+	return getNetworkWithStateID($area, $state); // return the ID of our newly-added network
+}
+
+function getNetworkWithStateID($area, $state) {
+	$query = "SELECT network_id FROM networks WHERE area = '".$area."' AND state = '".$state."'";
+	$result = mysql_query($query) or die(mysql_error());
+	$id = mysql_fetch_array($result);
+	return $id[0];
+}
 
 ?>

@@ -27,21 +27,21 @@
 
 /* MESSAGES */
 
-	function message() {
-		$query = "INSERT INTO messages VALUES(".getUserID().", ".$_POST['reply'][3].", '".$_POST['reply'][0]."', '".$_POST['reply'][1]."', now())";	
-		mysql_query($query);	
-	}
-	
-	function eventMessage($from, $event_id) { // goes to connactiv admin, always user_id 1
+function message() {
+	$query = "INSERT INTO messages VALUES(".getUserID().", ".$_POST['reply'][3].", '".$_POST['reply'][0]."', '".$_POST['reply'][1]."', now())";	
+	mysql_query($query);	
+}
+
+function eventMessage($from, $event_id) { // goes to connactiv admin, always user_id 1
 	//messages(from_user, to_user, subject, body, date)
-		$subj = "New Event";
-		$body = "Event $event_id is awaiting approval.";
-		$query = sprintf("INSERT INTO messages VALUES('%s', '1', '%s', '%s', now())", $from, $subj, $body);
-		
-		mysql_query($query) or die(mysql_error());
-	}
+	$subj = "New Event";
+	$body = "Event $event_id is awaiting approval.";
+	$query = sprintf("INSERT INTO messages VALUES('%s', '1', '%s', '%s', now())", $from, $subj, $body);
 	
- /* JOIN REQUESTS */
+	mysql_query($query) or die(mysql_error());
+}
+
+/* JOIN REQUESTS */
 
 function joinRequest(){
 	//This insert a join request into the datbase
@@ -72,7 +72,7 @@ function joinRequest(){
 	}
 
 	$query = "insert into messages values (".getUserID().", ".$to_user.", 'Contact info', '".$body."', now())";
-				
+	
 	mysql_query($query);
 	
 	$query = sprintf("INSERT INTO connaction_requests (from_user, to_user, connaction_ID, message) values(%s,%s,%s,'%s')", $from_user, $to_user, $connactionID, $message);
@@ -184,7 +184,7 @@ function acceptRequest($reqID){
 	mysql_query("insert into messages values(1, ".$fromUser.", 'Connaction Request', '".getUserName(getUserID())."' has accepted your request to join ', now())");
 	$query = sprintf("INSERT INTO connaction_attending(USER_ID, CONNACTION_ID) values('%s', '%s')", $fromUser, $connactionID);
 	$update = mysql_query($query) or die(mysql_error());
-		
+	
 }
 function acceptFriendRequest($reqID){
 	//This accepts the friend request
@@ -197,7 +197,7 @@ function acceptFriendRequest($reqID){
 	mysql_query("insert into messages values(1, ".$fromUser.", 'Friend Request', '".getUserName(getUserID())."' has accepted your friend request ', now())");
 	$query = sprintf("INSERT INTO friends(USER1, USER2) values('%s', '%s')", $fromUser, $toUser);
 	$update = mysql_query($query) or die(mysql_error());
-		
+	
 }
 function denyRequest($reqID){
 	$fromUser = strtok($reqID, " ");
@@ -254,7 +254,7 @@ function unhideRequestForFrom(){
 	
 	$hiddenRequests = getHiddenRequestsForFrom($fromUser);
 	if ($hiddenRequests) {
-					
+		
 		foreach($hiddenRequests as $incoming){
 			$connactionID = $incoming[2];
 			$query = sprintf("UPDATE connaction_requests SET HIDDEN_FOR_FROM = 0 WHERE FROM_USER = '%s' AND CONNACTION_ID = '%s'",$fromUser, $connactionID);
@@ -267,7 +267,7 @@ function unhideRequestForTo(){
 	$toUser = getUserID();
 	$hiddenRequests = getHiddenRequestsForTo($toUser);
 	if ($hiddenRequests) {
-					
+		
 		foreach($hiddenRequests as $incoming){
 			$connactionID = $incoming[2];
 			$query = sprintf("UPDATE connaction_requests SET HIDDEN_FOR_TO = 0 WHERE TO_USER = '%s' AND CONNACTION_ID = '%s'",$toUser, $connactionID);
