@@ -147,16 +147,35 @@
 				$table .= cell($e['ACTIVITY_ID']); 
 				$table .= cell($e['NETWORK_ID']);
 				$table .= cell($e['MESSAGE']);
-				$table .= cell($e['LOCATION']); 
-				$table .= cell($e['START']);
-				$table .= cell($e['END']);
+				$table .= cell($e['LOCATION']);
+				
+				$start = new DateTime($e['START']);
+				$startDate = $start->format('m-d-y H:i a');
+				$table .= cell($startDate);
+				
+				$end = new DateTime($e['END']);
+				$endDate = $start->format('m-d-y H:i a');
+				$table .= cell($endDate);
 				
 				$appr = $e['APPROVED'];
 				$appr == 0 ? $status = "denied" : ($appr = 1 ? $status = "approved" : $status = "awaiting approval");
 				
+				$start = new DateTime($e['START']);
+				$startDate = $start->format('m-d-y H:i:s');
+				$startYear = $start->format('y');
+				$startMon = $start->format('m');
+				$startDay = $start->format('d');
+				
+				$year = Date('y');
+				$mon = Date('m');
+				$day = Date('d');
+				if (($year > $startYear)) $status = "expired";
+				
 				$table .= cell($status);
 				
-				$table .= cell($e['REQUEST_DATE']);
+				$request = new DateTime($e['REQUEST_DATE']);
+				$requestDate = $start->format('m-d-y H:i a');
+				$table .= cell($requestDate);
 			
 				$table .= "<td><input class='event' type = 'checkbox' name = 'eventID[]' value = '".$eventID."' /></td>";	
 				$table .= "</tr>";
