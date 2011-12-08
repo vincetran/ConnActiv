@@ -1,167 +1,54 @@
 <?php 
-	$myfile = "database.xml";
-	
-	mysql_connect("localhost", "root", "") or die(mysql_error()); 	//This is wamp database credentials
-	mysql_select_db("xgamings_connactiv") or die(mysql_error());
-//users	
-	$table = "users";
-	
+	include("../views/functions/config.php");
 
-	$query = mysql_query("select * from ".$table) or die(mysql_error());
+	mysql_connect("connactiv.db", "connactiv_site", "connactiv123") or die(mysql_error()); 	
+	mysql_select_db("connactiv") or die(mysql_error());
 
-	$xml .= "<".$table.">\n";
-	
-	
-	while($info = mysql_fetch_array($query)){
-		$xml .= "<row>\n";
-		$i = 0;
-		$atts = mysql_query("describe ".$table) or die(mysql_error());
-		while($info1 = mysql_fetch_array($atts)){
-					
-			$xml .= "<".$info1[0].">".$info[$i]."</".$info1[0].">\n";
-			$i++;		
-		}
-		$xml .= "</row>\n";		
-	}
-	$xml .= "</".$table.">\n";
-
-//connactions
+	//connactions
+	$myfile = $_POST['userId']."connactionDb.xml";
 	$table = "connactions";
 	
-
-	$query = mysql_query("select * from ".$table) or die(mysql_error());
-
 	$xml .= "<".$table.">\n";
-	
-	
-	while($info = mysql_fetch_array($query)){
-		$xml .= "<row>\n";
-		$i = 0;
-		$atts = mysql_query("describe ".$table) or die(mysql_error());
-		while($info1 = mysql_fetch_array($atts)){
-					
-			$xml .= "<".$info1[0].">".$info[$i]."</".$info1[0].">\n";
-			$i++;		
+
+	//Gets the proper unique networks for the user
+	$id_query = "select unique_network_id from user_networks where user_id = ".$_POST['userId'];
+	$result = mysql_query($id_query);
+
+	while($info = mysql_fetch_array($result)){
+		$unique_network_id = $info[0];
+		$result1 = mysql_query("select * from connactions where unique_network_id = ".$unique_network_id);
+
+		while($info = mysql_fetch_array($result1))
+		{
+			$xml .= "<row>\n";
+			$i = 0;
+			$atts = mysql_query("describe ".$table) or die(mysql_error());
+			while($info1 = mysql_fetch_array($atts)){
+				
+				if(strcmp ($info1[0],"USER_ID")==0)
+				{
+					$xml .= "<".$info1[0].">".getUserName($info[$i])."</".$info1[0].">\n";
+				}
+				else if(strcmp ($info1[0],"UNIQUE_NETWORK_ID")==0)
+				{
+					$xml .= "<".$info1[0].">".prettifyName($info[$i])."</".$info1[0].">\n";
+				}
+				else
+				{
+					$xml .= "<".$info1[0].">".$info[$i]."</".$info1[0].">\n";
+				}
+				$i++;			
+			}
+			$xml .= "</row>\n";		
 		}
-		$xml .= "</row>\n";		
+
 	}
+	
 	$xml .= "</".$table.">\n";
 
-//friends
-	$table = "friends";
-	
-
-	$query = mysql_query("select * from ".$table) or die(mysql_error());
-
-	$xml .= "<".$table.">\n";
-	
-	
-	while($info = mysql_fetch_array($query)){
-		$xml .= "<row>\n";
-		$i = 0;
-		$atts = mysql_query("describe ".$table) or die(mysql_error());
-		while($info1 = mysql_fetch_array($atts)){
-					
-			$xml .= "<".$info1[0].">".$info[$i]."</".$info1[0].">\n";
-			$i++;		
-		}
-		$xml .= "</row>\n";		
-	}
-	$xml .= "</".$table.">\n";
-
-//networks
-$table = "networks";
-	
-
-	$query = mysql_query("select * from ".$table) or die(mysql_error());
-
-	$xml .= "<".$table.">\n";
-	
-	
-	while($info = mysql_fetch_array($query)){
-		$xml .= "<row>\n";
-		$i = 0;
-		$atts = mysql_query("describe ".$table) or die(mysql_error());
-		while($info1 = mysql_fetch_array($atts)){
-					
-			$xml .= "<".$info1[0].">".$info[$i]."</".$info1[0].">\n";
-			$i++;		
-		}
-		$xml .= "</row>\n";		
-	}
-	$xml .= "</".$table.">\n";
-
-//unique_networks
-$table = "unique_networks";
-	
-
-	$query = mysql_query("select * from ".$table) or die(mysql_error());
-
-	$xml .= "<".$table.">\n";
-	
-	
-	while($info = mysql_fetch_array($query)){
-		$xml .= "<row>\n";
-		$i = 0;
-		$atts = mysql_query("describe ".$table) or die(mysql_error());
-		while($info1 = mysql_fetch_array($atts)){
-					
-			$xml .= "<".$info1[0].">".$info[$i]."</".$info1[0].">\n";
-			$i++;		
-		}
-		$xml .= "</row>\n";		
-	}
-	$xml .= "</".$table.">\n";
-
-//user_activities
-$table = "user_activities";
-	
-
-	$query = mysql_query("select * from ".$table) or die(mysql_error());
-
-	$xml .= "<".$table.">\n";
-	
-	
-	while($info = mysql_fetch_array($query)){
-		$xml .= "<row>\n";
-		$i = 0;
-		$atts = mysql_query("describe ".$table) or die(mysql_error());
-		while($info1 = mysql_fetch_array($atts)){
-					
-			$xml .= "<".$info1[0].">".$info[$i]."</".$info1[0].">\n";
-			$i++;		
-		}
-		$xml .= "</row>\n";		
-	}
-	$xml .= "</".$table.">\n";
-
-//messages
-$table = "messages";
-	
-
-	$query = mysql_query("select * from ".$table) or die(mysql_error());
-
-	$xml .= "<".$table.">\n";
-	
-	
-	while($info = mysql_fetch_array($query)){
-		$xml .= "<row>\n";
-		$i = 0;
-		$atts = mysql_query("describe ".$table) or die(mysql_error());
-		while($info1 = mysql_fetch_array($atts)){
-					
-			$xml .= "<".$info1[0].">".$info[$i]."</".$info1[0].">\n";
-			$i++;		
-		}
-		$xml .= "</row>\n";		
-	}
-	$xml .= "</".$table.">\n";
-
-
-
-	
 	$fh = fopen($myfile, "w");
 	$error = fwrite($fh, $xml);
-	echo $error;
+	//echo $error;
 	fclose($fh);
+
 ?>
