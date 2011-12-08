@@ -287,11 +287,17 @@
 								
 								if (count($networkEvents)>0) {
 									foreach($networkEvents as $e) {
+									
+										$start = new DateTime($e[5]);
+										$startDate = $start->format('l, m-d-y H:i a');
+										$end = new DateTime($e[6]);
+										$endDate = $end->format('l, m-d-y H:i a');
+									
 										echo "<div class='post'>";
 										echo "<h3>Event: $name</h3>";
-										echo "$e[5] until $e[6]<br>";
+										echo "$startDate until $endDate<br>";
 										echo "Location: $e[7]<br>";
-										echo "Event details: $e[4]<br>";
+										echo "Details: $e[4]<br>";
 										echo "</div>";
 									}
 								} else {

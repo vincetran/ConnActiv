@@ -185,7 +185,7 @@
 		
 		$act_id = getActivityIDFromUnique($unique_id);
 		$net_id = getNetworkIDFromUnique($unique_id);
-		$query = "SELECT * FROM events WHERE approved='1' AND activity_id = '".$act_id."' AND network_id = '".$net_id."'";
+		$query = "SELECT * FROM events WHERE approved='1' AND start > now() AND activity_id = '".$act_id."' AND network_id = '".$net_id."'";
 		
 		$result = mysql_query($query) or die(mysql_error());
 		
@@ -282,7 +282,7 @@
 		$result = mysql_query($query);
 		while($info = mysql_fetch_array($result)){
 			$unique_network_id = $info[0];
-			$result1 = mysql_query("select * from connactions where unique_network_id = ".$unique_network_id);
+			$result1 = mysql_query("select * from connactions where unique_network_id = '".$unique_network_id."' AND start_time > now()" );
 			while($info1 = mysql_fetch_array($result1)){
 				$connactions[] = $info1;
 			}
@@ -401,8 +401,6 @@
 		//Argument should be POST, START or END
 		$dateID = getDatabaseInfo("connactions", "connaction_id", $connactionID);	
 		$date = new DateTime($dateID[$argument.'_TIME']);
-		//$dateParsed = date_parse($date);
-		//$newDate = $dateParsed["month"].'/'.$dateParsed["day"].'/'.$dateParsed["year"]." ".$dateParsed["hour"].":".$dateParsed["minute"];
 		return $date->format('D, m-d-y H:i a');
 	}
 	function getConnactionLocation($connactionID){
