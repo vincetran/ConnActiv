@@ -50,9 +50,11 @@
 		<?
 			$favs = getFavoritesWithIDs();
 			if ($favs):
+				echo "<ul class='tags'>";
 				foreach ($favs as $fav):
-					echo "<a href='#' id='goto_".$fav[0]."' class='fav'>".$fav[1]. ", " .$fav[2]. " - ".$fav[3]."</a><br/>";
+					echo "<li class='side_list'><a href='#' id='goto_".$fav[0]."' class='fav'>".$fav[1]. ", " .$fav[2]. " - ".$fav[3]."</a></li>";
 				endforeach;
+				echo "</ul>";
 			else:
 				echo "None yet!";
 			endif;
