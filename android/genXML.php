@@ -5,14 +5,13 @@
 	mysql_select_db("connactiv") or die(mysql_error());
 
 	//connactions
-	$myfile = "connactionDb.xml";
+	$myfile = $_POST['userId']."connactionDb.xml";
 	$table = "connactions";
 	
 	$xml .= "<".$table.">\n";
 
 	//Gets the proper unique networks for the user
-	//$id_query = "select unique_network_id from user_networks where user_id = ".$_POST['userId'];
-	$id_query = "select unique_network_id from user_networks where user_id = 2";
+	$id_query = "select unique_network_id from user_networks where user_id = ".$_POST['userId'];
 	$result = mysql_query($id_query);
 
 	while($info = mysql_fetch_array($result)){
