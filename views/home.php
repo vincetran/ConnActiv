@@ -339,14 +339,13 @@
 							
 							?>
 								<input type="hidden" class="hidden" value="<? echo $details; ?>" />
-								<img src="<? echo $src ?>" height="120"/><br/>
+								<img src="<? echo $src ?>" height="70"/><br/>
 								<? echo $uname ?>
 							</div>
 							<div class="post-body"> <!-- begin post body -->
 								<p class="quote"><? echo $message; ?></p>
-								<? //echo date_format($startTime, 'l, F jS, Y h:i a'); 
-									echo $startTime." - ".$endTime?></br>
-									<p><?php echo "Meet at: ".$location;?></p>
+								<? echo $startTime." - ".$endTime ?></br>
+									<p><? echo $location ?></p>
 							<div class="post-levels">
 							<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 							<?
@@ -359,8 +358,6 @@
 							if ($accept_low && $accept_high) echo "Seeking levels $accept_low - $accept_high.&nbsp";
 							if ($prefer) echo "$prefer preferred. ";
 							?>
-																
-								<br/>
 								Open to joiners&nbsp;&raquo;
 										<?php 
 											if($userID != getUserID()){// && !datePassed($post[6])){ 
@@ -504,7 +501,6 @@
 									</form>					
 							</div><!-- begin tags -->
 							<br/>
-									Tags:
 									<ul class="tags">
 										<li><?php echo getActivity($activityID); ?></li>
 										<li><?php echo getNetworkName($networkID); ?></li>
