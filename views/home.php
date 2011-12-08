@@ -339,13 +339,13 @@
 							
 							?>
 								<input type="hidden" class="hidden" value="<? echo $details; ?>" />
-								<img src="<? echo $src ?>" height="70"/><br/>
+								<img src="<? echo $src ?>" height="90"/><br/>
 								<? echo $uname ?>
 							</div>
 							<div class="post-body"> <!-- begin post body -->
 								<p class="quote"><? echo $message; ?></p>
-								<? echo $startTime." - ".$endTime ?></br>
-									<p><? echo $location ?></p>
+								<? echo $startTime." - ".$endTime ?><br>
+								<? echo $location ?><br/>
 							<div class="post-levels">
 							<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 							<?
@@ -448,12 +448,13 @@
 							
 							?>
 								<input type="hidden" class="hidden" value="<? echo $details; ?>" />
-								<img src="<? echo getUserPic($userID); ?>" height="120"/><br/>
+								<img src="<? echo getUserPic($userID); ?>" height="90"/><br/>
 								<? echo getUserName($userID) ?>
 							</div>
 							<div class="post-body"> <!-- begin post body -->
 								<p class="quote"><? echo $message; ?></p>
-									echo $startTime." - ".$endTime?>
+								<? echo $startTime." - ".$endTime ?><br>
+								<? echo $location ?><br/>
 							<div class="post-levels">
 							<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 									<?
