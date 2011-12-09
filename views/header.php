@@ -65,6 +65,7 @@
 		function fade_out() {
 			$(".notice").slideUp();
 			$(".error").slideUp();
+			$(".adminAction").slideUp();
 		}
 		
 		$('#selfReviews').dataTable({
