@@ -32,6 +32,15 @@
 				else if(strcmp ($info1[0],"UNIQUE_NETWORK_ID")==0)
 				{
 					$xml .= "<".$info1[0].">".prettifyName($info[$i])."</".$info1[0].">\n";
+					//Gets an array of the activities from UNID
+					$act = mysql_query("select activity_id from unique_networks where unique_network_id = ".$info[$i]);
+					$act1 = mysql_fetch_array($act);
+					$activityID = $act1[0];
+					$self = getActivityLevel($_POST['userId'],$activityID, 3);
+					$prefer = getActivityLevel($_POST['userId'],$activityID, 2);
+					$accept_low = getActivityLevel($_POST['userId'],$activityID, 0);
+					$accept_high = getActivityLevel($_POST['userId'],$activityID, 1);
+					$xml .= "<LEVELS>".$accept_low."|".$accept_high."|".$prefer."|".$self."</LEVELS>\n";
 				}
 				else
 				{
@@ -39,6 +48,7 @@
 				}
 				$i++;			
 			}
+			
 			$xml .= "</row>\n";		
 		}
 
