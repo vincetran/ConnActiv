@@ -200,11 +200,11 @@ $(function() {
 							?>
 							</tbody>
 						</table>
-				<div><br><br>Or <span id="addNewExpand" style="clear:both" class="clickable realgreen">add your own&nbsp;&raquo;</span></div><br/><br/>
+				<div><br><br>Or <span id="addNewExpand" style="clear:both" class="clickable realgreen">add your own&nbsp;&raquo;</span></div><br>
 					<div id="registrationUnique" style="display:none">
-						<span>Area: <input class="medium_input" type="text" name="area" value="" placeholder="ex: Pittsburgh"/></span><br/><br/>
-						<span>State:  <? echo getStateDropdown() ?></span><br/><br/>
-						<span>Activity: <input class="large_input" type="text" name="newActivity" value="" placeholder="ex: being awesome"/></span><br/><br/>
+						<span>Area: <input class="medium_input" type="text" name="area" value="" placeholder="ex: Pittsburgh"/></span>
+						<span>State:  <? echo getStateDropdown() ?></span><br><br>
+						<span>Activity: <input class="large_input" type="text" name="newActivity" value="" placeholder="ex: being awesome"/></span><br><br>
 					</div>
 					
 					<input type="submit" id="do_register" name="register" value="Get ConnActed!"/>
