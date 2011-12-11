@@ -202,8 +202,8 @@
 	function postConnaction(){
 	//This function will post the connaction to the database!
 	
-	if ( (!(isset($_POST['startDate']))) || (!isset($_POST['endDate'])) || (!isset($_POST['activity'])) 
-		|| ($_POST['network'] == -1) || ($_POST['location'] == -1) ) {
+	if ( (!(isset($_POST['startDate']))) || (!isset($_POST['endDate'])) || (!isset($_POST['uniqueNetwork'])) 
+		|| ($_POST['location'] == -1) ) {
 		echo "<div class='error'>Please fill in all ConnAction data.</div>";
 	} else {
 	
@@ -213,8 +213,6 @@
 		$startTime = $start." ".$_POST['startHour'].":".$_POST['startMin'].":00";
 		$endTime = $end." ".$_POST['endHour'].":".$_POST['endMin'].":00";
 		
-		$stuff = mysql_query($getun);		
-		$un = mysql_fetch_array($stuff);
 		$unID = $_POST['uniqueNetwork'];		
 		
 		$query = "INSERT INTO connactions(POST_TIME, USER_ID, LOCATION, START_TIME, MESSAGE, END_TIME, UNIQUE_NETWORK_ID, IS_PRIVATE)

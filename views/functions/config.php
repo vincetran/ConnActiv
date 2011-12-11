@@ -40,11 +40,17 @@ function isValid(){
 		header("Location: ../index.php");
 	}
 }
+
 function isAdmin(){
 	
 	$id = getUserID();
-	return $id == 1; // admin is user 1
-	
+	return $id == 1; // admin is user 1	
+}
+
+
+function isDemo() {
+	$id = getUserID();
+	return $id == 2; // demo is user 2
 }
 
 
@@ -99,7 +105,8 @@ function login(){
 		if($check2 == 0){
 			//check to make sure the password was confirmed			
 			if(strcmp($_POST['password'], $_POST['confirm'])==0){	
-				if(strlen($_POST['phone']) == 10 || strlen($_POST['phone']) ==12) {
+				if( strlen($_POST['phone']) == 0 || strlen($_POST['phone']) == 10 || strlen($_POST['phone']) ==12) {
+
 				//check to make sure the password is longer than 6 characters, may want to use regexp to improve
 				//security
 				
@@ -145,7 +152,7 @@ function login(){
 				header("Location: views/home.php");
 				}
 				else{
-					echo '<div class="error">The phone number that you input was not the right length. Please use either xxx-xxx-xxxx or xxxxxxxxxx </div>';
+					echo '<div class="error">Please input phone number as either xxx-xxx-xxxx or xxxxxxxxxx. </div>';
 				}		
 			}	
 			//if the passwords do not match ask them to enter the information again
