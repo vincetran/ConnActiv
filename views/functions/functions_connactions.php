@@ -12,7 +12,6 @@
 *
 *  void postEvent()
 *	 array getEventsForUniqueNetwork($unique_id)
-*  array getEventsForUniqueNetwork($unique_id)
 *
 *
 *** CONNACTIONS
@@ -152,21 +151,22 @@
 	// Events(event_id, user_id, activity_id, network_id, message, start, end, location, recurrence, approved //
 	
 		$user = getUserID();
+		$name = $_POST['eventName'];
 		$start = myDateParser($_POST['eventStartDate']);
 		$end = myDateParser($_POST['eventEndDate']);
 		$today = date("Y-m-d");
 		$startTime = $start." ".$_POST['eventStartHour'].":".$_POST['eventStartMin'].":00";
 		$endTime = $end." ".$_POST['eventEndHour'].":".$_POST['eventEndMin'].":00";
-		$act_id = $_POST['eventActivity'];
-		$net_id = $_POST['eventNetwork'];
 		$loc = $_POST['eventLoc'];
 		$msg = $_POST['eventMsg'];
 		
-		if (!$user || !$startTime || !$endTime || $act_id<0 || $net_id<0 || !$loc || !$msg) {
+		$unique_id = $_POST['uniqueNetwork'];
+		
+		if (!$user || !$startTime || !$endTime || $unique_id<0 || !$loc || !$msg) {
 			echo "<div class='error'>Please fill in all event information.</div>";
 		} else {
-			$query = sprintf("INSERT INTO events(USER_ID, ACTIVITY_ID, NETWORK_ID, START, END, MESSAGE, LOCATION, RECURRENCE, APPROVED, REQUEST_DATE)
-				VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', 0, -1, now())", $user, $act_id, $net_id, $startTime, $endTime, $msg, $loc); //waiting for admin approval
+			$query = sprintf("INSERT INTO events(USER_ID, UNIQUE_NETWORK_ID, NAME, START, END, MESSAGE, LOCATION, RECURRENCE, APPROVED, REQUEST_DATE)
+				VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', 0, -1, now())", $user, $unique_id, $name, $startTime, $endTime, $msg, $loc); //waiting for admin approval
 			$insert = mysql_query($query) or die(mysql_error());
 			$new_event = mysql_insert_id();
 			
@@ -178,15 +178,11 @@
 	}
 	
 	function getEventsForUniqueNetwork($unique_id) {
-		// Events(event_id, user_id, activity_id, network_id, message, start, end, location, recurrence, approved).
+		// Events(event_id, user_id, unique_network_id, message, start, end, location, recurrence, approved).
 		// Events that have been approved have approved=1.
 	
 		$events = array();
-		
-		$act_id = getActivityIDFromUnique($unique_id);
-		$net_id = getNetworkIDFromUnique($unique_id);
-		$query = "SELECT * FROM events WHERE approved='1' AND start > now() AND activity_id = '".$act_id."' AND network_id = '".$net_id."'";
-		
+		$query = "SELECT * FROM events WHERE approved='1' AND start > now() AND unique_network_id = '$unique_id'";
 		$result = mysql_query($query) or die(mysql_error());
 		
 		while($row = mysql_fetch_array($result)){
@@ -216,11 +212,10 @@
 		$today = date("Y-m-d");
 		$startTime = $start." ".$_POST['startHour'].":".$_POST['startMin'].":00";
 		$endTime = $end." ".$_POST['endHour'].":".$_POST['endMin'].":00";
-		$getun = "select unique_network_id from unique_networks where activity_id = ".$_POST['activity']." and network_id = ".$_POST['network'];
 		
 		$stuff = mysql_query($getun);		
 		$un = mysql_fetch_array($stuff);
-		$unID = $un[0];		
+		$unID = $_POST['uniqueNetwork'];		
 		
 		$query = "INSERT INTO connactions(POST_TIME, USER_ID, LOCATION, START_TIME, MESSAGE, END_TIME, UNIQUE_NETWORK_ID, IS_PRIVATE)
 			VALUES ('".$today."', '".getUserID()."', '".str_replace("'", "''", $_POST['location'])."', '".$startTime."', '".str_replace("'","''", $_POST['message'])."', '".$endTime."', '".$unID."', '".$_POST['private']."')";

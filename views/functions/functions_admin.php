@@ -133,7 +133,7 @@
 		
 		$table = "";
 		$table .= "<table id='eventsTable' class='regular_table admin'><thead><tr>";
-		$table .= "<th>ID</th><th>Requester</th><th>Activity</th><th>Network</th><th>Location</th><th>Details</th>";
+		$table .= "<th>ID</th><th>Requester</th><th>Unique Network</th><th>Name</th><th>Location</th><th>Details</th>";
 		$table .= "</th><th>Starting</th><th>Ending</th><th>Status</th><th>Requested</th>";
 		$table .= "<th><span id='event' class='checkAll'></span><span id='_event' class='uncheckAll'></th></tr></thead><tbody>";
 		
@@ -144,8 +144,9 @@
 				$eventID = $e['EVENT_ID'];
 				$table .= cell($eventID);
 				$table .= cell(getUserName($e[1]));
-				$table .= cell($e['ACTIVITY_ID']); 
-				$table .= cell($e['NETWORK_ID']);
+					$un = $e['UNIQUE_NETWORK_ID'];
+				$table .= cell($un. " | " . prettifyName(($un)));
+				$table .= cell($e['NAME']);				
 				$table .= cell($e['MESSAGE']);
 				$table .= cell($e['LOCATION']);
 				
@@ -158,7 +159,10 @@
 				$table .= cell($endDate);
 				
 				$appr = $e['APPROVED'];
-				$appr == 0 ? $status = "denied" : ($appr = 1 ? $status = "approved" : $status = "awaiting approval");
+				$appr == -1 ? $status = "waiting" : '';
+				$appr == 0 ? $status = "denied" : '';
+				$appr == 1 ? $status = "approved" : '';
+
 				
 				$start = new DateTime($e['START']);
 				$startDate = $start->format('m-d-y H:i:s');

@@ -172,24 +172,7 @@
 									}
 								?>
 							</select><br><br>
-						<select name="network">
-						<option value="-1">Network</option>
-							<?
-								$networks = getNetworkNames();
-								for($i = 0; $i < count($networks); $i++){
-									echo "<option value=\"",getNetworkID($networks[$i]), "\">", $networks[$i], "</option>";
-								}
-							?>
-						</select>
-						<select name="activity">
-							<option value="-1">Activity</option>
-							<?
-								$activities = getUserActivities();
-								for($i = 0; $i < count($activities); $i++){
-									echo "<option value=\"",getActivityID($activities[$i]), "\">", $activities[$i], "</option>";
-								}
-							?>
-						</select>
+						<? echo getUniqueAsSelect() ?>
 						<select name="private">
 							<option value="-1">Private</option>
 							<option value="0">No</option>
@@ -209,7 +192,7 @@
 				
 				<span class="realgreen">Submit your event details.</span><br/>
 				Once we approve your event, we'll post it on your behalf.<br/><br/>
-				
+				Name: <input type="text" class="small" id="eventName" placeholder="Give it a name!" name="eventName" maxlength="255"><br/><br/>
 				Description: <textarea class="small" id="eventMsg" placeholder=" Tell us a little about your event." name="eventMsg" maxlength="4000"></textarea><br/><br/>
 				Location: <textarea class="small" id="eventLoc" placeholder=" Where?" name="eventLoc" maxlength="255"></textarea><br/><br/>
 				Starting: <input type="text" class="small_input" name="eventStartDate" id="eventStartDate"/> <select name="eventStartHour"><option value="-1">Hour</option><? for($i = 1; $i < 24; $i++) echo "<option value=\"",$i,"\">", $i, "</option>";	?></select>
@@ -217,24 +200,9 @@
 				Ending: <input type="text" class="small_input" name="eventEndDate" id="eventEndDate" /> <select name="eventEndHour"><option value="-1">Hour</option>
 					<? for($i = 1; $i < 24; $i++) echo "<option value=\"",$i,"\">", $i, "</option>"; ?></select> : <select name="eventEndMin">
 					<option value="-1">Min</option><? for($i = 0; $i < 60; $i++) echo "<option value=\"",$i,"\">", $i, "</option>"; ?></select><br><br>	
-					<select name="eventNetwork">
-						<option value="-1">Network</option>
-							<?
-								$networks = getNetworkNames();
-								for($i = 0; $i < count($networks); $i++){
-									echo "<option value=\"",getNetworkID($networks[$i]), "\">", $networks[$i], "</option>";
-								}
-							?>
-						</select>
-						<select name="eventActivity">
-							<option value="-1">Activity</option>
-							<?
-								$activities = getUserActivities();
-								for($i = 0; $i < count($activities); $i++){
-									echo "<option value=\"",getActivityID($activities[$i]), "\">", $activities[$i], "</option>";
-								}
-							?>
-						</select>
+				<? //eventNetwork, eventActivity as IDs
+					
+					echo getUniqueAsSelect() ?>
 								
 				<input class="button" type="submit" name="postEvent" value="Submit"/>
 				</form>
@@ -242,19 +210,7 @@
 			</div>
 				
 				<br><br>
-				<h2>Stream</h2>	
-				<!-- 
-				<div style="margin: 5px 0px; text-align:left; width:200px; float:right" class="displayOpts"><span class="expander clickExpand">Customize your stream display&nbsp;&raquo;</span><br/>
-					<div id="opts" class="expand" style="display:none">
-					<table>
-						<tr><td><input type="checkbox" name="display" checked id="displayAll"/>&nbsp;</td><td><label>All stream</label></td></tr>
-						<tr><td><input type="checkbox" name="display" checked id="displayEvents"/>&nbsp;</td><td><label>Events stream</label></td></tr>
-						<tr><td><input type="checkbox" name="display" id="displayNetworks"/>&nbsp;</td><td><label>Stream for each network</label></td></tr>
-						<tr><td><input type="checkbox" name="display" checked id="displayUnique"/>&nbsp;</td><td><label>Stream for each network-activity</label></td></tr>
-					</table>
-					</div>
-				</div>
-					Kim TODO -->
+				<h2>Stream</h2>
 				<div class="main feeds-container">
 					<ul class="feeds">
 						
@@ -281,7 +237,7 @@
 							for($i=0; $i<count($networkIDs); $i++) {
 								
 								$name = $networkNames[$i]; 
-								$n_id = $networkIDs[$i];
+								$n_id = $networkIDs[$i]; //these are unique network ids
 								
 								$networkEvents= getEventsForUniqueNetwork($n_id);
 								
@@ -294,7 +250,7 @@
 										$endDate = $end->format('l, m-d-y H:i a');
 									
 										echo "<div class='post'>";
-										echo "<h3>Event: $name</h3>";
+										echo "<h3>".$e['NAME']."</h3>";
 										echo "$startDate until $endDate<br>";
 										echo "Location: $e[7]<br>";
 										echo "Details: $e[4]<br>";

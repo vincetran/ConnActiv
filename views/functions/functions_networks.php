@@ -6,6 +6,18 @@
 *
 */
 
+function getUniqueAsSelect() {
+	$select = "<select name='uniqueNetwork'>";
+
+	$unique = getUserUniqueNetworks(); //row(unique_network_id, area, state, activity_name).
+		foreach($unique as $un) {
+			$id = $un[0];
+			$name = prettifyName($id);
+			$select .= "<option value='$id'>$name</option>";
+		}
+	$select .= "</select>";
+	return $select;
+}
 
 function prettifyName($unique_id) {
 

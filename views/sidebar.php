@@ -26,7 +26,7 @@
 </script>
 
 <div id="sidebar">
-	<br/>
+	<br/>name
 	<img src="<? echo getUserPic(getUserId()); ?>" height="120"/>
 	<h2 class="sidebar"><? echo getName(); ?></h2>
 	
