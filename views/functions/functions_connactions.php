@@ -223,7 +223,7 @@
 		$unID = $un[0];		
 		
 		$query = "INSERT INTO connactions(POST_TIME, USER_ID, LOCATION, START_TIME, MESSAGE, END_TIME, UNIQUE_NETWORK_ID, IS_PRIVATE)
-			VALUES ('".$today."', '".getUserID()."', '".$_POST['location']."', '".$startTime."', '".$_POST['message']."', '".$endTime."', '".$unID."', '".$_POST['private']."')";
+			VALUES ('".$today."', '".getUserID()."', '".str_replace("'", "''", $_POST['location'])."', '".$startTime."', '".str_replace("'","''", $_POST['message'])."', '".$endTime."', '".$unID."', '".$_POST['private']."')";
 					
 		$insert = mysql_query($query) or die(mysql_error());
 		echo "<div class='notice'>ConnAction posted!</div>";
@@ -282,7 +282,7 @@
 		$result = mysql_query($query);
 		while($info = mysql_fetch_array($result)){
 			$unique_network_id = $info[0];
-			$result1 = mysql_query("select * from connactions where unique_network_id = '".$unique_network_id."' AND start_time > now()" );
+			$result1 = mysql_query("select * from connactions where unique_network_id = ".$unique_network_id);
 			while($info1 = mysql_fetch_array($result1)){
 				$connactions[] = $info1;
 			}

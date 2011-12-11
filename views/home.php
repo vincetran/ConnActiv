@@ -396,6 +396,19 @@
 													</div>
 											<?php } ?>
 										<?php } ?>
+<?php
+												if($userID == getUserID()){// && !datePassed($post[6])){ 
+												if(datePassed($post[6])){
+													echo "<span class='request_denied'>ConnAction ended.</span>";
+												}
+												
+											
+												
+												//else if(check cur date and end date){
+												//	$echo "ConnAction Is Over!";
+												//}
+												
+										 } ?>
 									</form>					
 							</div><!-- begin tags -->
 							<br/>
@@ -502,7 +515,19 @@
 														<input type="submit" class="join" name="joinRequest" value="Send"/>
 													</div>
 											<?php } ?>
-										<?php } ?>
+										<?php } 
+													if($userID == getUserID()){// && !datePassed($post[6])){ 
+												if(datePassed($post[6])){
+													echo "<span class='request_denied'>ConnAction ended.</span>";
+												}
+												
+											
+												
+												//else if(check cur date and end date){
+												//	$echo "ConnAction Is Over!";
+												//}
+												
+										 } ?>
 									</form>					
 							</div><!-- begin tags -->
 							<br/>

@@ -90,6 +90,7 @@ function login(){
 		if(!$_POST['username'] || !$_POST['password'] || !$_POST['confirm']) {
 			echo '<div class="error">You did not fill in a required field. Required fields include: email, password, and confirm password.</div>';
 		}
+		
 		//check to make sure the email is not already registered.
 		$check = mysql_query("SELECT * FROM users WHERE email = '".$_POST['username']."'")or die(mysql_error());
 		$check2 = mysql_num_rows($check);
@@ -97,7 +98,8 @@ function login(){
 		//if email has not been registered before
 		if($check2 == 0){
 			//check to make sure the password was confirmed			
-			if(strcmp($_POST['password'], $_POST['confirm'])==0){			
+			if(strcmp($_POST['password'], $_POST['confirm'])==0){	
+				if(!strlen($_POST['phone']) < 10 && !strlen($_POST['phone']) >12) {
 				//check to make sure the password is longer than 6 characters, may want to use regexp to improve
 				//security
 				
@@ -141,6 +143,10 @@ function login(){
 				setcookie('ID_my_site', $_POST['username'], $hour, '/'); 
 				setcookie('Key_my_site', md5($_POST['password']), $hour, '/');
 				header("Location: views/home.php");
+				}
+				else{
+					echo '<div class="error">The phone number that you input was not the right length. Please use either xxx-xxx-xxxx or xxxxxxxxxx </div>';
+				}		
 			}	
 			//if the passwords do not match ask them to enter the information again
 			else{ die("the passwords do not match, please re-enter your information");}
