@@ -118,7 +118,7 @@ $(function() {
 			<table>
 				<tr>
 					<th class="formHeader"><label>Email:</label></th>
-					<td><input id="username"  type="text" name="username" maxlength="25" class="validate[required,custom[email]]"/><br/></td>
+					<td><input id="username"  autofocus type="text" name="username" maxlength="25" class="validate[required,custom[email]]"/><br/></td>
 				</tr>
 				<tr>
 					<th class="formHeader">Password:</th>
