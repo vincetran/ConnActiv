@@ -8,6 +8,12 @@
 				
 			if (isset($_POST['saveInfo'])){
 				saveInfo();}
+			if(isset($_POST['saveInfoState'])){
+				saveInfoState();
+			}
+			if(isset($_POST['saveInfoAge'])){
+				saveInfoAge();
+			}
 			//upload the file and set the users profile pic.			
 			if(isset($_POST['fileupload'])){
 				upload_file($_FILES, getUserID());
@@ -161,7 +167,7 @@
 					<span class="clickable expander"><? echo $city ?><span class='editIcon'></span></span>
 					<div class="expand" style="display:none">
 							<input type="text" name="city" value="<? echo $city ?>"/>
-							<input class="button" type="submit" name="saveInfo" value="Save"/>
+							<input class="button" type="submit" name="saveInfoCity" value="Save"/>
 						</div>					
 					</td>
 				</tr>
@@ -172,7 +178,7 @@
 					<span class="clickable expander"><? echo $st ?><span class='editIcon'></span></span>
 					<div class="expand" style="display:none">
 							<? echo getStateDropdown(); ?>
-							<input class="button" type="submit" name="saveInfo" value="Save"/>
+							<input class="button" type="submit" name="saveInfoState" value="Save"/>
 						</div>					
 					</td>
 				</tr>
@@ -183,7 +189,7 @@
 						<span class="clickable expander"><? echo $age ?><span class='editIcon'></span></span>
 						<div class="expand" style="display:none">
 							<input type="text" name="DOB" id="DOB" placeholder=" Date of birth"/>
-							<input class="button" type="submit" name="saveInfo" value="Save"/>
+							<input class="button" type="submit" name="saveInfoAge" value="Save"/>
 						</div>
 					</td>
 				</tr>

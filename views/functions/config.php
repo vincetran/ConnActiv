@@ -331,7 +331,24 @@ function login(){
 			}
 			return $incMessages;
 		}
+		function saveInfoState(){
+			if (isset($_POST['state'])) {
+				$st = $_POST['state'];
+				$query = "UPDATE users SET STATE = '".mysql_real_escape_string($st)."' WHERE USER_ID = '".getUserID()."'";
+				$update = mysql_query($query) or die(mysql_error());
+
+			}
 		
+		}
+
+		function saveInfoAge(){
+			if (isset($_POST['DOB'])){
+				$DOB = myDateParser($_POST['DOB']);
+				$query = "UPDATE users SET DOB = '".mysql_real_escape_string($DOB)."' WHERE USER_ID = '".getUserID()."'";
+				$update = mysql_query($query) or die(mysql_error());
+			}
+		
+		}
 		function saveInfo(){
 			//This function sends the my info to the database
 			if(isset($_POST['about_me'])){
@@ -345,11 +362,7 @@ function login(){
 				$query = "UPDATE users SET GENDER = '".$gender."' WHERE USER_ID = '".getUserID()."'";
 				$update = mysql_query($query) or die(mysql_error());
 			}
-			if (isset($_POST['DOB'])){
-				$DOB = myDateParser($_POST['DOB']);
-				$query = "UPDATE users SET DOB = '".mysql_real_escape_string($DOB)."' WHERE USER_ID = '".getUserID()."'";
-				$update = mysql_query($query) or die(mysql_error());
-			}
+
 			
 			if (isset($_POST['city'])) {
 				$city = $_POST['city'];
@@ -358,12 +371,7 @@ function login(){
 
 			}
 			
-			if (isset($_POST['state'])) {
-				$st = $_POST['state'];
-				$query = "UPDATE users SET STATE = '".mysql_real_escape_string($st)."' WHERE USER_ID = '".getUserID()."'";
-				$update = mysql_query($query) or die(mysql_error());
 
-			}
 			
 			for($i = 0; $i < count(getUserActivityLevels()); $i++){
 				if((isset($_POST['seekLvl'.$i])) && ($_POST['seekLvl'.$i] != -1)){
