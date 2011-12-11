@@ -412,8 +412,8 @@ INSERT INTO `unique_networks` (`UNIQUE_NETWORK_ID`, `NETWORK_ID`, `ACTIVITY_ID`)
 (8, 1, 2),
 (9, 1, 3),
 (10, 1, 4),
-(11, 1, 6),
-(12, 1, 8),
+(2, 1, 6),
+(2, 1, 8),
 (13, 1, 12),
 (14, 2, 2),
 (15, 2, 3),
@@ -455,7 +455,7 @@ INSERT INTO `users` (`USER_ID`, `PASSWORD`, `FIRST_NAME`, `LAST_NAME`, `STREET`,
 (11, '8f53e82e508c96115551317048cba97e', 'Rob', 'Filippi', '', 'Pittsburgh', 'PA', 15232, '', 'Hello my name is Rob', '../public/images/avatar.png', 'flippi273@gmail.com', '1989-11-28', 'M'),
 (12, '8f53e82e508c96115551317048cba97e', 'Amy', 'Reehl', '', 'Pittsburgh', 'PA', 15232, '', '', '../public/images/avatar.png', 'amy4reehl@gmail.com', '1992-06-28', 'F'),
 (1, '9ae984b8b7e71ee69caf0a7b82b31b1e', '', 'Admin', '', '', '', NULL, '', '', '../public/images/avatar.png', 'admin@connactiv.com', NULL, NULL),
-(13, '9ae984b8b7e71ee69caf0a7b82b31b1e', 'User', 'Test', '', '', '', NULL, '', '', '../public/images/avatar.png', 'admin@connactiv.com', NULL, NULL),
+(2, 'fcf41657f02f88137a1bcf068a32c0a3', 'Guest', 'User', '', '', '', NULL, '', '', '../public/images/avatar.png', 'guest@connactiv.com', NULL, NULL),
 (14, '9ae984b8b7e71ee69caf0a7b82b31b1e', 'Fake', 'Mister', '', '', '', NULL, '', '', '../public/images/avatar.png', 'admin@connactiv.com', NULL, NULL);
 
 -- --------------------------------------------------------
@@ -481,8 +481,8 @@ CREATE TABLE IF NOT EXISTS `user_activities` (
 INSERT INTO `user_activities` (`USER_ID`, `ACTIVITY_ID`, `LOW_LEVEL`, `HIGH_LEVEL`, `PREFERRED`, `OWN_LEVEL`) VALUES
 (11, 3, 6, 9, 8, 8),
 (11, 1, 2, 6, 4, 5),
-(11, 4, NULL, NULL, NULL, NULL),
-(11, 5, NULL, NULL, NULL, NULL),
+(2, 6, NULL, NULL, NULL, NULL),
+(2, 8, NULL, NULL, NULL, NULL),
 (12, 6, NULL, NULL, NULL, NULL),
 (12, 2, NULL, NULL, NULL, NULL),
 (12, 8, NULL, NULL, NULL, NULL),
@@ -518,7 +518,8 @@ INSERT INTO `user_networks` (`USER_ID`, `UNIQUE_NETWORK_ID`) VALUES
 (13, 3),
 (13, 4),
 (14, 1),
-(14, 5);
+(14, 5),
+(2,1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

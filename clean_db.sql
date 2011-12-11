@@ -310,7 +310,8 @@ LOCK TABLES `users` WRITE;
 
 INSERT INTO `users` (`USER_ID`, `PASSWORD`, `FIRST_NAME`, `LAST_NAME`, `STREET`, `CITY`, `STATE`, `ZIP`, `PHONE`, `INTERESTS`, `PROFILE_PIC`, `EMAIL`, `DOB`, `GENDER`)
 VALUES
-	(1,'9ae984b8b7e71ee69caf0a7b82b31b1e','','Admin','','','',NULL,'','ConnActiv administrator account','../public/images/avatar.png','admin@connactiv.com',NULL,NULL);
+	(1,'9ae984b8b7e71ee69caf0a7b82b31b1e','','Admin','','','',NULL,'','ConnActiv administrator account','../public/images/avatar.png','admin@connactiv.com',NULL,NULL),
+(2,'fcf41657f02f88137a1bcf068a32c0a3','','Guest','','','',NULL,'','ConnActiv Guest account','../public/images/avatar.png','guest@connactiv.com',NULL,NULL);
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
