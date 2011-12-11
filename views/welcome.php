@@ -83,6 +83,10 @@ I'm not sure we need this file. TODO - see about deleting this.
 				<tr>
 					<td colspan="2" align="center"><input type="submit" id="do_login" name="login" value="Login"/></td>
 				</tr>
+				<tr>
+				<td colspan ="2"><form id = "demoButton" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post"> 
+				<input type = "submit" name = "demo" value = "Demo Connactiv!">If you'd like to take a tour of Connactiv, Click Here!    </input></form></td>
+				</tr>
 			</table>
 			</form>
 		</div>
@@ -159,9 +163,13 @@ I'm not sure we need this file. TODO - see about deleting this.
 				<tr>
 					<td colspan="2" align="center"><input type="submit" id="do_register" name="register" value="Get ConnActed!"/></td>
 				</tr>
+				
 			</table>
 			</form>
+
+		
 		</div>
+		
 		</div> <!-- /welcome_form-->
 	
  <?php 

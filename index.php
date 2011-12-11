@@ -1,6 +1,9 @@
 <?
 	include_once('views/functions/config.php'); 
-	if (isset($_POST['login'])) { 
+	if(isset($_POST['demo'])){
+		header("Location: views/home.php");
+	}
+	else if (isset($_POST['login'])) { 
 		//If user pressed login
 		login(); 
 	} else if (isset($_POST['register'])) {
@@ -127,6 +130,10 @@ $(function() {
 				<tr><td colspan="2">&nbsp;</td></tr>
 				<tr>
 					<td colspan="2" align="center"><input type="submit" id="do_login" name="login" value="Login"/></td>
+				</tr>
+				<tr>
+				<td colspan ="2"><form id = "demoButton" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post"> <br/>If you'd like to take a tour of Connactiv, Click Here!<br/>
+				<input type = "submit" name = "demo" value = "Demo Connactiv!">    </input></form></td>
 				</tr>
 			</table>
 			</form>
