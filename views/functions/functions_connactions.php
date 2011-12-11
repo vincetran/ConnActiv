@@ -210,16 +210,27 @@
 		$start = myDateParser($_POST['startDate']);
 		$end = myDateParser($_POST['endDate']);
 		$today = date("Y-m-d");
-		$startTime = $start." ".$_POST['startHour'].":".$_POST['startMin'].":00";
-		$endTime = $end." ".$_POST['endHour'].":".$_POST['endMin'].":00";
+
+		$todayTime = strtotime($today);
+		$startTime = strtotime($start);
+		$endTime = strtotime($end);
+
+		if ($startTime >= $todayTime || $endTime >= $todayTime) {
+		    $startTime = $start." ".$_POST['startHour'].":".$_POST['startMin'].":00";
+			$endTime = $end." ".$_POST['endHour'].":".$_POST['endMin'].":00";
+			
+			$unID = $_POST['uniqueNetwork'];		
+			
+			$query = "INSERT INTO connactions(POST_TIME, USER_ID, LOCATION, START_TIME, MESSAGE, END_TIME, UNIQUE_NETWORK_ID, IS_PRIVATE)
+				VALUES ('".$today."', '".getUserID()."', '".str_replace("'", "''", $_POST['location'])."', '".$startTime."', '".str_replace("'","''", $_POST['message'])."', '".$endTime."', '".$unID."', '".$_POST['private']."')";
+						
+			$insert = mysql_query($query) or die(mysql_error());
+			echo "<div class='notice'>ConnAction posted!</div>";
+		} else {
+		     echo "<div class='error'>Please set your ConnAction not to the past.</div>";
+		}
+
 		
-		$unID = $_POST['uniqueNetwork'];		
-		
-		$query = "INSERT INTO connactions(POST_TIME, USER_ID, LOCATION, START_TIME, MESSAGE, END_TIME, UNIQUE_NETWORK_ID, IS_PRIVATE)
-			VALUES ('".$today."', '".getUserID()."', '".str_replace("'", "''", $_POST['location'])."', '".$startTime."', '".str_replace("'","''", $_POST['message'])."', '".$endTime."', '".$unID."', '".$_POST['private']."')";
-					
-		$insert = mysql_query($query) or die(mysql_error());
-		echo "<div class='notice'>ConnAction posted!</div>";
 	}
 
 }
@@ -281,7 +292,8 @@
 			}
 			
 		}
-		return $connactions;
+		$result = array_reverse($connactions);
+		return $result;
 	}
 	function reviewedByUser($connactionid, $userid){
 		$query = "select * from reviews where from_user = ".$userid." and connaction_id = ".$connactionid;
@@ -298,7 +310,8 @@
 		while($row = mysql_fetch_array($query)){
 			$connactions[] = $row;
 		}
-	return $connactions;
+		$result = array_reverse($connactions);
+		return $result;
 	}
 	
 	function getConnactions($n_aID, $option){
