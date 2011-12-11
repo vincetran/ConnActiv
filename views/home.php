@@ -4,19 +4,29 @@
 	if(cookieExists() && validCookie()):
 	
 		if (isset($_POST['postConnaction'])) {
-			postConnaction();
+			if(getUserID() != "2"){
+				postConnaction();
+			}
+
 		} else if (isset($_POST['joinRequest'])) { 
-			joinRequest();
+			if(getUserID() != "2"){
+				joinRequest();
+			}
 		} else if (isset($_POST['postEvent'])) {
-			postEvent();
+			if(getUserID() != "2"){
+				postEvent();
+			}
 		} else if(isset($_POST['friend'])){
+			if(getUserID() != "2"){
 
+				$query = "insert into friend_requests values (".getUserID().", ".mysql_real_escape_string($_POST['friend'][2]).", '".mysql_real_escape_string($_POST['friend'][0])."', -1)";
 
-			$query = "insert into friend_requests values (".getUserID().", ".mysql_real_escape_string($_POST['friend'][2]).", '".mysql_real_escape_string($_POST['friend'][0])."', -1)";
-
-			mysql_query($query) or die(mysql_error());
+				mysql_query($query) or die(mysql_error());
+			}
 		}	else if(isset($_POST['reply'])){
-				message();	
+				if(getUserID() != "2"){
+					message();	
+				}	
 		}
 			
 	?>

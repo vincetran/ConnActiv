@@ -207,14 +207,14 @@ CREATE TABLE IF NOT EXISTS `events` (
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`EVENT_ID`, `USER_ID`, `ACTIVITY_ID`, `NETWORK_ID`, `MESSAGE`, `START`, `END`, `LOCATION`, `RECURRENCE`, `APPROVED`) VALUES
-(1, 12, 1, 1, 'we are having an event', '0000-00-00 00:00:00', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0),
-(2, 14, 2, 1, 'we are having another event', '0000-00-00 00:00:00', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0),
-(3, 15, 3, 2, 'we are having big event, we show you good time', '0000-00-00 00:00:00', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0),
-(4, 13, 4, 1, 'event for cancer', '0000-00-00 00:00:00', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0),
-(5, 18, 5, 2, 'event for aids', '0000-00-00 00:00:00', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0),
-(6, 17, 6, 1, 'event for canine retardation', '0000-00-00 00:00:00', '2011-12-02 20:21:54', 'in lawrenceville', 0, 0),
-(7, 11, 12, 1, 'we are having an event', '0000-00-00 00:00:00', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0);
+INSERT INTO `events` (`EVENT_ID`, `USER_ID`, `UNIQUE_NETWORK_ID`, `MESSAGE`, `START`, `END`, `LOCATION`, `RECURRENCE`, `APPROVED`) VALUES
+(1, 12, 1, 'we are having an event', '0000-00-00 00:00:00', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0),
+(2, 14, 2, 'we are having another event', '0000-00-00 00:00:00', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0),
+(3, 15, 3, 'we are having big event, we show you good time', '0000-00-00 00:00:00', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0),
+(4, 13, 4, 'event for cancer', '0000-00-00 00:00:00', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0),
+(5, 18, 5, 'event for aids', '0000-00-00 00:00:00', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0),
+(6, 17, 6, 'event for canine retardation', '0000-00-00 00:00:00', '2011-12-02 20:21:54', 'in lawrenceville', 0, 0),
+(7, 11, 12, 'we are having an event', '0000-00-00 00:00:00', '2011-12-02 20:21:54', 'in pittsburgh', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -311,7 +311,7 @@ INSERT INTO `messages` (`FROM_USER`, `TO_USER`, `SUBJECT`, `BODY`, `DATE`) VALUE
 (12, 11, 'Contact info', 'Email: amy4reehl@gmail.com\nPhone: \n', '2011-11-30 14:16:44'),
 (13, 12, 'Contact info', '', '2011-11-30 15:14:36'),
 (14, 13, 'Contact info', '', '2011-11-30 15:17:03'),
-(11, 11, 'Contact info', '', '2011-11-30 15:17:07'),
+(2, 1, 'Welcome', 'Connactiv Welcomes you!', '2011-11-30 15:17:07'),
 (12, 12, 'Contact info', '', '2011-11-30 15:17:58'),
 (13, 13, 'Contact info', '', '2011-11-30 15:20:23'),
 (12, 14, 'Contact info', '', '2011-11-30 15:20:42'),
@@ -412,12 +412,12 @@ INSERT INTO `unique_networks` (`UNIQUE_NETWORK_ID`, `NETWORK_ID`, `ACTIVITY_ID`)
 (8, 1, 2),
 (9, 1, 3),
 (10, 1, 4),
-(2, 1, 6),
-(2, 1, 8),
+(11, 2, 6),
+(12, 2, 8),
 (13, 1, 12),
-(14, 2, 2),
-(15, 2, 3),
-(16, 2, 4),
+(14, 2, 9),
+(15, 2, 7),
+(16, 2, 5),
 (17, 3, 2),
 (18, 3, 3),
 (19, 4, 4),
@@ -455,7 +455,7 @@ INSERT INTO `users` (`USER_ID`, `PASSWORD`, `FIRST_NAME`, `LAST_NAME`, `STREET`,
 (11, '8f53e82e508c96115551317048cba97e', 'Rob', 'Filippi', '', 'Pittsburgh', 'PA', 15232, '', 'Hello my name is Rob', '../public/images/avatar.png', 'flippi273@gmail.com', '1989-11-28', 'M'),
 (12, '8f53e82e508c96115551317048cba97e', 'Amy', 'Reehl', '', 'Pittsburgh', 'PA', 15232, '', '', '../public/images/avatar.png', 'amy4reehl@gmail.com', '1992-06-28', 'F'),
 (1, '9ae984b8b7e71ee69caf0a7b82b31b1e', '', 'Admin', '', '', '', NULL, '', '', '../public/images/avatar.png', 'admin@connactiv.com', NULL, NULL),
-(2, 'fcf41657f02f88137a1bcf068a32c0a3', 'Guest', 'User', '', '', '', NULL, '', '', '../public/images/avatar.png', 'guest@connactiv.com', NULL, NULL),
+(2, 'fcf41657f02f88137a1bcf068a32c0a3', 'Guest', 'User', '', 'Pittsburgh', 'PA', NULL, '', '', '../public/images/avatar.png', 'guest@connactiv.com', NULL, NULL),
 (14, '9ae984b8b7e71ee69caf0a7b82b31b1e', 'Fake', 'Mister', '', '', '', NULL, '', '', '../public/images/avatar.png', 'admin@connactiv.com', NULL, NULL);
 
 -- --------------------------------------------------------
@@ -519,7 +519,8 @@ INSERT INTO `user_networks` (`USER_ID`, `UNIQUE_NETWORK_ID`) VALUES
 (13, 4),
 (14, 1),
 (14, 5),
-(2,1);
+(2,11),
+(2,12);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

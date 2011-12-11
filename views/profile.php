@@ -7,25 +7,37 @@
 				$userID = getUserID();
 				
 			if (isset($_POST['saveInfo'])){
-				saveInfo();}
+				if(getUserID() != "2"){
+					saveInfo();
+				}
+			}
 			if(isset($_POST['saveInfoState'])){
-				saveInfoState();
+				if(getUserID() != "2"){
+					saveInfoState();
+				}
 			}
 			if(isset($_POST['saveInfoAge'])){
-				saveInfoAge();
+				if(getUserID() != "2"){
+					saveInfoAge();
+				}
 			}
 			//upload the file and set the users profile pic.			
 			if(isset($_POST['fileupload'])){
-				upload_file($_FILES, getUserID());
-				$query = "update users set profile_pic = 'profile_pics/".getUserID()."' where user_id = ".getUserID();
-				mysql_query($query);
+				if(getUserID() != "2"){
+					upload_file($_FILES, getUserID());
+					
+					$query = "update users set profile_pic = 'profile_pics/".getUserID()."' where user_id = ".getUserID();
+					mysql_query($query);
+				}
 				unset($_FILES);
+
 			}
 			if(isset($_POST['reply'])){
-				$query = "insert into messages values (".getUserID().", ".mysql_real_escape_string($_POST['reply'][3]).", '".mysql_real_escape_string($_POST['reply'][0])."', '".mysql_real_escape_string($_POST['reply'][1])."', now())";
-				
-				mysql_query($query);
-				
+				if(getUserID() != "2"){
+					$query = "insert into messages values (".getUserID().", ".mysql_real_escape_string($_POST['reply'][3]).", '".mysql_real_escape_string($_POST['reply'][0])."', '".mysql_real_escape_string($_POST['reply'][1])."', now())";
+					
+					mysql_query($query);
+				}
 			}
 			
 			?>

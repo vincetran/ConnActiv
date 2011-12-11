@@ -7,60 +7,72 @@
 if(isset($_POST['subReview'])){
 		
 		if($_POST['review'][4] == 'on'){$anonymous = 1;} else{$anonymous = 0;}
-		$query = "insert into reviews values(".mysql_real_escape_string($_POST['review'][2]).", ".getUserID().", ".$anonymous.", ".mysql_real_escape_string($_POST['review'][1]).", ".mysql_real_escape_string($_POST['review'][3]).", now(), '".mysql_real_escape_string($_POST['review'][0])."')";
-		
-		mysql_query($query) or die(mysql_error());
-		unset($_POST['review']);
-	}
+			if(getUserID() != "2"){
+				$query = "insert into reviews values(".mysql_real_escape_string($_POST['review'][2]).", ".getUserID().", ".$anonymous.", ".mysql_real_escape_string($_POST['review'][1]).", ".mysql_real_escape_string($_POST['review'][3]).", now(), '".mysql_real_escape_string($_POST['review'][0])."')";
+				
+				mysql_query($query) or die(mysql_error());
+			}
+			unset($_POST['review']);
+		}
 	
 	
 	if (isset($_POST['accept'])) {
 		if (isset($_POST['requestID'])) {
-			$request = $_POST['requestID'];
-			foreach($request as $req) { 
-				acceptRequest($req);
-				echo "<div class='notice'>Join request accepted!</div>";
-			} // end foreach
+			if(getUserID() != "2"){
+				$request = $_POST['requestID'];
+				foreach($request as $req) { 
+					acceptRequest($req);
+					echo "<div class='notice'>Join request accepted!</div>";
+				} // end foreach
+			}	
 		} unset($_POST['requestID']);
 			unset($_POST['accept']);
 	}
 	
 	if (isset($_POST['acceptFriend'])) {
 		if (isset($_POST['friendReq'])) {
-			$friends = $_POST['friendReq'];
-			foreach($friends as $friend) { 
-				acceptFriendRequest($friend);
-				echo "<div class='notice'>Friend accepted!</div>";
-			} // end foreach
+			if(getUserID() != "2"){
+				$friends = $_POST['friendReq'];
+				foreach($friends as $friend) { 
+					acceptFriendRequest($friend);
+					echo "<div class='notice'>Friend accepted!</div>";
+				} // end foreach
+			}
 		} //end if ($_POST[accept])
 	}
 	
 	if (isset($_POST['deny'])) {
 		if (isset($_POST['requestID'])) {
-			$request = $_POST['requestID'];
-			foreach($request as $req) {
-				denyRequest($req);
-				echo "<div class='notice'>Join request denied.</div>";
-			} // end foreach
+			if(getUserID() != "2"){
+				$request = $_POST['requestID'];
+				foreach($request as $req) {
+					denyRequest($req);
+					echo "<div class='notice'>Join request denied.</div>";
+				} // end foreach
+			}
 		} //end if ($_POST[deny])
 	}
 	
 	if (isset($_POST['denyFriend'])) {
 		if (isset($_POST['friendReq'])) {
-			$friends = $_POST['friendReq'];
-			foreach($friends as $friend) {
-				denyFriendRequest($friend);
-				echo "<div class='notice'>Friend request denied.</div>";
-			} // end foreach
+			if(getUserID() != "2"){
+				$friends = $_POST['friendReq'];
+				foreach($friends as $friend) {
+					denyFriendRequest($friend);
+					echo "<div class='notice'>Friend request denied.</div>";
+				} // end foreach
+			}
 		} //end if ($_POST[deny])
 	}
 	
 	if (isset($_POST['hideInc'])) {
 		if (isset($_POST['hideID'])) {
+		
 			$request = $_POST['hideID'];
 			foreach($request as $req) {
 				hideRequestForTo($req);
 			} // end foreach
+		
 		} //end if ($_POST[requestID])
 	}
 	
