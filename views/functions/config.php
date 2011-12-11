@@ -99,7 +99,7 @@ function login(){
 		if($check2 == 0){
 			//check to make sure the password was confirmed			
 			if(strcmp($_POST['password'], $_POST['confirm'])==0){	
-				if(!strlen($_POST['phone']) < 10 && !strlen($_POST['phone']) >12) {
+				if(strlen($_POST['phone']) == 10 || strlen($_POST['phone']) ==12) {
 				//check to make sure the password is longer than 6 characters, may want to use regexp to improve
 				//security
 				
