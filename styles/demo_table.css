@@ -37,8 +37,13 @@
 	width: 560px;
 }
 
-#subscribeTable_wrapper {
-	width: 400px;
+#subscribeTable_wrapper, {
+	width: 350px;
+	left: -50px;
+}
+
+#subscribeTable_info {
+	left: -50px;
 }
 	
 .dataTables_wrapper table.small {
