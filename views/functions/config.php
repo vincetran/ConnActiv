@@ -1,7 +1,7 @@
 <?php
 //var_dump($_POST);
 // Connects to Database
-//mysql_connect("localhost", "xgamings_connact", "connactive123") or die(mysql_error()); //This is our database credentials
+//get mysql_connect function
 mysql_connect("localhost", "root", "") or die(mysql_error()); 	//This is wamp database credentials
 mysql_select_db("connactiv") or die(mysql_error()); 
 

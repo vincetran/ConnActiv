@@ -1,5 +1,5 @@
 <?php
-	mysql_connect("connactiv.db", "connactiv_site", "connactiv123") or die(mysql_error()); 
+	//get the mysql_connect function 
 	mysql_select_db("connactiv") or die(mysql_error()); 
 
 	include("../views/functions/config.php");
