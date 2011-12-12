@@ -151,7 +151,7 @@
 	// Events(event_id, user_id, activity_id, network_id, message, start, end, location, recurrence, approved //
 	
 		$user = getUserID();
-		$name = $_POST['eventName'];
+		$name = mysql_real_escape_string($_POST['eventName']);
 		$start = myDateParser($_POST['eventStartDate']);
 		$end = myDateParser($_POST['eventEndDate']);
 		$today = date("Y-m-d");
@@ -160,13 +160,11 @@
 		$startTime = strtotime($start);
 		$endTime = strtotime($end);
 
-		//echo $todayTime."\n".$startTime."\n".$endTime;
-
 		if ($startTime >= $todayTime || $endTime >= $todayTime) {
 			$startTime = $start." ".$_POST['eventStartHour'].":".$_POST['eventStartMin'].":00";
 			$endTime = $end." ".$_POST['eventEndHour'].":".$_POST['eventEndMin'].":00";
 			$loc = $_POST['eventLoc'];
-			$msg = $_POST['eventMsg'];
+			$msg = mysql_real_escape_string($_POST['eventMsg']);
 			
 			$unique_id = $_POST['uniqueNetwork'];
 			
@@ -176,9 +174,7 @@
 				$query = sprintf("INSERT INTO events(USER_ID, UNIQUE_NETWORK_ID, NAME, START, END, MESSAGE, LOCATION, RECURRENCE, APPROVED, REQUEST_DATE)
 					VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', 0, -1, now())", $user, $unique_id, $name, $startTime, $endTime, $msg, $loc); //waiting for admin approval
 				$insert = mysql_query($query) or die(mysql_error());
-				$new_event = mysql_insert_id();
-				
-				eventMessage($user, $new_event); //alert admin		
+				$new_event = mysql_insert_id();	
 				
 				echo "<div class='notice'>Event request sent! We'll keep you informed of its approval.</div>";
 			}
@@ -233,7 +229,7 @@
 			$unID = $_POST['uniqueNetwork'];		
 			
 			$query = "INSERT INTO connactions(POST_TIME, USER_ID, LOCATION, START_TIME, MESSAGE, END_TIME, UNIQUE_NETWORK_ID, IS_PRIVATE)
-				VALUES ('".$today."', '".getUserID()."', '".str_replace("'", "''", $_POST['location'])."', '".$startTime."', '".str_replace("'","''", $_POST['message'])."', '".$endTime."', '".$unID."', '".$_POST['private']."')";
+				VALUES ('".$today."', '".getUserID()."', '".addslashes($_POST['location'])."', '".$startTime."', '".addslashes($_POST['message'])."', '".$endTime."', '".$unID."', '".$_POST['private']."')";
 						
 			$insert = mysql_query($query) or die(mysql_error());
 			echo "<div class='notice'>ConnAction posted!</div>";
@@ -246,36 +242,6 @@
 	}
 
 }
-	
-	/*		///This function was replaced by the getConnactions functions
-	function getConnactionUsers($n_aID, $option){
-		//The option is whether the ID is network_ID or Activity_ID
-		//0 = Activity_ID, 1 = network_ID
-		//This function returns an array of all users names who posted a connaction
-		$connactionUsers = array();
-		
-		if($option == 0){
-			//ID is activity
-			$resourceID = getResourceIDs("connactions", "activity_id", $n_aID);
-			while($info = mysql_fetch_array($resourceID)){
-				$connactionUsers[] = $info["USER_ID"];
-			}
-			return $connactionUsers;
-		}
-		else if($option == 1){
-			//ID is network
-			//print $n_aID;
-			$resourceID = getResourceIDs("connactions", "network_id", $n_aID);
-			while($info = mysql_fetch_array($resourceID)){
-				$connactionUsers[] = $info["USER_ID"];
-			}
-			return $connactionUsers;
-		}
-		else{
-			return "error";
-		}
-		
-	}*/
 	
 
 	function getPastConnactions($userid){
