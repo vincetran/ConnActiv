@@ -127,6 +127,18 @@
 				$(".notice").slideUp();
 				$(".error").slideUp();
 			}
+			
+				close_details = $("<span class='clickable close'></span>").click(function() {
+				$(this).parent('.details_question').fadeOut();
+			});
+			
+			$('div.question').click(function() {
+				id = $(this).attr('id');
+				$('#details_'+id).append(close_details)
+				.fadeIn('slow');
+			});
+			
+			
 
 		});
 			</script>

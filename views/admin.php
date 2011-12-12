@@ -102,7 +102,6 @@
 				$('section').hide();
 				$sect.fadeIn();
 			});
-			
 	
 	});	
 	

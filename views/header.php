@@ -79,21 +79,18 @@
 				"aoColumns": [ null, null, null, { "bSortable": false }, null]
    	 });
    	 
-   	 
    	$('#demo').click(function() {
    		var bubble = $(this);
    		bubble.animate({
    			opacity: 0.5,
-				height: '118px',
+				height: '117px',
 				'padding-top':'40px'
 			}, 400, function() {
-				bubble.html("In Demo mode, you can <span class='blue'>take a tour</span> of ConnActiv! Feel free to play around-- you can't actually mess with any of the real data. Also, you'll see some <span class='blue'>question marks</span> around the site. Hover over them to find out more about a feature.")
+				bubble.html("In Demo mode, you can <span class='blue'>take a tour</span> of ConnActiv! Feel free to play around-- you can't actually mess with any of the real data. Also, you'll see some <span class='blue'>question marks</span> around the site. Hover over them to find out more about a feature.<br>")
    			.fadeTo('fast',1);
 			});
-   		
-   	
    	});
-
+   	
 	});
 </script>
 
