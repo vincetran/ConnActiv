@@ -80,6 +80,7 @@
    	 });
    	 
    	$('#demo').click(function() {
+			$('div.details_question').fadeOut('slow');
    		var bubble = $(this);
    		bubble.animate({
    			opacity: 0.5,
