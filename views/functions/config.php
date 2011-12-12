@@ -382,7 +382,6 @@ function login(){
 			
 			for($i = 0; $i < count(getUserActivityLevels()); $i++){
 				if((isset($_POST['seekLvl'.$i])) && ($_POST['seekLvl'.$i] != -1)){
-					echo "setting seeklvl";
 					$type = "PREFERRED";
 					//echo "TODO: Update ".$type;
 					$seekID = $_POST['seekLvl'.$i];
@@ -391,7 +390,6 @@ function login(){
 					$activityID = getActivityID($activity);
 					
 					$query = sprintf("UPDATE user_activities SET %s = '%s' WHERE USER_ID = '%s' AND ACTIVITY_ID = '%s'",$type, $level, getUserID(), $activityID);
-					echo $query;
 					$update = mysql_query($query) or die(mysql_error());
 					
 				}
