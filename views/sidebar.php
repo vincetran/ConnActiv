@@ -44,9 +44,11 @@
 	<img src="<? echo getUserPic(getUserId()); ?>" height="120"/>
 	<h2 class="sidebar"><? echo getName(); ?></h2>
 	
+<? if (isDemo()): ?>	
 	<div id="reviews" class="question" style="left:-40px;top:100px"></div>
 	<div id="details_reviews" class="details_question" style="left:-120px;display:none"><span class="blue">Reviews</span> of an individual are written by people who have<br>done connactions with the user.</div>
-	
+<? endif; ?>
+
 	<table id="test" class="top_border" border="0" align="center">
 		<tr>
 			<td class="thumbs_up clickable"><img class="thumbs" src="../public/images/thumbs_up.png" height="60"/></td>

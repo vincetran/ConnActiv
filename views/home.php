@@ -151,10 +151,11 @@
 	
 		<div class="page">
 		
-		
-<div id="demoConnaction" class="question" style="right:-560px;top:50px"></div>
-<div id="details_demoConnaction" class="details_question" style="display:none;right:10px;top:50px">Feel like going for a run but want a running buddy? Or do you want to go rock climbing but you're new in town? Go ahead and <span class="blue">post a connaction!</span> A ConnAction is an activity. When you want to do something in a particular area, post a connaction to let other people know about it. Tag your connaction so that the people who are interested in similar things will be able to view it. Make it open to joiners if you'd like company!</div>
-	
+<? if (isDemo()): ?>		
+	<div id="demoConnaction" class="question" style="right:-560px;top:50px"></div>
+	<div id="details_demoConnaction" class="details_question" style="display:none;right:10px;top:50px">Feel like going for a run but want a running buddy? Or do you want to go rock climbing but you're new in town? Go ahead and <span class="blue">post a connaction!</span> A ConnAction is an activity. When you want to do something in a particular area, post a connaction to let other people know about it. Tag your connaction so that the people who are interested in similar things will be able to view it. Make it open to joiners if you'd like company!</div>
+<? endif; ?>
+
 			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
 			<div class="greyBorder" id="postConnaction">
 				<div id="postHeader">
@@ -275,6 +276,12 @@
 				
 				<br><br>
 				<h2>Stream</h2>
+				
+				<? if (isDemo()): ?>	
+					<div id="stream" class="question" style="left:50px;top:0px"></div>
+					<div id="details_stream" class="details_question" style="left:0px;display:none">Your <span class="blue">stream</span> is where you'll find the most recent connaction posts from all of your subscribed networks. To see more posts,<br>subscribe to more networks (under Settings).</div>
+				<? endif; ?>
+				
 				<div class="main feeds-container">
 					<ul class="feeds">
 						
