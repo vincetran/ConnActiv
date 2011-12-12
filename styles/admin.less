@@ -23,7 +23,7 @@
 	color: #2384DE;
 }
 
-.adminAction {
+.adminAction, .demo {
 	text-align: center;
 	background-color: #efefef;
 	border: 1px solid #2384de;
@@ -45,13 +45,15 @@
 }
 
 .welcome_demo {
-	.rounded;
+	.rounded(20px);
 	.shadow;
-	width: 230px;
+	width: 240px;
 	border: thin solid @darkergrey;
-	position: absolute;
-	left: 60px;
-	top: 100px;
+	position: fixed;
+	left: 25px;
+	top: 10px;
+	z-index: 40;
 	background: white;
-	padding: 20px 5px 20px 5px;
+	padding: 33px 5px 5px 5px;
+	text-align: center;
 }

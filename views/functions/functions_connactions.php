@@ -155,24 +155,33 @@
 		$start = myDateParser($_POST['eventStartDate']);
 		$end = myDateParser($_POST['eventEndDate']);
 		$today = date("Y-m-d");
-		$startTime = $start." ".$_POST['eventStartHour'].":".$_POST['eventStartMin'].":00";
-		$endTime = $end." ".$_POST['eventEndHour'].":".$_POST['eventEndMin'].":00";
-		$loc = $_POST['eventLoc'];
-		$msg = $_POST['eventMsg'];
-		
-		$unique_id = $_POST['uniqueNetwork'];
-		
-		if (!$user || !$startTime || !$endTime || $unique_id<0 || !$loc || !$msg) {
-			echo "<div class='error'>Please fill in all event information.</div>";
+
+		$todayTime = strtotime($today);
+		$startTime = strtotime($start);
+		$endTime = strtotime($end);
+
+		if ($startTime >= $todayTime || $endTime >= $todayTime) {
+			$startTime = $start." ".$_POST['eventStartHour'].":".$_POST['eventStartMin'].":00";
+			$endTime = $end." ".$_POST['eventEndHour'].":".$_POST['eventEndMin'].":00";
+			$loc = $_POST['eventLoc'];
+			$msg = $_POST['eventMsg'];
+			
+			$unique_id = $_POST['uniqueNetwork'];
+			
+			if (!$user || !$startTime || !$endTime || $unique_id<0 || !$loc || !$msg) {
+				echo "<div class='error'>Please fill in all event information.</div>";
+			} else {
+				$query = sprintf("INSERT INTO events(USER_ID, UNIQUE_NETWORK_ID, NAME, START, END, MESSAGE, LOCATION, RECURRENCE, APPROVED, REQUEST_DATE)
+					VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', 0, -1, now())", $user, $unique_id, $name, $startTime, $endTime, $msg, $loc); //waiting for admin approval
+				$insert = mysql_query($query) or die(mysql_error());
+				$new_event = mysql_insert_id();
+				
+				eventMessage($user, $new_event); //alert admin		
+				
+				echo "<div class='notice'>Event request sent! We'll keep you informed of its approval.</div>";
+			}
 		} else {
-			$query = sprintf("INSERT INTO events(USER_ID, UNIQUE_NETWORK_ID, NAME, START, END, MESSAGE, LOCATION, RECURRENCE, APPROVED, REQUEST_DATE)
-				VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', 0, -1, now())", $user, $unique_id, $name, $startTime, $endTime, $msg, $loc); //waiting for admin approval
-			$insert = mysql_query($query) or die(mysql_error());
-			$new_event = mysql_insert_id();
-			
-			eventMessage($user, $new_event); //alert admin		
-			
-			echo "<div class='notice'>Event request sent! We'll keep you informed of its approval.</div>";
+		     echo "<div class='error'>Please set your Event not to the past.</div>";
 		}
 		
 	}
@@ -188,8 +197,8 @@
 		while($row = mysql_fetch_array($result)){
 				$events[] = $row;
 			}
-		return $events;
-		
+		$result = array_reverse($events);
+		return $result;	
 		}
 		
 /*
@@ -280,7 +289,7 @@
 
 	function getAllConnactions(){
 		$userid = getUserID();
-		$connactions = "";
+		$connactions = array();
 	
 		$query = "select unique_network_id from user_networks where user_id = ".$userid;
 		$result = mysql_query($query);

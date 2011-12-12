@@ -114,6 +114,14 @@
 			</span>
 
 	</header>
+			
+	<? if (isDemo()) { ?>
+	
+	<div id="demo" class="welcome_demo">
+		You're in demo mode! <span class="clickable blue">What's this?</span>	
+	</div>
+	
+	<? } ?>
 		
 	<div id="side">
 	</div><!-- end #side -->

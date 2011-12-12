@@ -26,7 +26,11 @@
 
 				mysql_query($query) or die(mysql_error());
 			}
+
 			else{echo "<div class = 'demo'>You are unable to request friends in Demo Mode</div>";}
+
+		
+
 		}	else if(isset($_POST['reply'])){
 				if(getUserID() != "2"){
 					message();	
