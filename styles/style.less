@@ -15,8 +15,8 @@
 	-moz-border-radius: @radius;
 }
 
-.text-shadow {
-	text-shadow: 0px 1px 0px #efefef;
+.text-shadow(@depth:1px) {
+	text-shadow: 0px @depth 0px #efefef;
 }
 
 .shadow(@depth:4px) {
@@ -53,7 +53,6 @@ body {
 	margin:0px auto;
 	text-align:left;
 	padding:0px;
-	overflow:hidden;
 	padding-top: 40px;
 } 
 
@@ -475,4 +474,44 @@ div.pageViewer {
 	 margin: 0 .166em;
 	background-position: -22px -1090px;
 	.clickable;
+}
+
+.question {
+	text-align: center;
+	vertical-align: baseline;
+	height: 30px;
+	width: 25px;
+	z-index: 97;
+	position:relative;
+	background: transparent url("../public/images/question.jpg") no-repeat 0 0;
+}
+
+.question:hover {
+	.clickable;
+	background-position: 0 95%;
+}
+
+.details_question {
+	.rounded;
+	.shadow;
+	background: #fff;
+	min-width: 220px;
+	max-width: 250px;
+	padding: 3px 4px;
+	margin: 5px 10px;
+	border: thick solid @blue;
+	z-index: 97;
+	position:absolute;
+}
+
+.close {
+	float:right;
+	margin:.3em 0px 0px 0px;
+	background: transparent url("../public/images/icons_module.png") no-repeat 0 0;
+	display: inline-block;
+	height: 16px;
+	vertical-align: text-top;
+	 width: 16px;
+	overflow: hidden;
+	background-position: 3px -500px;
 }
