@@ -194,7 +194,9 @@
 			
 			<? if (isDemo()): ?>	
 			<div id="demoSkill" class="question" style="left:20px;top:-20px"></div>
-			<div id="details_demoSkill" class="details_question" style="left:200px;display:none"><span class="blue">xx</span> xxxxxxxxx.</div>
+			<div id="details_demoSkill" class="details_question" style="left:160px;top:300px;display:none">Your <span class="blue">personal skill level</span> is your indication of how skilled you are at that activity.</br>
+			Your <span class="blue">seeking level</span> is the ideal level of the person you want to look for.</br>
+			The <span class="blue">acceptance level</span> is the range of levels you would be willing to accept for your ConnAction.</div>
 		<? endif; ?>
 			
 			<form id="subscribeNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
