@@ -66,6 +66,7 @@
 			$(".notice").slideUp();
 			$(".error").slideUp();
 			$(".adminAction").slideUp();
+			$(".demo").slideUp();
 		}
 		
 		$('#selfReviews').dataTable({
