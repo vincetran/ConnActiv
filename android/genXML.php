@@ -1,9 +1,6 @@
 <?php 
 	include("../views/functions/config.php");
 
-	mysql_connect("connactiv.db", "connactiv_site", "connactiv123") or die(mysql_error()); 	
-	mysql_select_db("connactiv") or die(mysql_error());
-
 	//connactions
 	$myfile = $_POST['userId']."connactionDb.xml";
 	$table = "connactions";
