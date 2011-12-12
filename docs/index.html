@@ -1,0 +1,380 @@
+
+<!doctype html>
+<html>
+
+<head>
+<title>Group 7 - ConnActiv</title>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
+<style type="text/css">
+
+body { color: #000; background: #000; font-family: arial; font-size: 12pt; letter-spacing: -1pt; }
+
+img#bg { height: auto; left: 0px; max-width: 1024px; position: fixed; top: 0px; width: 100%; z-index: -5;}
+
+a { text-decoration: none; background: #3B6AA0; color: #fff; padding: 0px 3px 0px 3px; }
+
+div.part { filter:alpha(opacity=80); opacity:0.8; background: #fff; border-radius: 15px; text-align: center; padding: 5px 2px; -moz-border-radius: 15px; margin: 5px auto; width:70%;}
+
+ul { list-style-type: none; margin-left: -25px; }
+
+h2 { text-align: center; margin: 5px 0 5px 0; font-size: 1.2em;}
+
+p { padding: 0px 50px; }
+
+header { text-align: center; font-size: 2em; color: #fff; border-radius: 15px; text-align: center; -moz-border-radius: 15px; padding: 10px 5px 10px 5px; margin: 5px; }
+
+.toggler { float:right; display:inline; }
+
+table.fancy_table{border-width: 0px;
+	border-spacing: 1px;
+	border-style: outset;
+	border-collapse: separate;
+	background-color: white;}
+
+table.fancy_table td{
+	border-width: 1px;
+	padding: 2px;
+	border-style: inset;
+	border-color: gray;
+	background-color: white;
+	text-align: center;
+}
+
+div.alternate { background: #929292; }
+
+</style>
+
+<script type="text/javascript">
+$(function() {
+
+	$('.text').hide();
+	
+	var open = ' [ + ]', close = ' [ - ]', obj, id, form;
+	var toggler = $('<span class="toggle"/>')
+		.html(open)
+		.click(function() {
+			obj=$(this); id=obj.parent().attr('id'); form=obj.html();
+			form==open? obj.html(close): obj.html(open);
+			$('#' +id+'_text').slideToggle();
+		})
+		.hover(function() {
+			$(this).css('cursor','pointer');
+		});
+	toggler.appendTo('h2');
+
+	$('div.part:nth-child(even)').addClass('alternate');
+
+});
+
+</script>
+</head>
+
+<body>
+
+<img id="bg" src="images/bkg.jpg"/>
+
+<header>CS 1530 - Group 7 - Fall 2011</header>
+
+<div class="part">
+	<h2 id="members">Group Members</h2>
+	<div class="text" id="members_text">
+		<ul>
+			<li>Vince Tran - <a href="http://vincetran.me">Website</a></li>
+			<li>Dave Johnson</li>
+			<li>Rob Filippi</li>	
+			<li>Kim Cooperrider - <a href="http://www.pitt.edu/~kac162">Website</a></li>
+			<li>Ray Wang</li>	
+		</ul>
+	</div>
+</div>
+
+<div class="part">
+	<h2 id="cal">Course Calendar</h2>
+	<div class="text" id="cal_text">
+		<a href="cal.txt" target="_blank">View it</a>
+	</div>
+</div>
+
+<div class="part">
+	<h2 id="m1">Software Plan</h2>
+	<div class="text" id="m1_text">
+		<h3>Please note:</h3>
+		<p>This does not represent the entire Software Plan.</br>
+		To view the entire document, <a href="full/1-Software-Plan.pdf">click here</a>.</p>
+		<h3>Scope</h3>
+		<p>ConnActiv is a social network meant to connect people who participate in physical activities. Its goal is to allow users to meet other people in an area based on a mutual interest in sports, running, hiking, etc. Users will be able to subscribe to different activities based on their interest (e.g. a running "activity"). Each activity feeds into its own public stream containing posts that mention or "tag" the activity, as well as any other relevant updates.  The stream is able to be seen in a user's "Home" view if he or she is subscribed to the particular activity. This public stream is intended for users to post what activity they are doing and when. This allows other users to join them if the original user allows invitations to his or her posts.</p>
+		<p>For example, Jon posts the following message on the site's "Running" section: "Hey, going out for a run in Oakland at 9AM." If Jon has allowed it, Stacy may ask to join Jon in running that day. </p>
+		<p>Finally, users may give other users recommendations after they have done an activity together. This gives other users an opportunity to see if the user in question would be a suitable activity partner; however, because this could potentially lead to cyber bullying in the form of malicious reviews, users are limited to one review per activity with the person in question.</p>
+		<h3>Functions</h3>
+		<p><b>User login</b> - Allows the user to login to the site.</p>
+		<p><b>User info</b> - A database entry is stored with all user-inputted info about him or her.</p>
+		<p><b>Public stream</b> - Pulls the latest entries from an activity's database and displays them to users who are subscribed. Stream entries will be interactive -- if the posting user specified that the activity is open, subscribers of the activity may ask to join.  For better usability, tabs will be implemented to separate streams of activities and networks to which the user subscribes. There will be tabs that correspond with the activities and networks that the user subscribes to.</p>
+		<p><b>Recommendations</b> - Users will be able to recommend other users based on their performance, helpfulness, friendliness, etc. when they participate in activities together. A user may write a short review on the user and he/she may simply provide a "thumbs up” or "thumbs down."  A user's ratio of thumbs up/down is displayed in a simple, graphic form on the profile below the profile picture, and when clicked links to a more detailed Recommendations view.</p>
+		<p><b>Requests</b> - Requests will come in two forms: activity and connection. When a user asks to join another user to participate in an activity, this will be an activity request. A request to be buddies will be a connection request.</p>
+		<h3>Performances</h3>
+		<p>We aim to be able to serve up to 200 concurrent users.</p>
+		<h3>Limitations</h3>
+		<p>We predict that anything more than 200 concurrent users will slow down server responsiveness dramatically.</p>
+		<h3>Tasks</h3>
+		<p><b>Database creation and management</b> - The backbone of our system relies on databases to store user information and interaction.</p>
+		<p><b>Clean and modern UI</b> - In order to fit with the growing world of social networks, our user interface has to look modern and be simple to navigate.</p>
+		<p><b>Android app</b> - An android app will be developed as another way for users to access the website.</p>
+		<h3>Resources</h3>
+		<p><b>Hardware</b> - Besides computers to program and maintain the site, a web server is needed to host the site. Because we are creating a largely PHP-based web application, our server needs to support the use of PHP and MySQL for our databases.</p>
+		<p><b>Software</b> - Each developer will be using his or her preferred program to develop the code. We will be programming the front-end of our web application with HTML, CSS (supplemented by LESS, a CSS extension to simplify and optimize stylesheets), and JavaScript (notably jQuery). For back-end, we will be utilizing PHP with MySQL and an Apache web server to manage and manipulate the site's databases.</p>
+		<h3>People</h3>
+		<p><b>Vincent Tran</b> - Project Manager, Salesperson, Android Specialist</p>
+		<p><b>David Johnson</b> - Database Specialist</p>
+		<p><b>Kim Cooperrider</b> - Front-end Specialist, Document Specialist</p>
+		<p><b>Rob Filippi</b> - Tester, PHP Specialist</p>
+		<p><b>Ray Wang</b> - Tester</p>
+	</div>
+</div>
+
+<div class="part">
+	<h2 id="m2">Requirement Specs</h2>
+	<div class="text" id="m2_text">
+		<h3>Please note:</h3>
+		<p>This does not represent the entire Requirement Specs.</br>
+		To view the entire document, <a href="full/2-Requirement-Specs.pdf">click here</a>.</p>
+		<h3>High-Level Data Flow Diagram</h3>
+		<a href="images/ConnActiv.png"><img src="images/ConnActiv.png" width="700"/></a>
+		<h3>Data Structure Representation Examples</h3>
+		<b>Users</b>
+		<center><table class="fancy_table">
+		  <tr>
+			<th>Attribute</th>
+			<th>Data Type</th>
+		  </tr>
+		  <tr>
+			<td>USER_ID</td>
+			<td>INTEGER NOT NULL PK</td>
+		  </tr>
+		  <tr>
+			<td>FIRST_NAME</td>
+			<td>STRING</td>
+		  </tr>
+		  <tr>
+			<td>LAST_NAME</td>
+			<td>STRING</td>
+		  </tr>
+		  <tr>
+			<td>STREET</td>
+			<td>STRING</td>
+		  </tr>
+		  <tr>
+			<td>CITY</td>
+			<td>STRING</td>
+		  </tr>
+		  <tr>
+			<td>STATE</td>
+			<td>CHAR(2)</td>
+		  </tr>
+		  <tr>
+			<td>ZIP</td>
+			<td>INTEGER</td>
+		  </tr>
+		  <tr>
+			<td>PHONE</td>
+			<td>CHAR(12)</td>
+		  </tr>
+		  <tr>
+			<td>INTERESTS</td>
+			<td>CLOB</td>
+		  </tr>
+		  <tr>
+			<td>PROFILE_PIC</td>
+			<td>STRING</td>
+		  </tr>
+		  <tr>
+			<td>EMAIL</td>
+			<td>STRING</td>
+		  </tr>
+		  <tr>
+			<td>DOB</td>
+			<td>DATE</td>
+		  </tr>
+		  <tr>
+			<td>GENDER</td>
+			<td>CHAR(1)</td>
+		  </tr>
+		</table></center></br>
+		<b>ConnActions</b>
+		<center><table class="fancy_table">
+		  <tr>
+			<th>Attribute</th>
+			<th>Data Type</th>
+		  </tr>
+		  <tr>
+			<td>CONNACTION_ID</td>
+			<td>INTEGER NOT NULL PK</td>
+		  </tr>
+		  <tr>
+			<td>POST_TIME</td>
+			<td>DATE</td>
+		  </tr>
+		  <tr>
+			<td>USER_ID</td>
+			<td>INTEGER</td>
+		  </tr>
+		  <tr>
+			<td>LOCATION</td>
+			<td>STRING</td>
+		  </tr>
+		  <tr>
+			<td>START_TIME</td>
+			<td>DATE</td>
+		  </tr>
+		  <tr>
+			<td>MESSAGE</td>
+			<td>STRING</td>
+		  </tr>
+		  <tr>
+			<td>END_TIME</td>
+			<td>DATE</td>
+		  </tr>
+		  <tr>
+			<td>UNIQUE_NETWORK_ID</td>
+			<td>INTEGER</td>
+		  </tr>
+		  <tr>
+			<td>IS_PRIVATE</td>
+			<td>INTEGER</td>
+		  </tr>
+		</table></center>
+
+		<h3>Processing Narrative Examples</h3>
+		<p><b>login</b> - Allow the user to sign into his/her existing account by inputting a string for his/her username and the corresponding password string, hidden as a series of asterisks or dots, and then submitting the information. The user input is passed into the database and checked first to determine if the username is an existing entry (if not, returns false) and then checks if the inputted password matches the stored password for the user. Upon failure, the user is asked to retry his/her credentials. Upon success, the user is logged in and granted access to his/her Home page.</p>
+		<p><b>logout</b> - Allows the user to exit his/her current session. </p>
+		<p><b>subscribe</b> - Allows a user to receive all updates and activity posts from any  activity, network, or group he/she chooses.  The user then will see these updates in his/her Home news feed.</p>
+		<p><b>unsubscribe</b> - Allows a user to stop receiving updates and activity posts from any  activity, network, or group to which he/she was previously subscribed.</p>
+
+		<h3>Design Constraints Examples</h3>
+		<p><b>login</b> - Requires string input for both username and password. Before passing to the database, both inputs are stripped and tested to prevent SQL injections.</p>
+		<p><b>logout</b> - No design constraights</p>
+		<p><b>subscribe</b> - A user cannot subscribe to anything to which he/she is already subscribed.</p>
+		<p><b>unsubscribe</b> - A user cannot unsubscribe from any group/network to which he/she is not already subscribed.</p>
+
+		<h3>Performance Requirements</h3>
+		<p>Considering each user will have many entries in each supporting table, database storage will be our main performance hurdle. The amount of space that we have for database storage will dictate the number of users that our system can handle.</p>
+		<p>The processing speed of our server will dictate the number of concurrent users that we can handle at any given time.</p>
+		<p>Our system should initially be able to handle up to 1,000 user profiles and subsequent table entries according to the user’s site interaction in the database with up to 100 concurrent users. </p>
+		<p>The system should be able to process up to five database queries and display the dynamic page content within five seconds.</p>
+		<p>There shouldn't be any issues with storing dynamic information in the database since inserts are rather inexpensive and should happen one at a time.</p>
+		<p>No action or task should take more than five seconds to complete.</p>
+	</div>
+</div>
+
+<div class="part">
+	<h2 id="m3">Object-Oriented Analysis</h2>
+	<div class="text" id="m3_text">
+		<h3>Please note:</h3>
+		<p>This does not represent the entire Milestone 3. </br>
+		To view the entire document, <a href="full/3-OOA.pdf">click here</a>.  </p>
+		<h3>Class Model</h3>
+		<p>USER(user_id, firstName, lastName, street, city, zip, phone, interests, profile_pic)</br>
+		NETWORK(networkId, area, activity)</br>
+		CONNACTION(connactionId, location, startTime, endTime, activityId)</br>
+		ACTIVITY(activityId, activityName)</br>
+		REVIEW(userId. connactionId, thUp_thDn)</br>
+		COMMENT(commentId, fromUser, toUser, comment, commentDate)</br>
+		MESSAGE(fromUser, toUser, subject, body, date)</br>
+		SUBSCRIPTION(subscriptionId, networkId, userId)</br>
+		EVENT(eventId, startDate, endDate, activityId, location, recurrence)</br>
+		PICTURE(pictureId, userId, path)</p>
+
+		<h3>Scenarios</h3>
+		<p><b>Scenario 1 - Post an Activity</b></p>
+		<p>User selects what Activity Stream to post to</br>
+		User selects what kind of Activity</br>
+		User can leave a small message</br>
+		User selects what time</br>
+		User specifies difficulty levels</br>
+		User's Activity gets posted to selected stream</p>
+
+	</div>
+</div>
+
+<div class="part">
+	<h2 id="m4">Object-Oriented Design</h2>
+	<div class="text" id="m4_text">
+		<h3>Please note:</h3>
+		<p>This does not represent the entire Object-Oriented Design.</br>
+		to view the entire document, <a href="full/4-OOD.pdf">click here</a>.</p>
+
+		<h3>Functions</h3>
+		<p><b>Module Name:</b>  ConnActiv::login</br>
+		<b>Module Type:</b> Method</br>
+		<b>Return Type:</b> None</br>
+		<b>Input arguments:</b> Email, Password</br>
+		<b>Output arguments:</b> None</br>
+		<b>Error messages:</b> If invalid email/password combination is provided</br>
+		<b>Files accessed:</b> Users (Database)</br>
+		<b>Files changed:</b> None</br>
+		<b>Modules called:</b> None</br>
+		<b>Narrative:</b> When the user enters their email address and password to login, it will be checked by accessing the users </br>database to see if their email address exists and if the password is correct.</p>
+
+		<p><b>Module Name:</b> ConnActiv::logout</br>
+		<b>Module Type:</b> Method</br>
+		<b>Return Type:</b> None</br>
+		<b>Input arguments:</b> None</br>
+		<b>Output arguments:</b> None</br>
+		<b>Error messages:</b> None</br>
+		<b>Files accessed:</b> None</br>
+		<b>Files changed:</b> None</br>
+		<b>Modules called:</b> None</br>
+		<b>Narrative:</b> When the user decides to logout, he or she simple needs to click on the logout button and his or her session will end.</p>
+
+		<p>Module Name:</b>  ConnActiv::register_user</br>
+		<b>Module Type:</b> Method</br>
+		<b>Return Type: </b>None</br>
+		<b>Input arguments: </b>Email, First/Last Name, Address, Password, Activities</br>
+		<b>Output arguments:</b> None</br>
+		<b>Error messages:</b> If invalid email or password is given</br>
+		<b>Files accessed:</b> Activities (Database)</br>
+		<b>Files changed:</b> Users (Database)</br>
+		<b>Modules called:</b> None</br>
+		<b>Narrative:</b> When the user registers on ConnActiv, they will be prompted to fill in as much information as they want to provide with a few mandatory fields such as email and password. The activities database will provide a list of already created activities to add to their profile and when the profile is complete, the information will be added to the database.</p>
+
+		<p><b>Module Type:</b> Method</br>
+		<b>Return Type:</b> None</br>
+		<b>Input arguments:</b> Activity Name, User ID</br>
+		<b>Output arguments:</b> None</br>
+		<b>Error messages:</b> If the user inputs an activity that isn’t in the database</br>
+		<b>Files accessed:</b> Activity (Database)</br>
+		<b>Files changed:</b> User (Database)</br>
+		<b>Modules called:</b> None</br>
+		<b>Narrative:</b> A user wants to subscribe to an activity so they search for the activity and click to subscribe. This will add the activity ID to the user’s information in the database.</p>
+	</div>
+</div>
+
+
+<div class="part">
+	<h2 id="m5">Test Plan</h2>
+	<div class="text" id="m5_text">
+		<h3>Please note:</h3>
+		<p>This does not represent the entire Test Plan.</br>
+		to view the entire document, <a href="full/5-Test-Plan.pdf">click here</a>.</p>
+
+
+	</div>
+</div>
+
+
+<div class="part">
+	<h2 id="m6">Test Cases</h2>
+	<div class="text" id="m6_text">
+		<p>To view the entire document, <a href="full/6-Test-Cases.pdf">click here</a>.</p>
+	</div>
+</div>
+
+<div class="part">
+	<h2 id="demo">Acceptance Test & Demo</h2>
+	<div class="text" id="demo_text">
+		<p>To go back to the site, <a href="http://connactiv.com">click here</a>.</p>
+	</div>
+</div>
+
+</body>
+</html>
