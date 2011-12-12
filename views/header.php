@@ -78,6 +78,21 @@
 				"bAutoWidth": true,
 				"aoColumns": [ null, null, null, { "bSortable": false }, null]
    	 });
+   	 
+   	 
+   	$('#demo').click(function() {
+   		var bubble = $(this);
+   		bubble.animate({
+   			opacity: 0.5,
+				height: '130px',
+				'padding-top':'40px'
+			}, 400, function() {
+				bubble.html("When you're logged in as Guest, you can take a tour of ConnActiv. Feel free to play around-- you can't actually mess with any of the real data. Also, you'll see some helpful question marks around the site. Hover over them to find out more about a particular feature.")
+   			.fadeTo('fast',1);
+			});
+   		
+   	
+   	});
 
 	});
 </script>
