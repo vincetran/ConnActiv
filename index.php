@@ -17,6 +17,9 @@
 <head>
 <title>ConnActiv | The place for activ people.</title>
 
+<META name="description" content="A place where awesome people can find other awesome people doing awesome things. Awesome.">
+<META name="keywords" content="awesome, active, activity, connactiv, connaction, fun, connect, friends, moving, athletic, athlete, sports, hobbies, interesets, connecting">
+
 <link rel="shortcut icon" type="image/x-icon" href="public/images/favicon.ico">
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
