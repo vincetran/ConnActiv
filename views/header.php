@@ -84,10 +84,10 @@
    		var bubble = $(this);
    		bubble.animate({
    			opacity: 0.5,
-				height: '130px',
+				height: '118px',
 				'padding-top':'40px'
 			}, 400, function() {
-				bubble.html("When you're logged in as Guest, you can take a tour of ConnActiv. Feel free to play around-- you can't actually mess with any of the real data. Also, you'll see some helpful question marks around the site. Hover over them to find out more about a particular feature.")
+				bubble.html("In Demo mode, you can <span class='blue'>take a tour</span> of ConnActiv! Feel free to play around-- you can't actually mess with any of the real data. Also, you'll see some <span class='blue'>question marks</span> around the site. Hover over them to find out more about a feature.")
    			.fadeTo('fast',1);
 			});
    		
