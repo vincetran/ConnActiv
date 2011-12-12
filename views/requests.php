@@ -63,7 +63,7 @@ if(isset($_POST['subReview'])){
 				$friends = $_POST['friendReq'];
 				foreach($friends as $friend) {
 					denyFriendRequest($friend);
-					
+
 					echo "<div class='notice'>Friend request denied.</div>";
 				} // end foreach
 			}
@@ -456,6 +456,7 @@ if(isset($_POST['subReview'])){
 								<td>
 									<?php 
 										if($is_active == -1){
+											
 											echo "<input type='checkbox' value='".$friendID."' name='friendReq[]' /> <br/>"; 
 											echo "Pending";
 										}

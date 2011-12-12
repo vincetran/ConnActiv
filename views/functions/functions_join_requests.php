@@ -190,12 +190,12 @@ function acceptFriendRequest($reqID){
 	//This accepts the friend request
 	$fromUser = strtok($reqID, " ");
 	$toUser = strtok(" ");
-	
+	echo $from_user."   ". $to_user;
 	//echo "Accept: ID: ".$fromUser." ConID: ".$connactionID;
 	$query = sprintf("UPDATE friend_requests SET IS_ACTIVE = 1 WHERE FROM_USER = '%s' AND TO_USER = '%s'",$fromUser, $toUser);
 	$update = mysql_query($query) or die(mysql_error());
 	mysql_query("insert into messages values(1, ".$fromUser.", 'Friend Request', '".getUserName(getUserID())."' has accepted your friend request ', now())");
-	$query = sprintf("INSERT INTO friends(USER1, USER2) values('%s', '%s'), ", $fromUser, $toUser);
+	$query = sprintf("INSERT INTO friends(USER1, USER2) values('%s', '%s') ", $fromUser, $toUser);
 	$update = mysql_query($query) or die(mysql_error());
 	
 }
