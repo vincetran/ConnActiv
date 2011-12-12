@@ -219,7 +219,6 @@ function addUniqueNetwork($networkID, $activityID){
 }	
 
 function addNetwork($area, $state){
-	$area = addslashes($area);
 	$insert = mysql_query("INSERT INTO networks(AREA, STATE) VALUES('$area', '$state')") or die(mysql_error());
 	$query = mysql_query("select max(network_id) from networks");
 	$result = mysql_fetch_array($query);
@@ -227,7 +226,6 @@ function addNetwork($area, $state){
 }
 
 function networkExists($area, $state) {
-	$area = addslashes($area);
 	$query = "SELECT count(*) FROM networks WHERE area = '".$area."' AND state = '".$state."'";
 	$result = mysql_query($query) or die(mysql_error());
 	if (mysql_num_rows($result) > 1) return true;

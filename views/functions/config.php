@@ -60,10 +60,6 @@ function login(){
 	if(!$_POST['username'] | !$_POST['pass']) {
 		die('Oops. You did not fill in a required field.');
 	}
-	// checks it against the database
-	//if (!get_magic_quotes_gpc()) {
-		//	$_POST['email'] = addslashes($_POST['email']);		//I do not know where this came from. Did you add it dave?
-		//}
 		$check = mysql_query("SELECT * FROM users WHERE email = '".$_POST['username']."'")or die(mysql_error());
 		//Gives error if user dosen't exist
 		$check2 = mysql_num_rows($check);

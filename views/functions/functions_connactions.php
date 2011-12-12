@@ -229,7 +229,7 @@
 			$unID = $_POST['uniqueNetwork'];		
 			
 			$query = "INSERT INTO connactions(POST_TIME, USER_ID, LOCATION, START_TIME, MESSAGE, END_TIME, UNIQUE_NETWORK_ID, IS_PRIVATE)
-				VALUES ('".$today."', '".getUserID()."', '".addslashes($_POST['location'])."', '".$startTime."', '".addslashes($_POST['message'])."', '".$endTime."', '".$unID."', '".$_POST['private']."')";
+				VALUES ('".$today."', '".getUserID()."', '".mysql_real_escape_string($_POST['location'])."', '".$startTime."', '".mysql_real_escape_string($_POST['message'])."', '".$endTime."', '".$unID."', '".$_POST['private']."')";
 						
 			$insert = mysql_query($query) or die(mysql_error());
 			echo "<div class='notice'>ConnAction posted!</div>";
