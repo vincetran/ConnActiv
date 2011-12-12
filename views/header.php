@@ -87,7 +87,8 @@
 				'padding-top':'40px'
 			}, 400, function() {
 				bubble.html("In Demo mode, you can <span class='blue'>take a tour</span> of ConnActiv! Feel free to play around-- you can't actually mess with any of the real data. Also, you'll see some <span class='blue'>question marks</span> around the site. Click on them to find out more about a feature.<br>")
-   			.fadeTo('fast',1);
+   			.fadeTo('fast',1)
+   			.delay(6000).fadeOut('slow');
 			});
    	});
    	
