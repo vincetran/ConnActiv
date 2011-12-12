@@ -10,16 +10,19 @@
 				if(getUserID() != "2"){
 					saveInfo();
 				}
+				else{echo "<div class = 'demo'>You are unable to save profile information in Demo Mode</div>";}
 			}
 			if(isset($_POST['saveInfoState'])){
 				if(getUserID() != "2"){
 					saveInfoState();
 				}
+				else{echo "<div class = 'demo'>You are unable to save profile information in Demo Mode</div>";}
 			}
 			if(isset($_POST['saveInfoAge'])){
 				if(getUserID() != "2"){
 					saveInfoAge();
 				}
+				else{echo "<div class = 'demo'>You are unable to save profile information in Demo Mode</div>";}
 			}
 			//upload the file and set the users profile pic.			
 			if(isset($_POST['fileupload'])){
@@ -29,6 +32,7 @@
 					$query = "update users set profile_pic = 'profile_pics/".getUserID()."' where user_id = ".getUserID();
 					mysql_query($query);
 				}
+				else{echo "<div class = 'demo'>You are unable to upload profile pictures in Demo Mode</div>";}
 				unset($_FILES);
 
 			}
@@ -38,6 +42,7 @@
 					
 					mysql_query($query);
 				}
+				else{echo "<div class = 'demo'>You are unable to reply to messages in Demo Mode</div>";}
 			}
 			
 			?>

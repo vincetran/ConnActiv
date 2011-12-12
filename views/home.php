@@ -7,15 +7,18 @@
 			if(getUserID() != "2"){
 				postConnaction();
 			}
+			else{echo "<div class = 'demo'>You are unable to Post Connactions in Demo Mode</div>";}
 
 		} else if (isset($_POST['joinRequest'])) { 
 			if(getUserID() != "2"){
 				joinRequest();
 			}
+			else{echo "<div class = 'demo'>You are unable to Join Connactions in Demo Mode</div>";}
 		} else if (isset($_POST['postEvent'])) {
 			if(getUserID() != "2"){
 				postEvent();
 			}
+			else{echo "<div class = 'demo'>You are unable to Post Events in Demo Mode</div>";}
 		} else if(isset($_POST['friend'])){
 			if(getUserID() != "2"){
 
@@ -23,10 +26,12 @@
 
 				mysql_query($query) or die(mysql_error());
 			}
+			else{echo "<div class = 'demo'>You are unable to request friends in Demo Mode</div>";}
 		}	else if(isset($_POST['reply'])){
 				if(getUserID() != "2"){
 					message();	
-				}	
+				}
+				else{echo "<div class = 'demo'>You are unable to reply to messages in Demo Mode</div>";}	
 		}
 			
 	?>

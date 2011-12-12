@@ -12,6 +12,7 @@ if(isset($_POST['subReview'])){
 				
 				mysql_query($query) or die(mysql_error());
 			}
+			else{echo "<div class = 'demo'>You are unable to Review Connactions in Demo Mode</div>";}
 			unset($_POST['review']);
 		}
 	
@@ -25,6 +26,7 @@ if(isset($_POST['subReview'])){
 					echo "<div class='notice'>Join request accepted!</div>";
 				} // end foreach
 			}	
+			else{echo "<div class = 'demo'>You are unable to accept Connaction Requests in Demo Mode</div>";}
 		} unset($_POST['requestID']);
 			unset($_POST['accept']);
 	}
@@ -38,6 +40,7 @@ if(isset($_POST['subReview'])){
 					echo "<div class='notice'>Friend accepted!</div>";
 				} // end foreach
 			}
+			else{echo "<div class = 'demo'>You are unable to accept friend requests in Demo Mode</div>";}
 		} //end if ($_POST[accept])
 	}
 	
@@ -50,6 +53,7 @@ if(isset($_POST['subReview'])){
 					echo "<div class='notice'>Join request denied.</div>";
 				} // end foreach
 			}
+			else{echo "<div class = 'demo'>You are unable to deny connaction requests in Demo Mode</div>";}
 		} //end if ($_POST[deny])
 	}
 	
@@ -62,6 +66,7 @@ if(isset($_POST['subReview'])){
 					echo "<div class='notice'>Friend request denied.</div>";
 				} // end foreach
 			}
+			else{echo "<div class = 'demo'>You are unable to deny friend requests in Demo Mode</div>";}
 		} //end if ($_POST[deny])
 	}
 	
