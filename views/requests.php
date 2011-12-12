@@ -202,15 +202,6 @@ if(isset($_POST['subReview'])){
    	});
    	
    
-	close_details = $("<span class='clickable close'></span>").click(function() {
-		$(this).parent('.details_question').fadeOut();
-	});
-	
-	$('div.question').click(function() {
-		$('div.details_question').fadeOut('slow');
-		id = $(this).attr('id');
-		$('#details_'+id).append(close_details).fadeIn('slow');
-	});
    	
    	 
 		});		
