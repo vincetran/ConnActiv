@@ -106,19 +106,6 @@
 				$('.editExpander').click(function(){
 					$(this).siblings('.expand').toggle();
 				});
-				
-				
-				close_details = $("<span class='clickable close'></span>").click(function() {
-				$(this).parent('.details_question').fadeOut();
-			});
-			
-			$('div.question').click(function() {
-				id = $(this).attr('id');
-				$('#details_'+id).append(close_details)
-				.fadeIn('slow');
-			});
-				
-				
    		});
    		
    		</script>
@@ -236,7 +223,7 @@
 									<span class=\"clickable editExpander\">$level[1]<span class='editIcon'></span></span>";
 						}	
 							echo	"<div class=\"expand\" style=\"display:none\">
-											<input name=\"seekLvl$index\" type = \"number\" min = \"0\" max = \"10\" width = \"20\">
+											<select name=\"seekLvl$index\">
 												<option value=\"-1\">Level</option>";
 												for($i = 1; $i <= 10; $i++){
 													// i = Row number
@@ -255,7 +242,7 @@
 									<span class=\"clickable editExpander\">$level[2]<span class='editIcon'></span> - </span>";
 						}
 							echo "<div class=\"expand\" style=\"display:none\">
-										<input name=\"lowLvl$index\" type = \"number\" min = \"0\" max = \"10\" width = \"20\">
+										<select name=\"lowLvl$index\">
 												<option value=\"-1\">Level</option>";
 												for($i = 1; $i <= 10; $i++){
 													echo "<option value=\"$i $level[0]\">$i</option>";
@@ -270,7 +257,7 @@
 							echo "	<span class=\"clickable editExpander\">$level[3]<span class='editIcon'></span></span>";
 						}
 							echo " <div class=\"expand\" style=\"display:none\">
-										<input name=\"highLvl$index\" type = \"number\" min = \"0\" max = \"10\" width = \"20\">
+										<select name=\"highLvl$index\">
 												<option value=\"-1\">Level</option>";
 												for($i = 1; $i <= 10; $i++){
 													echo "<option value=\"$i $level[0]\">$i</option>";
@@ -288,7 +275,7 @@
 									<span class=\"clickable editExpander\">$level[4]<span class='editIcon'></span></span>";
 						}
 							echo "<div class=\"expand\" style=\"display:none\">
-											<input name=\"ownLvl$index\" type = \"number\" min = \"0\" max = \"10\" width = \"20\">
+											<select name=\"ownLvl$index\">
 												<option value=\"-1\">Level</option>";
 												for($i = 1; $i <= 10; $i++){
 													echo "<option value=\"$i $level[0]\">$i</option>";
