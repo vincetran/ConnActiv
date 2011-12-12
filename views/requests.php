@@ -201,15 +201,16 @@ if(isset($_POST['subReview'])){
    		$(this).hide();
    	});
    	
-   	close_details = $("<span class='clickable close'></span>").click(function() {
-			$(this).parent('.details_question').fadeOut();
-		});
-		
-		$('div.question').click(function() {
-			id = $(this).attr('id');
-			$('#details_'+id).append(close_details)
-			.fadeIn('slow');
-		});
+   
+	close_details = $("<span class='clickable close'></span>").click(function() {
+		$(this).parent('.details_question').fadeOut();
+	});
+	
+	$('div.question').click(function() {
+		$('div.details_question').fadeOut('slow');
+		id = $(this).attr('id');
+		$('#details_'+id).append(close_details).fadeIn('slow');
+	});
    	
    	 
 		});		
@@ -225,9 +226,9 @@ if(isset($_POST['subReview'])){
 	<div class="requestType" id="view_connactions">
 	
 	<? if (isDemo()): ?>	
-	<div id="demoRequest" class="question" style="left:0px;top:0px"></div>
-	<div id="details_demoRequest" class="details_question" style="left:0px;display:none"><span class="blue">xx</span> xxxxxxxxx.</div>
-<? endif; ?>
+	<div id="demoRequest" class="question" style="left:20px;top:70px"></div>
+	<div id="details_demoRequest" class="details_question" style="left:200px;top:200px;display:none"><span class="blue"></span> xxxxxxxxx.</div>
+	<? endif; ?>
 
 		<h2>Incoming Connaction Requests</h2>
 		<h3>People asking to join you</h3>

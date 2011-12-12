@@ -128,16 +128,16 @@
 				$(".error").slideUp();
 			}
 			
-				close_details = $("<span class='clickable close'></span>").click(function() {
-				$(this).parent('.details_question').fadeOut();
-			});
 			
-			$('div.question').click(function() {
-				id = $(this).attr('id');
-				$('#details_'+id).append(close_details)
-				.fadeIn('slow');
-			});
-			
+	close_details = $("<span class='clickable close'></span>").click(function() {
+		$(this).parent('.details_question').fadeOut();
+	});
+	
+	$('div.question').click(function() {
+		$('div.details_question').fadeOut('slow');
+		id = $(this).attr('id');
+		$('#details_'+id).append(close_details).fadeIn('slow');
+	});
 			
 
 		});
@@ -157,8 +157,8 @@
 			<h2>Profile Info</h2>
 			
 		<? if (isDemo()): ?>	
-			<div id="demoProfile" class="question" style="right:-450px;top:-30px"></div>
-			<div id="details_demoProfile" class="details_question" style="right:50px;top:90px;display:none"><span class="blue">xx</span> xxxx.</div>
+			<div id="demoProfile" class="question" style="left:20px;top:-10px"></div>
+			<div id="details_demoProfile" class="details_question" style="left:200px;display:none">You can <span class="blue">edit your profile</span> to your liking. This information will be viewable when someone clicks on your profile in the ConnActions stream.</div>
 		<? endif; ?>
 					
 			<div class="greyBorder">

@@ -106,6 +106,18 @@
 				$('.editExpander').click(function(){
 					$(this).siblings('.expand').toggle();
 				});
+				
+				
+	close_details = $("<span class='clickable close'></span>").click(function() {
+		$(this).parent('.details_question').fadeOut();
+	});
+	
+	$('div.question').click(function() {
+		$('div.details_question').fadeOut('slow');
+		id = $(this).attr('id');
+		$('#details_'+id).append(close_details).fadeIn('slow');
+	});
+				
    		});
    		
    		</script>
@@ -115,8 +127,8 @@
 			<h2>Your subscribed networks</h2>
 			
 			<? if (isDemo()): ?>	
-				<div id="demoSubscrips" class="question" style="left:0px;top:0px"></div>
-				<div id="details_demoSubscrips" class="details_question" style="left:0px;display:none"><span class="blue">xx</span> xxxxxxxxx.</div>
+				<div id="demoSubscrips" class="question" style="left:20px;top:0px"></div>
+				<div id="details_demoSubscrips" class="details_question" style="left:200px;top:150px;display:none">Your <span class="blue">subscribed networks</span> show what kind of activities and from where you want to see ConnActions from. To subscribe to new networks or make your own, click on 'Subscribe to a new network.'</div>
 			<? endif; ?>
 					
 			<form id="unsubNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
@@ -193,8 +205,8 @@
 			<h2>Your skill level preferences</h2>
 			
 			<? if (isDemo()): ?>	
-			<div id="demoSkill" class="question" style="left:0px;top:0px"></div>
-			<div id="details_demoSkill" class="details_question" style="left:0px;display:none"><span class="blue">xx</span> xxxxxxxxx.</div>
+			<div id="demoSkill" class="question" style="left:20px;top:-20px"></div>
+			<div id="details_demoSkill" class="details_question" style="left:200px;display:none"><span class="blue">xx</span> xxxxxxxxx.</div>
 		<? endif; ?>
 			
 			<form id="subscribeNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
