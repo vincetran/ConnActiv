@@ -127,6 +127,11 @@
 			
 			<h2>Your subscribed networks</h2>
 			
+			<? if (isDemo()): ?>	
+				<div id="demoSubscrips" class="question" style="left:0px;top:0px"></div>
+				<div id="details_demoSubscrips" class="details_question" style="left:0px;display:none"><span class="blue">xx</span> xxxxxxxxx.</div>
+			<? endif; ?>
+					
 			<form id="unsubNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 			<table id="userNetworks" class="alternating regular_table">
 				<thead>
@@ -140,7 +145,7 @@
 				<tbody>
 			<?
 				$networks = getUserUniqueNetworks();
-				$favs = getFavoriteIDs();	
+				$favs = getFavoriteIDs();
 					foreach($networks as $network) {
 						echo "<tr>";
 							echo "<td>".$network[1].", ".$network[2]."</td><td>".$network[3]."</td>";
@@ -199,6 +204,12 @@
 			
 			<br><br><br>
 			<h2>Your skill level preferences</h2>
+			
+			<? if (isDemo()): ?>	
+			<div id="demoSkill" class="question" style="left:0px;top:0px"></div>
+			<div id="details_demoSkill" class="details_question" style="left:0px;display:none"><span class="blue">xx</span> xxxxxxxxx.</div>
+		<? endif; ?>
+			
 			<form id="subscribeNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 			<table id="skillsTable" class="alternating regular_table">
 			<thead>
