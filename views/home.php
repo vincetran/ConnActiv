@@ -161,7 +161,7 @@
 									}
 								?>
 							</select> : <select name="startMin"><option value="-1">Min</option>
-								<? for($i = 0; $i < 60; $i++)
+								<? for($i = 0; $i < 60; $i+=15)
 									if( $i < 10){
 										echo "<option value=\"0",$i,"\">", "0".$i, "</option>";
 									}
@@ -182,7 +182,7 @@
 								?>
 							</select> : <select name="endMin">
 							<option value="-1">Min</option>
-								<? for($i = 0; $i < 60; $i++)
+								<? for($i = 0; $i < 60; $i+=15)
 									if( $i < 10){
 										echo "<option value=\"0",$i,"\">", "0".$i, "</option>";
 									}
@@ -214,11 +214,42 @@
 				Name: <input type="text" class="small" id="eventName" placeholder="Give it a name!" name="eventName" maxlength="255"><br/><br/>
 				Description: <textarea class="small" id="eventMsg" placeholder=" Tell us a little about your event." name="eventMsg" maxlength="4000"></textarea><br/><br/>
 				Location: <textarea class="small" id="eventLoc" placeholder=" Where?" name="eventLoc" maxlength="255"></textarea><br/><br/>
-				Starting: <input type="text" class="small_input" name="eventStartDate" id="eventStartDate"/> <select name="eventStartHour"><option value="-1">Hour</option><? for($i = 1; $i < 24; $i++) echo "<option value=\"",$i,"\">", $i, "</option>";	?></select>
-					: <select name="eventStartMin"><option value="-1">Min</option><? for($i = 0; $i < 60; $i++) echo "<option value=\"",$i,"\">", $i, "</option>";	?></select><br/><br/>
+				Starting: <input type="text" class="small_input" name="eventStartDate" id="eventStartDate"/> <select name="eventStartHour"><option value="-1">Hour</option>
+				<? for($i = 1; $i < 24; $i++)
+					if( $i < 10){
+						echo "<option value=\"0",$i,"\">", "0".$i, "</option>";
+					}
+					else{
+						echo "<option value=\"",$i,"\">", $i, "</option>";
+					}	
+				?></select>
+					: <select name="eventStartMin"><option value="-1">Min</option>
+					<? for($i = 0; $i < 60; $i+=15)
+						if( $i < 10){
+							echo "<option value=\"0",$i,"\">", "0".$i, "</option>";
+						}
+						else{
+							echo "<option value=\"",$i,"\">", $i, "</option>";
+						}
+					?></select><br/><br/>
 				Ending: <input type="text" class="small_input" name="eventEndDate" id="eventEndDate" /> <select name="eventEndHour"><option value="-1">Hour</option>
-					<? for($i = 1; $i < 24; $i++) echo "<option value=\"",$i,"\">", $i, "</option>"; ?></select> : <select name="eventEndMin">
-					<option value="-1">Min</option><? for($i = 0; $i < 60; $i++) echo "<option value=\"",$i,"\">", $i, "</option>"; ?></select><br><br>	
+					<? for($i = 1; $i < 24; $i++)
+						 if( $i < 10){
+							echo "<option value=\"0",$i,"\">", "0".$i, "</option>";
+						}
+						else{
+							echo "<option value=\"",$i,"\">", $i, "</option>";
+						}
+					?></select> : <select name="eventEndMin">
+					<option value="-1">Min</option>
+					<? for($i = 0; $i < 60; $i+=15)
+					 	if( $i < 10){
+							echo "<option value=\"0",$i,"\">", "0".$i, "</option>";
+						}
+						else{
+							echo "<option value=\"",$i,"\">", $i, "</option>";
+						}
+					 ?></select><br><br>	
 				<? //eventNetwork, eventActivity as IDs
 					
 					echo getUniqueAsSelect() ?>
