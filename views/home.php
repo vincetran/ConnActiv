@@ -7,18 +7,18 @@
 			if(getUserID() != "2"){
 				postConnaction();
 			}
-			else{echo "<div class = 'demo'>You are unable to Post Connactions in Demo Mode</div>";}
+			else{echo "<div class = 'demo'>You are unable to post connactions in Demo mode.</div>";}
 
 		} else if (isset($_POST['joinRequest'])) { 
 			if(getUserID() != "2"){
 				joinRequest();
 			}
-			else{echo "<div class = 'demo'>You are unable to Join Connactions in Demo Mode</div>";}
+			else{echo "<div class = 'demo'>You are unable to join connactions in Demo mode.</div>";}
 		} else if (isset($_POST['postEvent'])) {
 			if(getUserID() != "2"){
 				postEvent();
 			}
-			else{echo "<div class = 'demo'>You are unable to Post Events in Demo Mode</div>";}
+			else{echo "<div class = 'demo'>You are unable to post events in Demo mode.</div>";}
 		} else if(isset($_POST['friend'])){
 			if(getUserID() != "2"){
 
@@ -27,7 +27,7 @@
 				mysql_query($query) or die(mysql_error());
 			}
 
-			else{echo "<div class = 'demo'>You are unable to request friends in Demo Mode</div>";}
+			else{echo "<div class = 'demo'>You are unable to request friends in Demo mode.</div>";}
 
 		
 
@@ -35,7 +35,7 @@
 				if(getUserID() != "2"){
 					message();	
 				}
-				else{echo "<div class = 'demo'>You are unable to reply to messages in Demo Mode</div>";}	
+				else{echo "<div class = 'demo'>You are unable to reply to messages in Demo mode.</div>";}	
 		}
 			
 	?>
@@ -134,6 +134,16 @@
 			} else {
 				corresponding.hide();
 			}			
+		});		
+	
+		close_details = $("<span class='clickable close'></span>").click(function() {
+			$(this).parent('.details_question').fadeOut();
+		});
+		
+		$('div.question').click(function() {
+			id = $(this).attr('id');
+			$('#details_'+id).append(close_details)
+			.fadeIn('slow');
 		});
 
 	});
@@ -141,6 +151,10 @@
 	
 		<div class="page">
 		
+		
+<div id="demoConnaction" class="question" style="right:-560px;top:50px"></div>
+<div id="details_demoConnaction" class="details_question" style="display:none;right:10px;top:50px">Feel like going for a run but want a running buddy? Or do you want to go rock climbing but you're new in town? Go ahead and <span class="blue">post a connaction!</span> A ConnAction is an activity. When you want to do something in a particular area, post a connaction to let other people know about it. Tag your connaction so that the people who are interested in similar things will be able to view it. Make it open to joiners if you'd like company!</div>
+	
 			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
 			<div class="greyBorder" id="postConnaction">
 				<div id="postHeader">
