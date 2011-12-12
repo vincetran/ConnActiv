@@ -103,7 +103,8 @@ function login(){
 		
 		//if email has not been registered before
 		if($check2 == 0){
-			//check to make sure the password was confirmed			
+			//check to make sure the password was confirmed		
+			if(strlen($_POST['password']) >=6){	
 			if(strcmp($_POST['password'], $_POST['confirm'])==0){	
 				if( strlen($_POST['phone']) == 0 || strlen($_POST['phone']) == 10 || strlen($_POST['phone']) ==12) {
 
@@ -154,9 +155,12 @@ function login(){
 				else{
 					echo '<div class="error">Please input phone number as either xxx-xxx-xxxx or xxxxxxxxxx. </div>';
 				}		
-			}	
+			}
+				
 			//if the passwords do not match ask them to enter the information again
-			else{ die("the passwords do not match, please re-enter your information");}
+			else{echo '<div class="error">The passwords do not match, Please reenter your password</div>';}
+			}
+			else{echo '<div class="error">Your Password must be longer than 6 characters</div>';}
 		}
 		//if the email is already registered then display message
 		else{

@@ -30,9 +30,9 @@
 	});
 	
 	$('div.question').click(function() {
+		$('div.details_question').fadeOut('slow');
 		id = $(this).attr('id');
-		$('#details_'+id).append(close_details)
-		.fadeIn('slow');
+		$('#details_'+id).append(close_details).fadeIn('slow');
 	});
 		
 });
