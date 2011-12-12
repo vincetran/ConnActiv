@@ -62,19 +62,19 @@ function joinRequest(){
 		$releasePhone = "off";
 	}
 	$body = '';
-	
-	$user = getDatabaseInfo("users", "user_id", getUserID());
-	if($releaseEmail == "on"){
-		$body .= "Email: ".$user['EMAIL']."\n";
-	}
-	if($releasePhone == "on"){
-		$body .= "Phone: ".$user['PHONE']."\n";
-	}
+	if($releasePhone != "off" && $releaseEmail != "off"){
+		$user = getDatabaseInfo("users", "user_id", getUserID());
+		if($releaseEmail == "on"){
+			$body .= "Email: ".$user['EMAIL']."\n";
+		}
+		if($releasePhone == "on"){
+			$body .= "Phone: ".$user['PHONE']."\n";
+		}
 
-	$query = "insert into messages values (".getUserID().", ".$to_user.", 'Contact info', '".$body."', now())";
-	
-	mysql_query($query);
-	
+		$query = "insert into messages values (".getUserID().", ".$to_user.", 'Contact info', '".$body."', now())";
+		
+		mysql_query($query);
+	}
 	$query = sprintf("INSERT INTO connaction_requests (from_user, to_user, connaction_ID, message) values(%s,%s,%s,'%s')", $from_user, $to_user, $connactionID, $message);
 	$insert = mysql_query($query) or die(mysql_error());
 	echo "<div class='notice'>ConnAction request sent!</div>";
@@ -190,12 +190,12 @@ function acceptFriendRequest($reqID){
 	//This accepts the friend request
 	$fromUser = strtok($reqID, " ");
 	$toUser = strtok(" ");
-	
+	echo $from_user."   ". $to_user;
 	//echo "Accept: ID: ".$fromUser." ConID: ".$connactionID;
 	$query = sprintf("UPDATE friend_requests SET IS_ACTIVE = 1 WHERE FROM_USER = '%s' AND TO_USER = '%s'",$fromUser, $toUser);
 	$update = mysql_query($query) or die(mysql_error());
 	mysql_query("insert into messages values(1, ".$fromUser.", 'Friend Request', '".getUserName(getUserID())."' has accepted your friend request ', now())");
-	$query = sprintf("INSERT INTO friends(USER1, USER2) values('%s', '%s'), ", $fromUser, $toUser);
+	$query = sprintf("INSERT INTO friends(USER1, USER2) values('%s', '%s') ", $fromUser, $toUser);
 	$update = mysql_query($query) or die(mysql_error());
 	
 }
@@ -218,7 +218,7 @@ function denyFriendRequest($reqID){
 	$toUser = strtok(" ");
 	
 	//echo "Accept: ID: ".$fromUser." ConID: ".$connactionID;
-	$query = sprintf("UPDATE friend_requests SET IS_ACTIVE = 2 WHERE FROM_USER = '%s' AND TO_USER = '%s'",$fromUser, $toUser);
+	$query = sprintf("Delete from friend_requests WHERE FROM_USER = '%s' AND TO_USER = '%s'",$fromUser, $toUser);
 	$update = mysql_query($query) or die(mysql_error());
 	mysql_query("insert into messages values(1, ".$fromUser.", 'Friend Request', '".getUserName(getUserID())."' has denied your friend request ', now())");
 	

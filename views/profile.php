@@ -156,6 +156,11 @@
 			
 			<h2>Profile Info</h2>
 			
+		<? if (isDemo()): ?>	
+			<div id="demoProfile" class="question" style="left:0px;top:0px"></div>
+			<div id="details_demoProfile" class="details_question" style="left:0px;display:none"><span class="blue">xx</span> xxxx.</div>
+		<? endif; ?>
+					
 			<div class="greyBorder">
 			
 			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
