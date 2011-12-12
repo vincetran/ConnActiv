@@ -218,7 +218,7 @@ if(isset($_POST['subReview'])){
 	
 	<? if (isDemo()): ?>	
 	<div id="demoRequest" class="question" style="left:20px;top:70px"></div>
-	<div id="details_demoRequest" class="details_question" style="left:200px;top:200px;display:none">When other users send <span class="blue">ConnAction requests</span>, they will be displayed here to for you to accept or deny.</div>
+	<div id="details_demoRequest" class="details_question" style="left:200px;top:200px;display:none">When other users send <span class="blue">ConnAction requests</span>, they will be displayed here for you to accept or deny.</div>
 	<? endif; ?>
 
 		<h2>Incoming Connaction Requests</h2>

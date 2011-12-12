@@ -3,6 +3,6 @@
 
 	$unique = getAllUniqueNetworks();
 	foreach($unique as $un) {
-		echo $un[1] .", ". $un[2]." | ".$un[3] ."&";
+		echo $un[0]."*".$un[1].", ". $un[2]."*".$un[3]."*";
 	}
 ?>
