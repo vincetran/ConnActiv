@@ -158,7 +158,7 @@
 			
 		<? if (isDemo()): ?>	
 			<div id="demoProfile" class="question" style="right:-450px;top:-30px"></div>
-			<div id="details_demoProfile" class="details_question" style="right:-30px;top:90px;display:none"><span class="blue">xx</span> xxxx.</div>
+			<div id="details_demoProfile" class="details_question" style="right:50px;top:90px;display:none"><span class="blue">xx</span> xxxx.</div>
 		<? endif; ?>
 					
 			<div class="greyBorder">

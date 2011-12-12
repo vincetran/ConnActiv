@@ -41,7 +41,9 @@
 
 <div id="sidebar">
 	<br/>
-	<img src="<? echo getUserPic(getUserId()); ?>" height="120"/>
+	<div id="constrain_pic">
+		<img src="<? echo getUserPic(getUserId()); ?>" height="120"/>
+	</div>
 	<h2 class="sidebar"><? echo getName(); ?></h2>
 	
 <? if (isDemo()): ?>	
