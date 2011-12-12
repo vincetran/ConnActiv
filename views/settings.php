@@ -128,7 +128,7 @@
 			
 			<? if (isDemo()): ?>	
 				<div id="demoSubscrips" class="question" style="left:20px;top:0px"></div>
-				<div id="details_demoSubscrips" class="details_question" style="left:200px;top:150px;display:none">Your <span class="blue">subscribed networks</span> show what kind of activities you are subscribed to and from where you want to see ConnActions from. To subscribe to new networks or make your own, click on 'Subscribe to a new network.'</div>
+				<div id="details_demoSubscrips" class="details_question" style="left:200px;top:150px;display:none">Your <span class="blue">subscribed networks</span> show what kind of activities you are subscribed to and from what networks you want to see ConnActions. To subscribe to new networks or make your own, click on 'Subscribe to a new network.'</div>
 			<? endif; ?>
 					
 			<form id="unsubNetworksForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
