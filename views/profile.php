@@ -157,8 +157,8 @@
 			<h2>Profile Info</h2>
 			
 		<? if (isDemo()): ?>	
-			<div id="demoProfile" class="question" style="left:0px;top:0px"></div>
-			<div id="details_demoProfile" class="details_question" style="left:0px;display:none"><span class="blue">xx</span> xxxx.</div>
+			<div id="demoProfile" class="question" style="right:-450px;top:-30px"></div>
+			<div id="details_demoProfile" class="details_question" style="right:-30px;top:90px;display:none"><span class="blue">xx</span> xxxx.</div>
 		<? endif; ?>
 					
 			<div class="greyBorder">
