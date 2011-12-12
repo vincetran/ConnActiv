@@ -225,9 +225,9 @@ if(isset($_POST['subReview'])){
 	<div class="requestType" id="view_connactions">
 	
 	<? if (isDemo()): ?>	
-	<div id="demoRequest" class="question" style="left:0px;top:0px"></div>
-	<div id="details_demoRequest" class="details_question" style="left:0px;display:none"><span class="blue">xx</span> xxxxxxxxx.</div>
-<? endif; ?>
+	<div id="demoRequest" class="question" style="left:20px;top:70px"></div>
+	<div id="details_demoRequest" class="details_question" style="left:200px;top:200px;display:none"><span class="blue"></span> xxxxxxxxx.</div>
+	<? endif; ?>
 
 		<h2>Incoming Connaction Requests</h2>
 		<h3>People asking to join you</h3>

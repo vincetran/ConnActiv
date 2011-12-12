@@ -157,8 +157,8 @@
 			<h2>Profile Info</h2>
 			
 		<? if (isDemo()): ?>	
-			<div id="demoProfile" class="question" style="left:0px;top:0px"></div>
-			<div id="details_demoProfile" class="details_question" style="left:0px;display:none"><span class="blue">xx</span> xxxx.</div>
+			<div id="demoProfile" class="question" style="left:20px;top:-10px"></div>
+			<div id="details_demoProfile" class="details_question" style="left:200px;display:none">You can <span class="blue">edit your profile</span> to your liking. This information will be viewable when someone clicks on your profile in the ConnActions stream.</div>
 		<? endif; ?>
 					
 			<div class="greyBorder">

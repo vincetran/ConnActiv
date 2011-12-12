@@ -160,6 +160,8 @@
 		$startTime = strtotime($start);
 		$endTime = strtotime($end);
 
+		//echo $todayTime."\n".$startTime."\n".$endTime;
+
 		if ($startTime >= $todayTime || $endTime >= $todayTime) {
 			$startTime = $start." ".$_POST['eventStartHour'].":".$_POST['eventStartMin'].":00";
 			$endTime = $end." ".$_POST['eventEndHour'].":".$_POST['eventEndMin'].":00";
@@ -237,6 +239,7 @@
 			echo "<div class='notice'>ConnAction posted!</div>";
 		} else {
 		     echo "<div class='error'>Please set your ConnAction not to the past.</div>";
+		    // echo "<div class='error'>".$todayTime." ".$startTime." ".$endTime."</div>";
 		}
 
 		
