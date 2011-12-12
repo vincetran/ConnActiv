@@ -202,6 +202,8 @@ if(isset($_POST['subReview'])){
    	});
    	
    
+			
+			$('#demo').hide();
    	
    	 
 		});		

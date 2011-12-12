@@ -128,6 +128,8 @@
 				$(".error").slideUp();
 			}
 			
+			$('#demo').hide();
+			
 
 		});
 			</script>
