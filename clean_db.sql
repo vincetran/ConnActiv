@@ -31,7 +31,8 @@ CREATE TABLE `activities` (
   PRIMARY KEY (`ACTIVITY_ID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-
+INSERT INTO `activities` (`ACTIVITY_ID`, `ACTIVITY_NAME`) VALUES
+(1, 'Running');
 
 # Dump of table comments
 # ------------------------------------------------------------
@@ -80,6 +81,8 @@ CREATE TABLE `connaction_requests` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 
+INSERT INTO `connaction_requests` (`FROM_USER`, `TO_USER`, `CONNACTION_ID`, `MESSAGE`, `APPROVED`, `DATE`, `HIDDEN_FOR_FROM`, `HIDDEN_FOR_TO`) VALUES
+(1, 2, 1, 'I would like to come!', -1, '2011-11-29 01:49:02', 0, 0);
 
 # Dump of table connactions
 # ------------------------------------------------------------
@@ -98,8 +101,8 @@ CREATE TABLE `connactions` (
   `IS_PRIVATE` int(11) DEFAULT '0',
   PRIMARY KEY (`CONNACTION_ID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
-
-
+INSERT INTO `connactions` (`CONNACTION_ID`, `POST_TIME`, `USER_ID`, `LOCATION`, `START_TIME`, `MESSAGE`, `END_TIME`, `UNIQUE_NETWORK_ID`, `IS_PRIVATE`) VALUES
+(1, '2011-11-30', 1, 'Example Connaction', '2011-11-28 10:00:00', 'Example Connaction', '2011-11-28 11:00:00', 1, 0);
 
 # Dump of table event_attending
 # ------------------------------------------------------------
@@ -191,7 +194,9 @@ CREATE TABLE `messages` (
   PRIMARY KEY (`FROM_USER`,`TO_USER`,`DATE`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-
+INSERT INTO `messages` (`FROM_USER`, `TO_USER`, `SUBJECT`, `BODY`, `DATE`) VALUES
+(1, 2, 'Example Message', 'Welcome to Connactiv', '2011-11-30 14:12:23'),
+(2, 1, 'Example Message', 'Welcome to Connactiv', '2011-11-30 14:12:23');
 
 # Dump of table networks
 # ------------------------------------------------------------
@@ -205,7 +210,8 @@ CREATE TABLE `networks` (
   PRIMARY KEY (`NETWORK_ID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-
+INSERT INTO `networks` (`NETWORK_ID`, `AREA`, `STATE`) VALUES
+(1, 'Pittsburgh', 'PA');
 
 # Dump of table preferences
 # ------------------------------------------------------------
@@ -236,7 +242,8 @@ CREATE TABLE `reviews` (
   PRIMARY KEY (`FROM_USER`,`CONNACTION_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-
+INSERT INTO `reviews` (`USER_ID`, `FROM_USER`, `IS_ANONYMOUS`, `CONNACTION_ID`, `IS_POSITIVE`, `REVIEW_DATE`, `REVIEW`) VALUES
+(2, 1, 0, 1, 1, '2011-11-30', 'I had a great time at this connaction');
 
 # Dump of table unique_networks
 # ------------------------------------------------------------
@@ -250,7 +257,8 @@ CREATE TABLE `unique_networks` (
   PRIMARY KEY (`UNIQUE_NETWORK_ID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-
+INSERT INTO `unique_networks` (`UNIQUE_NETWORK_ID`, `NETWORK_ID`, `ACTIVITY_ID`) VALUES
+(1, 1, 1);
 
 # Dump of table user_activities
 # ------------------------------------------------------------
@@ -267,7 +275,8 @@ CREATE TABLE `user_activities` (
   PRIMARY KEY (`USER_ID`,`ACTIVITY_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-
+INSERT INTO `user_activities` (`USER_ID`, `ACTIVITY_ID`, `LOW_LEVEL`, `HIGH_LEVEL`, `PREFERRED`, `OWN_LEVEL`) VALUES
+(2,1, 6, 9, 8, 8);
 
 # Dump of table user_networks
 # ------------------------------------------------------------
@@ -280,7 +289,8 @@ CREATE TABLE `user_networks` (
   PRIMARY KEY (`USER_ID`,`UNIQUE_NETWORK_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-
+INSERT INTO `user_networks` (`USER_ID`, `UNIQUE_NETWORK_ID`) VALUES
+(2, 1);
 
 # Dump of table users
 # ------------------------------------------------------------

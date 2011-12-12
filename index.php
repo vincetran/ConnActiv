@@ -61,7 +61,6 @@ $(function() {
 	});
 	
 	$('#registerForm').validationEngine();
-	$('#signinForm').validationEngine();
 	
 	$('#subscribeTable').dataTable({
         "aaSorting": [[ 0, "desc" ]],
@@ -126,7 +125,7 @@ $(function() {
 			<table>
 				<tr>
 					<th class="formHeader"><label>Email:</label></th>
-					<td><input id="username"  autofocus type="text" name="username" maxlength="25" class="validate[required,custom[email]]"/><br/></td>
+					<td><input id="username"  autofocus type="text" name="username" maxlength="25"/><br/></td>
 				</tr>
 				<tr>
 					<th class="formHeader">Password:</th>
