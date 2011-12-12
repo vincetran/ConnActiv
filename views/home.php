@@ -153,7 +153,7 @@
 		
 <? if (isDemo()): ?>		
 	<div id="demoConnaction" class="question" style="right:-560px;top:70px"></div>
-	<div id="details_demoConnaction" class="details_question" style="display:none;right:10px;top:50px">Feel like going for a run but want a running buddy? Or do you want to go rock climbing but you're new in town? Go ahead and <span class="blue">post a ConnAction!</span> A ConnAction is an activity. When you want to do something in a particular area, post a connaction to let other people know about it. Tag your connaction so that the people who are interested in similar things will be able to view it. Make it open to joiners if you'd like company!</div>
+	<div id="details_demoConnaction" class="details_question" style="display:none;right:10px;top:50px">Feel like going for a run but want a running buddy? Or do you want to go rock climbing but you're new in town? </br>Go ahead and <span class="blue">post a ConnAction!</span> A ConnAction is an activity. When you want to do something in a particular area, post a connaction to let other people know about it. Tag your connaction so that the people who are interested in similar things will be able to view it. Make it open to joiners if you'd like company!</div>
 <? endif; ?>
 
 			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post"> 
