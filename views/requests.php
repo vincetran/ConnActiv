@@ -63,6 +63,7 @@ if(isset($_POST['subReview'])){
 				$friends = $_POST['friendReq'];
 				foreach($friends as $friend) {
 					denyFriendRequest($friend);
+					
 					echo "<div class='notice'>Friend request denied.</div>";
 				} // end foreach
 			}

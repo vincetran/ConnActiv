@@ -212,7 +212,7 @@
 									<span class=\"clickable editExpander\">$level[1]<span class='editIcon'></span></span>";
 						}	
 							echo	"<div class=\"expand\" style=\"display:none\">
-											<select name=\"seekLvl$index\">
+											<input name=\"seekLvl$index\" type = \"number\" min = \"0\" max = \"10\" width = \"20\">
 												<option value=\"-1\">Level</option>";
 												for($i = 1; $i <= 10; $i++){
 													// i = Row number
@@ -231,7 +231,7 @@
 									<span class=\"clickable editExpander\">$level[2]<span class='editIcon'></span> - </span>";
 						}
 							echo "<div class=\"expand\" style=\"display:none\">
-										<select name=\"lowLvl$index\">
+										<input name=\"lowLvl$index\" type = \"number\" min = \"0\" max = \"10\" width = \"20\">
 												<option value=\"-1\">Level</option>";
 												for($i = 1; $i <= 10; $i++){
 													echo "<option value=\"$i $level[0]\">$i</option>";
@@ -246,7 +246,7 @@
 							echo "	<span class=\"clickable editExpander\">$level[3]<span class='editIcon'></span></span>";
 						}
 							echo " <div class=\"expand\" style=\"display:none\">
-										<select name=\"highLvl$index\">
+										<input name=\"highLvl$index\" type = \"number\" min = \"0\" max = \"10\" width = \"20\">
 												<option value=\"-1\">Level</option>";
 												for($i = 1; $i <= 10; $i++){
 													echo "<option value=\"$i $level[0]\">$i</option>";
@@ -264,7 +264,7 @@
 									<span class=\"clickable editExpander\">$level[4]<span class='editIcon'></span></span>";
 						}
 							echo "<div class=\"expand\" style=\"display:none\">
-											<select name=\"ownLvl$index\">
+											<input name=\"ownLvl$index\" type = \"number\" min = \"0\" max = \"10\" width = \"20\">
 												<option value=\"-1\">Level</option>";
 												for($i = 1; $i <= 10; $i++){
 													echo "<option value=\"$i $level[0]\">$i</option>";
