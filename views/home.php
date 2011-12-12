@@ -23,6 +23,9 @@
 
 				mysql_query($query) or die(mysql_error());
 			}
+			$query = "insert into friend_requests values (".getUserID().", ".mysql_real_escape_string($_POST['friend'][2]).", '".mysql_real_escape_string($_POST['friend'][0])."', -1)";
+
+			mysql_query($query) or die(mysql_error());
 		}	else if(isset($_POST['reply'])){
 				if(getUserID() != "2"){
 					message();	
