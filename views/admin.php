@@ -42,6 +42,15 @@
 			unset($_POST['eventID']);
 		} // end if (count)
 	}
+	
+	if (isset($_POST['deleteConnaction'])) {
+		if (isset($_POST['connactionID'])) {
+			$connactions = $_POST['connactionID'];
+			foreach($connactions as $c) {
+				deleteConnaction($c);
+			}
+		}
+	}
    
    
 ?>
@@ -81,13 +90,26 @@
 				"bAutoWidth": false
 			});
 			
+			$('#connactionsTable').dataTable({ 
+				"aaSorting": [[ 0, "desc" ]],
+				"bPaginate": true,
+				"bLengthChange": true,
+				"bFilter": true,
+				"bSort": true,
+				"bInfo": true,
+				"bAutoWidth": false
+			});
+			
+			fnShowHide('connactionsTable', 2); //unique network ID
+			fnShowHide('connactionsTable', 10); //hide privacy settings
+			
 			$('.showHideCol').click(function() {
 				table = $(this).parent('section').attr('id').split('_').pop();
 				fnShowHide(table+'Table', this.id);
 			});
 			
-			$('#container').width('1020');
-			$('.dataTables_wrapper').width('1020');
+			$('#container').width('1020').css('margin-left', '-150px');
+			$('.dataTables_wrapper').width('1220');
 			$('thead th').css('min-width','70px');
 			
 			$('section').hide();
@@ -117,7 +139,8 @@
 	
 	<div class="pageViewer">
 		<span class='clickable green' id='users'>Users</span>&nbsp;|
-		<span class='clickable green' id='events'>Event Requests</span>
+		<span class='clickable green' id='events'>Events</span>&nbsp;|
+		<span class='clickable green' id='connactions'>Connactions</span>
 	</div>
 	
 	<section id="view_users">
@@ -181,9 +204,40 @@
 				</div>
 				
 			</form>
-			</div>
 	
 	</section> <!-- end #view_events -->
+	
+	<section id="view_connactions">
+		
+			<h2>Connactions</h2>
+			<? echo "<div class='stats'>Total connactions: ".totalAllConnactions();
+				echo "</div>" ?>
+			
+			<br><span class="blue">Toggle column visibility:</span><br><br>
+			<input type="checkbox" checked class="showHideCol" name="col" id="0">&nbsp;<label>Connaction ID</label>
+			<input type="checkbox" checked class="showHideCol" name="col" id="1">&nbsp;<label>Posted By</label>
+			<input type="checkbox" class="showHideCol" name="col" id="2">&nbsp;<label>Unique Network ID</label>
+			<input type="checkbox" checked class="showHideCol" name="col" id="3">&nbsp;<label>Unique Network</label>
+			<input type="checkbox" checked class="showHideCol" name="col" id="4">&nbsp;<label>Message</label><br>
+			<input type="checkbox" checked class="showHideCol" name="col" id="5">&nbsp;<label>Location</label>
+			<input type="checkbox" checked class="showHideCol" name="col" id="6">&nbsp;<label>Start Date</label>
+			<input type="checkbox" checked class="showHideCol" name="col" id="7">&nbsp;<label>End Date</label>
+			<input type="checkbox" checked class="showHideCol" name="col" id="8">&nbsp;<label>Status</label>
+			<input type="checkbox" checked class="showHideCol" name="col" id="9">&nbsp;<label>Post Date</label>
+			<input type="checkbox" class="showHideCol" name="col" id="10">&nbsp;<label>Privacy</label>
+			
+			
+			<form id="eventReqForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">	
+			<? echo getFormattedConnactions() ?>
+				
+				<div class="below_table">
+					<input style="float:right;" type="submit" name="deleteConnaction" value="Delete"/>
+				</div>
+				
+			</form>
+			</div>
+	
+	</section> <!-- end #view_connactions -->
 	
 	
 	</div>

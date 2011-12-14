@@ -211,9 +211,91 @@
 */
 
 
-	function getFormattedConnactions() {
 	
+	function deleteConnaction($id) {
+		$query = "DELETE FROM connactions WHERE connaction_id = '".$id."'";
+		mysql_query($query) or die(mysql_error());
 	}
+
+	function totalAllConnactions() {
+	// $which is -1, 0, or 1 depending on the status of events to count	
+		$users = array();
+		$query = "SELECT COUNT(*) from connactions";
+		$result = mysql_query($query) or die(mysql_error());
+		$row = mysql_fetch_array($result);
+		return $row[0];
+	}
+	
+	function getAllConnactionsAdmin() {
+		$connactions = array();
+		$query = "SELECT * FROM connactions";
+		
+		$result = mysql_query($query) or die(mysql_error());
+		
+		while($row = mysql_fetch_array($result)){
+				$connactions[] = $row;
+			}
+		return $connactions;
+	} // end getAllConnactions
+	
+	
+	function getFormattedConnactions() {
+		
+		$table = "";
+		$table .= "<table id='connactionsTable' class='regular_table admin'><thead><tr>";
+		$table .= "<th>ID</th><th>Posted By</th><th>Network ID</th><th>Network</th><th>Message</th><th>Location</th>";
+		$table .= "</th><th>Starting</th><th>Ending</th><th>Status</th><th>Post Date</th><th>Private</th>";
+		$table .= "<th><span id='connaction' class='checkAll'></span><span id='_connaction' class='uncheckAll'></th></tr></thead><tbody>";
+		
+		$conns = getAllConnactionsAdmin();
+			
+			foreach($conns as $c) {
+				$table .= "<tr>";
+				$connactionID = $c['CONNACTION_ID'];
+				$table .= cell($connactionID);
+				$table .= cell(getUserName($c['USER_ID']));
+					$un = $c['UNIQUE_NETWORK_ID'];
+					
+				$table .= cell($un);
+				$table .= cell(prettifyName($un));			
+				$table .= cell($c['MESSAGE']);
+				$table .= cell($c['LOCATION']);
+				
+				$start = new DateTime($c['START_TIME']);
+				$startDate = $start->format('m-d-y H:i a');
+				$table .= cell($startDate);
+				
+				$end = new DateTime($c['END_TIME']);
+				$endDate = $start->format('m-d-y H:i a');
+				$table .= cell($endDate);
+				
+				$startYear = $start->format('y');
+				$startMon = $start->format('m');
+				$startDay = $start->format('d');
+				
+				$year = Date('y');
+				$mon = Date('m');
+				$day = Date('d');
+				$year > $startYear? $status = "expired" : $status = "current";
+				
+				$table .= cell($status);
+				
+				$posted = new DateTime($c['POST_TIME']);
+				$postedDate = $start->format('m-d-y');
+				$table .= cell($postedDate);
+				
+				$private = $c['IS_PRIVATE'];
+				$private? $isPrivate = "private" : $isPrivate = "public";
+				$table .= cell($isPrivate);
+				
+				$table .= "<td><input class='connaction' type = 'checkbox' name = 'connactionID[]' value = '".$connactionID."' /></td>";	
+				$table .= "</tr>";
+			} //end foreach
+				$table .= "</tbody></table>";
+		
+		return $table;
+	
+		} //end getFormattedConnaction
 	
 	
 
